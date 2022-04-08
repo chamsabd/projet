@@ -14,7 +14,11 @@ class DepartementFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
+           // 'nom_dep' => $this->faker->word,
+            // 'id_admin' => Admin::get('id_admin')->random(),
+           // 'created_at' => now(),
+
         ];
     }
 }
