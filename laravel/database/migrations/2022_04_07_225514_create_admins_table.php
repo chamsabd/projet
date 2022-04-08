@@ -15,6 +15,7 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->integer('ncin_admin')->primary();
+            $table->foreign('ncin_admin')->references('ncin')->on('utilisateurs')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }
