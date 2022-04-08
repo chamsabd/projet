@@ -14,7 +14,13 @@ class FormationfactoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            //'nom_for' =>faker=>sentence,
+            //'date_debut'=>faker=>  ,
+            //'description' =>faker=>  ,
+            //'date_fin' =>faker=>   ,
+            //'date_certif' =>faker=>  ,
+            //'etat' => faker=>   ,
+            //'nbr_place' =>faker=>  
         ];
     }
 }

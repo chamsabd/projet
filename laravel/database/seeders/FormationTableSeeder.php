@@ -1,5 +1,5 @@
 <?php
-
+//use App\Formation;
 namespace Database\Seeders;
 
 use App\Models\Formation;
@@ -14,6 +14,6 @@ class FormationTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        //Formation::factory(Formation::class, 20)->create();
     }
 }

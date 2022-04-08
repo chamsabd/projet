@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+////use App\Inscrit;
 use Illuminate\Database\Seeder;
 
 class InscritTableSeeder extends Seeder
@@ -13,6 +13,6 @@ class InscritTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //Inscrit::factory(Inscrit::class, 10)->create();
     }
 }
