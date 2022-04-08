@@ -16,7 +16,8 @@ class CreateDepartementsTable extends Migration
         Schema::create('departements', function (Blueprint $table) {
             $table->id('id_dep');
             $table->string('nom_dep');
-            $table->integer('id_admin');
+            $table->integer('id_admin')->unsigned();
+           // $table->foreign('id_admin')->references('id_admin')->on('admins')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }
