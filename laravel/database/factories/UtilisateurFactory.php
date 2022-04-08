@@ -14,7 +14,16 @@ class UtilisateurFactory extends Factory
     public function definition()
     {
         return [
-            //
+     
+        'ncin'=>$this->faker->unique()->randomNumber($nbDigits = 8, $strict = true),
+        'email' => $this->faker->unique()->safeEmail(),
+        'password'=>$this->faker->password(),
+        'nom' => $this->faker->name(),
+        'prenom' => $this->faker->name(),
+        'profile' => $this->faker->randomElement($array = array ('admin','etud','prof','resp')),
+        'avatar' => $this->faker->file($sourceDir = '/tmp', $targetDir = '/tmp'),
+        'created_at'=>now()
         ];
     }
+
 }
