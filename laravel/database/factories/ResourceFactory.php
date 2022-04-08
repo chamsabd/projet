@@ -21,6 +21,7 @@ class ResourceFactory extends Factory
          'url'=>$this->faker->file($sourceDir = 'public', $targetDir = 'storage\img'),
            'type'=>$this->faker->fileExtension(),
            'id_seance'=>$this->faker->numberBetween(10, 500),
+           //'id_seance'=>Seance::get('id_seance')->random(),
            'created_at'=>now()
         ];
     }
