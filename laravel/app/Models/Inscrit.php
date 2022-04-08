@@ -9,5 +9,9 @@ class Inscrit extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_clients ' || 'id_formation' || 'date_inscrit';
-    
+
+//public function formations()
+//{
+  //  return $this->belongsTo('App\Formation','id_formation');
+//}    
 }

@@ -14,9 +14,10 @@ class InscritfactoryFactory extends Factory
     public function definition()
     {
         return [
-           // 'id_clients' =>$this->faker->clients::get('id_clients')->random(),
-           // 'id_formation' =>$this->faker->fromations::get('id_formation')->random(),
-            //'date_inscrit' =>$this->faker->,
+           //'id_clients' =>$this->faker->clients::get('id_clients')->random(),
+           // 'id_formation' =>$this->faker->formations::get('id_formation')->random(),
+           //'date_inscrit' =>$this->faker->dateTime(),
+           //'created_at'=>now()  
         ];
     }
 }

@@ -14,13 +14,15 @@ class FormationfactoryFactory extends Factory
     public function definition()
     {
         return [
-            //'nom_for' =>faker=>sentence,
-            //'date_debut'=>faker=>  ,
-            //'description' =>faker=>  ,
-            //'date_fin' =>faker=>   ,
-            //'date_certif' =>faker=>  ,
-            //'etat' => faker=>   ,
-            //'nbr_place' =>faker=>  
+            // 'id_formation' =>$this->faker->formations::get('id_formation')->random(),
+            //'nom_for' =>$this->faker=>sentences(),
+            //'date_debut'=>$this->faker=>dateTime(),  ,
+            //'description' =>$this->faker=>sentences(),  ,
+            //'date_fin' =>$this->faker=>dateTime(),   ,
+            //'date_certif' =>$this->faker=>dateTime(),  ,
+            //'etat' => =>$this->faker=>boolean(),   ,
+            //'nbr_place' =>$this->faker=>randomNumber(),
+            //'created_at'=>now()  
         ];
     }
 }
