@@ -14,8 +14,10 @@ class CreateAdminsTable extends Migration
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->integer('ncin_admin')->primary();
-            $table->foreign('ncin_admin')->references('ncin')->on('utilisateurs')->onDelete('restrict')->onUpdate('cascade');
+            $table->id('id_admin');
+            $table->integer('ncin');
+            $table->foreign('ncin')->references('ncin')->on('utilisateurs')->onDelete('restrict')->onUpdate('cascade');
+           
             $table->timestamps();
         });
     }

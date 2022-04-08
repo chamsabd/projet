@@ -17,8 +17,8 @@ class CreateResourcesTable extends Migration
             $table->id('id_resource');
             $table->string('url');
             $table->string('type');
-            
-            $table->foreign('id_cours')->references('id_cours')->on('seances')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('id_seance');
+          //  $table->foreign('id_seance')->references('id_seance')->on('seances')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
