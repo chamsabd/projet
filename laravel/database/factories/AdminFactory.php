@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Utilisateur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AdminFactory extends Factory
@@ -14,7 +15,9 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'ncin'=>Utilisateur::get('ncin')->unique()->random(),
+            
+            'created_at'=>now()
         ];
     }
 }
