@@ -17,6 +17,7 @@ class CreateProfesseursTable extends Migration
             $table->id('id_prof');
             $table->string('formation_certifier');
             $table->integer('id_reponsable');
+            //$table->foreign('id_reponsable')->references('')->on('responsables')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }

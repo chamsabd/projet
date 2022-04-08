@@ -9,4 +9,10 @@ class Departement extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_dep';
+
+    /* public function admins()
+    {
+        return $this->hasMany(Admin::class, 'id_admin');
+    }
+    */
 }

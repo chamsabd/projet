@@ -9,4 +9,10 @@ class Professeur extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_reponsable';
+
+   /* public function responsables()
+    {
+        return $this->hasMany(Responsable::class, 'id_reponsable');
+    }
+    */
 }
