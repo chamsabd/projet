@@ -12,17 +12,17 @@ class Seance extends Model
     //public $timestamps = false ;
     public function ressources()
     {
-        return $this->hasMany('app\Models\Ressource','id_seance');
+        return $this->hasMany(Ressource::class,'id_seance');
     }
 
     public function professeur()
     {
-        return $this->belongsTo('app\Category','id_seance');
+        return $this->belongsTo(Professeur::class,'id_seance');
     }
 
     public function formation()
     {
-        return $this->belongsTo('app\Formation','id_seance');
+        return $this->belongsTo(Formation::class,'id_seance');
     }
 
 
