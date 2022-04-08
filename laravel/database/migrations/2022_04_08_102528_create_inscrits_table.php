@@ -14,8 +14,14 @@ class CreateInscritsTable extends Migration
     public function up()
     {
         Schema::create('inscrits', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id_clients');
+            $table->integer('id_formation');
+            $table->date('date_inscrit');
+            $table->primary(['id_clients', 'id_formation', 'date_inscrit']);
+           // $table->foreign('id_clients')->references('id_clients')->on('clients')->onDelete('restrict')->onUpdate('cascade');
+           // $table->foreign('id_formation')->references('id_formation')->on('formations')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
+
         });
     }
 
