@@ -1,10 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-////use App\Inscrit;
+use App\Models\Inscrit;
 use Illuminate\Database\Seeder;
 
-class InscritTableSeeder extends Seeder
+class InscritSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class InscritTableSeeder extends Seeder
      */
     public function run()
     {
-        //Inscrit::factory(Inscrit::class, 10)->create();
+        Inscrit::factory()->count(5)->create();
     }
 }

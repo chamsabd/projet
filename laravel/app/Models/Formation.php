@@ -10,8 +10,8 @@ class Formation extends Model
     use HasFactory;
     protected $primaryKey = 'id_formation';
 
-//public function inscrits()
-//{
-   // return $this->hasMany('App\Inscrit','');
-//}
+public function inscrits()
+{
+    return $this->hasMany(Inscrit::class,'id_formation');
+}
 }

@@ -17,7 +17,7 @@ class CreateFormationsTable extends Migration
             $table->increments('id_formation');
             $table->string('nom_for');
             $table->date('date_debut');
-            $table->string(' description');
+            $table->string('description');
             $table->date('date_fin');
             $table->date('date_certif');
             $table->boolean('etat');
