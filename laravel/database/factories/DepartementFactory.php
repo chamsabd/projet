@@ -15,9 +15,10 @@ class DepartementFactory extends Factory
     {
         return [
             
-           // 'nom_dep' => $this->faker->word,
-            // 'id_admin' => Admin::get('id_admin')->random(),
-           // 'created_at' => now(),
+            'nom_dep' => $this->faker->word,
+            //'id_admin' => Admin::get('id_admin')->random(),
+            'id_admin' => $this->faker->numberBetween(10, 500),
+            'created_at' => now(),
 
         ];
     }

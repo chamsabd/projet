@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-//use App\Models\Professeur;
+
+use App\Models\Professeur;
 use Illuminate\Database\Seeder;
 
 class ProfesseurSeeder extends Seeder
@@ -13,6 +14,6 @@ class ProfesseurSeeder extends Seeder
      */
     public function run()
     {
-        //Professeur::factory()->count(5)->hasPosts(1)->create();
+        Professeur::factory()->count(5)->create();
     }
 }
