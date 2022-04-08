@@ -21,7 +21,7 @@ class UtilisateurFactory extends Factory
         'nom' => $this->faker->name(),
         'prenom' => $this->faker->name(),
         'profile' => $this->faker->randomElement($array = array ('admin','etud','prof','resp')),
-        'avatar' => $this->faker->file($sourceDir = '/tmp', $targetDir = '/tmp'),
+        'avatar' => $this->faker->imageUrl($width = 640, $height = 480),
         'created_at'=>now()
         ];
     }
