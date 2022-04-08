@@ -14,22 +14,22 @@ class Responsable extends Model
 
   public function etudiants()
   {
-      return $this->hasMany('app\Models\Etudiant', 'id_responsable');
+      return $this->hasMany(Etudiant::class, 'id_responsable','id_responsable');
   }
 
   public function professeurs()
   {
-      return $this->hasMany('app\Models\Professeur','id_responsable');
+      return $this->hasMany(Professeur::class,'id_responsable','id_responsable');
   }
 
   public function demandes()
   {
-      return $this->hasMany('app\Models\Demande','id_responsable');
+      return $this->hasMany(Demande::class,'id_responsable','id_responsable');
   }
 
   public function admin()
   {
-      return $this->belongsTo('app\Admin','id_responsable');
+      return $this->belongsTo(Admin::class,'id_responsable','id_responsable');
   }
 
 
