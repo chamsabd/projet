@@ -14,7 +14,7 @@ class CreateSeancesTable extends Migration
     public function up()
     {
         Schema::create('seances', function (Blueprint $table) {
-            $table->integer('id_seance')->primary()->unsigned();
+            $table->id('id_seance');
             $table->string('nom_cours');
             $table->float('duree');
             $table->unsignedInteger('id_professeur');
