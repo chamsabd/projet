@@ -10,6 +10,7 @@ class Seance extends Model
     use HasFactory;
     protected $primaryKey='id_seance';
     //public $timestamps = false ;
+    /*
     public function ressources()
     {
         return $this->hasMany(Ressource::class,'id_seance');
@@ -24,6 +25,6 @@ class Seance extends Model
     {
         return $this->belongsTo(Formation::class,'id_seance');
     }
-
+*/
 
 }

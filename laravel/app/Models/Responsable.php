@@ -11,7 +11,7 @@ class Responsable extends Model
     protected $primaryKey='id_responsable';
    // public $incrementing = false ;
   // public $timestamps = false ;
-
+/*
   public function etudiants()
   {
       return $this->hasMany(Etudiant::class, 'id_responsable','id_responsable');
@@ -31,6 +31,6 @@ class Responsable extends Model
   {
       return $this->belongsTo(Admin::class,'id_responsable','id_responsable');
   }
-
+*/
 
 }
