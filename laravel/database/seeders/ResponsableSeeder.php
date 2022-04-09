@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Responsable;
 use Illuminate\Database\Seeder;
 
 class ResponsableSeeder extends Seeder
@@ -13,6 +14,8 @@ class ResponsableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Responsable::factory()
+        ->count(10)
+        ->create();
     }
 }
