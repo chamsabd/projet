@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inscrit extends Model
 {
-    use HasFactory;
-    protected $primaryKey = 'id_clients ' || 'id_formation' || 'date_inscrit';
+    use HasFactory;    
 
 public function Formation()
 {
+
     return $this->belongsTo(Formation::class,'id_formation');
 }  
 public function client()
 {
     return $this->belongsTo(Client::class,'id_formation');
 }  
+
 }

@@ -17,8 +17,7 @@ class CreateInscritsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_clients');
             $table->unsignedInteger('id_formation');
-            $table->date('date_inscrit'); 
-           $table->unique(['id_clients', 'id_formation', 'date_inscrit']);
+            $table->date('date_inscrit')->unique(); 
             $table->foreign('id_clients')->references('id_clients')->on('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_formation')->references('id_formation')->on('formations')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
