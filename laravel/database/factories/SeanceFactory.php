@@ -16,9 +16,12 @@ class SeanceFactory extends Factory
     {
         return [
            'nom_cours' => $this->faker->name(),
-           'duree' =>$this->faker->randomNumber(),
+           'duree' =>$this->faker->dateTime(),
+           'id_professeur'=>$this->faker->randomNumber(),
+           'id_formation'=>$this->faker->randomNumber(),
            'created_at'=> now() ,
-           'updated_at'=> now() , 
+           'updated_at'=> now()  
+           
           // 'id_professeur'=> Professeur::get('id_professeur')->random(),
           //  'id_formation'=> Professeur::get('id_formation')->random()
         ];

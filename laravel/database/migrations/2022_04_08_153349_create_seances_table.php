@@ -16,9 +16,9 @@ class CreateSeancesTable extends Migration
         Schema::create('seances', function (Blueprint $table) {
             $table->id('id_seance');
             $table->string('nom_cours');
-            $table->bigInteger('duree');
-            //$table->unsignedInteger('id_professeur');
-            //$table->unsignedInteger('id_formation');
+            $table->dateTimeTz('duree');
+            $table->unsignedInteger('id_professeur');
+            $table->unsignedInteger('id_formation');
             $table->timestamps();
            // $table->foreign('id_professeur')->references ('id_professeur')->on('professeurs')->onDelete('restrict')->onUpdate('restrict') ;
            // $table->foreign('id_formation')->references ('id_formation')->on('formations')->onDelete('restrict')->onUpdate('restrict') ;

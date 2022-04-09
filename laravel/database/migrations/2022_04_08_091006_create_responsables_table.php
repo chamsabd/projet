@@ -19,8 +19,8 @@ class CreateResponsablesTable extends Migration
             $table->id('id_responsable');
             $table->string('metier');
             $table->timestamps();
-          // $table->unsignedInteger('id_admin');
-          // $table->unsignedInteger('id_professeur');
+           $table->unsignedInteger('id_admin');
+           $table->unsignedInteger('id_professeur');
 
           // $table->foreign('id_admin')->references ('id_admin')->on('clients')->onDelete('restrict')->onUpdate('restrict') ;
           // $table->foreign('id_professeur')->references ('id_professeur')->on('professeurs')->onDelete('restrict')->onUpdate('restrict')  ;

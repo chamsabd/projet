@@ -16,8 +16,11 @@ class ResponsableFactory extends Factory
     {
         return [
             'metier' => $this->faker->word(),
+            'id_professeur'=>$this->faker->randomNumber(),
+           'id_admin'=>$this->faker->randomNumber(),
            'created_at'=> now() ,
-           'updated_at'=> now()
+           'updated_at'=> now(),
+          
            // 'id_professeur'=> Professeur::get('id_professeur')->random(),
           //  'id_admin'=> Admin::get('id_admin')->random()
         ];
