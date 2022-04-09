@@ -1,11 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\Demande;
 
 use Illuminate\Database\Seeder;
+use App\Models\Etudiant;
 
-class DemandeTableSeeder extends Seeder
+class EtudiantSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class DemandeTableSeeder extends Seeder
      */
     public function run()
     {
-        Demande::factory()->count(3)->create();
+       Etudiant::factory()->count(3)->create();
     }
 }
