@@ -15,8 +15,5 @@ class Client extends Model
         return $this->belongsTo(Departement::class,'id_departement','id_dep');
       
    }
-   public function formations()
-   {
-       return $this->belongsToMany(Formation::class);
-   }
+
 }
