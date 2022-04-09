@@ -24,10 +24,10 @@ public class Formation {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Formation(Long idFormation, String nomFormation, String description, Date dateDebut, Date dateFin,
+	public Formation( String nomFormation, String description, Date dateDebut, Date dateFin,
 			Date dateCertif, boolean etat, int nbrPlace) {
 		super();
-		this.idFormation = idFormation;
+		
 		this.nomFormation = nomFormation;
 		this.description = description;
 		this.dateDebut = dateDebut;
@@ -83,7 +83,14 @@ public class Formation {
 	}
 	public void setNbrPlace(int nbrPlace) {
 		this.nbrPlace = nbrPlace;
+	}
+	@Override
+	public String toString() {
+		return "Formation [idFormation=" + idFormation + ", nomFormation=" + nomFormation + ", description="
+				+ description + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", dateCertif=" + dateCertif
+				+ ", etat=" + etat + ", nbrPlace=" + nbrPlace + "]";
 	} 
+	
 	
 }
 
