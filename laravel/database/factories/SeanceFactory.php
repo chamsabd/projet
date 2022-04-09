@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker ;
-class ResponsableFactory extends Factory
+class SeanceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,8 @@ class ResponsableFactory extends Factory
     public function definition()
     {
         return [
-            'metier' => $this->faker->word(),
+           'nom_cours' => $this->faker->name(),
+           'duree' =>$this->faker->randomNumber(),
            'created_at'=> now() ,
            'updated_at'=> now()
         ];
