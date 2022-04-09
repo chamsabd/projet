@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker ;
+use app\order ;
 class ResponsableFactory extends Factory
 {
     /**
@@ -17,6 +18,8 @@ class ResponsableFactory extends Factory
             'metier' => $this->faker->word(),
            'created_at'=> now() ,
            'updated_at'=> now()
+           // 'id_professeur'=> Professeur::get('id_professeur')->random(),
+          //  'id_admin'=> Admin::get('id_admin')->random()
         ];
     }
 }
