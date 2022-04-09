@@ -14,6 +14,6 @@ class FormationSeeder extends Seeder
      */
     public function run()
     {
-        Formation::factory()->count(5)->create();
+        Formation::factory()->count(10)->create();
     }
 }
