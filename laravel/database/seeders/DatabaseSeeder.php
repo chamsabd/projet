@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ResponsableSeeder::class);
         $this->call(ProfesseurSeeder::class);
         $this->call(FormationSeeder::class);
- $this->call(SeanceSeeder::class);
+        $this->call(SeanceSeeder::class);
         $this->call(ResourceSeeder::class);
         $this->call(DemandeSeeder::class);
         $this->call(EtudiantSeeder::class);
         $this->call(DepartementSeeder::class);
-        $this->call(InscritSeeder::class);
+      //  $this->call(InscritSeeder::class);
 
     }
 }
