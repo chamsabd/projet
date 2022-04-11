@@ -12,47 +12,47 @@ import com.projet.Formations.entities.Formation;
 
 @SpringBootTest
 class FormationsApplicationTests {
-@Autowired
-	private FormationRepository formationRepository; 
+	@Autowired
+	private FormationRepository formationRepository;
+
 	@Test
 	void contextLoads() {
 	}
-	@Test
-	public void testCreateFormation() { 
-		Formation form = new Formation("formation en sgbd","formation from zero to hero pour apprendre oragle",new Date(),new Date(),new Date(),true,20); 
-		formationRepository.save(form); 
-	 }
-	@Test
-	public void testFindFormation() 
-	 { 
-		Formation f = formationRepository.findById(1L).get(); 
-	 System.out.println(f.toString()); 
-	 } 
-	@Test
-	public void testUpdateFormation() 
-	 { 
-		Formation f = formationRepository.findById(1L).get(); 
-	 f.setDescription("update");
-		formationRepository.save(f); 
-	 
-	 System.out.println(f.toString()); 
-	 } 
-	@Test
-	public void testDeleteFormation() 
-	 { 
-		formationRepository.deleteById(1L); 
-	 } 
 
-@Test
-public void testFindAllFormations() 
- { 
- List<Formation> forms = formationRepository.findAll(); 
- 
- for (Formation f:forms) 
- System.out.println(f); 
- 
- } 
+	@Test
+	public void testCreateFormation() {
+		Formation form = new Formation("formation en sgbd", "formation from zero to hero pour apprendre oragle",
+				new Date(), new Date(), new Date(), true, 20);
+		formationRepository.save(form);
+	}
 
+	@Test
+	public void testFindFormation() {
+		Formation f = formationRepository.findById(1L).get();
+		System.out.println(f.toString());
+	}
 
+	@Test
+	public void testUpdateFormation() {
+		Formation f = formationRepository.findById(1L).get();
+		f.setDescription("update");
+		formationRepository.save(f);
+
+		System.out.println(f.toString());
+	}
+
+	@Test
+	public void testDeleteFormation() {
+		formationRepository.deleteById(1L);
+	}
+
+	@Test
+	public void testFindAllFormations() {
+		List<Formation> forms = formationRepository.findAll();
+
+		for (Formation f : forms)
+			System.out.println(f);
+
+	}
 
 }
