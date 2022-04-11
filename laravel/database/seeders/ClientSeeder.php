@@ -1,11 +1,11 @@
 <?php
-use App\Formation;
+
 namespace Database\Seeders;
 
-use App\Models\Formation;
 use Illuminate\Database\Seeder;
+use App\Models\Client;
 
-class FormationSeeder extends Seeder
+class ClientSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,8 @@ class FormationSeeder extends Seeder
      */
     public function run()
     {
-        Formation::factory()->count(10)->create();
+        Client::factory()
+        ->count(3)    
+       ->create();
     }
 }
