@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Utilisateur extends Model
 {
     use HasFactory;
- 
+
     public function admin()
     {
-        return $this->belongsTo(Admin::class,'ncin','ncin');
+        return $this->belongsTo(Admin::class);
     }
 }

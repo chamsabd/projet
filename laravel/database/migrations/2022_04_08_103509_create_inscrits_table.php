@@ -15,6 +15,7 @@ class CreateInscritsTable extends Migration
     {
         Schema::create('inscrits', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('id_clients');
             $table->unsignedInteger('id_formation');
             $table->date('date_inscrit')->unique(); 
