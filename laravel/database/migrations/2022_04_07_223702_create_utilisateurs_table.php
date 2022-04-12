@@ -14,6 +14,7 @@ class CreateUtilisateursTable extends Migration
     public function up()
     {
         Schema::create('utilisateurs', function (Blueprint $table) {
+
             
            $table->id();
            $table->integer('ncin')->unique();

@@ -17,6 +17,7 @@ class AdminFactory extends Factory
         return [
 
             'utilisateur_id'=>Utilisateur::get('id')->unique()->random(),
+
             'created_at'=>now()
         ];
     }

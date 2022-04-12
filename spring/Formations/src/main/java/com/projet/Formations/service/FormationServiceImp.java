@@ -51,6 +51,7 @@ public class FormationServiceImp implements FormationService {
 		return this.formationRepository.findByNomFormationContains(nom, pageable);
 	}
 
+
 //	@Override
 //	public Page<Formation> findByDateDebutFormationContains(Date datedebut, Pageable pageable) {
 //		// TODO Auto-generated method stub
@@ -62,5 +63,6 @@ public class FormationServiceImp implements FormationService {
 //		// TODO Auto-generated method stub
 //		return this.formationRepository.findByDateCertifFormationContains(datecertif, pageable);
 //	}
+
 
 }
