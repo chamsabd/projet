@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_admin';
-    public $incrementing = false;
+  
 
     public function utilisateur()
     {

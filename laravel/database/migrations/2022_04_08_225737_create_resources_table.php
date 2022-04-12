@@ -14,11 +14,11 @@ class CreateResourcesTable extends Migration
     public function up()
     {
         Schema::create('resources', function (Blueprint $table) {
-            $table->id('id_resource');
+            $table->id();
             $table->string('url');
             $table->string('type');
-            $table->string('id_seance');
-            $table->foreign('id_seance')->references('id_seance')->on('seances')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('seance_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+          //  $table->foreign('id_seance')->references('id_seance')->on('seances')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
