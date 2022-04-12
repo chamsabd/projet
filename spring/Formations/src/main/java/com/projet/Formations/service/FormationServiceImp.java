@@ -13,7 +13,7 @@ import com.projet.Formations.entities.Formation;
 @Service
 public class FormationServiceImp implements FormationService {
 	@Autowired
-	 FormationRepository formationRepository; 
+private	 FormationRepository formationRepository; 
 	@Override
 	public Formation saveFormation(Formation f) {
 		// TODO Auto-generated method stub
@@ -46,23 +46,23 @@ public class FormationServiceImp implements FormationService {
 	}
 
 	@Override
-	public Page<Formation> findByNomFormationContains(String nom, Pageable pageable) {
+	public Page<Formation> findByNomFormationContains(String nomFormation, Pageable pageable) {
 		// TODO Auto-generated method stub
-		return this.formationRepository.findByNomFormationContains(nom, pageable);
+		return this.formationRepository.findByNomFormationContains(nomFormation, pageable);
 	}
 
 
-//	@Override
-//	public Page<Formation> findByDateDebutFormationContains(Date datedebut, Pageable pageable) {
-//		// TODO Auto-generated method stub
-//		return this.formationRepository.findByDateDebutFormationContains(datedebut, pageable);
-//	}
-//
-//	@Override
-//	public Page<Formation> findByDateCertifFormationContains(Date datecertif, Pageable pageable) {
-//		// TODO Auto-generated method stub
-//		return this.formationRepository.findByDateCertifFormationContains(datecertif, pageable);
-//	}
+	@Override
+	public Page<Formation> findByDateDebutFormationContains(Date datedebut, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.formationRepository.findByDateDebutFormationContains(datedebut, pageable);
+	}
+
+	@Override
+	public Page<Formation> findByDateCertifFormationContains(Date dateCertif, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.formationRepository.findByDateCertifFormationContains(dateCertif, pageable);
+	}
 
 
 }

@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 @Entity
 public class Formation {
@@ -16,8 +19,11 @@ public class Formation {
 	private Long idFormation;
 	private String nomFormation;
 	private String description;
+	 @Temporal(TemporalType.DATE)
 	private Date dateDebut;
+	 @Temporal(TemporalType.DATE)
 	private Date dateFin;
+	 @Temporal(TemporalType.DATE)
 	private Date dateCertif;
 	private boolean etat;
 	private int nbrPlace;
@@ -36,6 +42,8 @@ public class Formation {
 
 		this.nomFormation = nomFormation;
 		this.description = description;
+		 
+	
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.dateCertif = dateCertif;

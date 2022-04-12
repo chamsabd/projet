@@ -1,11 +1,17 @@
 package com.projet.Formations;
 
+
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.projet.Formations.dao.FormationRepository;
 import com.projet.Formations.entities.Formation;
@@ -21,7 +27,7 @@ class FormationsApplicationTests {
 
 	@Test
 	public void testCreateFormation() {
-		Formation form = new Formation("formation en sgbd", "formation from zero to hero pour apprendre oragle",
+		Formation form = new Formation("formation en sgbd1", "formation from zero to hero pour apprendre oragle",
 				new Date(), new Date(), new Date(), true, 20);
 		formationRepository.save(form);
 	}
@@ -54,5 +60,28 @@ class FormationsApplicationTests {
 			System.out.println(f);
 
 	}
+	@Test
+	public void testFindFormationbynom() {
+		Page<Formation> forms = formationRepository.findByNomFormationContains("formation en sgbd", PageRequest.of(0, 2).toOptional().get());
 
+		for (Formation f : forms)
+			System.out.println(f);
+
+	}
+	@Test
+	public void testFindFormationbydatedebut() throws ParseException {
+		Page<Formation> forms = formationRepository.findByDateDebutFormationContains(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-09"), PageRequest.of(0, 2).toOptional().get());
+
+		for (Formation f : forms)
+			System.out.println(f.getNomFormation());
+
+	}
+	@Test
+	public void testFindFormationbydatecertif() throws ParseException {
+		Page<Formation> forms = formationRepository.findByDateCertifFormationContains(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-12"), PageRequest.of(0, 2).toOptional().get());
+
+		for (Formation f : forms)
+			System.out.println(f);
+
+	}
 }

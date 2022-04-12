@@ -14,9 +14,9 @@ public interface FormationService {
 	void deleteFormationparif(Long id);
 	Formation getFormation(Long id);
 	Page<Formation> getAllFormationparpage(int page,int size);
-	 Page<Formation> findByNomFormationContains(String nom,Pageable pageable);
+	 Page<Formation> findByNomFormationContains(String nomFormation,Pageable pageable);
 
-//	 Page<Formation> findByDateDebutFormationContains(Date datedebut,Pageable pageable);
-//	 Page<Formation> findByDateCertifFormationContains(Date datecertif,Pageable pageable);
+	 Page<Formation> findByDateDebutFormationContains(Date datedebut,Pageable pageable);
+ Page<Formation> findByDateCertifFormationContains(Date dateCertif,Pageable pageable);
 
 }
