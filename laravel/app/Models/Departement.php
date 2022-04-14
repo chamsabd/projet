@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Departement extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_dep';
+    
 
-    /* public function Admin()
+    public function Admin()
     {
-        return $this->belongsTo(Admin::class, 'id_admin');
+        return $this->belongsTo(Admin::class);
     }
-    */
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+    
 }
