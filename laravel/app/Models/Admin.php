@@ -13,6 +13,14 @@ class Admin extends Model
 
     public function utilisateur()
     {
-        return $this->hasOne(Utilisateur::class);
+        return $this->belongsTo(Utilisateur::class);
+    }
+    public function departments()
+    {
+        return $this->hasMany(Departement::class);
+    }
+    public function responsables()
+    {
+        return $this->hasMany(Responsable::class);
     }
 }
