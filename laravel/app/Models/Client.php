@@ -9,11 +9,18 @@ class Client extends Model
 {
     use HasFactory;
  
-    protected $primaryKey = 'id_clients';
     
     public function departement(){
-        return $this->belongsTo(Departement::class,'id_departement','id_dep');
+        return $this->belongsTo(Departement::class);
       
    }
+   public function etudiant()
+   {
+       return $this->hasOne(Etudiant::class);
+   }
+    public function utilisateur(){
+    return $this->belongsTo(Utilisateurs::class);
+}
 
 }
+?>

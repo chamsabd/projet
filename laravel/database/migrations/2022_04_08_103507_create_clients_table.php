@@ -14,12 +14,13 @@ class CreateClientsTable extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id('id_clients');
+            $table->id();
             $table->string('specialite'); 
-            $table->integer('ncin');
-            $table->integer('id_departement')->unsigned(); 
-            //$table->foreign('ncin')->references('ncin')->on('utlisateurs')->onDelete('restrict')->onUpdate('cascade');
-           // $table->foreign('id_departement')->references('id_dep')->on('departments')->onDelete('restrict')->onUpdate('cascade');;
+           $table->string('carte_etud')->unique();
+             $table->foreignId('ncin')->constrained()->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('departement_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
+
+          
             $table->timestamps();
 
         });

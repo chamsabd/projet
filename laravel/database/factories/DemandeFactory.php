@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Client;
+use App\Models\Formation;
+use App\Models\Responsable;
 
 class DemandeFactory extends Factory
 {
@@ -15,13 +17,13 @@ class DemandeFactory extends Factory
     public function definition()
     {
         return [
-            'id_clients' => Client::get('id_clients')->random(),
-            'id_formation'=> $this->faker->numberBetween(10,200),
-            //'id_formation' => Formation::get('id_formation')->random(),
+            'client_id' => Client::get('id')->random(),
+           // 'formation_id'=> $this->faker->numberBetween(10,200),
+           'formation_id' => Formation::get('id')->random(),
 
             'date_demande'=>$this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'id_responsable'=> $this->faker->numberBetween(10,200),
-            //'id_responsable' => Responsable::get('id_responsable')->random(),
+            //'responsable_id'=> $this->faker->numberBetween(10,200),
+            'responsable_id' => Responsable::get('id')->random(),
 
 
         ];
