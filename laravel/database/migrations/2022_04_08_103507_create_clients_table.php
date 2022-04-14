@@ -17,7 +17,7 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('specialite'); 
            $table->string('carte_etud')->unique();
-             $table->foreignId('ncin')->constrained()->onDelete('restrict')->onUpdate('cascade');
+             $table->foreignId('utilisateur_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('departement_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
 
           
