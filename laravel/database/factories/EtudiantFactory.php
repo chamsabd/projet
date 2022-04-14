@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Client;
+use App\Models\Responsable;
+
 class EtudiantFactory extends Factory
 {
     /**
@@ -14,11 +16,12 @@ class EtudiantFactory extends Factory
     public function definition()
     {
         return [
-            'carte_etud'=>$this->faker->unique()->numberBetween(0,7),
-            'id_clients' => Client::get('id_clients')->random(),
-            'id_responsable'=>$this->faker->numberBetween(0,7),
+            'id'=>$this->faker->unique()->numberBetween(0,7),
+            'client_id' => Client::get('id')->random(),
+           // 'responsable_id'=>$this->faker->numberBetween(0,7),
            // 'id_responsable' => Responsable::get('id_responsable')->random(),
-            	
+           'responsable_id' => Responsable::get('id')->random(),
+
         ];
     }
 }
