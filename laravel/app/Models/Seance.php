@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seance extends Model
 {
     use HasFactory;
-    protected $primaryKey='id_seance';
+ 
     //public $timestamps = false ;
     /*
     public function ressources()

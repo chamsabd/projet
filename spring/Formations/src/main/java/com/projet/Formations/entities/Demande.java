@@ -1,3 +1,4 @@
+
 package com.projet.Formations.entities;
 
 import java.util.Date;
@@ -72,3 +73,4 @@ public class Demande {
 	}
 
 }
+

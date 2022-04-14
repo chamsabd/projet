@@ -15,8 +15,9 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            'ncin'=>Utilisateur::get('ncin')->unique()->random(),
-            
+
+            'utilisateur_id'=>Utilisateur::get('id')->unique()->random(),
+
             'created_at'=>now()
         ];
     }
