@@ -14,10 +14,11 @@ class CreateProfesseursTable extends Migration
     public function up()
     {
         Schema::create('professeurs', function (Blueprint $table) {
-            $table->id('id_prof');
+            $table->id();
             $table->string('formation_certifier');
-            $table->integer('id_reponsable')->unsigned();
-            //$table->foreign('id_reponsable')->references('')->on('responsables')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('responsable_id')->unsigned();
+            //$table->foreign('responsable_id')->references('id_responsable')->on('responsables')->onDelete('restrict')->onUpdate('cascade');
+            //$table->foreignId('responsable_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }

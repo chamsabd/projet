@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Responsable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProfesseurFactory extends Factory
@@ -16,8 +16,8 @@ class ProfesseurFactory extends Factory
         return [
             //
              'formation_certifier' => $this->faker->sentence,
-             //'id_responsable' => Responsable::get('id_responsable')->random(),
-             'id_reponsable' => $this->faker->numberBetween(10, 500),
+             'responsable_id' => Responsable::get('id_responsable')->random(),
+             //'responsable_id' => $this->faker->numberBetween(10, 500),
              'created_at' => now(),
         ];
     }
