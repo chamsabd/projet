@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Admin;
+use App\Models\Professeur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker ;
 use app\order ;
@@ -16,13 +18,11 @@ class ResponsableFactory extends Factory
     {
         return [
             'metier' => $this->faker->word(),
-            'id_professeur'=>$this->faker->randomNumber(),
-           'id_admin'=>$this->faker->randomNumber(),
+           // 'professeur_id'=>Professeur::get('id')->random(),
+           'admin_id'=>Admin::get('id')->random(),
            'created_at'=> now() ,
            'updated_at'=> now(),
-          
-           // 'id_professeur'=> Professeur::get('id_professeur')->random(),
-          //  'id_admin'=> Admin::get('id_admin')->random()
+        
         ];
     }
 }
