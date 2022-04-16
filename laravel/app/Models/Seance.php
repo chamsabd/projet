@@ -8,23 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Seance extends Model
 {
     use HasFactory;
- 
-    //public $timestamps = false ;
-    /*
+  
     public function ressources()
     {
-        return $this->hasMany(Ressource::class,'id_seance');
+        return $this->hasMany(Ressource::class);
     }
 
     public function professeur()
     {
-        return $this->belongsTo(Professeur::class,'id_seance');
+        return $this->belongsTo(Professeur::class);
     }
 
     public function formation()
     {
-        return $this->belongsTo(Formation::class,'id_seance');
+        return $this->belongsTo(Formation::class);
     }
-*/
+
 
 }
