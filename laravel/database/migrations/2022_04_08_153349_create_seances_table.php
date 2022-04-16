@@ -17,7 +17,7 @@ class CreateSeancesTable extends Migration
             $table->id() ;
             $table->string('nom_cours');
             $table->dateTimeTz('duree');
-            $table->foreignId('professeur_id');
+            //$table->foreignId('professeur_id');
             $table->foreignId('formation_id');
             $table->timestamps();
           // $table->foreign('professeur_id')->references ('id')->on('professeurs')->onDelete('restrict')->onUpdate('restrict') ;

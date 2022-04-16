@@ -20,7 +20,7 @@ class CreateResponsablesTable extends Migration
             $table->string('metier');
             $table->timestamps();
            $table->foreignId('admin_id');
-           $table->foreignId('professer_id');
+           //$table->foreignId('professeur_id');
            $table->foreign('admin_id')->references ('id')->on('admins')->onDelete('restrict')->onUpdate('restrict') ;
          //  $table->foreign('professeur_id')->references ('id')->on('professeurs')->onDelete('restrict')->onUpdate('restrict')  ;
         });
