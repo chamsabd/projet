@@ -8,11 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Professeur extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_reponsable';
+    
 
-   /* public function Responsable()
+    public function Responsable()
     {
-        return $this->belongsTo(Responsable::class, 'id_reponsable');
+        return $this->belongsTo(Responsable::class);
     }
-    */
+
+    public function seances()
+    {
+        return $this->hasMany(Seance::class);
+    }
+
+    public function Client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    
 }

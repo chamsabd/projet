@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DepartementFactory extends Factory
@@ -16,8 +16,8 @@ class DepartementFactory extends Factory
         return [
             
             'nom_dep' => $this->faker->word,
-            //'id_admin' => Admin::get('id_admin')->random(),
-            'id_admin' => $this->faker->numberBetween(10, 500),
+            'admin_id' => Admin::get('id')->random(),
+            //'admin_id' => $this->faker->numberBetween(10, 500),
             'created_at' => now(),
 
         ];
