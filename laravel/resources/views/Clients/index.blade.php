@@ -1,4 +1,3 @@
 <?php
-
-var_dump('clients');
+var_dump($clients);
 ?>

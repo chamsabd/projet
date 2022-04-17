@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-Route::resource('/clients', ClientController::class);
+//Route::resource('/clients', ClientController::class);
 
 Route::apiResource('formations',FormationController::class);
