@@ -16,8 +16,8 @@ class ProfesseurFactory extends Factory
         return [
             //
              'formation_certifier' => $this->faker->sentence,
-             'responsable_id' => Responsable::get('id_responsable')->random(),
-             //'responsable_id' => $this->faker->numberBetween(10, 500),
+             //'responsable_id' => Responsable::get('id')->random(),
+             'responsable_id' => $this->faker->numberBetween(10, 500),
              'created_at' => now(),
         ];
     }
