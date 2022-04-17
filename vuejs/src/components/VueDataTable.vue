@@ -17,6 +17,7 @@
         <td>{{user.userId}}</td>
         <td>{{user.title}}</td>
         <td>{{user.body}}</td>
+        
       </tr>
        
     </tbody>
@@ -38,16 +39,21 @@ export default {
     this.getUsers();
   },
   methods: {
+    table(){
+ $("#myTable").DataTable().clear().destroy();
+       this.$nextTick(() => { $("#myTable").DataTable({
+             dom: 'Blfrtip', 
+              buttons: ["searchBuilder","searchPanes","colvis", "excel", "print", "csv"],
+          });
+        })
+    },
     getUsers() {
       axios
         .get("https://jsonplaceholder.typicode.com/posts")
         .then((response) => {
             this.users=response.data;
-              $("#myTable").DataTable().clear().destroy();
-       this.$nextTick(() => {  $("#myTable").DataTable({
-             dom: 'B<"clear">lfrtip',  buttons: ["searchBuilder","searchPanes","colvis", "excel", "print", "csv"],
-          });
-        })})
+            this.table();
+             })
         .catch((error) => console.log(error.response));
     },
   },
