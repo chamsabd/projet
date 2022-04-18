@@ -22,6 +22,7 @@ class CreateFormationsTable extends Migration
             $table->date('date_fin');
             $table->date('date_certif');
             $table->boolean('etat');
+            $table->boolean('archi');
             $table->integer('nbr_place');
             $table->timestamps();
         });
