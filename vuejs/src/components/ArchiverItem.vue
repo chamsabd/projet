@@ -12,10 +12,9 @@ export default {
   methods: {
 
     deleteitm(id){
-       
 axios.delete('http://127.0.0.1:8000/api/formation/'+id)
  .then((response) => {
-            if(response.data==true){
+            if(response.data==1){
  console.log("id",id);
         //    this.getformations();
         document.location.reload(true);

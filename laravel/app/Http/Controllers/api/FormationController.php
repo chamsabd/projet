@@ -73,7 +73,7 @@ return 'not found';
     {
         $formation=Formation::find($id);
         if($formation){
-           $formation->archi=false;
+           $formation->archi=1;
            
             return  $formation->save();;
         }
