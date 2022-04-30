@@ -10,7 +10,6 @@ export default {
    id:Number,
   },
   methods: {
-
     deleteitm(id){
 axios.delete('http://127.0.0.1:8000/api/formation/'+id)
  .then((response) => {
