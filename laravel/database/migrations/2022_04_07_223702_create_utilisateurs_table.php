@@ -20,11 +20,10 @@ class CreateUtilisateursTable extends Migration
            $table->integer('ncin')->unique();
            $table->string('email')->unique();
            $table->string('password');
-           
            $table->string('nom');
            $table->string('prenom');
-           $table->enum('profile',['admin','etud','prof','resp']);
-           $table->string('avatar');
+           $table->enum('role',['admin','etud','prof','agent']);
+           $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }
