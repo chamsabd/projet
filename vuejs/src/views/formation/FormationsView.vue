@@ -6,7 +6,7 @@
       <thead>
         <tr>
          
-          <th>nom formation</th>
+          <th>titre formation</th>
           <th>date debut</th>
           <th>desc</th>
           <th>action</th>
@@ -14,7 +14,7 @@
       </thead>
        <tbody>
       <tr v-for="formation in formations" :key="formation.id">
-        <td>{{formation.nom_for}}</td>
+        <td>{{formation.titre}}</td>
         <td>{{formation.date_debut}}</td>
         <td>{{formation.description}}</td>
        <td> 

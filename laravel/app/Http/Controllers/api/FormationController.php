@@ -15,7 +15,7 @@ class FormationController extends Controller
      */
     public function index()
     {
-        return Formation::where('archi',false)->get();
+        return Formation::with('responsable','formateur','formateurexterne')->get();
     }
 
     /**

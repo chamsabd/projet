@@ -23,9 +23,7 @@ class CreateFormationsTable extends Migration
             $table->foreignId('responsable_id')->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('formateur_id')->nullable()->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('formateurexterne_id')->nullable()->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade');
-          
             $table->boolean('etat');
-
             $table->integer('nbr_place');
             $table->timestamps();
         });
