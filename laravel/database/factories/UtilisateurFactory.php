@@ -20,7 +20,7 @@ class UtilisateurFactory extends Factory
         'password'=>$this->faker->password(),
         'nom' => $this->faker->name(),
         'prenom' => $this->faker->name(),
-        'profile' => $this->faker->randomElement($array = array ('admin','etud','prof','resp')),
+        'role' => $this->faker->randomElement($array = array ('admin','etud','prof','agent')),
         'avatar' => $this->faker->imageUrl($width = 640, $height = 480),
         'created_at'=>now()
         ];
