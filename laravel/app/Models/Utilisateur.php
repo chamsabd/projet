@@ -13,4 +13,15 @@ class Utilisateur extends Model
     {
         return $this->hasOne(Admin::class);
     }
+    public function responsable(){
+        return $this->hasOne(Responsable::class);
+    }
+    public function professeur(){
+        return $this->hasOne(Professeur::class);
+    }
+    public function etudiant(){
+        return $this->hasOne(Etudiant::class);
+    }
+ 
 }
+?>
