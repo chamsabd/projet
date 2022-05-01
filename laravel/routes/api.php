@@ -19,4 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-Route::apiResource('formations',FormationController::class);
+//Route::apiResource('/formations',[FormationController::class,'index']);
+Route::get('/formations',[FormationController::class,'index']);
+Route::prefix('/formation')->group(function(){
+    Route::post('/store',[FormationController::class,'store']);
+    Route::put('/{id}',[FormationController::class,'update']);
+    Route::delete('/{id}',[FormationController::class,'destroy']);
+    Route::get('/{id}',[FormationController::class,'show']);
+});
