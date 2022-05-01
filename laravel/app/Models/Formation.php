@@ -10,8 +10,16 @@ class Formation extends Model
     use HasFactory;
    
 
-public function inscrits()
-{
-    return $this->hasMany(Inscrit::class);
-}
+    public function responsable()
+    {
+        return $this->belongsTo(Utilisateur::class, 'responsable_id');
+    } 
+    public function formateur()
+    {
+        return $this->belongsTo(Utilisateur::class, 'formateur_id');
+    }  
+    public function formateurexterne()
+    {
+        return $this->belongsTo(Utilisateur::class, 'formateurexterne_id');
+    } 
 }
