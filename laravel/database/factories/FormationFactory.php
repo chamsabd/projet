@@ -24,7 +24,9 @@ class FormationFactory extends Factory
             'formateur_id' =>Utilisateur::get('id')->random(),
             'formateurexterne_id' =>Utilisateur::get('id')->random(),//table formateurexterne 
             'etat' =>$this->faker->boolean,   
+
              'nbr_place' =>$this->faker->randomNumber(),
+
             'created_at'=>now()  
         ];
     }

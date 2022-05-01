@@ -16,8 +16,8 @@ class CreateEtudiantsTable extends Migration
         Schema::create('etudiants', function (Blueprint $table) {
            
             $table->id();
-    $table->Integer('responsable_id');
-            //$table->foreignId('responsable_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
+            $table->string('carte_etud')->unique();
+            $table->foreignId('responsable_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
            // $table->foreignId('')->references('responsable_id')->constrained('responsables')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('client_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();

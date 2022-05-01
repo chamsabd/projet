@@ -16,12 +16,13 @@ class EtudiantFactory extends Factory
     public function definition()
     {
         return [
-            'id'=>$this->faker->unique()->numberBetween(0,7),
+           // 'id'=>$this->faker->unique()->numberBetween(0,7),
             'client_id' => Client::get('id')->random(),
            // 'responsable_id'=>$this->faker->numberBetween(0,7),
            // 'id_responsable' => Responsable::get('id_responsable')->random(),
            'responsable_id' => Responsable::get('id')->random(),
-
+           'carte_etud'=>$this->faker->unique()->randomNumber($nbDigits = 8, $strict = true),
+           
         ];
     }
 }
