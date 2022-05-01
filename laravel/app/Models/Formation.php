@@ -22,4 +22,16 @@ class Formation extends Model
     {
         return $this->belongsTo(Utilisateur::class, 'formateurexterne_id');
     } 
+    public function demandes()
+    {
+        return $this->belongsToMany(Utilisateur::class, 'demandes');
+    }
+    public function inscrits()
+    {
+        return $this->belongsToMany(Utilisateur::class, 'inscrits');
+    }
+    public function certifs()
+    {
+        return $this->belongsToMany(Utilisateur::class, 'certifs');
+    }
 }
