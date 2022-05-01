@@ -15,8 +15,7 @@ class CreateUtilisateursTable extends Migration
     {
         Schema::create('utilisateurs', function (Blueprint $table) {
 
-            
-           $table->id();
+            $table->id();
            $table->integer('ncin')->unique();
            $table->string('email')->unique();
            $table->string('password');
@@ -24,7 +23,7 @@ class CreateUtilisateursTable extends Migration
            $table->string('prenom');
            $table->enum('role',['admin','etud','prof','agent']);
            $table->string('avatar')->nullable();
-            $table->timestamps();
+           $table->timestamps();
         });
     }
 
