@@ -2,53 +2,80 @@
   <div id="app" class="container">
     <h1 class="text-center">Datatable with Vue</h1>
 
-    <table id="myTable" class="table table-bordered mt-5">
-      <thead>
+    <datatable
+      title="Basic table"
+      :columns="tableColumns1"
+      :rows="formations"
+      :perPage="[3, 5, 10]"
+    >
+      <th slot="thead-tr">Actions</th>
+ 
+       <template slot="tbody-tr" slot-scope="props">
         <tr>
-          <th>titre formation</th>
-          <th>date debut</th>
-          <th>desc</th>
-          <th>action</th>
+          <td></td>
+        <td>
+          <b-button
+            pill
+            v-b-toggle="'collapse-' + props.row.id"
+            variant="outline-info"
+            >detail</b-button
+          >
+         
+        </td>
         </tr>
-      </thead>
-      <tbody class="accordion">
-        <template  v-for="(formation,index) in formations">
-        
-          <tr  :key="index">
-            <td>{{ formation.titre }}</td>
-            <td>{{ formation.date_debut }}</td>
-            <td>{{ formation.description }}</td>
-            <td>
-              <b-button pill v-b-toggle="'collapse-'+formation.id " variant="outline-info">detail</b-button
-              >
-              <b-button pill variant="outline-success">modifier</b-button>
-              <ArchiverItem :id="formation.id" />
-            </td>
-          </tr>
-          <tr  :key="index">
-            <td colspan="4">
-              <b-collapse accordion="my-accordion" :id="'collapse-'+formation.id">
-                <b-card>I am collapsible content!</b-card>
-              </b-collapse>
-            </td>
-          </tr>
-        </template>
-      </tbody>
-    </table>
+       <table class="details">
+        <tr >
+          <FormationDetails :formation="props.row" />
+        </tr></table>
+      </template> 
+    </datatable>
+
+ 
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import $ from "jquery";
-import ArchiverItem from "@/components/ArchiverItem";
+
+import DataTable from "vue-materialize-datatable";
+//import ArchiverItem from "@/components/ArchiverItem";
+import FormationDetails from "@/components/formation/FormationDetails";
 export default {
   name: "FormationsView",
   components: {
-    ArchiverItem,
+    //  ArchiverItem,
+    FormationDetails,
+    datatable: DataTable,
   },
   data: function () {
     return {
+      tableColumns1: [
+        {
+          label: "titre de formation",
+          field: "titre",
+          numeric: false,
+          html: false,
+        },
+        {
+          label: "date debut",
+          field: "date_debut",
+          numeric: true,
+          html: false,
+        },
+        {
+          label: "description",
+          field: function f(fo) {
+            if (fo.description) {
+              return fo.description.toString().substring(0, 20) + "…";
+            } else {
+              return "pas de description";
+            }
+          },
+          numeric: false,
+          html: false,
+        },
+      ],
+
       formations: [],
     };
   },
@@ -56,31 +83,11 @@ export default {
     this.getformations();
   },
   methods: {
-    table(data) {
-      $("#myTable").DataTable().clear().destroy();
-
-      this.$nextTick(() => {
-        $("#myTable").DataTable({
-          data: data,
-
-          dom: "Blfrtip",
-          buttons: [
-            "searchBuilder",
-            "searchPanes",
-            "colvis",
-            "excel",
-            "print",
-            "csv",
-          ],
-        });
-      });
-    },
     getformations() {
       axios
         .get("http://127.0.0.1:8000/api/formations")
         .then((response) => {
           this.formations = response.data;
-          this.table();
         })
         .catch((error) => console.log(error.response));
     },
@@ -96,4 +103,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@import "~material-design-icons-iconfont/dist/material-design-icons";
+.details{
+ 
+   display:block !important; 
+width:100%;
+  right: 0px;
+}
+</style>
