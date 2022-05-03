@@ -18,7 +18,6 @@ class UtilisateurController extends Controller
     public function index()
     {
         $utilisateurs= Utilisateur::all();
-        var_dump($utilisateurs);
         return view('Utilisateurs.index',compact('utilisateurs'));  
     }
 
