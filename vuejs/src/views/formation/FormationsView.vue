@@ -6,31 +6,18 @@
       title="Basic table"
       :columns="tableColumns1"
       :rows="formations"
+      v-on:row-click="onRowClick"
       :perPage="[3, 5, 10]"
     >
       <th slot="thead-tr">Actions</th>
- 
-       <template slot="tbody-tr" slot-scope="props">
-        <tr>
-          <td></td>
-        <td>
-          <b-button
-            pill
-            v-b-toggle="'collapse-' + props.row.id"
-            variant="outline-info"
-            >detail</b-button
-          >
-         
-        </td>
-        </tr>
-       <table class="details">
-        <tr >
-          <FormationDetails :formation="props.row" />
-        </tr></table>
-      </template> 
-    </datatable>
 
- 
+      <template slot="tbody-tr">
+        <td>
+          <b-button pill variant="outline-info">detail</b-button>
+        </td>
+      </template>
+    </datatable>
+    <FormationDetails :formation="formation" />
   </div>
 </template>
 
@@ -44,7 +31,7 @@ export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
-    FormationDetails,
+     FormationDetails,
     datatable: DataTable,
   },
   data: function () {
@@ -77,12 +64,23 @@ export default {
       ],
 
       formations: [],
+      formation:{},
     };
   },
   mounted() {
     this.getformations();
   },
   methods: {
+    showModal(id) {
+      this.$bvModal.show(id);
+      // this.$refs[id].show()
+    },
+    onRowClick(row) {
+     
+      this.formation = row;
+      console.log(this.formation);
+    this.showModal('my-modal');
+    },
     getformations() {
       axios
         .get("http://127.0.0.1:8000/api/formations")
@@ -105,10 +103,9 @@ export default {
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-.details{
- 
-   display:block !important; 
-width:100%;
+.details {
+  display: block !important;
+  width: 100%;
   right: 0px;
 }
 </style>
