@@ -21,6 +21,7 @@ class FormationFactory extends Factory
             'date_fin' =>$this->faker->date($format = 'Y-m-d', $max = 'now'),   
             'date_certif' =>$this->faker->date($format = 'Y-m-d', $max = 'now'),  
             'etat' =>$this->faker->boolean,   
+            'archi' =>$this->faker->boolean,
             'nbr_place' =>$this->faker->randomNumber(),
             'created_at'=>now()  
         ];

@@ -17,7 +17,7 @@ class CreateDemandesTable extends Migration
             $table->id();
             $table->integer('responsable_id');
             $table->dateTime('date_demande');
-            $table->foreignId('formation_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
            // $table->foreignId('responsable_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('client_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
            //respo
