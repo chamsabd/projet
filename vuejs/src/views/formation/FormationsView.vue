@@ -103,9 +103,5 @@ export default {
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-.details {
-  display: block !important;
-  width: 100%;
-  right: 0px;
-}
+
 </style>
