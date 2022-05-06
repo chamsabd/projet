@@ -9,9 +9,16 @@
       v-on:row-click="onRowClick"
       :perPage="[3, 5, 10]"
     >
+      <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
 
-      <template slot="tbody-tr">
+      <template slot="tbody-tr" slot-scope="props">
+        <td>
+          <b-button v-if="props.row.etat == 0" pill variant="outline-info"
+            >overte</b-button
+          >
+          <b-button v-else pill variant="outline-danger">fermer</b-button>
+        </td>
         <td>
           <b-button pill variant="outline-info">detail</b-button>
         </td>
@@ -31,7 +38,7 @@ export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
-     FormationDetails,
+    FormationDetails,
     datatable: DataTable,
   },
   data: function () {
@@ -64,7 +71,7 @@ export default {
       ],
 
       formations: [],
-      formation:{},
+      formation: {},
     };
   },
   mounted() {
@@ -76,10 +83,9 @@ export default {
       // this.$refs[id].show()
     },
     onRowClick(row) {
-     
       this.formation = row;
       console.log(this.formation);
-    this.showModal('my-modal');
+      this.showModal("my-modal");
     },
     getformations() {
       axios
@@ -103,5 +109,4 @@ export default {
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-
 </style>
