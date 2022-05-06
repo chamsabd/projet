@@ -1,26 +1,27 @@
 <template>
   <div id="app" class="container">
-    <h1 class="text-center">Datatable with Vue</h1>
+    <h1 class="text-center">formation</h1>
 
-    <datatable
-      title="Basic table"
+     <datatable
+    title="formations "
+    :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
       v-on:row-click="onRowClick"
-      :perPage="[3, 5, 10]"
+      
     >
       <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
 
       <template slot="tbody-tr" slot-scope="props">
         <td>
-          <b-button v-if="props.row.etat == 0" pill variant="outline-info"
+          <b-button v-if="props.row.etat == 0" pill variant="outline-success"
             >overte</b-button
           >
           <b-button v-else pill variant="outline-danger">fermer</b-button>
         </td>
         <td>
-          <b-button pill variant="outline-info">detail</b-button>
+          <b-button pill variant="outline-info">action</b-button>
         </td>
       </template>
     </datatable>
@@ -72,12 +73,23 @@ export default {
 
       formations: [],
       formation: {},
+      customButtons:[
+  { 
+    hide: false, // Whether to hide the button
+    icon: "add", // Materialize icon 
+    onclick:this.test ,// Click handler 
+   
+  } 
+],
     };
   },
   mounted() {
     this.getformations();
   },
   methods: {
+    test(){
+console.log("ok add");
+    },
     showModal(id) {
       this.$bvModal.show(id);
       // this.$refs[id].show()
