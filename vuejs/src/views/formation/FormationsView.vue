@@ -2,13 +2,12 @@
   <div id="app" class="container">
     <h1 class="text-center">formation</h1>
 
-     <datatable
-    title="formations "
-    :customButtons="customButtons"
+    <datatable
+      title="formations "
+      :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
       v-on:row-click="onRowClick"
-      
     >
       <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
@@ -25,8 +24,7 @@
         </td>
       </template>
     </datatable>
-    <FormationDetails :formation="formation" />
-  
+    <modal-comp :object="formation" />
   </div>
 </template>
 
@@ -35,18 +33,21 @@ import axios from "axios";
 
 import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
-import FormationDetails from "@/components/formation/FormationDetails";
+
+import ModalComp from '../../components/ModalComp.vue';
 
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
+
    
-    FormationDetails,
     datatable: DataTable,
+    ModalComp,
   },
   data: function () {
     return {
+      admin:true,
       tableColumns1: [
         {
           label: "titre de formation",
@@ -76,22 +77,27 @@ export default {
 
       formations: [],
       formation: {},
-      customButtons:[
-  { 
-    hide: false, // Whether to hide the button
-    icon: "add", // Materialize icon 
-    onclick:this.onAddClick ,// Click handler 
-   
-  } 
-],
     };
+  },
+  computed: {
+    customButtons() {
+      return this.admin == true
+        ? [
+            {
+              hide: false, // Whether to hide the button
+              icon: "add", // Materialize icon
+              onclick: this.onAddClick, // Click handler
+            },
+          ]
+        : [];
+    },
   },
   mounted() {
     this.getformations();
   },
   methods: {
-    onAddClick(){
-this.formation = {};
+    onAddClick() {
+      this.formation = {};
       console.log(this.formation);
       this.showModal("my-modal");
     },

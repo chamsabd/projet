@@ -22,52 +22,53 @@
 
             <b-row>
               <b-col>
-                <b-form-group label="date debut"  label-for="input-2">
+                <b-form-group label="date debut" :state="advalid_dated"  label-for="input-2">
                   <b-form-datepicker :min="mind" :max="maxd"
                     id="input-2"
                      reset-button
                     class="mb-2 mr-sm-2 mb-sm-0"
                     v-model="formation.date_debut"
-                    
+                    :state="advalid_dated"
                     require
                     trim
                   ></b-form-datepicker>
-                  <b-form-invalid-feedback >
-                    titre doit etre 5-15 caractere
+                  <b-form-invalid-feedback :state="advalid_dated" >
+                   please enter a date 
                   </b-form-invalid-feedback>
-                  <b-form-valid-feedback >
+                  <b-form-valid-feedback  :state="advalid_dated">
                     Looks Good.
                   </b-form-valid-feedback>
                 </b-form-group>
               </b-col>
               <b-col>
-                <b-form-group label="date fin" label-for="input-3">
+                <b-form-group    :state="advalid_datef" label="date fin" label-for="input-3">
                   <b-form-datepicker
                   :min="minf"
                     id="input-3"
                    reset-button
+                   :state="advalid_datef"
                     class="mb-2 mr-sm-2 mb-sm-0"
                     v-model="formation.date_fin"
                     require
                     trim
                   ></b-form-datepicker>
 
-                  <b-form-invalid-feedback >
-                    titre doit etre 5-15 caractere
+                  <b-form-invalid-feedback    :state="advalid_datef">
+                   please enter a date 
                   </b-form-invalid-feedback>
-                  <b-form-valid-feedback >
+                  <b-form-valid-feedback    :state="advalid_datef">
                     Looks Good.
                   </b-form-valid-feedback>
                 </b-form-group>
               </b-col>
             </b-row>
-            <b-form-group label="titre formation" >
+            <b-form-group label="responsable n° cin" >
               <b-form-input
-             
-                v-model="formation.responsable_id"
+                list="input-list"
+                v-model="formation.responsable.ncin"
                 trim
               ></b-form-input>
-              <!-- list="input-list" <b-form-datalist id="input-list" :options="options"></b-form-datalist> -->
+              <b-form-datalist id="input-list" :options="options"></b-form-datalist>
               <b-form-invalid-feedback >
                 titre doit etre 5-15 caractere
               </b-form-invalid-feedback>
@@ -167,9 +168,16 @@ advalid_titre(){
     if(this.formation.titre!=undefined)
     return this.formation.titre.length >=5 && this.formation.titre.length <=15
 return false
-    
+},advalid_datef(){
+  if(this.formation.date_fin!=undefined )
+  return true
+  return false
 
-}
+},advalid_dated(){
+if(this.formation.date_debut!=undefined)
+ return true
+  return false
+},
    }
 };
 </script>
