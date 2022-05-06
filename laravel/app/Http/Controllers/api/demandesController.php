@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\demandeResource;
 use App\Models\Demande;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class demandesController extends Controller
@@ -16,7 +19,8 @@ class demandesController extends Controller
      */
     public function index()
     {
-        return Demande::with('utilisateur','formation')->get();
+        $Demande =Demande::all();
+        return demandeResource::collection($Demande);
     }
 
     /**
@@ -25,11 +29,31 @@ class demandesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($formation_id)
     {
-    $validateData = $request->validate($this->validationRules());
-    Demande::create($validateData);
-    return redirect()->route(' ')->with('Createdemande' , 'votre demande à été ajouter avec succès!');
+        $formation = DB::table('formations')
+        
+        // ->join('formations', 'formations.id', '=', 'demandes.formations_id')
+        // ->join('utilisateurs', 'utilisateurs.id', '=', 'demandes.utilisateurs_id')
+        // ->select('formations.*','formations.id as form_id','utilisateurs.*','utilisateurs.id as utili_id','demandes.*')
+        ->where('id',$formation_id)
+        //->get('demandes.*')->first()->id;
+        ->get()->first();
+        $Demande=Demande::create([
+            
+            "date_demande"=>new DateTime('now'),
+            "formation_id"=>$formation->id,
+            "utilisateur_id"=>Auth::utilisateur()->id(),
+        ]);
+        if($Demande->save()){
+
+            return response()->json($Demande);
+
+     } 
+    // $validateData = $request->validate($this->validationRules());
+    // Demande::create($validateData);
+    // return response()->json('votre demande à été ajouter avec succès!');
+   // return redirect()->route('')->with('Createdemande' , 'votre demande à été ajouter avec succès!');
     }
 
     /**
@@ -63,16 +87,19 @@ class demandesController extends Controller
      */
     public function destroy($id)
     {
-
-    DB::table('Demandes')->where('id',$id)->delete();
-    return redirect()->route(' ')->with('deletedemande' , 'la demande à été supprimer avec succès!');
-
+    $Demande = Demande::FindOrFail($id);
+            $Demande->delete();
+          //  dd($Demande);
+            return response()->json('deleted');
+            // $Demande = Demande::find($id);
+            // $Demande->delete();
+   
+            // return response()->json('Product successfully deleted!');
     }
-    private function validationRules()
-    {
-        return [
-            'id_demande'=>['required','unique:demandes'],
-            'date'=>'required'
-            ];
-    }
+    // private function validationRules()
+    // {
+    //     return [
+    //         'date_demande'=>'required',
+    //         ];
+    // }
 }
