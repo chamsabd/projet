@@ -26,6 +26,7 @@
       </template>
     </datatable>
     <FormationDetails :formation="formation" />
+  
   </div>
 </template>
 
@@ -35,10 +36,12 @@ import axios from "axios";
 import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
 import FormationDetails from "@/components/formation/FormationDetails";
+
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
+   
     FormationDetails,
     datatable: DataTable,
   },
@@ -77,7 +80,7 @@ export default {
   { 
     hide: false, // Whether to hide the button
     icon: "add", // Materialize icon 
-    onclick:this.test ,// Click handler 
+    onclick:this.onAddClick ,// Click handler 
    
   } 
 ],
@@ -87,8 +90,10 @@ export default {
     this.getformations();
   },
   methods: {
-    test(){
-console.log("ok add");
+    onAddClick(){
+this.formation = {};
+      console.log(this.formation);
+      this.showModal("my-modal");
     },
     showModal(id) {
       this.$bvModal.show(id);
