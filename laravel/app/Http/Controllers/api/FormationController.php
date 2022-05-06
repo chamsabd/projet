@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Formation;
 use Illuminate\Http\Request;
 
 class FormationController extends Controller
@@ -15,6 +16,7 @@ class FormationController extends Controller
     public function index()
     {
         //
+        return Formation::all();
     }
 
     /**
