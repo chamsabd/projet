@@ -1,12 +1,15 @@
 package com.projet.Formations.service;
 
-import java.util.Date;
+
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import com.projet.Formations.dao.FormationRepository;
 import com.projet.Formations.entities.Formation;
@@ -40,11 +43,16 @@ private	 FormationRepository formationRepository;
 	}
 
 	@Override
-	public Page<Formation> getAllFormationparpage(int page, int size) {
+	public Page<Formation> getAllFormationsparpage(int page, int size) {
 		// TODO Auto-generated method stub
 		return this.formationRepository.findAll(PageRequest.of(page, size));
 	}
+	@Override
 
+	public List<Formation> getAllFormations() { 
+	 
+	 return formationRepository.findAll(); 
+	 } 
 	@Override
 	public Page<Formation> findByNomFormationContains(String nomFormation, Pageable pageable) {
 		// TODO Auto-generated method stub
@@ -52,17 +60,7 @@ private	 FormationRepository formationRepository;
 	}
 
 
-	@Override
-	public Page<Formation> findByDateDebutFormationContains(Date datedebut, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return this.formationRepository.findByDateDebutFormationContains(datedebut, pageable);
-	}
 
-	@Override
-	public Page<Formation> findByDateCertifFormationContains(Date dateCertif, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return this.formationRepository.findByDateCertifFormationContains(dateCertif, pageable);
-	}
 
 
 }

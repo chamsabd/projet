@@ -2,8 +2,7 @@ package com.projet.Formations;
 
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -68,20 +67,5 @@ class FormationsApplicationTests {
 			System.out.println(f);
 
 	}
-	@Test
-	public void testFindFormationbydatedebut() throws ParseException {
-		Page<Formation> forms = formationRepository.findByDateDebutFormationContains(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-09"), PageRequest.of(0, 2).toOptional().get());
-
-		for (Formation f : forms)
-			System.out.println(f.getNomFormation());
-
-	}
-	@Test
-	public void testFindFormationbydatecertif() throws ParseException {
-		Page<Formation> forms = formationRepository.findByDateCertifFormationContains(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-12"), PageRequest.of(0, 2).toOptional().get());
-
-		for (Formation f : forms)
-			System.out.println(f);
-
-	}
+	
 }
