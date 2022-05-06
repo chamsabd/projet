@@ -20,8 +20,10 @@ class CreateSeancesTable extends Migration
             $table->foreignId('professeur_id');
             $table->foreignId('formation_id');
             $table->timestamps();
+
             $table->foreign('professeur_id')->references ('id')->on('professeurs')->onDelete('restrict')->onUpdate('restrict') ;
             $table->foreign('formation_id')->references ('id')->on('formations')->onDelete('cascade')->onUpdate('cascade') ;
+
         });
     }
 

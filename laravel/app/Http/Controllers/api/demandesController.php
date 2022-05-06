@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Formation;
 use Illuminate\Http\Request;
 
-class FormationController extends Controller
+class demandesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class FormationController extends Controller
      */
     public function index()
     {
-
-        return Formation::with('responsable','formateur','formateurexterne')->get();
+        //
     }
 
     /**
@@ -27,12 +25,7 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
-        $formation=new Formation();
-        $formation->nom_for=$request->nom_for;
-        $formation->date_debut=$request->date_debut;
-        $formation->description=$request->description;
-        
-        return $formation->save();
+        //
     }
 
     /**
@@ -55,13 +48,7 @@ class FormationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $formation=Formation::find($id);
-        if($formation){
-        $formation->nom_for=$request->nom_for;
-        $formation->date_debut=$request->date_debut;
-        $formation->description=$request->description;
-        return $formation->save();}
-return 'not found';
+        //
     }
 
     /**
@@ -72,12 +59,6 @@ return 'not found';
      */
     public function destroy($id)
     {
-        $formation=Formation::find($id);
-        if($formation){
-           $formation->archi=1;
-           
-            return  $formation->save();;
-        }
-        return 'not found';
+        //
     }
 }
