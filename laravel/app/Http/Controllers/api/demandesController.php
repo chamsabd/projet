@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Demande;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class demandesController extends Controller
 {
@@ -14,7 +16,7 @@ class demandesController extends Controller
      */
     public function index()
     {
-        //
+        return Demande::with('utilisateur','formation')->get();
     }
 
     /**
@@ -25,7 +27,9 @@ class demandesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $validateData = $request->validate($this->validationRules());
+    Demande::create($validateData);
+    return redirect()->route(' ')->with('Createdemande' , 'votre demande à été ajouter avec succès!');
     }
 
     /**
@@ -36,7 +40,7 @@ class demandesController extends Controller
      */
     public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -59,6 +63,16 @@ class demandesController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+    DB::table('Demandes')->where('id',$id)->delete();
+    return redirect()->route(' ')->with('deletedemande' , 'la demande à été supprimer avec succès!');
+
+    }
+    private function validationRules()
+    {
+        return [
+            'id_demande'=>['required','unique:demandes'],
+            'date'=>'required'
+            ];
     }
 }
