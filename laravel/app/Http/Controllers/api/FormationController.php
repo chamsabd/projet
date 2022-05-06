@@ -27,7 +27,7 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
