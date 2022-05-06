@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Formation extends Model
 {
     use HasFactory;
-   
 
     public function responsable()
     {
