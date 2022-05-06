@@ -15,13 +15,14 @@ class CreateSeancesTable extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->id() ;
-            $table->string('nom_cours');
-            $table->dateTimeTz('duree');
-            $table->foreignId('professeur_id');
+            $table->string('nom_seance');
+            $table->date('date');
+            $table->dateTime('temps_fin');
+            $table->dateTime('temps_debut');
+           
             $table->foreignId('formation_id');
             $table->timestamps();
 
-            $table->foreign('professeur_id')->references ('id')->on('professeurs')->onDelete('restrict')->onUpdate('restrict') ;
             $table->foreign('formation_id')->references ('id')->on('formations')->onDelete('cascade')->onUpdate('cascade') ;
 
         });
