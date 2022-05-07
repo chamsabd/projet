@@ -10,11 +10,7 @@ const routes = [
     name: 'FormationsView',
     component: FormationsView
   },
-  {
-    path: '/demande',
-    name: 'DemandeForm',
-    component: DemandeForm
-  },
+
   
 ]
 

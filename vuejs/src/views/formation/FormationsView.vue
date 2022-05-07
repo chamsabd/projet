@@ -110,8 +110,8 @@ export default {
       console.log(this.formation);
       this.showModal("my-modal");
     },
-    getformations() {
-      axios
+    async getformations() {
+  await  axios
         .get("http://127.0.0.1:8000/api/formations")
         .then((response) => {
           this.formations = response.data;
