@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import FormationsView from '@/views/formation/FormationsView'
 
+import FormationsView from '@/views/formation/FormationsView'
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,6 +9,11 @@ const routes = [
     path: '/formations',
     name: 'FormationsView',
     component: FormationsView
+  },
+  {
+    path: '/demande',
+    name: 'DemandeForm',
+    component: DemandeForm
   },
   
 ]

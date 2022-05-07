@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\FormationController;
+use App\Http\Controllers\api\demandesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
+
+
+
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/formations',[FormationController::class,'index']);
 Route::prefix('/formation')->group(function(){
@@ -27,3 +31,4 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
+
