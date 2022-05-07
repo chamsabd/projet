@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 
-use App\Models\Utilisateur;
+use App\Models\User;
 
 use Illuminate\Database\Seeder;
 
@@ -17,6 +17,6 @@ class UtilisateurSeeder extends Seeder
     public function run()
     {
        
-     Utilisateur::factory()->count(20)->create();
+     User::factory()->count(20)->create();
     }
 }
