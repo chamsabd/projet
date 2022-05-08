@@ -28,7 +28,7 @@ import axios from "axios";
 import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
 import FormationDetails from "@/components/formation/FormationDetails";
-import AddDemande from '../../components/demande/addDemande.vue';
+import AddDemande from "@/components/demande/addDemande.vue";
 export default {
   name: "FormationsView",
   components: {
