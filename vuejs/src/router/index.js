@@ -1,14 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueDataTable from '@/components/VueDataTable'
 
+import FormationsView from '@/views/formation/FormationsView'
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/test',
-    name: 'VueDataTable',
-    component: VueDataTable
+    path: '/formations',
+    name: 'FormationsView',
+    component: FormationsView
+  },
+  {
+    path: '/demande',
+    name: 'DemandeForm',
+    component: DemandeForm
   },
   
 ]

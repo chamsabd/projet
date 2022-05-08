@@ -19,6 +19,7 @@ class UtilisateurController extends Controller
     {
         $users= User::all();
         return view('Utilisateurs.index',compact('users'));  
+
     }
 
     /**
