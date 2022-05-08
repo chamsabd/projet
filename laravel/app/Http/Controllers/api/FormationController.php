@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use PhpParser\Node\Stmt\TryCatch;
 
 class FormationController extends Controller
 {
@@ -28,7 +29,11 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     { 
-        $request->validate($this->validationRules());
+       // return $request;
+         $request->validate($this->validationRules());
+    
+     
+       
         $formation=new Formation();
         $formation->titre=$request->titre;
         $formation->date_debut=$request->date_debut;
@@ -37,11 +42,14 @@ class FormationController extends Controller
         if ($request->description) {
       $formation->description=$request->description;
         }
-       
+       $formation->responsable_id=$request->responsable_id;
         $formation->nbr_place=$request->nbr_place;
        
-        
-        return $formation->save();
+        $formation->save();  
+   return $formation;
+     
+     
+      
     }
 
     /**
@@ -90,15 +98,14 @@ class FormationController extends Controller
         
     }
     private function validationRules()
-    { $day=new Date('y-m-d');
-        $day::setMonth($day::getMonth()+1);
+    {    
         return [
-            'title' => ['required', 'min:5', 'max:15'],
-            'nbr_place' => ['required', 'min:10', 'max:30'],
-            'description'=>'max:100',
-            'responsable_id' => 'required|exists:utilisateurs,id',
-            'date_debut' => 'required|date_format:y-m-d|before_or_equal:date_fin|after:'.$day,
-            'date_fin' => 'required|date_format:y-m-d|after_or_equal:date_debut'
+            'titre' => 'required|min:5|max:15',
+            'nbr_place' => 'required|integer|between:10,30',
+              'description'=>'max:100',
+              'responsable_id' => 'required|exists:utilisateurs,id',
+              'date_debut' => 'required|date_format:Y-m-d|before_or_equal:date_fin|after_or_equal:'.Date('Y-m-d',strtotime("+1 month",strtotime(date('Y-m-d')))),
+              'date_fin' => 'required|date_format:Y-m-d|after_or_equal:date_debut'
         ];
     }
 }

@@ -104,6 +104,9 @@
          
             <b-form-group label="nombre de place" :state="advalid_nbr">
               <b-form-input type="number" v-model="formation.nbr_place" trim :state="advalid_nbr"></b-form-input>
+              <b-form-invalid-feedback :state="errors['nbr_place']">
+                {{errors['nbr_place']}}
+              </b-form-invalid-feedback >
               <b-form-invalid-feedback :state="advalid_nbr">
                 nbr de place doit etre entre 10 et 30 
               </b-form-invalid-feedback >
@@ -128,9 +131,14 @@ export default {
     return {
       today: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
       utilisateurs: [],
-
+errors:[],
       formation: {
+        'titre':null,
+        'nbr_place':null,
+        'description':null,
+        'date_debut':null,
         'responsable_id':null,
+        'date_fin':null,
       },
     };
   },
@@ -139,9 +147,44 @@ export default {
   },
   methods: {
     Add() {
-      if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
-      return ;
+       if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
+       return ;
       console.log("add");
+            var fd = new FormData()
+          fd.append('titre', this.formation.titre);
+         fd.append('description', this.formation.description);
+         fd.append('date_debut',this.formation.date_debut==null?this.formation.date_debut:new Date('Y-m-d',this.formation.date_debut)) ;
+         fd.append('date_fin',this.formation.date_fin==null?this.formation.date_fin:new Date('Y-m-d', this.formation.date_fin) );
+         fd.append('responsable_id', this.formation.responsable_id);
+        fd.append('nbr_place', this.formation.nbr_place);
+         
+        //  console.log("in");
+          axios({
+            url: 'http://127.0.0.1:8000/api/formation/store',
+            method: 'post',
+            data: this.formation
+          })
+          .then(re => {
+           console.log(re);
+        //     if (re.data.res == 'success') {
+        //       // alert(' updated');
+            
+        //       this.formation = {};
+        //       // sessionStorage.setItem('show',true);
+            
+        //   this.hideModal('my-modalcer');
+        //   // app.getagents();
+        //   // document.location.reload(true);
+        //   // window.location.reload();
+        //   this.showAlert();
+        //  this.showplus('modal-multi-2',this.acc.id_ac)
+        
+        //     }
+          })
+          .catch(err => {
+            this.errors=err.response.data.errors;
+            console.log("erreurs chams",this.errors);
+          })
     },
     async getutilisateurs() {
       await axios
