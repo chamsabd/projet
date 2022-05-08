@@ -1,6 +1,6 @@
 <template>
   <div id="app"  class="container">
-    <h1 class="text-center">formation</h1>
+    
 
     <datatable
       title="formations"
@@ -24,7 +24,7 @@
         </td>
       </template>
     </datatable>
-      <b-modal  id="my-modal" size="lg"  centered ok-only>
+      <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
    
        </b-modal>

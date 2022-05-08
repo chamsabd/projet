@@ -1,8 +1,24 @@
 <template>
   <div id="app"  class="container ">
-    
+    <h1 class="text-center">formation</h1>
+    <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="info"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+    >
+    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter avec success a la fin de table</h6>
+      <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
+      <b-progress
+        variant="info"
+        :max="dismissSecs"
+        :value="dismissCountDown"
+        height="4px"
+      ></b-progress>
+    </b-alert>
    <lister-formation :formations="formations" :role="role"/>
- <b-modal  id="add-modal" size="lg"  centered ok-only><add-formation /> </b-modal>
+   <add-formation @add-formation="Addformation" /> 
 
   </div>
 </template>
@@ -30,9 +46,11 @@ export default {
   data: function () {
     return {
    
-
+ dismissSecs: 10,
+        dismissCountDown: 0,
 
       formations: [],
+      titreform:'',
    
     };
   },
@@ -45,7 +63,18 @@ role(){
     this.getformations();
   },
   methods: {
-  
+     countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      },
+  Addformation(formation){
+    this.titreform=formation.titre;
+console.log(formation);
+this.getformations();
+this.showAlert();
+  },
     onAddClick() {
       this.formation = {};
       console.log(this.formation);
