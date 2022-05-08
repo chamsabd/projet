@@ -10,7 +10,7 @@
       <b-navbar-nav>
      
       <router-link to="/formations">formations</router-link> |
-   
+    <router-link to="/demande">demandes</router-link>
  
       </b-navbar-nav>
 
