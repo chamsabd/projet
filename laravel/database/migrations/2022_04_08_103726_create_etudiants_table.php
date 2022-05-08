@@ -19,7 +19,6 @@ class CreateEtudiantsTable extends Migration
             $table->string('carte_etud')->unique();
             $table->foreignId('responsable_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
            // $table->foreignId('')->references('responsable_id')->constrained('responsables')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreignId('client_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }

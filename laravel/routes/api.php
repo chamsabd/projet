@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\api\FormationController;
+use App\Http\Controllers\api\UtilisateurController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\api\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,11 +15,18 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+ 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-
 });
+ 
+
+Route::post('/l', [AuthController::class,'login']);
+
+
 //Route::resource('/clients', ClientController::class);
 
 Route::apiResource('formations',FormationController::class);
+//Route::get('utilisateurs',[UtilisateurController::class,'index']);
+//Route::post('/register', [AuthController::class, 'register']);
+?>
