@@ -4,15 +4,22 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Etudiant;
-class EtudiantController extends Controller
+use  App\Models\User;
+
+class UtilisateurController extends Controller
 {
-   
+    //
+
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        //$etudiants= Etudiant::all();
-        $etudiants= Etudiant::all();
-        return view('Etudiants.index',compact('etudiants'));    }
+        $utilisateurs= User::all();
+        return view('Utilisateurs.index',compact('utilisateurs'));  
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -22,7 +29,7 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

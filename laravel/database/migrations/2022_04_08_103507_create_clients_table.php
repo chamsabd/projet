@@ -16,11 +16,7 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('specialite'); 
-          
-             $table->foreignId('utilisateur_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
             $table->foreignId('departement_id')->constrained()->onDelete('restrict')->onUpdate('cascade');
-
-          
             $table->timestamps();
 
         });
