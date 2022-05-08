@@ -1,23 +1,30 @@
 <template>
   <div id="app" class="container">
-    <h1 class="text-center">Datatable with Vue</h1>
+    <h1 class="text-center">formation</h1>
 
     <datatable
-      title="Basic table"
+      title="formations "
+      :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
-      v-on:row-click="onRowClick"
-      :perPage="[3, 5, 10]"
+     
     >
+      <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
 
-      <template slot="tbody-tr">
+      <template slot="tbody-tr" slot-scope="props">
         <td>
-          <b-button pill variant="outline-info">detail</b-button>
+          <b-button v-if="props.row.etat == 0" pill variant="outline-success"
+            >overte</b-button
+          >
+          <b-button v-else pill variant="outline-danger">fermer</b-button>
+        </td>
+        <td>
+          <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
         </td>
       </template>
     </datatable>
-    <FormationDetails :formation="formation" />
+    <modal-comp :object="formation" />
   </div>
 </template>
 
@@ -26,16 +33,21 @@ import axios from "axios";
 
 import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
-import FormationDetails from "@/components/formation/FormationDetails";
+
+import ModalComp from '../../components/ModalComp.vue';
+
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
-     FormationDetails,
+
+   
     datatable: DataTable,
+    ModalComp,
   },
   data: function () {
     return {
+      admin:true,
       tableColumns1: [
         {
           label: "titre de formation",
@@ -64,25 +76,46 @@ export default {
       ],
 
       formations: [],
-      formation:{},
+      formation: {},
     };
+  },
+  computed: {
+    customButtons() {
+      return this.admin == true
+        ? [
+            {
+              hide: false, // Whether to hide the button
+              icon: "add", // Materialize icon
+              onclick: this.onAddClick, // Click handler
+            },
+          ]
+        : [];
+    },
   },
   mounted() {
     this.getformations();
   },
   methods: {
+  
+    onAddClick() {
+      this.formation = {};
+      console.log(this.formation);
+      this.showModal("my-modal");
+    },
     showModal(id) {
       this.$bvModal.show(id);
       // this.$refs[id].show()
+    }, hideModal(id) {
+      this.$bvModal.hide(id);
+      // this.$refs[id].show()
     },
     onRowClick(row) {
-     
       this.formation = row;
       console.log(this.formation);
-    this.showModal('my-modal');
+      this.showModal("my-modal");
     },
-    getformations() {
-      axios
+    async getformations() {
+ await  axios
         .get("http://127.0.0.1:8000/api/formations")
         .then((response) => {
           this.formations = response.data;
@@ -103,5 +136,4 @@ export default {
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-
 </style>
