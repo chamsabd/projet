@@ -6,7 +6,7 @@
 
 <script>
 //import axios from "axios";
-import AfficherDemandes from '../../components/demande/afficherDemandes.vue';
+import AfficherDemandes from "@components/demande/afficherDemandes.vue";
 
 //import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
@@ -14,7 +14,7 @@ import AfficherDemandes from '../../components/demande/afficherDemandes.vue';
 export default {
   name: "DemandesView",
   components: {
-  AfficherDemandes,
+ AfficherDemandes,
   },
   data: function () {
     return {
