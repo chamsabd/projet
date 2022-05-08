@@ -25,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Route::apiResource('/formations',[FormationController::class,'index']);
-Route::get('/formations',[FormationController::class,'index']);
+Route::get('/admin/formations',[FormationController::class,'index']);
+Route::get('/participant/formations',[FormationController::class,'index']);
+Route::get('/responsable/formations',[FormationController::class,'responsableindex']);
+Route::get('/formateur/formations',[FormationController::class,'formateurindex']);
 Route::prefix('/formation')->group(function(){
     Route::post('/store',[FormationController::class,'store']);
     Route::put('/{id}',[FormationController::class,'update']);

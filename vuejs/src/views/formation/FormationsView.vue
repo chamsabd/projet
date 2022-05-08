@@ -57,12 +57,27 @@ export default {
   computed:{
 role(){
   return this.$route.params.role;
-}  },
+},
+  },
+watch: {
+ role:function () {
+  this.getformations();
+ }
+},
  
   mounted() {
     this.getformations();
   },
   methods: {
+    async getformations() {
+  
+ await  axios
+        .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
+        .then((response) => {
+          this.formations = response.data;
+        })
+        .catch((error) => console.log(error.response));
+    },
      countDownChanged(dismissCountDown) {
         this.dismissCountDown = dismissCountDown
       },
@@ -88,14 +103,7 @@ this.showAlert();
       // this.$refs[id].show()
     },
   
-    async getformations() {
- await  axios
-        .get("http://127.0.0.1:8000/api/formations")
-        .then((response) => {
-          this.formations = response.data;
-        })
-        .catch((error) => console.log(error.response));
-    },
+   
     deleteitm(id) {
       axios
         .delete("http://127.0.0.1:8000/api/formation/" + id)
