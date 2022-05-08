@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
 use Illuminate\Http\Request;
@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
+Route::apiResource('/seances',SeanceController::class);
 
 
 //Route::apiResource('/formations',[FormationController::class,'index']);
@@ -31,4 +32,3 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
-
