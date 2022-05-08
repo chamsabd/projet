@@ -4,7 +4,7 @@
               <b-modal  id="my-modal" size="lg"  centered ok-only>
 
            <div v-if="object!={} && object.responsable!=undefined" >
-           <FormationDetails :formation="object" />
+              <FormationDetails :formation="object" />
               </div>
                <div v-else>
                     <AddFormation/></div> 

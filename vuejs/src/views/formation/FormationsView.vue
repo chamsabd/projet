@@ -7,7 +7,7 @@
       :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
-      v-on:row-click="onRowClick"
+     
     >
       <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
@@ -20,7 +20,7 @@
           <b-button v-else pill variant="outline-danger">fermer</b-button>
         </td>
         <td>
-          <b-button pill variant="outline-info">action</b-button>
+          <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
         </td>
       </template>
     </datatable>
@@ -96,6 +96,7 @@ export default {
     this.getformations();
   },
   methods: {
+  
     onAddClick() {
       this.formation = {};
       console.log(this.formation);
@@ -104,6 +105,9 @@ export default {
     showModal(id) {
       this.$bvModal.show(id);
       // this.$refs[id].show()
+    }, hideModal(id) {
+      this.$bvModal.hide(id);
+      // this.$refs[id].show()
     },
     onRowClick(row) {
       this.formation = row;
@@ -111,7 +115,7 @@ export default {
       this.showModal("my-modal");
     },
     async getformations() {
-  await  axios
+ await  axios
         .get("http://127.0.0.1:8000/api/formations")
         .then((response) => {
           this.formations = response.data;

@@ -166,20 +166,7 @@ errors:[],
           })
           .then(re => {
            console.log(re);
-        //     if (re.data.res == 'success') {
-        //       // alert(' updated');
-            
-        //       this.formation = {};
-        //       // sessionStorage.setItem('show',true);
-            
-        //   this.hideModal('my-modalcer');
-        //   // app.getagents();
-        //   // document.location.reload(true);
-        //   // window.location.reload();
-        //   this.showAlert();
-        //  this.showplus('modal-multi-2',this.acc.id_ac)
-        
-        //     }
+  //this.$emit('add',id,this.Article.quantity);
           })
           .catch(err => {
             this.errors=err.response.data.errors;
