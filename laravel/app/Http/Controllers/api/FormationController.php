@@ -7,9 +7,10 @@ use App\Models\Formation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
-
+use Illuminate\Support\Facades\Auth;
 class FormationController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +21,26 @@ class FormationController extends Controller
 
         return Formation::with('responsable','formateur','formateurexterne')->get();
     }
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function responsableindex()
+    {
+       // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
+       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
+    }
+       /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function formateurindex()
+    {
 
+        return Formation::with('responsable','formateur','formateurexterne')->get();
+    }
     /**
      * Store a newly created resource in storage.
      *

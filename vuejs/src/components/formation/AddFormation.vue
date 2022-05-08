@@ -1,9 +1,11 @@
 <template>
+<b-modal  id="add-modal" size="lg"  centered @cancel="resetModal" @ok="handleOk" >
+ 
   <div class="row d-flex justify-content-center">
     <div class="col-lg-9">
       <div class="card">
         <div class="card-header"><strong>add</strong> Formation</div>
-        <form ref="my-modal1form" @submit.stop.prevent="Add">
+        <form ref="my-modal1form" @submit.stop.prevent="AddFormation">
           <div class="card-body card-block">
             <b-form-group label="titre formation" :state="advalid_titre">
               <b-form-input
@@ -113,14 +115,12 @@
               <b-form-valid-feedback :state="advalid_nbr"> Looks Good. </b-form-valid-feedback>
             </b-form-group>
           </div>
-          <div class="card-footer">
-            <b-button type="submit" variant="primary">Submit</b-button>
-        
-          </div>
+         
         </form>
       </div>
     </div>
   </div>
+</b-modal>
 </template>
 <script>
 import axios from "axios";
@@ -146,7 +146,7 @@ errors:[],
     this.getutilisateurs();
   },
   methods: {
-    Add() {
+    AddFormation() {
        if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
        return ;
       console.log("add");
@@ -165,8 +165,10 @@ errors:[],
             data: this.formation
           })
           .then(re => {
-           console.log(re);
-  //this.$emit('add',id,this.Article.quantity);
+          console.log(re);
+          this.$bvModal.hide('add-modal')
+     
+  this.$emit('add-formation',re);
           })
           .catch(err => {
             this.errors=err.response.data.errors;
@@ -181,6 +183,22 @@ errors:[],
         })
         .catch((error) => console.log(error.response));
     },
+     resetModal() {
+      this.formation= {
+        'titre':null,
+        'nbr_place':null,
+        'description':null,
+        'date_debut':null,
+        'responsable_id':null,
+        'date_fin':null,
+      };
+      },
+      handleOk(bvModalEvent) {
+        // Prevent modal from closing
+        bvModalEvent.preventDefault()
+        // Trigger submit handler
+        this.AddFormation();
+      },
   },
   computed: {
     options() {
