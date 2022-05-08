@@ -32,7 +32,7 @@ Route::prefix('/formation')->group(function(){
     Route::get('/{id}',[FormationController::class,'show']);
 });
 Route::get('/demandes',[demandesController::class,'index']);
-Route::post('/demandes/store/{id_formation}',[demandesController::class,'store']);
+Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
 Route::delete('/demandes/{id}',[demandesController::class,'destroy']);
 Route::get('/demandes/{id}',[demandesController::class,'show']);

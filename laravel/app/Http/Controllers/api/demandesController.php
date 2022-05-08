@@ -5,10 +5,10 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\demandeResource;
 use App\Models\Demande;
-use DateTime;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\Auth;
+
 
 class demandesController extends Controller
 {
@@ -29,31 +29,24 @@ class demandesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($formation_id)
+    public function store(Request $request)
     {
-        $formation = DB::table('formations')
-        
-        // ->join('formations', 'formations.id', '=', 'demandes.formations_id')
-        // ->join('utilisateurs', 'utilisateurs.id', '=', 'demandes.utilisateurs_id')
-        // ->select('formations.*','formations.id as form_id','utilisateurs.*','utilisateurs.id as utili_id','demandes.*')
-        ->where('id',$formation_id)
-        //->get('demandes.*')->first()->id;
-        ->get()->first();
-        $Demande=Demande::create([
-            
-            "date_demande"=>new DateTime('now'),
-            "formation_id"=>$formation->id,
-            "utilisateur_id"=>Auth::utilisateur()->id(),
-        ]);
-        if($Demande->save()){
 
-            return response()->json($Demande);
+            $Demande=Demande::create([
+                
+                "date_demande"=>$request ->date_demande,
+                "formation_id"=>$request ->formation_id,
+                "utilisateur_id"=>$request ->utilisateur_id
+               // "utilisateur_id"=>Auth::utilisateur()->id(),
+            ]);
+            if($Demande->save()){
+    
+                return response()->json($Demande, 200);
+    
+            } else{
+                return response()->json([], 400);
 
-     } 
-    // $validateData = $request->validate($this->validationRules());
-    // Demande::create($validateData);
-    // return response()->json('votre demande à été ajouter avec succès!');
-   // return redirect()->route('')->with('Createdemande' , 'votre demande à été ajouter avec succès!');
+            }
     }
 
     /**
@@ -89,12 +82,7 @@ class demandesController extends Controller
     {
     $Demande = Demande::FindOrFail($id);
             $Demande->delete();
-          //  dd($Demande);
-            return response()->json('deleted');
-            // $Demande = Demande::find($id);
-            // $Demande->delete();
-   
-            // return response()->json('Product successfully deleted!');
+            return response()->json('demande deleted succefuly');  
     }
     // private function validationRules()
     // {
