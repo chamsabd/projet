@@ -17,7 +17,7 @@ class CreateDemandesTable extends Migration
             $table->id();
             $table->date('date_demande');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
            $table->timestamps();
         });
     }
