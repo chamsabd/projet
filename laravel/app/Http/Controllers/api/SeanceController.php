@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
+use App\Models\Seance;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class SeanceController extends Controller
      */
     public function index()
     {
-        //
+      return Seance::all();
     }
 
     /**
