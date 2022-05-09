@@ -1,20 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Dashboard from '@/views/Dashboard'
 
 import FormationsView from '@/views/formation/FormationsView'
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/formations',
-    name: 'FormationsView',
-    component: FormationsView
-  },
-  {
-    path: '/demande',
-    name: 'DemandeForm',
-    component: DemandeForm
-  },
+    path: '/',
+    name: 'HomeView',
+    component: Dashboard,
+    children: [
+      {
+
+          path: '/formations/:role',
+          name: 'FormationsView',
+          component: FormationsView
+        }
+     
+    ]
+  }
+ 
+
   
 ]
 
