@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Dashboard from '@/views/Dashboard'
 
 import FormationsView from '@/views/formation/FormationsView'
@@ -12,7 +13,6 @@ const routes = [
     component: Dashboard,
     children: [
       {
-
           path: '/formations/:role',
           name: 'FormationsView',
           component: FormationsView
