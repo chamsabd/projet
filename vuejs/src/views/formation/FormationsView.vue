@@ -19,6 +19,7 @@
     </b-alert>
    <lister-formation :formations="formations" :role="role"/>
    <add-formation @add-formation="Addformation" /> 
+   
 
   </div>
 </template>
@@ -32,15 +33,22 @@ import AddFormation from '../../components/formation/AddFormation.vue';
 
 
 
+
+
+
+
+
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
 
+
    
  
     ListerFormation,
    AddFormation,
+     
 
   },
   data: function () {
