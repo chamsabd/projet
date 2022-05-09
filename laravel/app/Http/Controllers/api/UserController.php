@@ -3,22 +3,23 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\User;
+
 use Illuminate\Http\Request;
-use  App\Models\User;
 
-class UtilisateurController extends Controller
+class UserController extends Controller
 {
-    //
+    /**
 
-   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users= User::all();
-        return view('Utilisateurs.index',compact('users'));  
+
+        return User::all();
 
     }
 
@@ -30,7 +31,7 @@ class UtilisateurController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -66,4 +67,6 @@ class UtilisateurController extends Controller
     {
         //
     }
+
 }
+

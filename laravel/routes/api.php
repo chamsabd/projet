@@ -3,7 +3,8 @@
 use App\Http\Controllers\api\FormationController;
 
 use App\Http\Controllers\api\demandesController;
-use App\Http\Controllers\api\UtilisateurContraller;
+
+use App\Http\Controllers\api\UserController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +37,7 @@ Route::prefix('/formation')->group(function(){
     Route::get('/{id}',[FormationController::class,'show']);
 });
 
-Route::get('/utilisateurs',[UtilisateurContraller::class,'index']);
-
+Route::get('/users',[UserController::class,'index']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -46,4 +46,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class,'login']);
 //Route::get('utilisateurs',[UtilisateurController::class,'index']);
 Route::post('/register', [AuthController::class, 'register']);
+
 
