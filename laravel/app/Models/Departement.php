@@ -15,9 +15,6 @@ class Departement extends Model
         return $this->belongsTo(Admin::class);
     }
 
-    public function clients()
-    {
-        return $this->hasMany(Client::class);
-    }
+  
     
 }
