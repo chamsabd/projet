@@ -1,9 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\demandeResource;
+use App\Models\Demande;
+
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Auth;
+
 
 class demandesController extends Controller
 {
@@ -14,7 +19,8 @@ class demandesController extends Controller
      */
     public function index()
     {
-        //
+        $Demande =Demande::all();
+        return demandeResource::collection($Demande);
     }
 
     /**
@@ -25,7 +31,22 @@ class demandesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+            $Demande=Demande::create([
+                
+                "date_demande"=>$request ->date_demande,
+                "formation_id"=>$request ->formation_id,
+                "utilisateur_id"=>$request ->utilisateur_id
+               // "utilisateur_id"=>Auth::utilisateur()->id(),
+            ]);
+            if($Demande->save()){
+    
+                return response()->json($Demande, 200);
+    
+            } else{
+                return response()->json([], 400);
+
+            }
     }
 
     /**
@@ -36,7 +57,7 @@ class demandesController extends Controller
      */
     public function show($id)
     {
-        //
+        // 
     }
 
     /**
@@ -59,6 +80,14 @@ class demandesController extends Controller
      */
     public function destroy($id)
     {
-        //
+    $Demande = Demande::FindOrFail($id);
+            $Demande->delete();
+            return response()->json('demande deleted succefuly');  
     }
+    // private function validationRules()
+    // {
+    //     return [
+    //         'date_demande'=>'required',
+    //         ];
+    // }
 }

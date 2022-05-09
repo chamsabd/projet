@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Demande extends Model
 {
     use HasFactory;
+    protected $fillable=[
+'date_demande',
+'formation_id',
+'utilisateur_id'
+    ];
    // protected $primaryKey='id_demande';
    public function utilisateur(){
          return $this->belongsTo(Utilisateur::class);

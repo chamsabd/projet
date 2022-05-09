@@ -20,6 +20,17 @@
    <lister-formation :formations="formations" :role="role"/>
    <add-formation @add-formation="Addformation" /> 
 
+
+
+      <template slot="tbody-tr">
+        <td>
+          <b-button pill variant="outline-info">detail</b-button>
+        </td>
+      </template>
+    </datatable>
+    <FormationDetails :formation="formation" />
+    <add-demande :demandes="demandes" />
+
   </div>
 </template>
 
@@ -32,15 +43,26 @@ import AddFormation from '../../components/formation/AddFormation.vue';
 
 
 
+
+
+import FormationDetails from "@/components/formation/FormationDetails";
+import AddDemande from "@/components/demande/addDemande.vue";
+
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
 
+
    
  
     ListerFormation,
    AddFormation,
+
+
+     FormationDetails,
+    datatable: DataTable,
+     AddDemande,
 
   },
   data: function () {
