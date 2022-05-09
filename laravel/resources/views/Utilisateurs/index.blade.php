@@ -1,4 +1,10 @@
 <?php
-var_dump($utilisateurs);
+
+foreach ($users as  $user) {
+
+    echo " ||" .$user->nom;
+    echo "|||".$user->ncin;
+    
+}
 
 ?>

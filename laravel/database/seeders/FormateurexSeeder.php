@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-
-use App\Models\Utilisateur;
-
 use Illuminate\Database\Seeder;
+use App\Models\Formateurex;
 
-class UtilisateurSeeder extends Seeder
+class FormateurexSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +14,7 @@ class UtilisateurSeeder extends Seeder
      */
     public function run()
     {
-       
-     Utilisateur::factory()->count(20)->create();
+        //
+        Formateurex::factory()->count(5)->create();
     }
 }

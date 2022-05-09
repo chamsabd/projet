@@ -16,13 +16,14 @@ class CreateFormationsTable extends Migration
         Schema::create('formations', function (Blueprint $table) {
             
             $table->id();
-            $table->string('nom_for');
+            $table->string('titre');
             $table->date('date_debut');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->date('date_fin');
-            $table->date('date_certif');
+            $table->foreignId('responsable_id')->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('formateur_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('formateurexterne_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('etat');
-            $table->boolean('archi');
             $table->integer('nbr_place');
             $table->timestamps();
         });

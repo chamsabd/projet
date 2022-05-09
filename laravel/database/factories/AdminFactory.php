@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Utilisateur;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AdminFactory extends Factory
@@ -16,7 +16,7 @@ class AdminFactory extends Factory
     {
         return [
 
-            'utilisateur_id'=>Utilisateur::get('id')->unique()->random(),
+            'user_id'=>User::get('id')->unique()->random(),
 
             'created_at'=>now()
         ];

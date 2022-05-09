@@ -10,16 +10,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "datatables.net-bs4";
-import "datatables.net-bs4/css/dataTables.bootstrap4.min.css";
-import "jszip"
-import "pdfmake"
-import "datatables.net-buttons-bs4/js/buttons.bootstrap4"
-import "datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css"
-import "datatables.net-buttons/js/buttons.colVis"
-import "datatables.net-buttons/js/buttons.flash"
-import "datatables.net-buttons/js/buttons.html5"
-import "datatables.net-buttons/js/buttons.print"
+import "material-design-icons-iconfont/dist/material-design-icons.css";
 import router from './router'
 
 Vue.use(VueAxios, axios)
