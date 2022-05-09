@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Utilisateur;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class UtilisateurContraller extends Controller
@@ -15,7 +16,7 @@ class UtilisateurContraller extends Controller
      */
     public function index()
     {
-        return Utilisateur::all();
+        return User::all();
     }
 
     /**
