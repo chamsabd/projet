@@ -22,7 +22,11 @@ class demandesController extends Controller
         $Demande =Demande::all();
         return demandeResource::collection($Demande);
     }
-
+    public function getDemande($id)
+    {
+        $Demande = Demande::FindOrFail($id);
+        return new demandeResource($Demande);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -31,22 +35,24 @@ class demandesController extends Controller
      */
     public function store(Request $request)
     {
-
-            $Demande=Demande::create([
-                
-                "date_demande"=>$request ->date_demande,
-                "formation_id"=>$request ->formation_id,
-                "utilisateur_id"=>$request ->utilisateur_id
+      
+        $request->validate($this->validationRules());
+          //  $Demande=Demande::create([
+            $Demande=new Demande();
+                $Demande->date_demande=$request ->date_demande;
+                $Demande->formation_id=$request->formation_id;
+                $Demande->utilisateur_id=1;
                // "utilisateur_id"=>Auth::utilisateur()->id(),
-            ]);
-            if($Demande->save()){
+           // ]);
+            // if($Demande->save()){
     
-                return response()->json($Demande, 200);
+            //     return response()->json($Demande, 200);
     
-            } else{
-                return response()->json([], 400);
+            // } else{
+            //     return response()->json([], 400);
 
-            }
+            // }
+            return $Demande;
     }
 
     /**
@@ -84,10 +90,12 @@ class demandesController extends Controller
             $Demande->delete();
             return response()->json('demande deleted succefuly');  
     }
-    // private function validationRules()
-    // {
-    //     return [
-    //         'date_demande'=>'required',
-    //         ];
-    // }
+     private function validationRules()
+    {
+        return [
+            'date_demande'=>'date_format:Y-m-d|date_equals:now',
+            'formation_id'=>'exists:utilisateurs,id',
+          //  'utilisateur_id'=>'required|exists:utilisateurs,id',
+            ];
+    }
 }

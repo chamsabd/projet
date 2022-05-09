@@ -5,7 +5,7 @@ import Dashboard from '@/views/Dashboard'
 
 
 //import DemandesView from '@/views/demande/DemandesView'
-
+import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
 Vue.use(VueRouter)
 
@@ -17,23 +17,20 @@ const routes = [
     component: Dashboard,
     children: [
       {
-
           path: '/formations/:role',
           name: 'FormationsView',
           component: FormationsView
         }
      
     ]
+   
+  },
+  {
+    path: '/demande',
+    name: 'afficherDemandes',
+    component: afficherDemandes
   }
  
-
-  
-
-    path: '/formations',
-    name: 'FormationsView',
-    component: FormationsView
-  },
-
   // {
   //   path: '/demandes',
   //   name: 'DemandesView',

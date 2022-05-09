@@ -6,29 +6,56 @@
       title="Basic table"
       :columns="tableColumns1"
       :rows="demandes"
-      v-on:row-click="onRowClick"
       :perPage="[3, 5, 10]"
     >
-    <adddemande 
+    <!-- <adddemande 
     v-on:reloadlist="getdemandes()"
     />
-      <th slot="thead-tr">Actions</th>
+      <th slot="thead-tr">Actions</th> -->
 
       <template slot="tbody-tr">
-        <td>
+        <!-- <td>
           <b-button pill variant="outline-info">detail</b-button>
-        </td>
+        </td> -->
       </template>
     </datatable>
   </div>
 </template>
 <script>
 import axios from "axios";
-import addDemande from './addDemande.vue';
+// import addDemande from './addDemande.vue';
 export default {
-  components: { addDemande },
+  // components: { 
+  //   addDemande },
   name: 'afficherDemande',
+ data: function () {
+    return {
+     formation_id: " ",
+      tableColumns1: [
+        {
+          label: "nom formation",
+          field: "titre",
+          numeric: false,
+          html: false,
+        },
+        {
+          label: "date demande",
+          field: "date_demande",
+          numeric: true,
+          html: false,
+        },
+        {
+          label: "nom utilisateur",
+          field: "nom",
+          numeric: false,
+          html: false,
+        },
+      ],
 
+    
+      formation: {},
+    };
+  },
   methods: {
    
    getdemandes() {
