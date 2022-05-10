@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-
+Route::get('/seances',SeanceController::class);
 //Route::get('/seances',[SeanceController::class,'index']);
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/formations',[FormationController::class,'index']);
