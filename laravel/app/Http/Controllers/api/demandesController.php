@@ -41,7 +41,7 @@ class demandesController extends Controller
             $Demande=new Demande();
                 $Demande->date_demande=$request ->date_demande;
                 $Demande->formation_id=$request->formation_id;
-                $Demande->utilisateur_id=1;
+                $Demande->user_id=1;
                // "utilisateur_id"=>Auth::utilisateur()->id(),
            // ]);
             // if($Demande->save()){
@@ -94,7 +94,7 @@ class demandesController extends Controller
     {
         return [
             'date_demande'=>'date_format:Y-m-d|date_equals:now',
-            'formation_id'=>'exists:utilisateurs,id',
+            'formation_id'=>'exists:users,id',
           //  'utilisateur_id'=>'required|exists:utilisateurs,id',
             ];
     }

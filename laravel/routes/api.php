@@ -21,7 +21,7 @@ use App\Http\Controllers\api\AuthController;
 */
 
 
-});
+
 Route::apiResource('/seances',SeanceController::class);
 //Route::get('/seances',[SeanceController::class,'index']);
 
@@ -37,6 +37,9 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
+
+
+
 
 
 

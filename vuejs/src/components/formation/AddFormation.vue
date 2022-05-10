@@ -130,7 +130,7 @@ export default {
     const now = new Date();
     return {
       today: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
-      utilisateurs: [],
+      users: [],
 errors:[],
       formation: {
         'titre':null,
@@ -179,7 +179,7 @@ errors:[],
       await axios
         .get("http://127.0.0.1:8000/api/users")
         .then((response) => {
-          this.utilisateurs = response.data;
+          this.users = response.data;
         })
         .catch((error) => console.log(error.response));
     },
@@ -202,7 +202,7 @@ errors:[],
   },
   computed: {
     options() {
-      var val = this.utilisateurs;
+      var val = this.users;
 
       var option = val.map(function (utilisateur) {
         return {
