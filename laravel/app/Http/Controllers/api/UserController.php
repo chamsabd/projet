@@ -3,20 +3,24 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\User;
 
 use Illuminate\Http\Request;
 
-class UtilisateurContraller extends Controller
+class UserController extends Controller
 {
     /**
+
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+
         return User::all();
+
     }
 
     /**
@@ -27,7 +31,7 @@ class UtilisateurContraller extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -63,4 +67,6 @@ class UtilisateurContraller extends Controller
     {
         //
     }
+
 }
+

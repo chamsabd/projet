@@ -20,6 +20,7 @@ class Formation extends Model
     public function formateurexterne()
     {
         return $this->belongsTo(Formateurex::class, 'formateurexterne_id');
+
     } 
     public function demandes()
     {
