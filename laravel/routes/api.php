@@ -37,11 +37,10 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
-<<<<<<< HEAD
-Route::get('/user',[UserController::class,'index']);
-=======
 
->>>>>>> 211242a09b575893c10b600fcf5d349dca923738
+
+
+
 
 
 Route::get('/demandes',[demandesController::class,'index']);
