@@ -18,7 +18,9 @@ class Demande extends Model
    public function user(){
          return $this->belongsToMany(User::class);
             
+
     }
+    
     public function formation(){
         return $this->belongsToMany(Formation::class);
     }

@@ -29,9 +29,11 @@ class FormationController extends Controller
     public function responsableindex()
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
+
        return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
+
     }
-       /**
+       /**s
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -39,7 +41,7 @@ class FormationController extends Controller
     public function formateurindex()
     {
 
-        return Formation::with('responsable','formateur','formateurexterne')->get();
+        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',1)->get();
     }
     /**
      * Store a newly created resource in storage.
@@ -123,7 +125,7 @@ class FormationController extends Controller
             'titre' => 'required|min:5|max:15',
             'nbr_place' => 'required|integer|between:10,30',
               'description'=>'max:100',
-              'responsable_id' => 'required|exists:utilisateurs,id',
+              'responsable_id' => 'required|exists:Users,id',
               'date_debut' => 'required|date_format:Y-m-d|before_or_equal:date_fin|after_or_equal:'.Date('Y-m-d',strtotime("+1 month",strtotime(date('Y-m-d')))),
               'date_fin' => 'required|date_format:Y-m-d|after_or_equal:date_debut'
         ];

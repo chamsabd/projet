@@ -20,9 +20,9 @@ class Professeur extends Model
         return $this->hasMany(Seance::class);
     }
 
-    public function Client()
+    public function utilsateur()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Utilisateur::class);
     }
 
     
