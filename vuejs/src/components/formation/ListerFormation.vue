@@ -21,7 +21,11 @@
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
+         <b-button pill variant="outline-warning">afficher demandes</b-button>
         </td>
+        <td>  
+             <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
+          <add-demande :f="props" /></td>
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -37,26 +41,26 @@ import axios from "axios";
 import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
-
+import AddDemande from "@/components/demande/addDemande.vue";
 
 
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
-
-   
+ 
     datatable: DataTable,
     FormationDetails,
- 
+    AddDemande,
   },
   props: {
   formations:Array,
   role:String,
+  // d:Object,
   },
   data: function () {
     return {
-     
+    // formation_id: " ",
       tableColumns1: [
         {
           label: "titre de formation",
@@ -128,6 +132,26 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+
+    // getDemande(id){
+    // var demande={};
+    //     demande.formation_id=this.d.row.id;
+        
+    //   axios(
+    //   {   url: 'http://127.0.0.1:8000/api/demandes/'+id,
+    //         method: 'get',
+    //         data: demande,
+    //       })
+    //   .then((response) => {
+    //     console.log(response);
+          
+    //     })
+    // axios.get("http://127.0.0.1:8000/api/demandes/" +id)
+    //  .then((resp) => {
+    //   this.formation_id = resp.data.data.id;
+    //   console.log(this.formation_id);
+    // })
+    // },
   },
 };
 </script>
