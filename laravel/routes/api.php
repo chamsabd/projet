@@ -40,6 +40,9 @@ Route::prefix('/formation')->group(function(){
 
 
 
+
+
+
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
