@@ -17,7 +17,7 @@ class ClientFactory extends Factory
     {
         return [
             'specialite'=>$this->faker->sentence(),
-            'utilisateur_id'=>Utilisateur::get('id')->unique()->random(),
+           // 'utilisateur_id'=>Utilisateur::get('id')->unique()->random(),
            'departement_id'=>Departement::get('id')->random()
 
         ];

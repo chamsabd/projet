@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
 
        
-        $this->call(UtilisateurSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(DepartementSeeder::class);
         $this->call(ClientSeeder::class);
@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SeanceSeeder::class);
         $this->call(ResourceSeeder::class);
         $this->call(DemandeSeeder::class);
-
         $this->call(EtudiantSeeder::class);  
         $this->call(InscritSeeder::class);
 

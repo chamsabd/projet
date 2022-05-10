@@ -15,21 +15,17 @@ public class Demande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	private Long idDemande;
-	private Long idResponsable;
-	private Long idClient;
+	private Long idUtilisateur;
 	@ManyToOne
 	@JoinColumn(name = "idFormation")
 	private Formation formation;
 	
 	private Date dateDemande;
 
-	public Demande(Long idDemande, Long idResponsable, Long idClient, Date dateDemande) {
+	public Demande(Long idDemande, Long idUtilisateur, Date dateDemande) {
 		super();
 		this.idDemande = idDemande;
-		this.idResponsable = idResponsable;
-		this.idClient = idClient;
-		
-
+		this.idUtilisateur = idUtilisateur;
 		this.dateDemande = dateDemande;
 	}
 
@@ -46,23 +42,21 @@ public class Demande {
 		this.idDemande = idDemande;
 	}
 
-	public Long getIdResponsable() {
-		return idResponsable;
+	public Long getIdUtilisateur() {
+		return idUtilisateur;
 	}
 
-	public void setIdResponsable(Long idResponsable) {
-		this.idResponsable = idResponsable;
+	public void setIdUtilisateur(Long idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
 	}
 
-	public Long getIdClient() {
-		return idClient;
+	public Formation getFormation() {
+		return formation;
 	}
 
-	public void setIdClient(Long idClient) {
-		this.idClient = idClient;
+	public void setFormation(Formation formation) {
+		this.formation = formation;
 	}
-
-
 
 	public Date getDateDemande() {
 		return dateDemande;
@@ -70,6 +64,12 @@ public class Demande {
 
 	public void setDateDemande(Date dateDemande) {
 		this.dateDemande = dateDemande;
+	}
+
+	@Override
+	public String toString() {
+		return "Demande [idDemande=" + idDemande + ", idUtilisateur=" + idUtilisateur + ", formation=" + formation
+				+ ", dateDemande=" + dateDemande + ", toString()=" + super.toString() + "]";
 	}
 
 }
