@@ -14,10 +14,10 @@ class CreateDemandesTable extends Migration
     public function up()
     {
         Schema::create('demandes', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->date('date_demande');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
            $table->timestamps();
         });
     }

@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\api;
-
+use App\Models\Seance;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Etudiant;
-class EtudiantController extends Controller
+
+class SeanceController extends Controller
 {
-   
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        //$etudiants= Etudiant::all();
-        $etudiants= Etudiant::all();
-        return view('Etudiants.index',compact('etudiants'));    }
+      return Seance::with('formation')->get().'\n\t';
+    }
 
     /**
      * Store a newly created resource in storage.

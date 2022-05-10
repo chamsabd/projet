@@ -29,9 +29,11 @@ class FormationController extends Controller
     public function responsableindex()
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
-       return Formation::with('User','formateur','formateurexterne')->where('responsable_id',1)->get();
+
+       return Formation::with('user','formateur','formateurexterne')->where('responsable_id',1)->get();
+
     }
-       /**
+       /**s
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
