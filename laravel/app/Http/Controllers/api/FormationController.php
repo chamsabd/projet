@@ -91,9 +91,16 @@ class FormationController extends Controller
         $formation->formateur_id=$utilisateur->id;
         //$formation->formateurexterne_id=$request->formateurexterne_id;
         $formation->save();
+        return response()->json([
+            'message' => 'Update Success',
+            'id' => $formation->id,
+            'attributes' => $formation
+        ], 201);
+    } else {
+        return response()->json([
+            "formateur non trouvée"
+        ], 404);
     }
-return 'not found';
-        
         /*Formation::where('id', $id)->update({
             'formateur' => $request->formateur,
         })*/
