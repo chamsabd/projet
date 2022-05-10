@@ -2,7 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Utilisateur;
+use App\Models\User;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FormationFactory extends Factory
@@ -20,9 +21,9 @@ class FormationFactory extends Factory
             'date_debut'=>$this->faker->date($format = 'Y-m-d', $max = 'now'),  
             'description' =>$this->faker->sentence, 
             'date_fin' =>$this->faker->date($format = 'Y-m-d', $max = 'now'),   
-            'responsable_id' =>Utilisateur::get('id')->random(),
-            'formateur_id' =>Utilisateur::get('id')->random(),
-            'formateurexterne_id' =>Utilisateur::get('id')->random(),//table formateurexterne 
+            'responsable_id' =>User::get('id')->random(),
+            'formateur_id' =>User::get('id')->random(),
+            'formateurexterne_id' =>User::get('id')->random(),//table formateurexterne 
             'etat' =>$this->faker->boolean,   
 
              'nbr_place' =>$this->faker->randomNumber(),
