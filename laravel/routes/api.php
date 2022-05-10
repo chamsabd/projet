@@ -35,7 +35,7 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
-Route::get('/utilisateurs',[UtilisateurContraller::class,'index']);
+Route::get('/user',[UserController::class,'index']);
 
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);

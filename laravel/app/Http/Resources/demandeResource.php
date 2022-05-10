@@ -18,7 +18,7 @@ class demandeResource extends JsonResource
             'id' => $this->id,
             'date_demande' =>$this->date_demande,
             'formation_id' =>$this->formation_id,
-            'utilisateur_id' =>$this->utilisateur_id,
+            'user_id' =>$this->user_id,
         ];
     }
 }
