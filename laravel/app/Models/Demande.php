@@ -20,7 +20,7 @@ class Demande extends Model
             
 
     }
-    */
+    
     public function formation(){
         return $this->belongsToMany(Formation::class);
     }

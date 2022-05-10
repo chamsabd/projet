@@ -25,7 +25,7 @@ class FormationFactory extends Factory
             'date_fin' =>$this->faker->date($format = 'Y-m-d', $max = 'now'),   
             'responsable_id' =>User::get('id')->random(),
             'formateur_id' =>User::get('id')->random(),
-            'formateurexterne_id' =>Formateurex::get('id')->random(),//table formateurexterne 
+            'formateurexterne_id' =>User::get('id')->random(),//table formateurexterne 
 
             'etat' =>$this->faker->boolean,   
 

@@ -21,7 +21,7 @@ use App\Http\Controllers\api\AuthController;
 */
 
 
-});
+
 Route::apiResource('/seances',SeanceController::class);
 //Route::get('/seances',[SeanceController::class,'index']);
 
