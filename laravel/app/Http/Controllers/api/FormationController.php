@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Formation;
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
@@ -78,6 +79,25 @@ class FormationController extends Controller
         $formation->date_debut=$request->date_debut;
         $formation->description=$request->description;
         return $formation->save();}
+
+    }
+    public function updateFormateur(Request $request, $id , $nom)
+    {
+        $utilisateur=Utilisateur::where('nom','=',$nom)->first();
+       // dd($utilisateur->id);
+
+        $formation=Formation::find($id);
+        if($formation){
+        $formation->formateur_id=$utilisateur->id;
+        //$formation->formateurexterne_id=$request->formateurexterne_id;
+        $formation->save();
+    }
+return 'not found';
+        
+        /*Formation::where('id', $id)->update({
+            'formateur' => $request->formateur,
+        })*/
+
 
     }
 

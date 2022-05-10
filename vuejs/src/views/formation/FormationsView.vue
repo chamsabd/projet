@@ -22,9 +22,13 @@
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
         </td>
+         <td>
+          <b-button pill variant="outline-secondary" @click="AffecterFor(props)">Affecter Formateur</b-button>
+        </td>
       </template>
     </datatable>
     <modal-comp :object="formation" />
+   <AffecterFormateur /> 
   </div>
 </template>
 
@@ -33,13 +37,16 @@ import axios from "axios";
 
 import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
-
 import ModalComp from '../../components/ModalComp.vue';
+import AffecterFormateur from "@/components/formation/AffecterFormateur";
+
+
 
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
+    AffecterFormateur,
 
    
     datatable: DataTable,
@@ -130,7 +137,12 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+    AffecterFor(id){
+    console.log(id);
+    this.showModal("my-modal2");
+  }
   },
+  
 };
 </script>
 

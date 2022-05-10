@@ -21,7 +21,7 @@ class CreateFormationsTable extends Migration
             $table->string('description')->nullable();
             $table->date('date_fin');
             $table->foreignId('responsable_id')->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('formateur_id')->nullable()->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('formateur_id')->nullable()->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade')->default(null);
             $table->foreignId('formateurexterne_id')->nullable()->constrained()->on('utilisateurs')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('etat');
             $table->integer('nbr_place');
