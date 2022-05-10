@@ -21,9 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
-Route::apiResource('/seances',SeanceController::class);
-
-
+//Route::get('/seances',[SeanceController::class,'index']);
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/formations',[FormationController::class,'index']);
 Route::prefix('/formation')->group(function(){
