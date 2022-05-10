@@ -16,9 +16,10 @@ class SeanceFactory extends Factory
     public function definition()
     {
         return [
-           'nom_cours' => $this->faker->name(),
-           'duree' =>$this->faker->dateTime(),
-          'professeur_id'=>Professeur::get('id')->random(),
+           'nom_seance' => $this->faker->name(),
+           'date' =>$this->faker->date(),
+           'temps_fin' =>$this->faker->dateTime(),
+           'temps_debut' =>$this->faker->dateTime(),
            'formation_id'=>Formation::get('id')->random(),
            'created_at'=> now() ,
            'updated_at'=> now()  

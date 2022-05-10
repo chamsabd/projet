@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
 use App\Http\Controllers\api\UserController;
@@ -21,9 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-
-
-
+Route::get('/seances',SeanceController::class);
+//Route::get('/seances',[SeanceController::class,'index']);
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/admin/formations',[FormationController::class,'index']);
 Route::get('/participant/formations',[FormationController::class,'index']);
@@ -37,6 +36,7 @@ Route::prefix('/formation')->group(function(){
 });
 
 
+
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
@@ -46,4 +46,5 @@ Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
 
 
 Route::get('/users',[UserController::class,'index']);
+
 
