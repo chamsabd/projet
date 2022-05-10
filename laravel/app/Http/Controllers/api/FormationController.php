@@ -19,7 +19,7 @@ class FormationController extends Controller
     public function index()
     {
 
-        return Formation::with('User','formateur','formateurexterne')->get();
+        return Formation::with('responsable','formateur','formateurexterne')->get();
     }
         /**
      * Display a listing of the resource.
@@ -29,9 +29,11 @@ class FormationController extends Controller
     public function responsableindex()
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
-       return Formation::with('User','formateur','formateurexterne')->where('responsable_id',1)->get();
+
+       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
+
     }
-       /**
+       /**s
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -39,7 +41,7 @@ class FormationController extends Controller
     public function formateurindex()
     {
 
-        return Formation::with('User','formateur','formateurexterne')->where('formateur_id',1)->get();
+        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',1)->get();
     }
     /**
      * Store a newly created resource in storage.
