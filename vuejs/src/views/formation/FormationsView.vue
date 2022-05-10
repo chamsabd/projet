@@ -8,6 +8,7 @@
       @dismissed="dismissCountDown=0"
       @dismiss-count-down="countDownChanged"
     >
+
     <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter avec success a la fin de table</h6>
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
@@ -21,6 +22,27 @@
    <add-formation @add-formation="Addformation" /> 
    
 
+
+      <th slot="thead-tr">Etat</th>
+      <th slot="thead-tr">Actions</th>
+
+      <template slot="tbody-tr" slot-scope="props">
+        <td>
+          <b-button v-if="props.row.etat == 0" pill variant="outline-success"
+            >overte</b-button
+          >
+          <b-button v-else pill variant="outline-danger">fermer</b-button>
+        </td>
+        <td>
+          <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
+        </td>
+         <td>
+          <b-button pill variant="outline-secondary" @click="AffecterFor(props)">Affecter Formateur</b-button>
+        </td>
+      </template>
+    </datatable>
+    <modal-comp :object="formation" />
+   <AffecterFormateur /> 
   </div>
 </template>
 
@@ -37,11 +59,17 @@ import AddFormation from '../../components/formation/AddFormation.vue';
 
 
 
+import ModalComp from '../../components/ModalComp.vue';
+import AffecterFormateur from "@/components/formation/AffecterFormateur";
+
+
+
 
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
+    AffecterFormateur,
 
 
    
@@ -120,7 +148,12 @@ this.showAlert();
         })
         .catch((error) => console.log(error.response));
     },
+    AffecterFor(id){
+    console.log(id);
+    this.showModal("my-modal2");
+  }
   },
+  
 };
 </script>
 
