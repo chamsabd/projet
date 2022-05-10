@@ -9,10 +9,11 @@ class Demande extends Model
 {
     use HasFactory;
    // protected $primaryKey='id_demande';
-   public function utilisateur(){
+  /* public function utilisateur(){
          return $this->belongsTo(Utilisateur::class);
        
     }
+    */
     public function formation(){
         return $this->belongsTo(Formation::class);
     }

@@ -11,26 +11,26 @@ class Formation extends Model
 
     public function responsable()
     {
-        return $this->belongsTo(Utilisateur::class, 'responsable_id');
+        return $this->belongsTo(User::class, 'responsable_id');
     } 
     public function formateur()
     {
-        return $this->belongsTo(Utilisateur::class, 'formateur_id');
+        return $this->belongsTo(User::class, 'formateur_id');
     }  
     public function formateurexterne()
     {
-        return $this->belongsTo(Utilisateur::class, 'formateurexterne_id');
+        return $this->belongsTo(User::class, 'formateurexterne_id');
     } 
     public function demandes()
     {
-        return $this->belongsToMany(Utilisateur::class, 'demandes');
+        return $this->belongsToMany(User::class, 'demandes');
     }
     public function inscrits()
     {
-        return $this->belongsToMany(Utilisateur::class, 'inscrits');
+        return $this->belongsToMany(User::class, 'inscrits');
     }
     public function certifs()
     {
-        return $this->belongsToMany(Utilisateur::class, 'certifs');
+        return $this->belongsToMany(User::class, 'certifs');
     }
 }
