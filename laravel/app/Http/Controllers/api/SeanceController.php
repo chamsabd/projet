@@ -62,7 +62,17 @@ class SeanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $existingSeance = Seance::find($id);
+        if ($existingSeance ) {
+        $existingSeance->nom_seance=$request->seance["nom_seance"];
+        $existingSeance->date=$request->seance["date"];
+        $existingSeance->nom_seance=$request->seance["temps_fin"];
+        $existingSeance->nom_seance=$request->seance["temps_debut"];
+       // $existingSeance->formation_id=$request->seance["formation_id"];
+        $existingSeance->save();
+        return $existingSeance ;
+        }
+       else{ return "Seance non trouvé";}
     }
 
     /**
@@ -73,6 +83,14 @@ class SeanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $existingSeance = Seance::find($id);
+        if ($existingSeance ) {
+            $existingSeance->delete();
+            return "Seance supprimé" ;
+        }
+        else{
+            return "Seance non trouvé" ;
+        }
+
     }
 }
