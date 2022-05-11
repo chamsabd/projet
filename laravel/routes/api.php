@@ -1,11 +1,8 @@
 <?php
 use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
-
 use App\Http\Controllers\api\demandesController;
-
 use App\Http\Controllers\api\UserController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
@@ -19,12 +16,13 @@ use App\Http\Controllers\api\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
-
-Route::apiResource('/seances',SeanceController::class);
-//Route::get('/seances',[SeanceController::class,'index']);
-
+Route::get('/seances',[SeanceController::class,'index']);
+Route::prefix('/seance')->group(function(){
+    Route::post('/store',[SeanceController::class,'store']);
+    Route::put('/{id}',[SeanceController::class,'update']);
+    Route::delete('/{id}',[SeanceController::class,'destroy']);
+    Route::get('/{id}',[SeanceController::class,'show']);
+});
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/admin/formations',[FormationController::class,'index']);
 Route::get('/participant/formations',[FormationController::class,'index']);

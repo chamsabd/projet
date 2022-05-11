@@ -25,7 +25,21 @@ class SeanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $newSeance = new Seance() ;
+      
+     $newSeance->nom_seance = $request->seance["nom_seance"];
+      $newSeance->date = $request->seance["date"];
+      $newSeance->temps_fin = $request->seance["temps_fin"];
+     // $newSeance->temps_debut = $request->seance["temps_debut"];
+     // $newSeance->temps_debut = $request->seance["formation_id"];
+     // $newSeance->temps_debut = $request->seance["temps_debut"];
+     // $newSeance->nom_seance = $request->nom_seance;
+      //$newSeance->date = $request->date;
+     // $newSeance->temps_fin = $request->temps_fin;
+      $newSeance->temps_debut = $request->temps_debut;
+      $newSeance->temps_debut = $request->formation_id;       
+       $newSeance->save() ;
+       return $newSeance ; 
     }
 
     /**
