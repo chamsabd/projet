@@ -30,6 +30,7 @@ public class Formation {
 	 
 	private boolean etat;
 	private int nbrPlace;
+	private float prix;
 
 	@OneToMany(mappedBy = "formation")
 	private List<Demande> demandes;

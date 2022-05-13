@@ -11,7 +11,7 @@ import com.projet.Formations.entities.Formation;
 
 public interface FormationRepository extends JpaRepository<Formation, Long> { 
 
-      Page<Formation> findByNomFormationContains(String nomFormation,Pageable pageable);
+//      Page<Formation> findByNomFormationContains(String nomFormation,Pageable pageable);
 
      
 

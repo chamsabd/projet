@@ -26,9 +26,9 @@ class FormationsApplicationTests {
 
 	@Test
 	public void testCreateFormation() {
-		Formation form = new Formation("formation en sgbd1", "formation from zero to hero pour apprendre oragle",
-				new Date(), new Date(), new Date(), true, 20);
-		formationRepository.save(form);
+//		Formation form = new Formation("formation en sgbd1", "formation from zero to hero pour apprendre oragle",
+//				new Date(), new Date(), new Date(), true, 20);
+//		formationRepository.save(form);
 	}
 
 	@Test
@@ -40,7 +40,7 @@ class FormationsApplicationTests {
 	@Test
 	public void testUpdateFormation() {
 		Formation f = formationRepository.findById(1L).get();
-		f.setDescription("update");
+//		f.setDescription("update");
 		formationRepository.save(f);
 
 		System.out.println(f.toString());
@@ -59,13 +59,13 @@ class FormationsApplicationTests {
 			System.out.println(f);
 
 	}
-	@Test
-	public void testFindFormationbynom() {
-		Page<Formation> forms = formationRepository.findByNomFormationContains("formation en sgbd", PageRequest.of(0, 2).toOptional().get());
-
-		for (Formation f : forms)
-			System.out.println(f);
-
-	}
+//	@Test
+//	public void testFindFormationbynom() {
+//		Page<Formation> forms = formationRepository.findByNomFormationContains("formation en sgbd", PageRequest.of(0, 2).toOptional().get());
+//
+//		for (Formation f : forms)
+//			System.out.println(f);
+//
+//	}
 	
 }
