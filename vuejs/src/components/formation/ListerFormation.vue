@@ -21,6 +21,7 @@
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
+           <b-button v-if="role=='admin'" pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
          <b-button pill variant="outline-warning">afficher demandes</b-button>
         </td>
         <td>  
@@ -30,8 +31,9 @@
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
-   
        </b-modal>
+
+        <add-formation v-if="role=='admin'" @add-formation="Addformatio" :modformation="formation" />
   </div>
 </template>
 
@@ -42,13 +44,13 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-
+import AddFormation from '../../components/formation/AddFormation.vue';
 
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
- 
+ AddFormation,
     datatable: DataTable,
     FormationDetails,
     AddDemande,
@@ -106,9 +108,23 @@ export default {
     },
   },
   methods: {
-  
+    Addformatio(formation){
+   this.$emit('add-formation',formation);
+  },
+    modifFormation(row){
+     this.formation=row; 
+     console.log(this.formation);
+ this.showModal("add-modal");
+    },
     onAddClick() {
-    
+    this.formation={
+        'titre':null,
+        'nbr_place':null,
+        'description':null,
+        'date_debut':null,
+        'responsable_id':null,
+        'date_fin':null,
+      },
       this.showModal("add-modal");
     },
     showModal(id) {

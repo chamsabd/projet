@@ -17,8 +17,8 @@
         height="4px"
       ></b-progress>
     </b-alert>
-   <lister-formation :formations="formations" :role="role"/>
-   <add-formation @add-formation="Addformation" /> 
+   <lister-formation :formations="formations" @add-formation="Addformation" :role="role"/>
+   
    
 
   </div>
@@ -28,7 +28,7 @@
 import axios from "axios";
 
 import ListerFormation from '../../components/formation/ListerFormation.vue';
-import AddFormation from '../../components/formation/AddFormation.vue';
+
 //import ArchiverItem from "@/components/ArchiverItem";
 
 
@@ -47,7 +47,7 @@ export default {
    
  
     ListerFormation,
-   AddFormation,
+
      
 
   },
