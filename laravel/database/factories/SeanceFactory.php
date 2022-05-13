@@ -18,8 +18,8 @@ class SeanceFactory extends Factory
         return [
            'nom_seance' => $this->faker->name(),
            'date' =>$this->faker->date(),
-           'temps_fin' =>$this->faker->dateTime(),
-           'temps_debut' =>$this->faker->dateTime(),
+           'temps_fin' =>$this->faker->time(),
+           'temps_debut' =>$this->faker->time(),
            'formation_id'=>Formation::get('id')->random(),
            'created_at'=> now() ,
            'updated_at'=> now()  
