@@ -6,7 +6,7 @@
       <div class="card">
         <div class="card-header"><strong>add</strong> Formation</div>
         <form ref="my-modal1form" @submit.stop.prevent="AddFormation">
-           <b-form-input
+           <b-form-input class="d-none"
                 v-model="formation.id"
                 trim
               ></b-form-input>
@@ -151,11 +151,19 @@ errors:[],
        if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
        return ;
       console.log("add");
-           
+      var ur='';
+          var met='';
+           if(this.formation.id){
+             ur='http://127.0.0.1:8000/api/formation/'+this.formation.id;
+             met='put'
+           }
+           else{
+           ur='http://127.0.0.1:8000/api/formation/store';
+           met='post'}
         //  console.log("in");
           axios({
-            url: 'http://127.0.0.1:8000/api/formation/store',
-            method: 'post',
+            url: ur,
+            method: met,
             data: this.formation
           })
           .then(re => {

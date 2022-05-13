@@ -94,12 +94,21 @@ class FormationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->validationRules());
         $formation=Formation::findorfail($id);
         if($formation){
-        $formation->nom_for=$request->nom_for;
-        $formation->date_debut=$request->date_debut;
-        $formation->description=$request->description;
-        return $formation->save();}
+            $formation->titre=$request->titre;
+            $formation->date_debut=$request->date_debut;
+            $formation->date_fin=$request->date_fin;
+            $formation->etat=0;
+            if ($request->description) {
+          $formation->description=$request->description;
+            }
+           $formation->responsable_id=$request->responsable_id;
+            $formation->nbr_place=$request->nbr_place;
+        $formation->update();
+        return $formation;}
+        return 'data not found';
 
     }
 
