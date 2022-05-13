@@ -21,17 +21,26 @@
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
+        </td>
+        <td>
          <b-button pill variant="outline-warning">afficher demandes</b-button>
         </td>
         <td>  
              <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
-          <add-demande :f="props" /></td>
+          <add-demande :f="props" />
+        </td>
+        <td>
+         <b-button pill variant="outline-secondary" @click="AffecterFor(props.row)">Affecter Formateur</b-button>
+        </td>
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
+
+         
    
-       </b-modal>
+       </b-modal> 
+       <AffecterFormateur :formation="formation"/>
   </div>
 </template>
 
@@ -42,12 +51,14 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
+import AffecterFormateur from "@/components/formation/AffecterFormateur";
 
 
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
+    AffecterFormateur,
  
     datatable: DataTable,
     FormationDetails,
@@ -132,6 +143,12 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+
+    AffecterFor(formation){
+      this.formation=formation;
+      this.showModal("my-modal2");
+      
+    }
 
     // getDemande(id){
     // var demande={};

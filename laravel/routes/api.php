@@ -36,7 +36,7 @@ Route::prefix('/formation')->group(function(){
     Route::put('/{id}',[FormationController::class,'update']);
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
-    Route::put('update/{id}/{nom}',[FormationController::class,'updateFormateur']);
+    Route::put('update/{id}',[FormationController::class,'updateFormateur']);
 });
 
 

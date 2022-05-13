@@ -19,31 +19,9 @@
       ></b-progress>
     </b-alert>
    <lister-formation :formations="formations" :role="role"/>
-   <add-formation @add-formation="Addformation" /> 
-   
-
-
-      <th slot="thead-tr">Etat</th>
-      <th slot="thead-tr">Actions</th>
-
-      <template slot="tbody-tr" slot-scope="props">
-        <td>
-          <b-button v-if="props.row.etat == 0" pill variant="outline-success"
-            >overte</b-button
-          >
-          <b-button v-else pill variant="outline-danger">fermer</b-button>
-        </td>
-        <td>
-          <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
-        </td>
-         <td>
-          <b-button pill variant="outline-secondary" @click="AffecterFor(props)">Affecter Formateur</b-button>
-        </td>
-      </template>
-    </datatable>
-    <modal-comp :object="formation" />
-   <AffecterFormateur /> 
+   <add-formation @add-formation="Addformation" />
   </div>
+
 </template>
 
 <script>
@@ -56,20 +34,10 @@ import AddFormation from '../../components/formation/AddFormation.vue';
 
 
 
-
-
-
-import ModalComp from '../../components/ModalComp.vue';
-import AffecterFormateur from "@/components/formation/AffecterFormateur";
-
-
-
-
 export default {
   name: "FormationsView",
   components: {
     //  ArchiverItem,
-    AffecterFormateur,
 
 
    
@@ -148,10 +116,6 @@ this.showAlert();
         })
         .catch((error) => console.log(error.response));
     },
-    AffecterFor(id){
-    console.log(id);
-    this.showModal("my-modal2");
-  }
   },
   
 };

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Formation;
-use App\Models\Utilisateur;
+use App\Models\User;
+use App\Models\Formateurex;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
@@ -103,15 +104,16 @@ class FormationController extends Controller
         return $formation->save();}
 
     }
-    public function updateFormateur(Request $request, $id , $nom)
+    public function updateFormateur(Request $request, $id )
     {
-        $utilisateur=Utilisateur::where('nom','=',$nom)->first();
+       // $User=User::where('id','=',$id)->first();
+       // $Formateurex=Formateurex::where('nom','=',$nom)->first();
        // dd($utilisateur->id);
 
         $formation=Formation::find($id);
         if($formation){
-        $formation->formateur_id=$utilisateur->id;
-        //$formation->formateurexterne_id=$request->formateurexterne_id;
+        $formation->formateur_id=$request->id;
+       // $formation->formateurexterne_id=$Formateurex->id;
         $formation->save();
         return response()->json([
             'message' => 'Update Success',
