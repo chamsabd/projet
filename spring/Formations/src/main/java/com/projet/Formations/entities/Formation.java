@@ -19,8 +19,7 @@ public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	private Long idFormation;
-	
-	private String titreFormation;
+		private String titreFormation;
 	private String description;
 	@Temporal(TemporalType.DATE) 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
