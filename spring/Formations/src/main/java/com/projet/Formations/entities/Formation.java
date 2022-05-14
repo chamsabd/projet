@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,40 +16,48 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
 
+
+
 @Entity
 public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	private Long idFormation;
-	@NotBlank
-	@Size(min = 5, max = 30)
+	
+@NotNull @Size(min = 5, max = 30)
 	private String titreFormation;
 	@Null
 	@Size(min = 15, max = 100)
 	private String description;
-	@Temporal(TemporalType.DATE)
+	
+@NotNull @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateDebut;
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateFin;
-
-	@NonNull
+	@NotNull
 	private boolean etat;
+	@NotNull
 	@Min(10)
 	@Max(30)
 	private int nbrPlace;
-	@Null
+	@Min(0)
 	private float prix;
-
 	@OneToMany(mappedBy = "formation")
 	private List<Demande> demandes;
+    @ManyToOne
+	@JoinColumn(name = "idResponsable")
+	@NotNull private User responsable;
+
 
 	@AssertTrue(message = "Field `dateDebut` should be before (avant) `datefin`")
 	private boolean isbeforefin() {
@@ -74,8 +84,11 @@ public class Formation {
 
 	}
 
-	public Formation(@Size(min = 5, max = 30) String titreFormation, @Size(min = 5, max = 30) String description,
-			Date dateDebut, Date dateFin, boolean etat, int nbrPlace, float prix) {
+
+	public Formation(@NotNull @Size(min = 5, max = 30) String titreFormation,
+			@Null @Size(min = 15, max = 100) String description, @NotNull Date dateDebut, @NotNull Date dateFin,
+			@NotNull boolean etat, @NotNull @Min(10) @Max(30) int nbrPlace, @Min(0) float prix,
+			@NotNull User responsable) {
 		this.titreFormation = titreFormation;
 		this.description = description;
 		this.dateDebut = dateDebut;
@@ -83,8 +96,16 @@ public class Formation {
 		this.etat = etat;
 		this.nbrPlace = nbrPlace;
 		this.prix = prix;
+		this.responsable = responsable;
 	}
 
+	public User getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(User responsable) {
+		this.responsable = responsable;
+	}
 	public Long getIdFormation() {
 		return idFormation;
 	}

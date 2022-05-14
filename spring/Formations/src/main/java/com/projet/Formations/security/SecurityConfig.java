@@ -54,7 +54,6 @@ http.csrf().disable()
 	.successHandler(new AuthentificationLoginSuccessHandler()) 
 		.failureHandler( new AuthentificationLoginFailureHandler())
 		.and()	
-
 .logout() 
 .logoutUrl("/logout") 
 .logoutSuccessHandler(new AuthentificationLogoutSuccessHandler()) 
@@ -66,12 +65,11 @@ http.csrf().disable()
 .antMatchers("/webjars/**").permitAll()
 .antMatchers("/logout").permitAll() ;
 
-//TODO Auto-generated method stub
-http.authorizeRequests().antMatchers("/showCreate","/saveFormation").hasAnyRole("ADMIN","AGENT"); 
-		 http.authorizeRequests().antMatchers("/ListeFormations") 
-		 .hasAnyRole("ADMIN","AGENT","USER"); 
+ 
+		 http.authorizeRequests().antMatchers("/ListeFormations").permitAll(); 
+		 //.hasAnyRole("ADMIN","USER"); 
 		 http.authorizeRequests() 
-		 .antMatchers("/supprimerFormation","/modifierFormation","/updateFormation") 
+		 .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 
 		 .hasAnyRole("ADMIN")
 		.anyRequest().authenticated(); 
 		 http.exceptionHandling().accessDeniedPage("/accessDenied");
@@ -97,7 +95,7 @@ SimpleUrlAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		
 		response.setStatus(HttpServletResponse.SC_OK); 
 		UrlPathHelper help =new UrlPathHelper();
 		String path=help.getContextPath(request);

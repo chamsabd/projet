@@ -2,12 +2,14 @@ package com.projet.Formations.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -33,10 +35,11 @@ public class User implements Serializable, UserDetails {
 	private int nCin;
 	private String nom;
 	private String prenom;
-	
+	@OneToMany(mappedBy = "responsable")
+	private List<Formation> formation;
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	public User(@Email String username, String password, int nCin, String nom, String prenom) {
