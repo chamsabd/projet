@@ -25,7 +25,6 @@ href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
 
 <option th:each="pr:${scFormations}" th:value="${pr.titreFormation}">
 
- 
 </datalist>
  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">filtrer</button>
  
@@ -67,7 +66,6 @@ data-toggle="modal" th:data-target="'#exampleModal'+${p.idFormation}">details</a
             <p th:if="${p.etat}==true" class="card-text" >fermer</p>
             responsable
             <p class="card-text" th:text="${p.responsable.username}"></p>
-  
           </div>
         </div>
       </div>

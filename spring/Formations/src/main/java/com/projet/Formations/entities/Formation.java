@@ -12,7 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -20,10 +23,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
+import org.apache.jasper.tagplugins.jstl.core.When;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
-
-
 
 @Entity
 public class Formation {
@@ -33,16 +35,18 @@ public class Formation {
 	
 @NotNull @Size(min = 5, max = 30)
 	private String titreFormation;
-	@Null
-	@Size(min = 15, max = 100)
+	
+	@Size(max = 100)
 	private String description;
 	
 @NotNull @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@FutureOrPresent
 	private Date dateDebut;
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Future
 	private Date dateFin;
 	@NotNull
 	private boolean etat;
@@ -56,28 +60,10 @@ public class Formation {
 	private List<Demande> demandes;
     @ManyToOne
 	@JoinColumn(name = "idResponsable")
-	@NotNull private User responsable;
+	 private User responsable;
 
 
-	@AssertTrue(message = "Field `dateDebut` should be before (avant) `datefin`")
-	private boolean isbeforefin() {
-		return dateDebut.before(dateFin) && dateDebut.equals(dateFin);
-	}
 
-	@AssertTrue(message = "Field `dateDebut` should be after 1 month from now")
-	private boolean isafternow() {
-		// Date date =new Date();
-		// date.setMonth(date.getMonth()+1);
-		Calendar dat = Calendar.getInstance();
-		dat.set(Calendar.MONTH, Calendar.MONTH + 1);
-		Date date = dat.getTime();
-		return dateDebut.after(date) && dateDebut.equals(date);
-	}
-
-	@AssertTrue(message = "Field `datefin` should be after (apres) `dateDebut`")
-	private boolean isafterdatedebut() {
-		return dateFin.after(dateDebut) && dateDebut.equals(dateDebut);
-	}
 
 	public Formation() {
 		super();

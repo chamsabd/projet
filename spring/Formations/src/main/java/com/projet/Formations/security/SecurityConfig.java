@@ -66,13 +66,13 @@ http.csrf().disable()
 .antMatchers("/logout").permitAll() ;
 
  
-		 http.authorizeRequests().antMatchers("/ListeFormations").permitAll(); 
-		 //.hasAnyRole("ADMIN","USER"); 
-		 http.authorizeRequests() 
-		 .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 
-		 .hasAnyRole("ADMIN")
-		.anyRequest().authenticated(); 
-		 http.exceptionHandling().accessDeniedPage("/accessDenied");
+		//  http.authorizeRequests().antMatchers("/ListeFormations").permitAll(); 
+		//  //.hasAnyRole("ADMIN","USER"); 
+		//  http.authorizeRequests() 
+		//  .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 
+		//  .hasAnyRole("ADMIN")
+		// .anyRequest().authenticated(); 
+		//  http.exceptionHandling().accessDeniedPage("/accessDenied");
 	
 		 
 

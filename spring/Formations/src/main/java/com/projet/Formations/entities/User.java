@@ -35,6 +35,7 @@ public class User implements Serializable, UserDetails {
 	private int nCin;
 	private String nom;
 	private String prenom;
+
 	@OneToMany(mappedBy = "responsable")
 	private List<Formation> formation;
 	public User() {

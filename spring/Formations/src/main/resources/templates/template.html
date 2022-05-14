@@ -33,8 +33,8 @@ src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
  Produits 
  </a>
  <div class="dropdown-menu">
- 
- <a sec:authorize="hasAnyRole('ADMIN','AGENT')"  class="dropdown-item" th:href="@{showCreate?(etat='create')}">Ajouter</a>
+<!-- sec:authorize="hasAnyRole('ADMIN')" -->
+ <a   class="dropdown-item" th:href="@{showCreateFormation?(etat='create')}">Ajouter</a>
  <a class="dropdown-item" th:href="@{ListeFormations}">Lister</a>
  </div>
 </li>
