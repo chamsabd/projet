@@ -1,6 +1,6 @@
 package com.projet.Formations.service;
 
-import java.util.Date;
+//import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,16 +51,16 @@ public class FormationServiceImp implements FormationService {
 		return this.formationRepository.findByNomFormationContains(nom, pageable);
 	}
 
-	@Override
-	public Page<Formation> findByDateDebutFormationContains(Date datedebut, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return this.formationRepository.findByDateDebutFormationContains(datedebut, pageable);
-	}
-
-	@Override
-	public Page<Formation> findByDateCertifFormationContains(Date datecertif, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return this.formationRepository.findByDateCertifFormationContains(datecertif, pageable);
-	}
+//	@Override
+//	public Page<Formation> findByDateDebutFormationContains(Date datedebut, Pageable pageable) {
+//		// TODO Auto-generated method stub
+//		return this.formationRepository.findByDateDebutFormationContains(datedebut, pageable);
+//	}
+//
+//	@Override
+//	public Page<Formation> findByDateCertifFormationContains(Date datecertif, Pageable pageable) {
+//		// TODO Auto-generated method stub
+//		return this.formationRepository.findByDateCertifFormationContains(datecertif, pageable);
+//	}
 
 }

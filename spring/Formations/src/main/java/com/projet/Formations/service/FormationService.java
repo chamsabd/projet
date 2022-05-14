@@ -1,6 +1,6 @@
 package com.projet.Formations.service;
 
-import java.util.Date;
+//import java.util.Date;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +15,6 @@ public interface FormationService {
 	Formation getFormation(Long id);
 	Page<Formation> getAllFormationparpage(int page,int size);
 	 Page<Formation> findByNomFormationContains(String nom,Pageable pageable);
-	 Page<Formation> findByDateDebutFormationContains(Date datedebut,Pageable pageable);
-	 Page<Formation> findByDateCertifFormationContains(Date datecertif,Pageable pageable);
+//	 Page<Formation> findByDateDebutFormationContains(Date datedebut,Pageable pageable);
+//	 Page<Formation> findByDateCertifFormationContains(Date datecertif,Pageable pageable);
 }
