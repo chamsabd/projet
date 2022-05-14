@@ -61,9 +61,13 @@ data-toggle="modal" th:data-target="'#exampleModal'+${p.idFormation}">details</a
             <h5 class="card-title" th:text="${p.titreFormation}"></h5>
             <h6 class="card-subtitle mb-2 text-muted" th:text="'de'+${p.dateDebut}+'jusqu a'+${p.dateFin}"></h6>
             <p class="card-text" th:text="${p.description}"></p>
+           prix: <p class="card-text" th:text="${p.prix}"></p>
+           nbr place: <p  class="card-text" th:text="${p.nbrPlace}"></p>
+           etat <p th:if="${p.etat}==false" class="card-text" >overte</p>
+            <p th:if="${p.etat}==true" class="card-text" >fermer</p>
+            responsable
             <p class="card-text" th:text="${p.responsable.username}"></p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+  
           </div>
         </div>
       </div>
