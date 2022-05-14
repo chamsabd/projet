@@ -56,6 +56,7 @@ Route::get('/users',[UserController::class,'index']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+    
 });
 
 Route::post('/login', [AuthController::class,'login']);
