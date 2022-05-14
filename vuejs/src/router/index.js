@@ -29,7 +29,13 @@ const routes = [
     path: '/demande',
     name: 'afficherDemandes',
     component: afficherDemandes
-  }
+  },
+  {
+    path: '/DetailsSeance',
+    name: 'DetailsSeance',
+    component:()=>
+    import("../components/seances/AfficherDetailsSeance")
+  },
  
   // {
   //   path: '/demandes',

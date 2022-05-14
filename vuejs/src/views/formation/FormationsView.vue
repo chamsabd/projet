@@ -26,7 +26,6 @@
 
 <script>
 import axios from "axios";
-
 import ListerFormation from '../../components/formation/ListerFormation.vue';
 import AddFormation from '../../components/formation/AddFormation.vue';
 //import ArchiverItem from "@/components/ArchiverItem";

@@ -37,12 +37,11 @@
 
 <script>
 import axios from "axios";
-
 import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-
+//import AddSeance from '../../components/seances/AddSeance.vue';
 
 export default {
   name: "ListerFormations",
@@ -52,6 +51,7 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+   // AddSeance
   },
   props: {
   formations:Array,
