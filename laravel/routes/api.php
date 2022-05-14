@@ -4,6 +4,7 @@ use App\Http\Controllers\api\FormationController;
 
 use App\Http\Controllers\api\demandesController;
 
+use App\Http\Controllers\api\FormateurexController;
 use App\Http\Controllers\api\UserController;
 
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ Route::prefix('/formation')->group(function(){
 
 
 
-
+Route::apiResource('/formateurexes',FormateurexController::class);
 
 
 Route::get('/demandes',[demandesController::class,'index']);
