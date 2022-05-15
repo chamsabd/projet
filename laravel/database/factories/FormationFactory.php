@@ -28,9 +28,8 @@ class FormationFactory extends Factory
             'formateurexterne_id' =>User::get('id')->random(),//table formateurexterne 
 
             'etat' =>$this->faker->boolean,   
-
              'nbr_place' =>$this->faker->randomNumber(),
-
+             'prix' =>$this->faker->randomFloat($nbMaxDecimals=2, $min = 0, $max = 99999),
             'created_at'=>now()  
         ];
     }
