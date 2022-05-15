@@ -9,6 +9,7 @@
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
+      required
       trim
     ></b-form-input>
      <label for="input-live">Prenom:</label>
@@ -18,6 +19,7 @@
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
       trim
+      required
     ></b-form-input>
  <label for="input-live">Numero de Carte d'identite :</label>
     <b-form-input
@@ -27,6 +29,7 @@
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
       trim
+      required
     ></b-form-input>
 
      <label for="input-live">Email :</label>
@@ -37,6 +40,7 @@
       :state="nameState"
       aria-describedby="input-live-help input-live-feedback"
       placeholder="Enter your name"
+      required
       trim
     ></b-form-input>
          <label for="input-live">Vous etes  :</label>
@@ -59,6 +63,7 @@
       placeholder="Enter your password"
       type="password"
       trim
+      required
     ></b-form-input>
     <br>
     <br>
