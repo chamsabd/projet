@@ -112,7 +112,6 @@ public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse resp
 response.setStatus(HttpServletResponse.SC_OK); 
 UrlPathHelper help =new UrlPathHelper();
 String path=help.getContextPath(request);
-
 response.sendRedirect(path +"/login");
 } 
 } 
