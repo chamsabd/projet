@@ -1,5 +1,5 @@
 <template>
-<b-modal  id="add-modal" size="lg"  centered @cancel="resetModal" @ok="handleOk" >
+<b-modal  id="add-modal" size="lg"  centered @hidden="resetModal" @cancel="resetModal" @ok="handleOk" >
  
   <div class="row d-flex justify-content-center">
     <div class="col-lg-9">
@@ -117,6 +117,19 @@
               </b-form-invalid-feedback >
               <b-form-valid-feedback :state="advalid_nbr"> Looks Good. </b-form-valid-feedback>
             </b-form-group>
+              <b-form-group label="prix" :state="advalid_prix">
+              <b-form-input type="number" min=0 step="0.01" v-model="formation.prix" :state="advalid_prix" trim ></b-form-input>
+              <b-form-invalid-feedback :state="advalid_prix">
+               prix doit etre >=0
+              </b-form-invalid-feedback>
+              <b-form-valid-feedback :state="advalid_prix"> Looks Good.</b-form-valid-feedback>
+            </b-form-group>
+              <b-form-group v-if="formation.id" label="etat" >
+             <b-form-select v-model="formation.etat">
+      <b-form-select-option value="0">overte</b-form-select-option>
+      <b-form-select-option value="1">fermer</b-form-select-option>
+             </b-form-select>  
+               </b-form-group>
           </div>
          
         </form>
@@ -135,22 +148,26 @@ export default {
       today: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
       users: [],
 errors:[],
-     
+     formation:{},
     };
   },
   props: {
   modformation:Object,
 
   },
-  
+  watch: {
+ modformation:function () {
+ this.formation=this.modformation;
+ }
+},
   mounted() {
     this.getutilisateurs();
   },
   methods: {
     AddFormation() {
-       if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
+       if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr|| !this.advalid_prix)
        return ;
-      console.log("add");
+      console.log(this.formation);
       var ur='';
           var met='';
            if(this.formation.id){
@@ -173,6 +190,7 @@ errors:[],
   this.$emit('add-formation',re);
           })
           .catch(err => {
+            console.log(err);
             this.errors=err.response.data.errors;
          //   console.log("erreurs chams",this.errors);
           })
@@ -194,6 +212,7 @@ errors:[],
         'responsable_id':null,
         'date_fin':null,
       };
+      this.$emit('add-formation',"none");
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing
@@ -203,8 +222,7 @@ errors:[],
       },
   },
   computed: {
-     formation(){
-       return this.modformation;},
+    
     options() {
       var val = this.users;
 
@@ -270,6 +288,13 @@ errors:[],
   if (this.formation.nbr_place != undefined)
   return this.formation.nbr_place>=10 &&this.formation.nbr_place<=30
   return false
+    },
+      advalid_prix(){
+       if (this.formation.prix != undefined )
+        return (
+          this.formation.prix>=0
+        );
+      return false;
     },
   },
 };

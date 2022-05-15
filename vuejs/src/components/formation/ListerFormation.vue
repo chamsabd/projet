@@ -33,7 +33,7 @@
           <formation-details :formation="formation"/>
        </b-modal>
 
-        <add-formation v-if="role=='admin'" @add-formation="Addformatio" :modformation="formation" />
+        <add-formation v-if="role=='admin'" @add-formation="Addformatio" :modformation="modformation" />
   </div>
 </template>
 
@@ -92,6 +92,7 @@ export default {
 
     
       formation: {},
+      modformation:{}
     };
   },
   computed: {
@@ -109,10 +110,11 @@ export default {
   },
   methods: {
     Addformatio(formation){
+      
    this.$emit('add-formation',formation);
   },
     modifFormation(row){
-     this.formation=row; 
+     this.modformation=row; 
      console.log(this.formation);
  this.showModal("add-modal");
     },
@@ -124,6 +126,8 @@ export default {
         'date_debut':null,
         'responsable_id':null,
         'date_fin':null,
+        'prix':0,
+        'etat':true
       },
       this.showModal("add-modal");
     },
