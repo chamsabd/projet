@@ -9,13 +9,13 @@ class Inscrit extends Model
 {
     use HasFactory;    
 
-// public function Formations()
-// {
-//  return $this->belongsTo(Formation::class);
-// }  
-// public function users()
-// {
-//     return $this->belongsTo(Client::class);
-// }  
+public function formations()
+{
+ return $this->belongsTo(Formation::class,'formation_id');
+}  
+public function users()
+{
+    return $this->belongsTo(User::class,'user_id');
+}  
 
 }

@@ -7,7 +7,6 @@
       :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
-     
     >
       <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>

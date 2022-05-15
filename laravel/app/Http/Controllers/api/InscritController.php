@@ -20,6 +20,12 @@ class InscritController extends Controller
         return Inscrit::All();
 
     }
+    public function formationsindex()
+    {
+       // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
+       return Formation::with('inscrits')->where('formations.responsable_id',9)->get();
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,7 +35,7 @@ class InscritController extends Controller
      */
     public function store(Request $request)
     {
-        $user=User::find($request->user_id);
+         $user=User::find($request->user_id);
         $user->inscrits()->sync($request->formation_id,['date_inscrit'=>$request->date_inscrit]);
 
     }

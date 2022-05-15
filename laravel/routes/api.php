@@ -36,7 +36,7 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
-
+Route::get('/inscrits/formations',[InscritController::class,'formationsindex']);
 Route::get('/inscrits',[InscritController::class,'index']);
 Route::prefix('/inscrit')->group(function(){
     Route::post('/store',[InscritController::class,'store']);

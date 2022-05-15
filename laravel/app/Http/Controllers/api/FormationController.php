@@ -33,6 +33,7 @@ class FormationController extends Controller
        return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
 
     }
+  
        /**s
      * Display a listing of the resource.
      *

@@ -7,7 +7,7 @@
       variant="info"
       @dismissed="dismissCountDown=0"
       @dismiss-count-down="countDownChanged">
-    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter avec success a la fin de table</h6>
+    <h6 aria-describedby="help-block"> le formation  est ajouter avec success a la fin de table</h6>
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
         variant="info"
@@ -16,18 +16,29 @@
         height="4px"
       ></b-progress>
     </b-alert>
-   <lister-formation :formations="formations" :role="role"/>
-   <add-formation @add-formation="Addformation" /> 
-   
-
+<div  class="accordion" role="tablist">
+    <b-card no-body class="mb-1" v-for="formation in formations" :key="formation.id">
+      <b-card-header v-if="formation.inscrits" header-tag="header" class="p-1" role="tab">
+          <b-container class="bv-example-row" block v-b-toggle.formation.id>
+  <b-row>
+    <b-col>{{formation.titre}}</b-col>
+    <b-col>{{formation.date_debut}}</b-col>
+  </b-row>
+</b-container>
+          </b-card-header>
+      <b-collapse :id="formation.id"  accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <b-card-text>I start opened because <code>visible</code> is <code>true</code></b-card-text>
+        </b-card-body>
+      </b-collapse>
+    </b-card>  
+  </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
-import ListerFormation from '../../components/formation/ListerFormation.vue';
-import AddFormation from '../../components/formation/AddFormation.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 
 
@@ -38,15 +49,10 @@ import AddFormation from '../../components/formation/AddFormation.vue';
 
 
 export default {
-  name: "FormationsView",
+  name: "InscritsView",
   components: {
     //  ArchiverItem,
 
-
-   
- 
-    ListerFormation,
-   AddFormation,
      
 
   },
@@ -56,20 +62,15 @@ export default {
  dismissSecs: 10,
         dismissCountDown: 0,
 
-      formations: [],
-      titreform:'',
+     formations:[],
    
     };
   },
   computed:{
-role(){
-  return this.$route.params.role;
-},
+
   },
 watch: {
- role:function () {
-  this.getformations();
- }
+ 
 },
  
   mounted() {
@@ -79,7 +80,7 @@ watch: {
     async getformations() {
   
  await  axios
-        .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
+        .get("http://127.0.0.1:8000/api/inscrits/formations")
         .then((response) => {
           this.formations = response.data;
         })
@@ -91,24 +92,7 @@ watch: {
       showAlert() {
         this.dismissCountDown = this.dismissSecs
       },
-  Addformation(formation){
-    this.titreform=formation.titre;
-console.log(formation);
-this.getformations();
-this.showAlert();
-  },
-    onAddClick() {
-      this.formation = {};
-      console.log(this.formation);
-      this.showModal("my-modal");
-    },
-    showModal(id) {
-      this.$bvModal.show(id);
-      // this.$refs[id].show()
-    }, hideModal(id) {
-      this.$bvModal.hide(id);
-      // this.$refs[id].show()
-    },
+  
   
    
     deleteitm(id) {
@@ -126,15 +110,5 @@ this.showAlert();
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
 
-.formation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    font-size: 40px;
-    color: rgb(167, 167, 167);
-    font-weight: 600;
-}
 
 </style>
