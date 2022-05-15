@@ -19,6 +19,14 @@
           >
           <b-button v-else pill variant="outline-danger">fermer</b-button>
         </td>
+           
+    <!-- ************************tttttttttttttttttaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkk************-->
+           <td>
+         <!-- <b-button pill variant="outline-" @click="onRowClick(props.row)">details</b-button>-->
+         <b-button pill variant="outline-secondary">
+         <router-link to="/AfficherDetailsSeance">Consulter seances</router-link></b-button>
+        </td>
+      
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
          <b-button pill variant="outline-warning">afficher demandes</b-button>
@@ -26,6 +34,8 @@
         <td>  
              <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
           <add-demande :f="props" /></td>
+        
+      
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -41,7 +51,7 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-//import AddSeance from '../../components/seances/AddSeance.vue';
+//import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
 
 export default {
   name: "ListerFormations",

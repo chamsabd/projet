@@ -36,6 +36,12 @@ const routes = [
     component:()=>
     import("../components/seances/AfficherDetailsSeance")
   },
+  {
+    path: '/ListeSeances',
+    name: 'ListeSeances',
+    component:()=>
+    import("../components/seances/ListeSeances")
+  } ,
  
   // {
   //   path: '/demandes',
