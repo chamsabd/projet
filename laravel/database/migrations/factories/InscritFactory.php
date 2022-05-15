@@ -19,7 +19,7 @@ class InscritFactory extends Factory
       
         return [
           
-           'client_id' =>Client::get('id')->unique()->random(),
+           //'client_id' =>Client::get('id')->unique()->random(),
             'formation_id' =>Formation::get('id')->unique()->random(),
            'date_inscrit' =>$this->faker->unique()->date($format = 'Y-m-d', $max = 'now'),
            'created_at'=>now()  
