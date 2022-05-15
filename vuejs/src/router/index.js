@@ -7,6 +7,7 @@ import Dashboard from '@/views/Dashboard'
 //import DemandesView from '@/views/demande/DemandesView'
 import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
+import containerSeances from '../views/Seance/containerSeances'
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,8 +21,8 @@ const routes = [
           path: '/formations/:role',
           name: 'FormationsView',
           component: FormationsView
-        }
-     
+        }, 
+        
     ]
    
   },
@@ -31,17 +32,13 @@ const routes = [
     component: afficherDemandes
   },
   {
-    path: '/DetailsSeance',
-    name: 'DetailsSeance',
-    component:()=>
-    import("../components/seances/AfficherDetailsSeance")
-  },
-  {
-    path: '/ListeSeances',
-    name: 'ListeSeances',
-    component:()=>
-    import("../components/seances/ListeSeances")
-  } ,
+    path: '/ContainerSeances',
+    name: 'ContainerSeances',
+    component : containerSeances
+  // component:()=>
+  // import("")
+  }
+
  
   // {
   //   path: '/demandes',
