@@ -28,7 +28,7 @@ class Formation extends Model
     }
     public function inscrits()
     {
-        return $this->belongsToMany(User::class, 'inscrits');
+        return $this->belongsToMany(User::class, 'inscrits') ->withTimestamps()->wherePivot('date_inscrit');
     }
     public function certifs()
     {

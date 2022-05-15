@@ -3,6 +3,7 @@ use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
 use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\api\InscritController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
@@ -36,8 +37,13 @@ Route::prefix('/formation')->group(function(){
     Route::get('/{id}',[FormationController::class,'show']);
 });
 
-
-
+Route::get('/inscrits',[InscritController::class,'index']);
+Route::prefix('/inscrit')->group(function(){
+    Route::post('/store',[InscritController::class,'store']);
+    Route::put('/{id}',[InscritController::class,'update']);
+    Route::delete('/{id}',[InscritController::class,'destroy']);
+    Route::get('/{id}',[InscritController::class,'show']);
+});
 
 
 
