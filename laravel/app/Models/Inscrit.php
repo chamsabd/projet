@@ -12,11 +12,11 @@ class Inscrit extends Model
 public function Formation()
 {
 
-    return $this->belongsTo(Formation::class,'id_formation');
+    return $this->belongsTo(Formation::class);
 }  
 public function client()
 {
-    return $this->belongsTo(Client::class,'id_formation');
+    return $this->belongsTo(Client::class);
 }  
 
 }
