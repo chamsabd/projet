@@ -13,21 +13,26 @@
     />
       <th slot="thead-tr">Actions</th> -->
 
-      <template slot="tbody-tr">
+      <!-- <template slot="tbody-tr"> -->
         <!-- <td>
           <b-button pill variant="outline-info">detail</b-button>
         </td> -->
-      </template>
+      <!-- </template> -->
     </datatable>
   </div>
 </template>
 <script>
 import axios from "axios";
 // import addDemande from './addDemande.vue';
+import DataTable from "vue-materialize-datatable";
 export default {
   // components: { 
   //   addDemande },
   name: 'afficherDemande',
+    components: {
+
+    datatable: DataTable,
+  },
  data: function () {
     return {
      formation_id: " ",
