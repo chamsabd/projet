@@ -3,10 +3,10 @@
     <h1 class="text-center">Datatable with Vue</h1>
 
         <datatable
-      title="Basic table"
+      title="demande"
       :columns="tableColumns1"
       :rows="demandes"
-      :perPage="[3, 5, 10]"
+     
     >
     <!-- <adddemande 
     v-on:reloadlist="getdemandes()"

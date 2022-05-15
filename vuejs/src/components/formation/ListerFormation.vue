@@ -21,10 +21,11 @@
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
-         <b-button pill variant="outline-warning">afficher demandes</b-button>
+         <b-button pill variant="outline-warning" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
+         <!-- <afficher-demandes :demande="demande"/> -->
         </td>
         <td>  
-             <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
+             <b-button v-if="'participant'==0" pill variant="outline-warning">send demande</b-button>
           <add-demande :f="props" /></td>
       </template>
     </datatable>
@@ -42,16 +43,18 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
+//import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 
 
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
- 
+
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+  //  AfficherDemandes,
   },
   props: {
   formations:Array,
@@ -60,7 +63,7 @@ export default {
   },
   data: function () {
     return {
-    // formation_id: " ",
+     formation_id: " ",
       tableColumns1: [
         {
           label: "titre de formation",
@@ -133,7 +136,7 @@ export default {
         .catch((error) => console.log(error.response));
     },
 
-    // getDemande(id){
+    getDemandeByFormation(id){
     // var demande={};
     //     demande.formation_id=this.d.row.id;
         
@@ -146,18 +149,17 @@ export default {
     //     console.log(response);
           
     //     })
-    // axios.get("http://127.0.0.1:8000/api/demandes/" +id)
-    //  .then((resp) => {
-    //   this.formation_id = resp.data.data.id;
-    //   console.log(this.formation_id);
-    // })
-    // },
+    axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
+    .then((response) => {
+      this.formation_id = response.data.data.id;
+      console.log(this.formation_id);
+    })
+    .catch((error) => console.log(error.response));
+    },
   },
 };
 </script>
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-
-
 </style>
