@@ -1,11 +1,15 @@
 <template>
-<b-modal  id="add-modal" size="lg"  centered @cancel="resetModal" @ok="handleOk" >
+<b-modal  id="add-modal" size="lg"  centered @hidden="resetModal" @cancel="resetModal" @ok="handleOk" >
  
   <div class="row d-flex justify-content-center">
     <div class="col-lg-9">
       <div class="card">
         <div class="card-header"><strong>add</strong> Formation</div>
         <form ref="my-modal1form" @submit.stop.prevent="AddFormation">
+           <b-form-input class="d-none"
+                v-model="formation.id"
+                trim
+              ></b-form-input>
           <div class="card-body card-block">
             <b-form-group label="titre formation" :state="advalid_titre">
               <b-form-input
@@ -42,8 +46,7 @@
                 <b-form-group
                   label="date debut"
                   :state="advalid_dated"
-                  label-for="input-2"
-                >
+                  label-for="input-2" >
                   <b-form-datepicker
                     :min="mind"
                     :max="maxd"
@@ -114,6 +117,19 @@
               </b-form-invalid-feedback >
               <b-form-valid-feedback :state="advalid_nbr"> Looks Good. </b-form-valid-feedback>
             </b-form-group>
+              <b-form-group label="prix" :state="advalid_prix">
+              <b-form-input type="number" min=0 step="0.01" v-model="formation.prix" :state="advalid_prix" trim ></b-form-input>
+              <b-form-invalid-feedback :state="advalid_prix">
+               prix doit etre >=0
+              </b-form-invalid-feedback>
+              <b-form-valid-feedback :state="advalid_prix"> Looks Good.</b-form-valid-feedback>
+            </b-form-group>
+              <b-form-group v-if="formation.id" label="etat" >
+             <b-form-select v-model="formation.etat">
+      <b-form-select-option value="0">overte</b-form-select-option>
+      <b-form-select-option value="1">fermer</b-form-select-option>
+             </b-form-select>  
+               </b-form-group>
           </div>
          
         </form>
@@ -132,36 +148,39 @@ export default {
       today: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
       users: [],
 errors:[],
-      formation: {
-        'titre':null,
-        'nbr_place':null,
-        'description':null,
-        'date_debut':null,
-        'responsable_id':null,
-        'date_fin':null,
-      },
+     formation:{},
     };
   },
+  props: {
+  modformation:Object,
+
+  },
+  watch: {
+ modformation:function () {
+ this.formation=this.modformation;
+ }
+},
   mounted() {
     this.getutilisateurs();
   },
   methods: {
     AddFormation() {
-       if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
+       if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr|| !this.advalid_prix)
        return ;
-      console.log("add");
-            var fd = new FormData()
-          fd.append('titre', this.formation.titre);
-         fd.append('description', this.formation.description);
-         fd.append('date_debut',this.formation.date_debut==null?this.formation.date_debut:new Date('Y-m-d',this.formation.date_debut)) ;
-         fd.append('date_fin',this.formation.date_fin==null?this.formation.date_fin:new Date('Y-m-d', this.formation.date_fin) );
-         fd.append('responsable_id', this.formation.responsable_id);
-        fd.append('nbr_place', this.formation.nbr_place);
-         
+      console.log(this.formation);
+      var ur='';
+          var met='';
+           if(this.formation.id){
+             ur='http://127.0.0.1:8000/api/formation/'+this.formation.id;
+             met='put'
+           }
+           else{
+           ur='http://127.0.0.1:8000/api/formation/store';
+           met='post'}
         //  console.log("in");
           axios({
-            url: 'http://127.0.0.1:8000/api/formation/store',
-            method: 'post',
+            url: ur,
+            method: met,
             data: this.formation
           })
           .then(re => {
@@ -171,8 +190,9 @@ errors:[],
   this.$emit('add-formation',re);
           })
           .catch(err => {
+            console.log(err);
             this.errors=err.response.data.errors;
-            console.log("erreurs chams",this.errors);
+         //   console.log("erreurs chams",this.errors);
           })
     },
     async getutilisateurs() {
@@ -192,6 +212,7 @@ errors:[],
         'responsable_id':null,
         'date_fin':null,
       };
+      this.$emit('add-formation',"none");
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing
@@ -201,6 +222,7 @@ errors:[],
       },
   },
   computed: {
+    
     options() {
       var val = this.users;
 
@@ -266,6 +288,13 @@ errors:[],
   if (this.formation.nbr_place != undefined)
   return this.formation.nbr_place>=10 &&this.formation.nbr_place<=30
   return false
+    },
+      advalid_prix(){
+       if (this.formation.prix != undefined )
+        return (
+          this.formation.prix>=0
+        );
+      return false;
     },
   },
 };

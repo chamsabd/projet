@@ -6,8 +6,11 @@
       dismissible
       variant="info"
       @dismissed="dismissCountDown=0"
-      @dismiss-count-down="countDownChanged">
-    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter avec success a la fin de table</h6>
+
+      @dismiss-count-down="countDownChanged"
+    >
+    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter ou modiffier avec success </h6>
+
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
         variant="info"
@@ -16,8 +19,8 @@
         height="4px"
       ></b-progress>
     </b-alert>
-   <lister-formation :formations="formations" :role="role"/>
-   <add-formation @add-formation="Addformation" /> 
+   <lister-formation :formations="formations" @add-formation="Addformation" :role="role"/>
+   
    
 
   </div>
@@ -27,7 +30,7 @@
 import axios from "axios";
 
 import ListerFormation from '../../components/formation/ListerFormation.vue';
-import AddFormation from '../../components/formation/AddFormation.vue';
+
 //import ArchiverItem from "@/components/ArchiverItem";
 
 
@@ -46,7 +49,7 @@ export default {
    
  
     ListerFormation,
-   AddFormation,
+
      
 
   },
@@ -92,10 +95,13 @@ watch: {
         this.dismissCountDown = this.dismissSecs
       },
   Addformation(formation){
-    this.titreform=formation.titre;
+    if(formation!='none'){
+    this.titreform=formation.data.titre;
+this.showAlert();
+}
 console.log(formation);
 this.getformations();
-this.showAlert();
+
   },
     onAddClick() {
       this.formation = {};
