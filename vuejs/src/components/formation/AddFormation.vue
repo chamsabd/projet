@@ -6,6 +6,10 @@
       <div class="card">
         <div class="card-header"><strong>add</strong> Formation</div>
         <form ref="my-modal1form" @submit.stop.prevent="AddFormation">
+           <b-form-input class="d-none"
+                v-model="formation.id"
+                trim
+              ></b-form-input>
           <div class="card-body card-block">
             <b-form-group label="titre formation" :state="advalid_titre">
               <b-form-input
@@ -42,8 +46,7 @@
                 <b-form-group
                   label="date debut"
                   :state="advalid_dated"
-                  label-for="input-2"
-                >
+                  label-for="input-2" >
                   <b-form-datepicker
                     :min="mind"
                     :max="maxd"
@@ -132,16 +135,14 @@ export default {
       today: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
       users: [],
 errors:[],
-      formation: {
-        'titre':null,
-        'nbr_place':null,
-        'description':null,
-        'date_debut':null,
-        'responsable_id':null,
-        'date_fin':null,
-      },
+     
     };
   },
+  props: {
+  modformation:Object,
+
+  },
+  
   mounted() {
     this.getutilisateurs();
   },
@@ -150,18 +151,19 @@ errors:[],
        if(!this.advalid_titre || !this.advalid_desc || !this.advalid_dated || !this.advalid_datef || !this.advalid_responsable || !this.advalid_nbr)
        return ;
       console.log("add");
-            var fd = new FormData()
-          fd.append('titre', this.formation.titre);
-         fd.append('description', this.formation.description);
-         fd.append('date_debut',this.formation.date_debut==null?this.formation.date_debut:new Date('Y-m-d',this.formation.date_debut)) ;
-         fd.append('date_fin',this.formation.date_fin==null?this.formation.date_fin:new Date('Y-m-d', this.formation.date_fin) );
-         fd.append('responsable_id', this.formation.responsable_id);
-        fd.append('nbr_place', this.formation.nbr_place);
-         
+      var ur='';
+          var met='';
+           if(this.formation.id){
+             ur='http://127.0.0.1:8000/api/formation/'+this.formation.id;
+             met='put'
+           }
+           else{
+           ur='http://127.0.0.1:8000/api/formation/store';
+           met='post'}
         //  console.log("in");
           axios({
-            url: 'http://127.0.0.1:8000/api/formation/store',
-            method: 'post',
+            url: ur,
+            method: met,
             data: this.formation
           })
           .then(re => {
@@ -172,7 +174,7 @@ errors:[],
           })
           .catch(err => {
             this.errors=err.response.data.errors;
-            console.log("erreurs chams",this.errors);
+         //   console.log("erreurs chams",this.errors);
           })
     },
     async getutilisateurs() {
@@ -201,6 +203,8 @@ errors:[],
       },
   },
   computed: {
+     formation(){
+       return this.modformation;},
     options() {
       var val = this.users;
 
