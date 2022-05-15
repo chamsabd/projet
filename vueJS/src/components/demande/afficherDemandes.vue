@@ -22,12 +22,17 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+//import axios from "axios";
+import DataTable from "vue-materialize-datatable";
 // import addDemande from './addDemande.vue';
 export default {
   // components: { 
   //   addDemande },
   name: 'afficherDemande',
+    components: {
+    datatable: DataTable,
+   
+  },
  data: function () {
     return {
      formation_id: " ",
@@ -57,14 +62,7 @@ export default {
     };
   },
   methods: {
-   
-   getdemandes() {
-      axios.get("http://127.0.0.1:8000/api/demandes")
-      .then((response) => {
-          this.demandes = response.data;
-        })
-        .catch((error) => console.log(error.response));
-    },
+
   },
 };
 </script>
