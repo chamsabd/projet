@@ -1,6 +1,6 @@
 <template>
   <div id="app"  class="container ">
-    <h1 class="text-center">formation</h1>
+    <h1 class="text-center">les participants</h1>
     <b-alert
       :show="dismissCountDown"
       dismissible
@@ -16,28 +16,33 @@
         height="4px"
       ></b-progress>
     </b-alert>
-<div  class="accordion" role="tablist">
-    <b-card no-body class="mb-1" v-for="formation in formations" :key="formation.id">
-      <b-card-header v-if="formation.inscrits" header-tag="header" class="p-1" role="tab">
-          <b-container class="bv-example-row" block v-b-toggle.formation.id>
+
+  <div class="accordion" role="tablist">
+    <b-card no-body class="mb-1"  v-for="formation in formations" :key="formation.id">
+      <b-card-header header-tag="header" class="p-1" role="tab" v-if="formation.inscrits">
+        <b-button  block  v-b-toggle :href="'#id'+formation.id" @click.prevent>
+            <b-container class="bv-example-row"  >
   <b-row>
     <b-col>{{formation.titre}}</b-col>
     <b-col>{{formation.date_debut}}</b-col>
   </b-row>
 </b-container>
-          </b-card-header>
-      <b-collapse :id="formation.id"  accordion="my-accordion" role="tabpanel">
+</b-button>
+      </b-card-header>
+      <b-collapse :id="'id'+formation.id" v-if="formation.inscrits"  accordion="my-accordion" role="tabpanel">
         <b-card-body>
-          <b-card-text>I start opened because <code>visible</code> is <code>true</code></b-card-text>
+          <lister-inscrit :inscrits="formation.inscrits" />
         </b-card-body>
       </b-collapse>
-    </b-card>  
+    </b-card>
   </div>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import ListerInscrit from '../../components/inscrit/ListerInscrit.vue';
 
 //import ArchiverItem from "@/components/ArchiverItem";
 
@@ -51,6 +56,7 @@ import axios from "axios";
 export default {
   name: "InscritsView",
   components: {
+    ListerInscrit
     //  ArchiverItem,
 
      

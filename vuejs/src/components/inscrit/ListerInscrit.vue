@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="inscrit in inscrits" key="inscrit.pivot.id">
+    <tr v-for="inscrit in inscrits" :key="inscrit.pivot.id">
       <th scope="row">{{inscrit.pivot.id}}</th>
       <td scope="col">{{inscrit.email}}</td>
       <td scope="col">{{inscrit.ncin}}</td>
@@ -32,7 +32,7 @@ import axios from "axios";
 
 
 export default {
-  name: "Listerinscrits",
+  name: "ListerInscrits",
   components: {
   
   },
@@ -42,7 +42,7 @@ export default {
   },
   data: function () {
     return {
-   inscrits:[],
+  
     };
   },
   computed: {

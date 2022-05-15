@@ -21,7 +21,8 @@ const routes = [
           path: '/formations/:role',
           name: 'FormationsView',
           component: FormationsView
-        },{
+        },
+        {
           path: '/inscrits',
           name: 'InscritsView',
           component: InscritsView
