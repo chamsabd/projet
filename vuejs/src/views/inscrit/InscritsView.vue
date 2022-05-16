@@ -1,16 +1,13 @@
 <template>
   <div id="app"  class="container ">
-    <h1 class="text-center">formation</h1>
+    <h1 class="text-center">les participants</h1>
     <b-alert
       :show="dismissCountDown"
       dismissible
       variant="info"
       @dismissed="dismissCountDown=0"
-
-      @dismiss-count-down="countDownChanged"
-    >
-    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter ou modiffier avec success </h6>
-
+      @dismiss-count-down="countDownChanged">
+    <h6 aria-describedby="help-block"> le formation  est ajouter avec success a la fin de table</h6>
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
         variant="info"
@@ -19,17 +16,33 @@
         height="4px"
       ></b-progress>
     </b-alert>
-   <lister-formation :formations="formations" @add-formation="Addformation" :role="role"/>
-   
-   
+
+  <div class="accordion" role="tablist">
+    <b-card no-body class="mb-1"  v-for="formation in formations" :key="formation.id">
+      <b-card-header header-tag="header" class="p-1" role="tab" v-if="formation.inscrits">
+        <b-button  block  v-b-toggle :href="'#id'+formation.id" @click.prevent>
+            <b-container class="bv-example-row"  >
+  <b-row>
+    <b-col>{{formation.titre}}</b-col>
+    <b-col>{{formation.date_debut}}</b-col>
+  </b-row>
+</b-container>
+</b-button>
+      </b-card-header>
+      <b-collapse :id="'id'+formation.id" v-if="formation.inscrits"  accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <lister-inscrit :inscrits="formation.inscrits" />
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+  </div>
 
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
-import ListerFormation from '../../components/formation/ListerFormation.vue';
+import ListerInscrit from '../../components/inscrit/ListerInscrit.vue';
 
 //import ArchiverItem from "@/components/ArchiverItem";
 
@@ -41,14 +54,10 @@ import ListerFormation from '../../components/formation/ListerFormation.vue';
 
 
 export default {
-  name: "FormationsView",
+  name: "InscritsView",
   components: {
+    ListerInscrit
     //  ArchiverItem,
-
-
-   
- 
-    ListerFormation,
 
      
 
@@ -59,20 +68,15 @@ export default {
  dismissSecs: 10,
         dismissCountDown: 0,
 
-      formations: [],
-      titreform:'',
+     formations:[],
    
     };
   },
   computed:{
-role(){
-  return this.$route.params.role;
-},
+
   },
 watch: {
- role:function () {
-  this.getformations();
- }
+ 
 },
  
   mounted() {
@@ -82,7 +86,7 @@ watch: {
     async getformations() {
   
  await  axios
-        .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
+        .get("http://127.0.0.1:8000/api/inscrits/formations")
         .then((response) => {
           this.formations = response.data;
         })
@@ -94,27 +98,7 @@ watch: {
       showAlert() {
         this.dismissCountDown = this.dismissSecs
       },
-  Addformation(formation){
-    if(formation!='none'){
-    this.titreform=formation.data.titre;
-this.showAlert();
-}
-console.log(formation);
-this.getformations();
-
-  },
-    onAddClick() {
-      this.formation = {};
-      console.log(this.formation);
-      this.showModal("my-modal");
-    },
-    showModal(id) {
-      this.$bvModal.show(id);
-      // this.$refs[id].show()
-    }, hideModal(id) {
-      this.$bvModal.hide(id);
-      // this.$refs[id].show()
-    },
+  
   
    
     deleteitm(id) {
@@ -132,15 +116,5 @@ this.getformations();
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
 
-.formation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    font-size: 40px;
-    color: rgb(167, 167, 167);
-    font-weight: 600;
-}
 
 </style>

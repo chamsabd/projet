@@ -30,9 +30,10 @@ class FormationController extends Controller
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
 
-       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
+       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',9)->get();
 
     }
+  
        /**s
      * Display a listing of the resource.
      *
