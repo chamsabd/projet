@@ -1,0 +1,37 @@
+<template>
+    <div>
+        <add-seance :revele="revele"
+         :toogleModale="toogleModale" ></add-seance>
+        <div>
+           
+        <b-button v-on:click="toogleModale"
+      pill
+      variant="outline-success"
+      ><i class="bi bi-plus-circle"></i
+    ></b-button> </div>
+    </div>
+</template>
+<script>
+import AddSeance from './AddSeance.vue'
+export default {
+    name:'conetnue-c',
+    data(){
+            return{
+                revele: false
+            }
+        },
+    components:{
+        'add-seance':AddSeance,
+        
+    },
+    methods:{
+        toogleModale:function(){
+            this.revele= !this.revele
+        }
+    }
+}
+
+
+
+
+</script>

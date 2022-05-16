@@ -9,7 +9,12 @@ import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
 import containerSeances from '../views/Seance/containerSeances'
 Vue.use(VueRouter)
-
+Vue.component('add-seance',require('@/components/seances/AddSeance.vue').default);
+Vue.component('delete-seance',require('@/components/seances/deleteSeance.vue').default);
+Vue.component('details-seance',require('@/components/seances/detailsSeance.vue').default);
+Vue.component('add-seance',require('@/components/seances/AddSeance.vue').default);
+Vue.component('liste-seances',require('@/components/seances/ListeSeances.vue').default);
+Vue.component('cont-add-modal',require('@/components/seances/contAddModal.vue').default)
 const routes = [
   {
 

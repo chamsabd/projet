@@ -22,24 +22,13 @@
             <th scope="row">1</th>
             <td><liste-seances></liste-seances></td>
             <td>
-              <Details-Seance>
-                <b-button pill variant="outline-primary"
-                  ><i class="bi bi-info-circle"></i></b-button
-              ></Details-Seance>
-              &nbsp;&nbsp;
-              <add-seance
-                ><b-button
-                  pill
-                  variant="outline-success"
-                  class="data-bs-whatever='@getbootstrap'"
-                  ><i class="bi bi-plus-circle"></i></b-button
-              ></add-seance>
-              &nbsp;&nbsp;
+              <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
+               <cont-add-modal></cont-add-modal>
               <delete-Seance>
                 <b-button pill variant="outline-danger"
-                  ><i class="bi bi-trash3"></i
-                ></b-button> </delete-Seance
-              >&nbsp;&nbsp;
+                  ><i class="bi bi-trash3"></i>
+                </b-button> </delete-Seance>
+                <!--&nbsp;&nbsp;-->
               <edit-Seance
                 ><b-button pill variant="outline-warning"
                   ><i class="bi bi-pen"></i></b-button
@@ -48,13 +37,6 @@
           </tr>
         </tbody>
       </table>
-
-      <!--        <th>Liste des Seances</th>
-        <th>Actions possibles</th>
-        
-    <add-seance></add-seance>
-    <liste-seances></liste-seances>
-    </table>-->
     </center>
   </div>
 </template>
@@ -64,13 +46,15 @@ import ListeSeances from "@/components/seances/ListeSeances.vue";
 import deleteSeance from "@/components/seances/deleteSeance";
 import detailsSeance from "@/components/seances/detailsSeance";
 import editSeance from "@/components/seances/editSeance";
+import contAddModal from '../../components/seances/contAddModal.vue';
 export default {
+  components: { contAddModal },
   componenets: {
     AddSeance,
     ListeSeances,
     deleteSeance,
     detailsSeance,
-    editSeance,
+    editSeance,contAddModal
   },
 };
 </script>
