@@ -21,7 +21,7 @@
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
-         <b-button pill variant="outline-warning" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
+         <b-button pill variant="outline-warning" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
         </td>
         <td>  
              <b-button v-if="'participant'==0" pill variant="outline-warning">send demande</b-button>
@@ -32,7 +32,7 @@
           <formation-details :formation="formation"/>
    
        </b-modal>
-       <afficherDemandes :d="d"/>
+       <!-- <afficherDemandes /> -->
   </div>
          
 
@@ -45,7 +45,7 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
+// import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 
 
 export default {
@@ -56,7 +56,7 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
-    AfficherDemandes,
+    // AfficherDemandes,
   },
   props: {
   formations:Array,
