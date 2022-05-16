@@ -17,7 +17,7 @@
       <td scope="col">{{inscrit.email}}</td>
       <td scope="col">{{inscrit.ncin}}</td>
       <td scope="col">{{inscrit.role}}</td>
-      <td scope="col">{{inscrit.pivot.date_inscrit}}</td>
+      <td scope="col">{{inscrit.pivot.created_at}}</td>
       <td scope="col">action</td>
     </tr>
  
