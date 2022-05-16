@@ -20,11 +20,14 @@
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
+         <b-button pill variant="outline-warning" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
+
            <b-button v-if="role=='admin'" pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
          <b-button pill variant="outline-warning">afficher demandes</b-button>
+
         </td>
         <td>  
-             <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
+             <b-button v-if="'participant'==0" pill variant="outline-warning">send demande</b-button>
           <add-demande :f="props" /></td>
       </template>
     </datatable>
@@ -32,8 +35,11 @@
           <formation-details :formation="formation"/>
        </b-modal>
 
+
         <add-formation v-if="role=='admin'" @add-formation="Addformatio" :modformation="modformation" />
   </div>
+         
+
 </template>
 
 <script>
@@ -43,25 +49,32 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
+// import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
+
+
 import AddFormation from '../../components/formation/AddFormation.vue';
 
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
+
  AddFormation,
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+    // AfficherDemandes,
   },
   props: {
   formations:Array,
   role:String,
-  // d:Object,
+  //  d:Object,
   },
   data: function () {
     return {
-    // formation_id: " ",
+     d:{},
+      //demandes:[],
+
       tableColumns1: [
         {
           label: "titre de formation",
@@ -152,7 +165,8 @@ export default {
         .catch((error) => console.log(error.response));
     },
 
-    // getDemande(id){
+    getDemandeByFormation(id){
+      console.log(id);
     // var demande={};
     //     demande.formation_id=this.d.row.id;
         
@@ -165,18 +179,18 @@ export default {
     //     console.log(response);
           
     //     })
-    // axios.get("http://127.0.0.1:8000/api/demandes/" +id)
-    //  .then((resp) => {
-    //   this.formation_id = resp.data.data.id;
-    //   console.log(this.formation_id);
-    // })
-    // },
+    axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
+    .then((response) => {
+      this.d = response.data;
+      console.log(this.d);
+      window.location.href = '/demande';
+    })
+    .catch((error) => console.log(error.response));
+    },
   },
 };
 </script>
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-
-
 </style>
