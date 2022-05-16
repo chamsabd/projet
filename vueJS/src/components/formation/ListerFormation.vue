@@ -32,7 +32,7 @@
           <formation-details :formation="formation"/>
    
        </b-modal>
-       <!-- <afficherDemandes /> -->
+       <afficherDemandes :d="d"/>
   </div>
          
 
@@ -45,7 +45,7 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-//import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
+import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 
 
 export default {
@@ -56,7 +56,7 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
-   // AfficherDemandes,
+    AfficherDemandes,
   },
   props: {
   formations:Array,
@@ -65,7 +65,9 @@ export default {
   },
   data: function () {
     return {
-     d:Object,
+     d:{},
+      //demandes:[],
+
       tableColumns1: [
         {
           label: "titre de formation",

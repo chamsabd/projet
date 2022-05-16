@@ -64,7 +64,7 @@ class demandesController extends Controller
             $Demande=new Demande();
                 $Demande->date_demande=$request ->date_demande;
                 $Demande->formation_id=$request->formation_id;
-                $Demande->user_id=1;
+                $Demande->user_id=9;
                
             // if($Demande->save()){
             //     return response()->json($Demande, 200);
