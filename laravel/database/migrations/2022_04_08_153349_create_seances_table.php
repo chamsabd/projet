@@ -17,10 +17,10 @@ class CreateSeancesTable extends Migration
             $table->id() ;
             $table->string('nom_seance');
             $table->date('date');
-            $table->dateTime('temps_fin');
-            $table->dateTime('temps_debut');
+            $table->time('temps_fin');
+            $table->time('temps_debut');
            
-            $table->foreignId('formation_id');
+            $table->foreignId('formation_id')  ;
             $table->timestamps();
 
             $table->foreign('formation_id')->references ('id')->on('formations')->onDelete('cascade')->onUpdate('cascade') ;

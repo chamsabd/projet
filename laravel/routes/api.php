@@ -1,11 +1,9 @@
 <?php
 use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
-
 use App\Http\Controllers\api\demandesController;
-
 use App\Http\Controllers\api\UserController;
-
+use App\Http\Controllers\api\InscritController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
@@ -19,12 +17,13 @@ use App\Http\Controllers\api\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
-
-Route::apiResource('/seances',SeanceController::class);
-//Route::get('/seances',[SeanceController::class,'index']);
-
+Route::get('/seances',[SeanceController::class,'index']);
+Route::prefix('/seance')->group(function(){
+    Route::post('/store',[SeanceController::class,'store']);
+    Route::put('/{id}',[SeanceController::class,'update']);
+    Route::delete('/{id}',[SeanceController::class,'destroy']);
+    Route::get('/{id}',[SeanceController::class,'show']);
+});
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/admin/formations',[FormationController::class,'index']);
 Route::get('/participant/formations',[FormationController::class,'index']);
@@ -37,9 +36,14 @@ Route::prefix('/formation')->group(function(){
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
 });
-
-
-
+Route::get('/inscrits/formations',[InscritController::class,'formationsindex']);
+Route::get('/inscrits',[InscritController::class,'index']);
+Route::prefix('/inscrit')->group(function(){
+    Route::post('/store',[InscritController::class,'store']);
+    Route::put('/{id}',[InscritController::class,'update']);
+    Route::delete('/{id}',[InscritController::class,'destroy']);
+    Route::get('/{id}',[InscritController::class,'show']);
+});
 
 
 

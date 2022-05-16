@@ -7,7 +7,6 @@
       :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
-     
     >
       <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
@@ -22,6 +21,10 @@
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
          <b-button pill variant="outline-warning" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
+
+           <b-button v-if="role=='admin'" pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
+         <b-button pill variant="outline-warning">afficher demandes</b-button>
+
         </td>
         <td>  
              <b-button v-if="'participant'==0" pill variant="outline-warning">send demande</b-button>
@@ -30,9 +33,10 @@
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
-   
        </b-modal>
-       <!-- <afficherDemandes /> -->
+
+
+        <add-formation v-if="role=='admin'" @add-formation="Addformatio" :modformation="modformation" />
   </div>
          
 
@@ -48,11 +52,14 @@ import AddDemande from "@/components/demande/addDemande.vue";
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 
 
+import AddFormation from '../../components/formation/AddFormation.vue';
+
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
 
+ AddFormation,
     datatable: DataTable,
     FormationDetails,
     AddDemande,
@@ -97,6 +104,7 @@ export default {
 
     
       formation: {},
+      modformation:{}
     };
   },
   computed: {
@@ -113,9 +121,26 @@ export default {
     },
   },
   methods: {
-  
+    Addformatio(formation){
+      
+   this.$emit('add-formation',formation);
+  },
+    modifFormation(row){
+     this.modformation=row; 
+     console.log(this.formation);
+ this.showModal("add-modal");
+    },
     onAddClick() {
-    
+    this.formation={
+        'titre':null,
+        'nbr_place':null,
+        'description':null,
+        'date_debut':null,
+        'responsable_id':null,
+        'date_fin':null,
+        'prix':0,
+        'etat':true
+      },
       this.showModal("add-modal");
     },
     showModal(id) {
