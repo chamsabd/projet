@@ -3,8 +3,29 @@
    <div class="overlay" v-on:click='toggleModale'>
      <div class="modale card">
        <div class="btn-modale btn btn-danger" v-on:click='toggleModale'>x</div>
-       Le contenue de la modale
-     </div>
+<form>
+  <div class="mb-3">
+    <label for="texte" class="form-label">Nom De Seance a Ajouter</label>
+    <input type="text" class="form-control" id="texte"  required >
+  </div>
+
+  <div class="mb-3">
+    <label for="date" class="form-label">Date De Seance</label>
+    <input type="date" class="form-control" id="date" required>
+  </div>
+
+<div class="mb-3">
+    <label for="temps_debut" class="form-label">Temps De Début De La Seance</label>
+    <input type="time" class="form-control" id="temps_debut" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="temps_fin" class="form-label">Temps De Fin De La Seance</label>
+    <input type="time" class="form-control" id="temps_fin" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>     </div>
  
     </div>
        </div>

@@ -7,6 +7,8 @@
       />
       <h2>Seances de la formation : ..............</h2>
     </div>
+    <div > 
+    <cont-add-modal ></cont-add-modal> </div>
     <center>
       <table class="table">
         <thead>
@@ -23,7 +25,7 @@
             <td><liste-seances></liste-seances></td>
             <td>
               <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
-               <cont-add-modal></cont-add-modal>
+               
               <delete-Seance>
                 <b-button pill variant="outline-danger"
                   ><i class="bi bi-trash3"></i>

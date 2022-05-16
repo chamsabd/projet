@@ -22,9 +22,7 @@
            
     <!-- ************************tttttttttttttttttaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkk************-->
            <td>
-         <!-- <b-button pill variant="outline-" @click="onRowClick(props.row)">details</b-button>-->
-         <b-button pill variant="outline-secondary">
-         <router-link to="/AfficherDetailsSeance">Consulter seances</router-link></b-button>
+          <b-button pill variant="outline-info" @click="consulterSeances(props.row)">deatseance</b-button>
         </td>
       
         <td>
@@ -42,6 +40,8 @@
           <formation-details :formation="formation"/>
    
        </b-modal>
+
+       <liste-seances />
   </div>
 </template>
 
@@ -51,6 +51,7 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
+import ListeSeances from '../seances/ListeSeances.vue';
 //import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
 
 export default {
@@ -61,6 +62,7 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+    ListeSeances,
    // AddSeance
   },
   props: {
@@ -142,6 +144,11 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+
+    consulterSeances(id){
+      console.log(id);
+
+    }
 
     // getDemande(id){
     // var demande={};
