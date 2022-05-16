@@ -61,6 +61,6 @@ class User extends Authenticatable
     }
     public function inscrits(){
         return $this->belongsToMany(Formation::class,"inscrits")
-        ->withTimestamps()->withPivot('date_inscrit','id');
+        ->withTimestamps()->withPivot('id');
     }
 }

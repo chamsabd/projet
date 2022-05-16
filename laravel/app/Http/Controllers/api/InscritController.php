@@ -37,7 +37,6 @@ class InscritController extends Controller
     {
          $user=User::find($request->user_id);
         $user->inscrits()->sync($request->formation_id,['date_inscrit'=>$request->date_inscrit]);
-
     }
 
     /**

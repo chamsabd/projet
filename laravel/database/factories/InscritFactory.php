@@ -22,7 +22,7 @@ class InscritFactory extends Factory
           
            'user_id' =>User::get('id')->unique()->random(),
             'formation_id' =>Formation::get('id')->unique()->random(),
-           'date_inscrit' =>now(),
+          // 'date_inscrit' =>now(),
            'created_at'=>now()  
         ];
     }

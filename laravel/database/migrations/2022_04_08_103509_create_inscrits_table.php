@@ -16,7 +16,7 @@ class CreateInscritsTable extends Migration
         Schema::create('inscrits', function (Blueprint $table) {
             $table->id();
            // $table->unsignedBigInteger('client_id');
-            $table->date('date_inscrit'); 
+           // $table->date('date_inscrit'); 
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
