@@ -30,6 +30,7 @@
           <add-demande :f="props" />
         </td>
         <td>
+          
          <b-button pill variant="outline-secondary" @click="AffecterFor(props.row)">Affecter Formateur</b-button>
         </td>
       </template>

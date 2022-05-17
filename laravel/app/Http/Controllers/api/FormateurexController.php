@@ -27,6 +27,19 @@ class FormateurexController extends Controller
     public function store(Request $request)
     {
         //
+        //$request->validate($this->validationRules());
+
+        $newformateurex=new Formateurex();
+        $newformateurex->ncin=$request->formateurex["ncin"];
+        $newformateurex->email=$request->formateurex["email"];
+        $newformateurex->nom=$request->formateurex["nom"];
+        $newformateurex->prenom=$request->formateurex["prenom"];
+        $newformateurex->specialite=$request->formateurex["specialite"];
+        $newformateurex->password=$request->formateurex["password"];
+
+
+        $newformateurex->save();  
+     return $newformateurex;
     }
 
     /**
@@ -61,5 +74,15 @@ class FormateurexController extends Controller
     public function destroy($id)
     {
         //
+        $existingformateurex = Formateurex::find($id);
+
+        if($existingformateurex){
+            $existingformateurex->delete();
+            return "Formateurex successfully deleted.";
+        }
+
+        return "Formateurex not found.";
+
     }
+
 }

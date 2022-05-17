@@ -20,7 +20,6 @@ class CreateFormateurexesTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('specialite');
-            $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
