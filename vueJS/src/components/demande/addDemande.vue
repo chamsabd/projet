@@ -25,7 +25,8 @@ export default {
         //  fd.append('date_demande', date);
         var demande={};
         demande.formation_id=this.f.row.id;
-        demande.date_formation=new Date();
+        demande.date_demande=(new Date()).toISOString().split('T')[0];
+        
       axios(
       {   url: 'http://127.0.0.1:8000/api/demandes/store',
             method: 'post',
@@ -35,7 +36,9 @@ export default {
         console.log(response);
           
         })
-        .catch((error) => console.log(error.response));
+        .catch((error) => {
+          console.log(error.response.data.message)
+          });
     },
     // deleteitm(id) {
     //   axios

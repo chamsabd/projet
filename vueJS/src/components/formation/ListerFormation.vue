@@ -23,11 +23,11 @@
          <b-button pill variant="outline-warning" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin'" pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
-         <b-button pill variant="outline-warning">afficher demandes</b-button>
+        
 
         </td>
         <td>  
-             <b-button v-if="'participant'==0" pill variant="outline-warning">send demande</b-button>
+             <!-- <b-button pill variant="outline-warning">send demande</b-button> -->
           <add-demande :f="props" /></td>
       </template>
     </datatable>
@@ -165,7 +165,7 @@ export default {
         .catch((error) => console.log(error.response));
     },
 
-    getDemandeByFormation(id){
+    getDemandeByFormation(id) {
       console.log(id);
     // var demande={};
     //     demande.formation_id=this.d.row.id;
@@ -179,7 +179,7 @@ export default {
     //     console.log(response);
           
     //     })
-    axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
+     axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
     .then((response) => {
       this.d = response.data;
       console.log(this.d);
