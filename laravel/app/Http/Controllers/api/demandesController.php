@@ -47,12 +47,12 @@ class demandesController extends Controller
      */
     public function store(Request $request)
     {
-      
         $request->validate($this->validationRules());
             $old = DB::table("demandes")
                 ->where("demandes.formation_id", "=", $request->formation_id)
                 ->where("demandes.user_id", "=", 9)
                 ->get();
+                
             if(count($old)>0){
                 $response = [
                     "success"=> FALSE,
@@ -60,12 +60,12 @@ class demandesController extends Controller
                 ];
                 return response()->json($response, 400);
             }
-           
+            
             $Demande=new Demande();
                 $Demande->date_demande=$request ->date_demande;
                 $Demande->formation_id=$request->formation_id;
                 $Demande->user_id=9;
-               
+                $Demande->save();
             // if($Demande->save()){
             //     return response()->json($Demande, 200);
             // } 
@@ -75,7 +75,7 @@ class demandesController extends Controller
           //  $Demande=Demande::create([
                // "utilisateur_id"=>Auth::utilisateur()->id(),
            // ]);
-           return $Demande; 
+           return response()->json($Demande); 
     }
 
     /**
@@ -116,8 +116,8 @@ class demandesController extends Controller
      private function validationRules()
     {
         return [
-            'date_demande'=>'date_format:Y-m-d|date_equals:now',
-            'formation_id'=>'exists:users,id',
+            'date_demande'=>'date_format:Y-m-d',
+            'formation_id'=>'exists:formations,id',
           //  'utilisateur_id'=>'required|exists:utilisateurs,id',
             ];
     }
