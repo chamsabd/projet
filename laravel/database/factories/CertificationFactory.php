@@ -18,6 +18,7 @@ class CertificationFactory extends Factory
             'formation_id' =>Formation::get('id')->unique()->random(),
             'user_id' =>User::get('id')->unique()->random(),
             'score'=>$this->faker->randomFloat(2,0,99),
+            'nom'=>$this->faker->word(),
            'created_at'=>now() 
         ];
     }
