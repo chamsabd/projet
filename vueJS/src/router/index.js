@@ -8,15 +8,21 @@ import Dashboard from '@/views/Dashboard'
 import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
+import CalenderView from '@/views/CalenderView'
 Vue.use(VueRouter)
 
 const routes = [
   {
 
     path: '/',
-    name: 'HomeView',
+
     component: Dashboard,
     children: [
+      {
+        path: '/',
+     
+        component: CalenderView
+      },
       {
           path: '/formations/:role',
           name: 'FormationsView',
