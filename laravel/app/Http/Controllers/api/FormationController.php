@@ -52,6 +52,7 @@ class FormationController extends Controller
      */
     public function store(Request $request)
     { 
+      
        
        // return $request;
          $request->validate($this->validationRules());
@@ -59,7 +60,7 @@ class FormationController extends Controller
         $formation->titre=$request->titre;
         $formation->date_debut=$request->date_debut;
         $formation->date_fin=$request->date_fin;
-        $formation->etat=0;
+        $formation->etat=$request->etat;
         if ($request->description) {
       $formation->description=$request->description;
         }
@@ -139,6 +140,7 @@ class FormationController extends Controller
               'date_debut' => 'required|date_format:Y-m-d|before_or_equal:date_fin|after_or_equal:'.Date('Y-m-d',strtotime("+1 month",strtotime(date('Y-m-d')))),
               'date_fin' => 'required|date_format:Y-m-d|after_or_equal:date_debut',
               'prix'=>'min:0',
+              'etat'=>'required'
         ];
     }
 }
