@@ -2,7 +2,7 @@
     <div class="dashboard">
         <SideBar/>
         <div class="content">
-            <router-view :key="$route.path"/>
+            <router-view />
         </div>
     </div>
 </template>

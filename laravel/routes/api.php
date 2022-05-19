@@ -44,7 +44,7 @@ Route::prefix('/inscrit')->group(function(){
     Route::delete('/{id}',[InscritController::class,'destroy']);
     Route::get('/{id}',[InscritController::class,'show']);
 });
-
+Route::get('/users',[UserController::class,'index']);
 
 
 Route::get('/demandes',[demandesController::class,'index']);
