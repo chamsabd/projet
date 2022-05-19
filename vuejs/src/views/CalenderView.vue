@@ -22,24 +22,7 @@ export default {
         },
         events:[],
         initialView: 'dayGridMonth',
-       // dateClick: this.handleDateClick,
-  //      eventSources: [
-  //        {
-  //          url: 'http://127.0.0.1:8000/api/participant/formations',
-  //          type: 'GET',
-  //          async:false,
-  //          data:{ 
-  //            startDate: date_debut,
-  //     endDate:date_fin
-                
-  //               },
-  //          error: function() {
-  //             alert('there was an error while fetching events!');
-  //             },      
-  //         }
-        
-    
-  // ],
+       
      
         weekends: true,
         eventClick: this.handleEventClick,
@@ -55,25 +38,22 @@ export default {
    mounted() {
  
             axios({
-                method: "GET",    //WebMethods will not allow GET
+                method: "GET",   
                 url: "http://127.0.0.1:8000/api/participant/formations",
-                //completely take out 'data:' line if you don't want to pass to webmethod - Important to also change webmethod to not accept any parameters 
-                
+                  
             }).then(doc => {
-                      //javascript event object created here
-                    console.log(doc);
-                    var obj = doc.data;
+                     var obj = doc.data;
                     obj.forEach(formation => {
                       this.calendarOptions.events.push({
-                            title: formation.titre,  //your calevent object has identical parameters 'title', 'start', ect, so this will work
-                            start:formation.date_debut, // will be parsed into DateTime object    
+                            title: formation.titre,  
+                            start:formation.date_debut,    
                             end: formation.date_fin,
                           
                         });
                     });
                                       
                    // if (callback) callback(events);
-                    console.log(this.event);  
+                   
                    
                 })
   },
