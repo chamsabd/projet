@@ -3,12 +3,13 @@ use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
 
 use App\Http\Controllers\api\demandesController;
-
 use App\Http\Controllers\api\UserController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CertificationController;
+use App\Http\Controllers\CertificationController as ControllersCertificationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,7 +39,9 @@ Route::prefix('/formation')->group(function(){
     Route::get('/{id}',[FormationController::class,'show']);
 });
 
-
+Route::prefix('/certif')->group(function (){
+Route::get('/list',[CertificationController::class,'index']);
+});
 
 
 
@@ -48,9 +51,6 @@ Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
 Route::delete('/demandes/{id}',[demandesController::class,'destroy']);
 Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
-
-
-
 
 Route::get('/users',[UserController::class,'index']);
 
