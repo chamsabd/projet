@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import App from './App.vue'
 //import router from "../../trash/router";
@@ -20,8 +21,8 @@ Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-//Vue.use(Calendar)
 Vue.config.productionTip = false
+
 new Vue({
  router,
 

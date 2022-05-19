@@ -8,27 +8,19 @@ import Dashboard from '@/views/Dashboard'
 import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
-import CalenderView from '@/views/CalenderView'
 Vue.use(VueRouter)
 
 const routes = [
   {
 
     path: '/',
-   
+    name: 'HomeView',
     component: Dashboard,
     children: [
       {
-        path: '/',
-        name: 'CalendView',
-        component: CalenderView,
-       
-      },
-      {
           path: '/formations/:role',
           name: 'FormationsView',
-          component: FormationsView,
-         
+          component: FormationsView
         },
         {
           path: '/inscrits',
@@ -43,12 +35,8 @@ const routes = [
     path: '/demande',
     name: 'afficherDemandes',
     component: afficherDemandes
-  },
-  {
-    path: "/page-not-found",
-    alias: '*',
-    component: { render: (h) => h("div", ["404! Page Not Found!"]) },
-  },
+  }
+ 
   // {
   //   path: '/demandes',
   //   name: 'DemandesView',

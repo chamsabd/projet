@@ -175,7 +175,6 @@ errors:[],
              met='put'
            }
            else{
-             this.formation.etat=0;
            ur='http://127.0.0.1:8000/api/formation/store';
            met='post'}
         //  console.log("in");
@@ -226,16 +225,16 @@ errors:[],
     
     options() {
       var val = this.users;
-console.log(this.users);
-      var option = val.map(function (user) {
+
+      var option = val.map(function (utilisateur) {
         return {
           text:
-            user.ncin +
+            utilisateur.ncin +
             " / " +
-            user.nom +
+            utilisateur.nom +
             " / " +
-            user.prenom,
-          value: user.id,
+            utilisateur.prenom,
+          value: utilisateur.id,
           disabled: false,
         };
       });

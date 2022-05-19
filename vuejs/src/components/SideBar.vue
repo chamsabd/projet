@@ -21,7 +21,7 @@
                 </div>
             </router-link>
 
-             <router-link  :to="{ name: 'FormationsView', params: { role: role }}"  active-class="active" tag="button" exact class="side-btn">
+             <router-link  :to="{ name: 'FormationsView', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    formations
                 </div>
@@ -58,24 +58,16 @@ export default {
         role:this.$route.params.role?this.$route.params.role:'participant',
     }},
      computed: {
+        
      }
      ,watch: {
  role:function () {
      var r=this.$route.path;
      console.log(r);
       console.log(this.$route.params.role);
-      if (this.$route.params.role!=undefined) {
-           r= r.replace(this.$route.params.role, this.role);
+    r= r.replace(this.$route.params.role, this.role);
      console.log(r);
  this.$router.push(r);
-      }
-      else {
-         if (this.$route.path != '/') {
-    this.$router.push("/");
-}
-           
-      }
-   
  
  }},
 
