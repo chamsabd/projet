@@ -137,7 +137,7 @@ class FormationController extends Controller
             'nbr_place' => 'required|integer|between:10,30',
               'description'=>'max:100',
               'responsable_id' => 'required|exists:Users,id',
-              'date_debut' => 'required|date_format:Y-m-d|before_or_equal:date_fin|after_or_equal:'.Date('Y-m-d',strtotime("+1 month",strtotime(date('Y-m-d')))),
+              'date_debut' => 'required|date_format:Y-m-d|before_or_equal:date_fin',
               'date_fin' => 'required|date_format:Y-m-d|after_or_equal:date_debut',
               'prix'=>'min:0',
               'etat'=>'required'

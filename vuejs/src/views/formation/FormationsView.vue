@@ -20,9 +20,6 @@
       ></b-progress>
     </b-alert>
    <lister-formation :formations="formations" @add-formation="Addformation" :role="role"/>
-   
-   
-
   </div>
 </template>
 
@@ -32,7 +29,6 @@ import axios from "axios";
 import ListerFormation from '../../components/formation/ListerFormation.vue';
 
 //import ArchiverItem from "@/components/ArchiverItem";
-
 
 
 
