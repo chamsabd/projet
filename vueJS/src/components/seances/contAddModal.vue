@@ -3,7 +3,7 @@
     <div>
         <add-seance :revele="revele"
          :toogleModale="toogleModale"
-          @addSeance="addSeance"
+         @add-seance="refresh"
         ></add-seance>
         <div>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -14,7 +14,7 @@
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        <b-button v-on:click="toogleModale()" 
+        <b-button @click="toogleModale" 
       pill
       variant="outline-success"
       class=" float-end"
@@ -36,8 +36,11 @@ export default {
         
     },
     methods:{
-        toogleModale:function(){
+        toogleModale(){
             this.revele= !this.revele
+        } ,
+        refresh (seances){
+          this.seances= seances.data
         }
     },
   /*  addSeance(a){

@@ -62,7 +62,7 @@ export default {
   methods:{
       contAddModal(seance){
     this.nom_seance=seance.nom_seance;
-console.log(seance);
+          console.log(seance);
 
   }
   }

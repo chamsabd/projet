@@ -1,9 +1,9 @@
 <template>
   <div class="bloc-modale" v-if="revele">
-   <div class="overlay" v-on:click='toggleModale'>
+   <div class="overlay" v-on:click='toggleModale()'>
      <div class="modale card">
-       <div class="btn-modale btn btn-danger" v-on:click='toggleModale'>x</div>
-<form @submit.prevent="addSeance">
+       <div class="btn-modale btn btn-danger" v-on:click='toggleModale()'>x</div>
+<form>
   <div class="mb-3">
     <label for="texte" class="form-label">Nom De Seance a Ajouter</label>
     <input type="text" class="form-control" id="texte"  required v-model="seance.nom_seance" >
@@ -24,7 +24,7 @@
     <input type="time" class="form-control" id="temps_fin" required v-model="seance.temps_fin">
   </div>
 
-  <button type="submit" class="btn btn-primary" v-on:click="addSeance">Valider</button> &nbsp;
+  <button type="submit" class="btn btn-primary" @click="addSeance">Valider</button> &nbsp;
   <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
  
@@ -36,12 +36,15 @@
 <script>
 
 import axios from 'axios';
-//import { response } from 'express';
+
 
 export default {
  name: 'add-seance',
- props:['revele','toggleModale'],
- data:function (){
+ props:{
+   revele : Boolean,
+ toggleModale:Function
+ },
+ data(){
    return {
    seance : {
        nom_seance:'',
@@ -54,25 +57,24 @@ export default {
    }
  } ,
  methods:{
-addSeance(){
+addSeance(){ 
   axios.post('http://127.0.0.1:8000/api/seance/store',{
-  seance : this.seance 
-
+  seance : this.seance ,
+  
   })
-  .then (response => {if (response.status==201 ) {
+  .then (
+    response => {if (response.status==201 ) {
     this.$emit('add-seance',this.seance);
     this.seance.nom_seance='' ;
     this.seance.date='' ;
     this.seance.temps_fin='' ;
     this.seance.temps_debut='' ;
   }
-  })
+  }).then(response =>this.$emit("add-seance",response))
   .catch(error =>{console.log(error) }) ;
   
 } ,
-onSubmitAdd(){
-  console.log(this.seance)
-}
+
  }
 };
 </script>
