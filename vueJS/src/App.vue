@@ -1,16 +1,14 @@
+
 <template>
   <div id="app">
 
+    
     <router-view/>
   </div>
 </template>
 <script>
   export default {
-    name: 'App',
-     data: function () {
-    return {
-      
-    }},
+    name: 'App'
   }
 </script>
 <style>
@@ -28,3 +26,4 @@ body {
   box-sizing: border-box;
 }
 </style>
+
