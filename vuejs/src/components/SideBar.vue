@@ -65,9 +65,18 @@ export default {
      var r=this.$route.path;
      console.log(r);
       console.log(this.$route.params.role);
-    r= r.replace(this.$route.params.role, this.role);
+      if (this.$route.params.role!=undefined) {
+           r= r.replace(this.$route.params.role, this.role);
      console.log(r);
  this.$router.push(r);
+      }
+      else {
+         if (this.$route.path != '/') {
+    this.$router.push("/");
+}
+           
+      }
+   
  
  }},
 
