@@ -22,7 +22,9 @@
            
     <!-- ************************tttttttttttttttttaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkk************-->
            <td>
-          <b-button pill variant="outline-info" @click="consulterSeances(props.row)">deatseance</b-button>
+          <b-button pill variant="outline-info" @click="consulterSeances(props.row)">deatseance
+          <router-link to="/containerSeances"> </router-link>
+          </b-button>
         </td>
       
         <td>
@@ -42,6 +44,7 @@
        </b-modal>
 
        <liste-seances />
+       
   </div>
 </template>
 

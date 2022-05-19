@@ -8,7 +8,7 @@
       <h2>Seances de la formation : ..............</h2>
     </div>
     <div > 
-    <cont-add-modal ></cont-add-modal> </div>
+    <cont-add-modal @cont-add-modal="contAddModal"   ></cont-add-modal> </div>
     <center>
       <table class="table">
         <thead>
@@ -22,20 +22,20 @@
         <tbody class="table-group-divider">
           <tr>
             <th scope="row">1</th>
-            <td><liste-seances></liste-seances></td>
+            <!--<td><liste-seances></liste-seances></td>
             <td>
-              <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
+             <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
                
               <delete-Seance>
                 <b-button pill variant="outline-danger"
                   ><i class="bi bi-trash3"></i>
                 </b-button> </delete-Seance>
-                <!--&nbsp;&nbsp;-->
+               &nbsp;&nbsp;
               <edit-Seance
                 ><b-button pill variant="outline-warning"
                   ><i class="bi bi-pen"></i></b-button
-              ></edit-Seance>
-            </td>
+              ></edit-Seance> 
+            </td>-->
           </tr>
         </tbody>
       </table>
@@ -44,20 +44,28 @@
 </template>
 <script>
 import AddSeance from "@/components/seances/AddSeance";
-import ListeSeances from "@/components/seances/ListeSeances.vue";
-import deleteSeance from "@/components/seances/deleteSeance";
-import detailsSeance from "@/components/seances/detailsSeance";
-import editSeance from "@/components/seances/editSeance";
+//import ListeSeances from "@/components/seances/ListeSeances.vue";
+//import deleteSeance from "@/components/seances/deleteSeance";
+//import detailsSeance from "@/components/seances/detailsSeance";
+//import editSeance from "@/components/seances/editSeance";
 import contAddModal from '../../components/seances/contAddModal.vue';
 export default {
   components: { contAddModal },
   componenets: {
     AddSeance,
-    ListeSeances,
-    deleteSeance,
-    detailsSeance,
-    editSeance,contAddModal
+    //ListeSeances,
+   // deleteSeance,
+    //detailsSeance,
+    //editSeance,
+    contAddModal
   },
+  methods:{
+      contAddModal(seance){
+    this.nom_seance=seance.nom_seance;
+console.log(seance);
+
+  }
+  }
 };
 </script>
 <style scoped>

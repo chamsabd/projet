@@ -3,28 +3,29 @@
    <div class="overlay" v-on:click='toggleModale'>
      <div class="modale card">
        <div class="btn-modale btn btn-danger" v-on:click='toggleModale'>x</div>
-<form>
+<form @submit.prevent="addSeance">
   <div class="mb-3">
     <label for="texte" class="form-label">Nom De Seance a Ajouter</label>
-    <input type="text" class="form-control" id="texte"  required >
+    <input type="text" class="form-control" id="texte"  required v-model="seance.nom_seance" >
   </div>
 
   <div class="mb-3">
     <label for="date" class="form-label">Date De Seance</label>
-    <input type="date" class="form-control" id="date" required>
+    <input type="date" class="form-control" id="date" required v-model="seance.date">
   </div>
 
 <div class="mb-3">
     <label for="temps_debut" class="form-label">Temps De Début De La Seance</label>
-    <input type="time" class="form-control" id="temps_debut" required>
+    <input type="time" class="form-control" id="temps_debut" required v-model="seance.temps_debut">
   </div>
 
   <div class="mb-3">
     <label for="temps_fin" class="form-label">Temps De Fin De La Seance</label>
-    <input type="time" class="form-control" id="temps_fin" required>
+    <input type="time" class="form-control" id="temps_fin" required v-model="seance.temps_fin">
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" v-on:click="addSeance">Valider</button> &nbsp;
+  <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
  
     </div>
@@ -33,9 +34,46 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+//import { response } from 'express';
+
 export default {
  name: 'add-seance',
- props:['revele','toggleModale']
+ props:['revele','toggleModale'],
+ data:function (){
+   return {
+   seance : {
+       nom_seance:'',
+       date :"" ,
+       temps_fin:"",
+       temps_debut:""
+       },
+       seances:[]
+     
+   }
+ } ,
+ methods:{
+addSeance(){
+  axios.post('http://127.0.0.1:8000/api/seance/store',{
+  seance : this.seance 
+
+  })
+  .then (response => {if (response.status==201 ) {
+    this.$emit('add-seance',this.seance);
+    this.seance.nom_seance='' ;
+    this.seance.date='' ;
+    this.seance.temps_fin='' ;
+    this.seance.temps_debut='' ;
+  }
+  })
+  .catch(error =>{console.log(error) }) ;
+  
+} ,
+onSubmitAdd(){
+  console.log(this.seance)
+}
+ }
 };
 </script>
 <style  scoped>
@@ -66,7 +104,7 @@ background: #f1f1f1;
 color:#333;
 padding: 50px;
 position: fixed;
-top:30%;
+top:20%;
 }
 .btn-modale{
   position: absolute;
