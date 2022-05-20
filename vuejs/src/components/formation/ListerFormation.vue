@@ -20,9 +20,9 @@
           <b-button v-else pill variant="outline-danger">fermer</b-button>
         </td>
            
-  <td>
+  <td><!--@click="consulterSeances(props.row)"-->
           <b-button pill variant="outline-info" 
-          @click="consulterSeances(props.row)"
+          
            :to="{name:'ContainerSeances' ,
                 params:{id:props.row.id , name:props.row.titre} }"
                 >Gérer Seances
@@ -45,8 +45,8 @@
    
        </b-modal>
 
-       <liste-seances />
-       <router-view/>
+      <!-- <liste-seances />-->
+      
        
   </div>
 </template>
@@ -57,7 +57,8 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-import ListeSeances from '../seances/ListeSeances.vue';
+//import containerSeances from "@/views/Seance/containerSeances.vue";
+//import ListeSeances from '../seances/ListeSeances.vue';
 //import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
 
 export default {
@@ -68,7 +69,8 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
-    ListeSeances,
+  //  ListeSeances,
+  //  containerSeances
    // AddSeance
   },
   props: {
@@ -76,7 +78,7 @@ export default {
   role:String,
   // d:Object,
   },
-  data: function () {
+  data () {
     return {
     // formation_id: " ",
       tableColumns1: [

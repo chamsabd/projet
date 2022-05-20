@@ -1,5 +1,5 @@
 <template>
-  <div class="containerSeances">
+  <div class="containerSeances" id="app">
     l'id passé est{{this.$route.params.id}}
     <div style="color: blueviolet" class="heading">
       <link
@@ -23,7 +23,10 @@
         <tbody class="table-group-divider">
           <tr>
             <th scope="row"> </th>
-          <td><liste-seances  ></liste-seances></td>
+            
+          <td><liste-seances :to="{name:'ListeSeances' ,params:{id:this.$route.params.id} } "
+                
+           ></liste-seances></td>
           <!--    <td>
              <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
                
@@ -40,7 +43,8 @@
           </tr>
         </tbody>
       </table>
-    </center>
+  
+         </center>
   </div>
 </template>
 <script>
@@ -50,9 +54,13 @@ import ListeSeances from "@/components/seances/ListeSeances.vue";
 //import detailsSeance from "@/components/seances/detailsSeance";
 //import editSeance from "@/components/seances/editSeance";
 import contAddModal from '../../components/seances/contAddModal.vue';
+//import axios from 'axios'
 export default {
-  components: { contAddModal,
-  },
+   data(){
+     return{
+    // formation_id :this.props.row.id,
+   }},
+
   componenets: {
     AddSeance,
     ListeSeances,
@@ -60,13 +68,16 @@ export default {
     //detailsSeance,
     //editSeance,
     contAddModal
-  },
+  }, 
+
   methods:{
       contAddModal(seance){
     this.nom_seance=seance.nom_seance;
           console.log(seance);
 
-  }
+  } 
+
+
   }
 };
 </script>
