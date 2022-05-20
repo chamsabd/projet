@@ -3,6 +3,7 @@
        <div v-for="seance in seances " :key="seance.id">
        <li class="list-group-item"  v-if="this.$route.params.id == seance.formation_id" 
        >{{seance.nom_seance}} 
+
        </li> 
     </div>
     </div>
@@ -39,9 +40,9 @@ export default {
   
   
   created(){
-   
+       var vm=this;
     axios.get('http://127.0.0.1:8000/api/seances')
-      .then(response =>this.seances=console.log(response.data))
+      .then(response =>vm.seances=console.log(response.data))
       .catch(error => console.log(error));
 
 },
