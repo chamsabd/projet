@@ -9,7 +9,7 @@
 
       @dismiss-count-down="countDownChanged"
     >
-    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter ou modiffier avec success </h6>
+    <h6 aria-describedby="help-block">  {{alert}}  </h6>
 
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
@@ -19,7 +19,7 @@
         height="4px"
       ></b-progress>
     </b-alert>
-   <lister-formation :formations="formations" @add-formation="Addformation" :role="role"/>
+   <lister-formation :formations="formations" @add="Add" :role="role"/>
   </div>
 </template>
 
@@ -54,7 +54,7 @@ export default {
         dismissCountDown: 0,
 
       formations: [],
-      titreform:'',
+      alert:'',
    
     };
   },
@@ -74,11 +74,11 @@ watch: {
   },
   methods: {
     async getformations() {
-  
  await  axios
         .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
         .then((response) => {
           this.formations = response.data;
+          console.log(this.formations);
         })
         .catch((error) => console.log(error.response));
     },
@@ -88,12 +88,12 @@ watch: {
       showAlert() {
         this.dismissCountDown = this.dismissSecs
       },
-  Addformation(formation){
-    if(formation!='none'){
-    this.titreform=formation.data.titre;
+  Add(alert){
+    if(alert!='none'){
+    this.alert=alert;
 this.showAlert();
 }
-console.log(formation);
+
 this.getformations();
 
   },

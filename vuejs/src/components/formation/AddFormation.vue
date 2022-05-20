@@ -175,6 +175,7 @@ errors:[],
              met='put'
            }
            else{
+             this.formation.etat=0;
            ur='http://127.0.0.1:8000/api/formation/store';
            met='post'}
         //  console.log("in");
@@ -184,10 +185,10 @@ errors:[],
             data: this.formation
           })
           .then(re => {
-          console.log(re);
+          console.log();
           this.$bvModal.hide('add-modal')
-     
-  this.$emit('add-formation',re);
+     var alert="la formation "+re.data.titre+" a ete modifier avec success"
+  this.$emit('add',alert);
           })
           .catch(err => {
             console.log(err);

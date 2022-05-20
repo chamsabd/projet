@@ -5,8 +5,11 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\demandeResource;
 use App\Models\Demande;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 //use Illuminate\Support\Facades\Auth;
 
 
@@ -22,6 +25,7 @@ class demandesController extends Controller
         $Demande =Demande::all();
         return demandeResource::collection($Demande);
     }
+  
     // public function getDemande($id)
     // {
     //     $Demande = Demande::FindOrFail($id);
