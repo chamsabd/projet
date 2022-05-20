@@ -33,10 +33,8 @@ class FormateurexController extends Controller
         $newformateurex->ncin=$request->formateurex["ncin"];
         $newformateurex->email=$request->formateurex["email"];
         $newformateurex->nom=$request->formateurex["nom"];
-        $newformateurex->prenom=$request->formateurex["prenom"];
+        $newformateurex->prenom=$request->formateurex["prenom"]; 
         $newformateurex->specialite=$request->formateurex["specialite"];
-        $newformateurex->password=$request->formateurex["password"];
-
 
         $newformateurex->save();  
      return $newformateurex;
@@ -63,6 +61,19 @@ class FormateurexController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $existingformateurex=Formateurex::find($id);
+        if($existingformateurex){
+        $existingformateurex->ncin=$request->formateurex["ncin"];
+        $existingformateurex->email=$request->formateurex["email"];
+        $existingformateurex->nom=$request->formateurex["nom"];
+        $existingformateurex->prenom=$request->formateurex["prenom"];
+        $existingformateurex->specialite=$request->formateurex["specialite"];
+        $existingformateurex->save();
+        return $existingformateurex;
+
+        }
+        return "formateur not found";
+
     }
 
     /**

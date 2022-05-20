@@ -42,7 +42,14 @@ Route::prefix('/formation')->group(function(){
 
 
 
-Route::apiResource('/formateurexes',FormateurexController::class);
+//Route::apiResource('/formateurexes',FormateurexController::class);
+Route::get('/formateurexes',[FormateurexController::class,'index']);
+Route::prefix('/formateurex')->group(function(){
+    Route::post('/store',[FormateurexController::class,'store']);
+    Route::put('/{id}',[FormateurexController::class,'update']);
+    Route::delete('/{id}',[FormateurexController::class,'destroy']);
+    Route::get('/{id}',[FormateurexController::class,'show']);
+});
 
 
 Route::get('/demandes',[demandesController::class,'index']);
