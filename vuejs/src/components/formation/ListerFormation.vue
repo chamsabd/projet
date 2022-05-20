@@ -20,10 +20,12 @@
           <b-button v-else pill variant="outline-danger">fermer</b-button>
         </td>
            
-    <!-- ************************tttttttttttttttttaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkk************-->
-           <td>
-          <b-button pill variant="outline-info" @click="consulterSeances(props.row)">deatseance
-          <router-link to="/containerSeances"> </router-link>
+  <td>
+          <b-button pill variant="outline-info" 
+          @click="consulterSeances(props.row)"
+           :to="{name:'ContainerSeances' ,
+                params:{id:props.row.id , name:props.row.titre} }"
+                >Gérer Seances
           </b-button>
         </td>
       
@@ -44,6 +46,7 @@
        </b-modal>
 
        <liste-seances />
+       <router-view/>
        
   </div>
 </template>
