@@ -35,6 +35,8 @@ class InscritController extends Controller
      */
     public function store(Request $request)
     {
+        //validation user id and formation id  sould be in table demmande
+        //if exist delet and add to table inscrits
          $user=User::find($request->user_id);
         $user->inscrits()->sync($request->formation_id,['date_inscrit'=>$request->date_inscrit]);
     }

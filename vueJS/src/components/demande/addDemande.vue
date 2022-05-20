@@ -32,8 +32,9 @@ export default {
             method: 'post',
             data: demande,
           })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+         var alert="la demande est envoyer avec success"
+  this.$emit('add',alert);
           
         })
         .catch((error) => {

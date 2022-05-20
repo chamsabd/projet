@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Formation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
@@ -19,7 +20,27 @@ class FormationController extends Controller
     public function index()
     {
 
+
         return Formation::with('responsable','formateur','formateurexterne')->get();
+    }
+
+   public function participantindex()
+    {
+        $formations=Formation::with('responsable','formateur','formateurexterne')->get();
+         $formations_dem=User::find(9)->demandes; //Auth::id()
+        
+foreach ($formations as $key => $formation) {
+    foreach ($formations_dem as $key => $formation_dem) {
+      if ($formation->id==$formation_dem->id) {
+        $formation->send=false;
+        break;
+      }
+      else
+      $formation->send=true;
+    }
+   
+}
+        return $formations;
     }
         /**
      * Display a listing of the resource.
@@ -30,7 +51,7 @@ class FormationController extends Controller
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
 
-       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',9)->get();
+       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
 
     }
   

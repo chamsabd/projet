@@ -13,22 +13,24 @@
 
       <template slot="tbody-tr" slot-scope="props">
         <td>
-          <b-button v-if="props.row.etat == 0" pill variant="outline-success"
-            >overte</b-button
-          >
-          <b-button v-else pill variant="outline-danger">fermer</b-button>
+        
+             <b-badge pill variant="success" v-if="props.row.etat == 0">overte</b-badge>
+  <b-badge pill variant="danger" v-else>fermer</b-badge>
+          
+         
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
-         <b-button pill variant="outline-warning" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
+         <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
-           <b-button v-if="role=='admin'" pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
+           <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
         
 
         </td>
         <td>  
-             <!-- <b-button pill variant="outline-warning">send demande</b-button> -->
-          <add-demande :f="props" /></td>
+             
+          <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
+            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -36,7 +38,7 @@
        </b-modal>
 
 
-        <add-formation v-if="role=='admin'" @add-formation="Addformatio" :modformation="modformation" />
+        <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
   </div>
          
 
@@ -121,9 +123,9 @@ export default {
     },
   },
   methods: {
-    Addformatio(formation){
+    Add(alert){
       
-   this.$emit('add-formation',formation);
+   this.$emit('add',alert);
   },
     modifFormation(row){
      this.modformation=row; 
