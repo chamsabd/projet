@@ -1,9 +1,5 @@
 package com.projet.Formations.service;
-
-
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,13 +15,13 @@ public class FormationServiceImp implements FormationService {
 private	 FormationRepository formationRepository; 
 	@Override
 	public Formation saveFormation(Formation f) {
-		// TODO Auto-generated method stub
+
 		return this.formationRepository.save(f);
 	}
 
 	@Override
 	public Formation updateFormation(Formation f) {
-		// TODO Auto-generated method stub
+		
 		return this.formationRepository.save(f);
 	}
 

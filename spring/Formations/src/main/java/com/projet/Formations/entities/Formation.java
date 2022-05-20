@@ -18,14 +18,12 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
-import org.apache.jasper.tagplugins.jstl.core.When;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.NonNull;
 
 @Entity
 public class Formation {
@@ -39,14 +37,15 @@ public class Formation {
 	@Size(max = 100)
 	private String description;
 	
-@NotNull @Temporal(TemporalType.DATE)
+@NotNull
+ @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@FutureOrPresent
+	
 	private Date dateDebut;
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Future
+	
 	private Date dateFin;
 	@NotNull
 	private boolean etat;
@@ -61,9 +60,6 @@ public class Formation {
     @ManyToOne
 	@JoinColumn(name = "idResponsable")
 	 private User responsable;
-
-
-
 
 	public Formation() {
 		super();
