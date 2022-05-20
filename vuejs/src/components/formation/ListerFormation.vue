@@ -147,7 +147,7 @@ export default {
 
     AffecterFor(formation){
       this.formation=formation;
-      this.showModal("my-modal2");
+      this.showModal("my-modaldelete");
       
     }
 

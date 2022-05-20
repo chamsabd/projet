@@ -10,10 +10,18 @@
       <template slot="tbody-tr" slot-scope="props">
         
         <td>  
-         <b-button pill variant="outline-secondary" @click="details(props.row)">DETAILe</b-button>
+         <b-button pill variant="outline-info" @click="fonctionDetails(props.row)">details</b-button>
         </td>
+
+        <td>  
+         <b-button pill variant="outline-warning" @click="editeFormateurex(props.row)">edite</b-button>
+        </td>
+
       </template>
     </datatable>
+    <DetailsFormateurex :formateurex="formateurex"/>
+    <EditeFormateurex :formateurex="formateurex"/>
+
 
     </div>
 </template>
@@ -21,6 +29,8 @@
 
 
 import DataTable from "vue-materialize-datatable";
+import DetailsFormateurex from "@/components/formateurex/DetailsFormateurex";
+import EditeFormateurex from "@/components/formateurex/EditeFormateurex";
 
 
 export default {
@@ -28,6 +38,8 @@ export default {
      components: {
  
     datatable: DataTable,
+    DetailsFormateurex,
+    EditeFormateurex,
 
   },
   props: {
@@ -51,18 +63,24 @@ export default {
        
       ],
     
-     // formateurex: {},
+     formateurex: {},
     };
   },
- /* methods: {
+  methods: {
       showModal(id) {
       this.$bvModal.show(id);
-      // this.$refs[id].show()
-    }, hideModal(id) {
-      this.$bvModal.hide(id);
-      // this.$refs[id].show()
     },
-  }*/
+    fonctionDetails(row) {
+      this.formateurex = row;
+      console.log(this.formateurex);
+      this.showModal("my-modalDetails");
+    },
+    editeFormateurex(row){
+      console.log(row);
+      this.formateurex=row;
+      this.showModal("my-modaldelete");
+    }
+  }
 }
 </script>
 <style scoped>

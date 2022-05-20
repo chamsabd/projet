@@ -33,7 +33,7 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
-   /* showModal(id) {
+   /*showModal(id) {
       this.$bvModal.show(id);
       // this.$refs[id].show()
     }, hideModal(id) {
