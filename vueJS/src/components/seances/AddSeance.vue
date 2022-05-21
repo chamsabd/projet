@@ -1,8 +1,8 @@
 <template>
-  <div class="bloc-modale" v-if="revele">
-   <div class="overlay" v-on:click='toggleModale()'>
+  <div class="bloc-modale"  v-if="revele">
+   <div class="overlay" v-on:click="toggleModale()">
      <div class="modale card">
-       <div class="btn-modale btn btn-danger" v-on:click='toggleModale()'>x</div>
+       <div class="btn-modale btn btn-danger" v-on:click="toggleModale()">x</div>
 <form>
   <div class="mb-3">
     <label for="texte" class="form-label">Nom De Seance a Ajouter</label>
@@ -42,7 +42,25 @@ export default {
  name: 'add-seance',
  props:{
    revele : Boolean,
- toggleModale:Function
+   toggleModale:
+ {
+      type: Function,
+      // Unlike object or array default, this is not a factory function - this is a function to serve as a default value
+      default() {
+        return 'Default function'
+      }
+ }
+
+
+
+
+
+
+
+
+
+
+
  },
  data(){
    return {

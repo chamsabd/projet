@@ -7,25 +7,6 @@
        </li> 
     </div>
     </div>
-    <!--
-    <div id="app">
-        <datatable
-      title="seances"
-      :columns="tableColumns1"
-      :rows="seances"
-     
-    >
-
-     <th slot="thead-tr">Action</th>
-      <template slot="tbody-tr" slot-scope="props">
-        
-        <td>  
-         <li @click="fonctionDetails(props.row)"></li>
-        </td>
-      </template>
-
-       </datatable>
-    </div>-->
 </template>
 <script>
 import axios from 'axios'
