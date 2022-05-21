@@ -1,6 +1,6 @@
 <template>
   <div class="containerSeances" id="app">
-    l'id passé est{{this.$route.params.id}}
+    <!--l'id passé est{{this.$route.params.id}}-->
     <div style="color: blueviolet" class="heading">
       <link
         rel="stylesheet"
