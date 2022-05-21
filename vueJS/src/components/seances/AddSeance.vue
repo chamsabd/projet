@@ -76,7 +76,6 @@ addSeance(){
 
     }
   })
-  
   .catch(error =>{console.log(error) }) ;
   
 } ,
