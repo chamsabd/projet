@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Professeur;
+use App\Models\Formation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker ;
 use app\order ;
@@ -15,15 +16,13 @@ class SeanceFactory extends Factory
     public function definition()
     {
         return [
-           'nom_cours' => $this->faker->name(),
-           'duree' =>$this->faker->dateTime(),
-           'id_professeur'=>$this->faker->randomNumber(),
-           'id_formation'=>$this->faker->randomNumber(),
+           'nom_seance' => $this->faker->name(),
+           'date' =>$this->faker->date(),
+           'temps_fin' =>$this->faker->time(),
+           'temps_debut' =>$this->faker->time(),
+           'formation_id'=>Formation::get('id')->random(),
            'created_at'=> now() ,
            'updated_at'=> now()  
-           
-          // 'id_professeur'=> Professeur::get('id_professeur')->random(),
-          //  'id_formation'=> Professeur::get('id_formation')->random()
         ];
     }
 }

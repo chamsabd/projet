@@ -8,11 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_admin';
-    public $incrementing = false;
+
+  
 
     public function utilisateur()
     {
-        return $this->hasOne(Utilisateur::class,'ncin','ncin');
+        return $this->belongsTo(User::class);
+    }
+    public function departments()
+    {
+        return $this->hasMany(Departement::class);
+    }
+    public function responsables()
+    {
+        return $this->hasMany(Responsable::class);
     }
 }

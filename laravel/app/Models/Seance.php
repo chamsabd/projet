@@ -5,26 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+#$lastupdated = date('Y-m-d H:i:s');
 class Seance extends Model
 {
     use HasFactory;
-    protected $primaryKey='id_seance';
-    //public $timestamps = false ;
-    /*
-    public function ressources()
-    {
-        return $this->hasMany(Ressource::class,'id_seance');
-    }
-
-    public function professeur()
-    {
-        return $this->belongsTo(Professeur::class,'id_seance');
-    }
-
+   protected $fillable=['nom_seance','date','temps_debut','temps_fin','formation_id'];
+   
     public function formation()
     {
-        return $this->belongsTo(Formation::class,'id_seance');
+        return $this->belongsTo(Formation::class);
     }
-*/
+
 
 }

@@ -8,10 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Formation extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id_formation';
 
-public function inscrits()
-{
-    return $this->hasMany(Inscrit::class,'id_formation');
-}
+    public function responsable()
+    {
+        return $this->belongsTo(User::class, 'responsable_id');
+    } 
+    public function formateur()
+    {
+        return $this->belongsTo(User::class, 'formateur_id');
+    }  
+    public function formateurexterne()
+    {
+        return $this->belongsTo(User::class, 'formateurexterne_id');
+
+    } 
+    public function demandes()
+    {
+        return $this->belongsToMany(User::class, 'demandes');
+    }
+    public function inscrits()
+    {
+        return $this->belongsToMany(User::class, 'inscrits')->withTimestamps()->withPivot('id');
+    }
+    public function certifs()
+    {
+        return $this->belongsToMany(User::class, 'certifs');
+    }
 }
