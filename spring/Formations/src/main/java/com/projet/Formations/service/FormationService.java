@@ -2,6 +2,7 @@ package com.projet.Formations.service;
 
 
 
+
 import java.util.List;
 
 
@@ -17,7 +18,9 @@ public interface FormationService {
 	Formation updateFormation(Formation f);
 	void deleteFormationparid(Long id);
 	Formation getFormation(Long id);
+
 	Page<Formation> getAllFormationsparpage(int page,int size);
 	 Page<Formation> findByTitreFormationContains(String titreFormation,Pageable pageable);
+
 
 }
