@@ -16,8 +16,15 @@
         
              <b-badge pill variant="success" v-if="props.row.etat == 0">overte</b-badge>
   <b-badge pill variant="danger" v-else>fermer</b-badge>
-          
-         
+          </td>
+           <td><!--@click="consulterSeances(props.row)"-->
+          <b-button pill variant="outline-info" 
+
+           :to="{name:'ContainerSeances' ,
+                params:{id:props.row.id , name:props.row.titre} }"
+                >Gérer Seances
+          </b-button>
+        
         </td>
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
@@ -31,6 +38,9 @@
              
           <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
             <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
+             <td>
+             <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
+          <add-demande :f="props" /></td>
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -52,6 +62,9 @@ import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
+//import containerSeances from "@/views/Seance/containerSeances.vue";
+//import ListeSeances from '../seances/ListeSeances.vue';
+//import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
 
 
 import AddFormation from '../../components/formation/AddFormation.vue';
