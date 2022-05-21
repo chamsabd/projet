@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="template">
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+<head>
+    <meta charset="utf-8">
+    <title>Create Formation</title>
+</head>
+
+<body>
+    <div layout:fragment="Mycontent">
+        <div class="container">
+            <div class="card-body">
+
+                <form th:action="${etat} =='update'?@{updateFormation?(page=${page},size=${size})}:@{saveFormation}"
+                    method="post">
+                    <!-- save Formation ou update -->
+                    <div class="form-group">
+                        <input type="text" name="idFormation" th:value="${formation.idFormation}"
+                            class="d-none form-control" />
+                        <label class="control-label">titre Formation :</label>
+                        <input type="text" name="titreFormation" class="form-control"
+                            th:value="${formation.titreFormation}" />
+                        <span th:errors=${formation.titreFormation} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">description Formation :</label>
+                        <input type="text" name="description" class="form-control"
+                            th:value="${formation.description}" />
+                        <span th:errors=${formation.description} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">date debut :</label>
+                        <input type="date" name="dateDebut" class="form-control"
+                            th:value="${formation.dateDebut}" />
+                        <span th:errors=${formation.dateDebut} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">date fin :</label>
+                        <input type="date" name="dateFin" class="form-control"
+                            th:value="${formation.dateFin}" />
+                        <span th:errors=${formation.dateFin} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">nbr place :</label>
+                        <input type="number" name="nbrPlace" class="form-control"
+                            th:value="${formation.nbrPlace}" />
+                        <span th:errors=${formation.nbrPlace} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">prix :</label>
+                        <input type="number" name="prix" class="form-control"
+                            th:value="${formation.prix}" />
+                        <span th:errors=${formation.prix} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">etat :</label>
+                        <select class="custom-select" name="etat" th:value="${formation.etat}"
+                        aria-label="Example select with button addon">
+                        <option  value="0" label="overte">
+                            <option  value="1" label="fermer"></option>
+                        </option>
+                    </select>
+                        <span th:errors=${formation.nbrPlace} class="text-danger"> </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">responsable :</label>
+                        <select class="custom-select"  name="responsable" th:value="${formation.responsable}"
+                            aria-label="Example select with button addon">
+                            <option th:each="re:${responsables}" th:value="${re.idUser}" th:label="${re.username}">
+                            </option>
+                        </select>
+                        <span th:errors=${formation.responsable.idUser} class="text-danger"> </span>
+                    </div>
+
+                    <div>
+                        <button type="submit" th:text="${etat}" class="btn btn-primary"></button>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <br />
+           
+        </div>
+    </div>
+</body>
+
+</html>

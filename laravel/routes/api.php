@@ -3,6 +3,7 @@ use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
 use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\api\InscritController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
@@ -25,28 +26,33 @@ Route::prefix('/seance')->group(function(){
 });
 //Route::apiResource('/formations',[FormationController::class,'index']);
 Route::get('/admin/formations',[FormationController::class,'index']);
-Route::get('/participant/formations',[FormationController::class,'index']);
+Route::get('/participant/formations',[FormationController::class,'participantindex']);
 Route::get('/responsable/formations',[FormationController::class,'responsableindex']);
 Route::get('/formateur/formations',[FormationController::class,'formateurindex']);
-
-Route::prefix('/formation')->group(function(){
+ Route::prefix('/formation')->group(function(){
     Route::post('/store',[FormationController::class,'store']);
     Route::put('/{id}',[FormationController::class,'update']);
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
+  
 });
+Route::get('/inscrits/formations',[InscritController::class,'formationsindex']);
+Route::get('/inscrits',[InscritController::class,'index']);
+Route::prefix('/inscrit')->group(function(){
+    Route::post('/store',[InscritController::class,'store']);
+    Route::put('/{id}',[InscritController::class,'update']);
+    Route::delete('/{id}',[InscritController::class,'destroy']);
+    Route::get('/{id}',[InscritController::class,'show']);
+});
+Route::get('/users',[UserController::class,'index']);
 
-
-
-
-
-
+Route::get('/user/demandes',[demandesController::class,'userdemandes']);
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
 Route::delete('/demandes/{id}',[demandesController::class,'destroy']);
-Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
-
+//Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
+Route::get('/demandes/formation/{form_id}',[demandesController::class,'getDemandeByFormation']);
 
 
 

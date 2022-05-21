@@ -7,17 +7,17 @@
       :customButtons="customButtons"
       :columns="tableColumns1"
       :rows="formations"
-     
     >
       <th slot="thead-tr">Etat</th>
       <th slot="thead-tr">Actions</th>
 
       <template slot="tbody-tr" slot-scope="props">
         <td>
-          <b-button v-if="props.row.etat == 0" pill variant="outline-success"
-            >overte</b-button
-          >
-          <b-button v-else pill variant="outline-danger">fermer</b-button>
+        
+             <b-badge pill variant="success" v-if="props.row.etat == 0">overte</b-badge>
+  <b-badge pill variant="danger" v-else>fermer</b-badge>
+          
+         
         </td>
            
   <td><!--@click="consulterSeances(props.row)"-->
@@ -31,24 +31,39 @@
       
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
-         <b-button pill variant="outline-warning">afficher demandes</b-button>
+         <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
+
+           <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
+        
+
         </td>
         <td>  
+             
+          <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
+            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
+
              <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
           <add-demande :f="props" /></td>
         
       
+
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
-   
        </b-modal>
+
+
+
+        <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
 
       <!-- <liste-seances />-->
       
        
+
   </div>
+         
+
 </template>
 
 <script>
@@ -57,30 +72,44 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
+
+// import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
+
+
+import AddFormation from '../../components/formation/AddFormation.vue';
+
 //import containerSeances from "@/views/Seance/containerSeances.vue";
 //import ListeSeances from '../seances/ListeSeances.vue';
 //import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
+
 
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
- 
+
+ AddFormation,
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+
+    // AfficherDemandes,
+
   //  ListeSeances,
   //  containerSeances
    // AddSeance
+
   },
   props: {
   formations:Array,
   role:String,
-  // d:Object,
+  //  d:Object,
   },
   data () {
     return {
-    // formation_id: " ",
+     d:{},
+      //demandes:[],
+
       tableColumns1: [
         {
           label: "titre de formation",
@@ -110,6 +139,7 @@ export default {
 
     
       formation: {},
+      modformation:{}
     };
   },
   computed: {
@@ -126,9 +156,26 @@ export default {
     },
   },
   methods: {
-  
+    Add(alert){
+      
+   this.$emit('add',alert);
+  },
+    modifFormation(row){
+     this.modformation=row; 
+     console.log(this.formation);
+ this.showModal("add-modal");
+    },
     onAddClick() {
-    
+    this.formation={
+        'titre':null,
+        'nbr_place':null,
+        'description':null,
+        'date_debut':null,
+        'responsable_id':null,
+        'date_fin':null,
+        'prix':0,
+        'etat':true
+      },
       this.showModal("add-modal");
     },
     showModal(id) {
@@ -153,12 +200,17 @@ export default {
         .catch((error) => console.log(error.response));
     },
 
+
+    getDemandeByFormation(id) {
+      console.log(id);
+
     consulterSeances(id){
       console.log(id);
 
     }
 
     // getDemande(id){
+
     // var demande={};
     //     demande.formation_id=this.d.row.id;
         
@@ -171,18 +223,18 @@ export default {
     //     console.log(response);
           
     //     })
-    // axios.get("http://127.0.0.1:8000/api/demandes/" +id)
-    //  .then((resp) => {
-    //   this.formation_id = resp.data.data.id;
-    //   console.log(this.formation_id);
-    // })
-    // },
+     axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
+    .then((response) => {
+      this.d = response.data;
+      console.log(this.d);
+      window.location.href = '/demande';
+    })
+    .catch((error) => console.log(error.response));
+    },
   },
 };
 </script>
 
 <style>
 @import "~material-design-icons-iconfont/dist/material-design-icons";
-
-
 </style>

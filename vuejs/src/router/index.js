@@ -7,7 +7,12 @@ import Dashboard from '@/views/Dashboard'
 //import DemandesView from '@/views/demande/DemandesView'
 import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
+
+import InscritsView from '@/views/inscrit/InscritsView'
+import CalenderView from '@/views/CalenderView'
+
 import containerSeances from '../views/Seance/containerSeances'
+
 Vue.use(VueRouter)
 Vue.component('add-seance',require('@/components/seances/AddSeance.vue').default);
 Vue.component('delete-seance',require('@/components/seances/deleteSeance.vue').default);
@@ -20,15 +25,30 @@ const routes = [
   {
 
     path: '/',
-    name: 'HomeView',
+
     component: Dashboard,
     children: [
+      {
+        path: '/',
+     
+        component: CalenderView
+      },
       {
           path: '/formations/:role',
           name: 'FormationsView',
           component: FormationsView
+
+        },
+        {
+          path: '/inscrits',
+          name: 'InscritsView',
+          component: InscritsView
+        }
+     
+
         }, 
         
+
     ]
    
   },
