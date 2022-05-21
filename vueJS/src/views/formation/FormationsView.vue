@@ -78,7 +78,7 @@ watch: {
         .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
         .then((response) => {
           this.formations = response.data;
-          console.log(this.formations);
+      
         })
         .catch((error) => console.log(error.response));
     },

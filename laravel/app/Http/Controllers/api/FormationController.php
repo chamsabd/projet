@@ -63,7 +63,7 @@ foreach ($formations as $key => $formation) {
     public function formateurindex()
     {
 
-        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',1)->get();
+        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',15)->get();
     }
     /**
      * Store a newly created resource in storage.

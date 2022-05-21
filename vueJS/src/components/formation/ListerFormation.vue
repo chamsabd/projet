@@ -24,8 +24,7 @@
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
-        
-
+        <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter cours</b-button>
         </td>
         <td>  
              
@@ -37,7 +36,7 @@
           <formation-details :formation="formation"/>
        </b-modal>
 
-
+<add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
   </div>
          
@@ -55,6 +54,7 @@ import AddDemande from "@/components/demande/addDemande.vue";
 
 
 import AddFormation from '../../components/formation/AddFormation.vue';
+import AddRessource from '../ressource/AddRessource.vue';
 
 export default {
   name: "ListerFormations",
@@ -65,6 +65,8 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+    AddRessource,
+
     // AfficherDemandes,
   },
   props: {
@@ -104,7 +106,7 @@ export default {
         },
       ],
 
-    
+   
       formation: {},
       modformation:{}
     };
@@ -156,6 +158,10 @@ export default {
       this.formation = row;
       console.log(this.formation);
       this.showModal("my-modal");
+    },
+    AjoutCour(row){
+this.formation = row;
+ this.showModal("ressource-modal");
     },
 
     deleteitm(id) {

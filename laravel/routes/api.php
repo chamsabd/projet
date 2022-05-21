@@ -7,6 +7,8 @@ use App\Http\Controllers\api\InscritController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\RessourseController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +38,16 @@ Route::get('/formateur/formations',[FormationController::class,'formateurindex']
     Route::get('/{id}',[FormationController::class,'show']);
   
 });
+Route::prefix('/ressource')->group(function(){
+    Route::post('/url',[RessourseController::class,'url']);
+    Route::post('/store',[RessourseController::class,'store']);
+    Route::put('/{id}',[RessourseController::class,'update']);
+    Route::delete('/{id}',[RessourseController::class,'destroy']);
+    Route::get('/{id}',[RessourseController::class,'show']);
+  
+});
+
+
 Route::get('/inscrits/formations',[InscritController::class,'formationsindex']);
 Route::get('/inscrits',[InscritController::class,'index']);
 Route::prefix('/inscrit')->group(function(){
