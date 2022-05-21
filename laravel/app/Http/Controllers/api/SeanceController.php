@@ -25,6 +25,11 @@ class SeanceController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+           'formation_id' => 'exists:formations,id',
+          // 'nom_seance' => 'required ',
+          // 'date'=>'after:tomorrow'
+        ]);
        $newSeance = new Seance() ;
  //Seance::create($request->all());
       /* $newSeance = Seance::create([
@@ -105,4 +110,18 @@ class SeanceController extends Controller
         }
 
     }
+
+    private function validationRules()
+    {
+        return [
+            'formation_id' => ['required|exists:formations,id'] ,
+          //  'date'=>['required|date |after:now']    ,
+          //  'nom_seance' => 'required'
+          'nom_seance' => ['required']
+
+            ];
+    }
+
 }
+
+

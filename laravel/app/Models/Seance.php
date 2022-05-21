@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seance extends Model
 {
     use HasFactory;
-   
+   protected $fillable=['nom_seance','date','temps_debut','temps_fin','formation_id'];
    
     public function formation()
     {
