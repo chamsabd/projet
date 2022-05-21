@@ -9,7 +9,8 @@
       <h2>Seances de la formation : {{this.$route.params.name}}</h2>
     </div>
     <div > 
-    <cont-add-modal @cont-add-modal="contAddModal"   ></cont-add-modal> </div>
+    <cont-add-modal @cont-add-modal="contAddModal" 
+       :to="{name:'contAddModal' ,params:{id:this.$route.params.id}}"></cont-add-modal> </div>
     <center>
       <table class="table">
         <thead>
@@ -29,12 +30,13 @@
            ></liste-seances></td>
           <!--    <td>
              <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
-               
-              <delete-Seance>
+               -->
                 <b-button pill variant="outline-danger"
+                @click="deleteSeance(seance.id)"
+
                   ><i class="bi bi-trash3"></i>
-                </b-button> </delete-Seance>
-               &nbsp;&nbsp;
+                </b-button> 
+               &nbsp;&nbsp;<!--
               <edit-Seance
                 ><b-button pill variant="outline-warning"
                   ><i class="bi bi-pen"></i></b-button
@@ -75,8 +77,12 @@ export default {
     this.nom_seance=seance.nom_seance;
           console.log(seance);
 
-  } 
+  } ,
+/*
+  deleteSeance(id){
 
+  }
+*/
 
   }
 };

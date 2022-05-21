@@ -6,22 +6,25 @@
 <form>
   <div class="mb-3">
     <label for="texte" class="form-label">Nom De Seance a Ajouter</label>
-    <input type="text" class="form-control" id="texte"  required v-model="seance.nom_seance" >
+    <input type="text" class="form-control" name="texte" id="texte"  required v-model="seance.nom_seance" >
   </div>
 
   <div class="mb-3">
     <label for="date" class="form-label">Date De Seance</label>
-    <input type="date" class="form-control" id="date" required v-model="seance.date">
+    <input type="date" class="form-control" name="date" id="date" required v-model="seance.date">
   </div>
 
 <div class="mb-3">
     <label for="temps_debut" class="form-label">Temps De Début De La Seance</label>
-    <input type="time" class="form-control" id="temps_debut" required v-model="seance.temps_debut">
+    <input type="time" class="form-control" name="temps_debut" id="temps_debut" required v-model="seance.temps_debut">
   </div>
 
   <div class="mb-3">
     <label for="temps_fin" class="form-label">Temps De Fin De La Seance</label>
-    <input type="time" class="form-control" id="temps_fin" required v-model="seance.temps_fin">
+    <input type="time" class="form-control" name="temps_fin" id="temps_fin" required v-model="seance.temps_fin">
+  </div>
+  <div class="mb-3">
+    <input type="hidden"  name="formation_id" id="formation_id" v-model="seance.formation_id">
   </div>
 
   <button type="submit" class="btn btn-primary" @click="addSeance">Valider</button> &nbsp;
@@ -43,23 +46,10 @@ export default {
  props:{
    revele : Boolean,
    toggleModale:
- {
-      type: Function,
-      // Unlike object or array default, this is not a factory function - this is a function to serve as a default value
-      default() {
-        return 'Default function'
-      }
- }
-
-
-
-
-
-
-
-
-
-
+ { type: Function,
+   default() {
+   return 'Default function'
+      } }
 
  },
  data(){
@@ -68,9 +58,10 @@ export default {
        nom_seance:'',
        date :"" ,
        temps_fin:"",
-       temps_debut:""
+       temps_debut:"",
+       formation_id:this.$route.params.id
        },
-       seances:[]
+      
      
    }
  } ,
@@ -79,16 +70,13 @@ addSeance(){
   axios.post('http://127.0.0.1:8000/api/seance/store',{
   seance : this.seance ,
   
+  }).then(response=>{
+    if (response.status==201){
+     console.log(this.seance)
+
+    }
   })
-  .then (
-    response => {if (response.status==201 ) {
-    this.$emit('add-seance',this.seance);
-    this.seance.nom_seance='' ;
-    this.seance.date='' ;
-    this.seance.temps_fin='' ;
-    this.seance.temps_debut='' ;
-  }
-  }).then(response =>this.$emit("add-seance",response))
+  
   .catch(error =>{console.log(error) }) ;
   
 } ,
