@@ -16,8 +16,16 @@ class CertificationController extends Controller
   
 
     public function index(){
-        return Certification::with('formation','user')->get();
+         return Certification::with('Formation','user')->get();
+       // return response()->json(["redata"=>$certif],200);
     }
+    public function destroy($id)
+    {
+        $certif=Certification::FindOrFail($id);
+            $certif->delete();
+            return response()->json('Certification supprime avec succes');  
     
+        
+    }
 
 }

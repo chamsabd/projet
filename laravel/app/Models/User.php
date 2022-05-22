@@ -60,7 +60,7 @@ class User extends Authenticatable
         return $this->hasOne(Etudiant::class);
     }
     public function certif(){
-        return $this->belongsToMany(Formation::class,"certifications")
+        return $this->belongsToMany(Formation::class,"Certifications")
         ->withTimestamps()->withPivot('id');
     }
  }

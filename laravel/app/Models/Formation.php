@@ -32,6 +32,6 @@ class Formation extends Model
     }
     public function certifs()
     {
-        return $this->belongsToMany(User::class, 'certifs');
+        return $this->belongsToMany(User::class, 'certifications');
     }
 }
