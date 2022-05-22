@@ -8,6 +8,8 @@ import afficherDemandes from '@/components/demande/afficherDemandes'
 import FormationsView from '@/views/formation/FormationsView'
 import LoginView from '@/views/LoginView'
 import registerView from '@/views/registerView'
+//import CertifList from '@/components/Certification/CertifList'
+import CertifView from '@/views/Certification/CertifView'
 import Vue from 'vue'
 Vue.use(VueRouter)
 const routes = [
@@ -20,7 +22,13 @@ const routes = [
           path: '/formations/:role',
           name: 'FormationsView',
           component: FormationsView
+        },
+        {
+          path:'/listesCertifs',
+          name:'listeCertif',
+          component:CertifView,
         }
+       
      
     ],
    
@@ -41,11 +49,13 @@ const routes = [
     name: 'LoginView',
     component: LoginView
   },
+
   {
     path: '/register',
     name: 'registerView',
     component: registerView
   }
+
 ]
 
 const router = new VueRouter({
