@@ -40,10 +40,11 @@
         <td>  
              
           <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
-            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
+            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button>
 
              <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
-          <add-demande :f="props" /></td>
+          <add-demande :f="props" />
+          </td>
         
       
 
@@ -204,10 +205,7 @@ export default {
     getDemandeByFormation(id) {
       console.log(id);
 
-    consulterSeances(id){
-      console.log(id);
-
-    }
+  
 
     // getDemande(id){
 
