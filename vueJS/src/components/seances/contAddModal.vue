@@ -4,6 +4,7 @@
         <add-seance :revele="revele"
          :toogleModale="toogleModale"
          @add-seance="refresh"
+          :to="{name:'AddSeance' ,params:{id:this.$route.params.id}}"
         ></add-seance>
         <div>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
