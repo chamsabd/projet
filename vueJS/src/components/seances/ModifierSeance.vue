@@ -7,7 +7,7 @@
 <script>
 export default {
  
-  name: 'editSeance',
+  name: 'm-seance',
   
   methods: {
    

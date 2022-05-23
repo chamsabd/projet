@@ -28,20 +28,17 @@
           <td><liste-seances :to="{name:'ListeSeances' ,params:{id:this.$route.params.id} } "
                 
            ></liste-seances></td>
-          <!--    <td>
-             <Details-Seance> <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button></Details-Seance>
-               -->
+             <td>
+             <details-seance> </Details-Seance>
                 <b-button pill variant="outline-danger"
                 @click="deleteSeance(seance.id)"
-
                   ><i class="bi bi-trash3"></i>
                 </b-button> 
-               &nbsp;&nbsp;<!--
-              <edit-Seance
-                ><b-button pill variant="outline-warning"
-                  ><i class="bi bi-pen"></i></b-button
-              ></edit-Seance> 
-            </td>-->
+              <modifier-seance
+              :to="{name:'ModifierSeance' ,params:{id:this.$route.params.id} }"
+              ></modifier-seance>
+              
+            </td>
           </tr>
         </tbody>
       </table>
@@ -52,23 +49,27 @@
 <script>
 import AddSeance from "@/components/seances/AddSeance";
 import ListeSeances from "@/components/seances/ListeSeances.vue";
-//import deleteSeance from "@/components/seances/deleteSeance";
-//import detailsSeance from "@/components/seances/detailsSeance";
-//import editSeance from "@/components/seances/editSeance";
+import deleteSeance from "@/components/seances/deleteSeance";
+import detailsSeance from "@/components/seances/detailsSeance";
 import contAddModal from '../../components/seances/contAddModal.vue';
+import ModifierSeance from '@/components/seances/ModifierSeance'
+//import ModifierSeance from '../../components/seances/ModifierSeance.vue';
+//import ModifierSeance from '../../components/seances/ModifierSeance.vue';
 //import axios from 'axios'
 export default {
+  components: { ModifierSeance },
    data(){
      return{
-    // formation_id :this.props.row.id,
+  
+      ModifierSeance  // formation_id :this.props.row.id,
    }},
 
   componenets: {
     AddSeance,
     ListeSeances,
-   // deleteSeance,
-    //detailsSeance,
-    //editSeance,
+    deleteSeance,
+    detailsSeance,
+    ModifierSeance ,
     contAddModal
   }, 
 
@@ -78,11 +79,9 @@ export default {
           console.log(seance);
 
   } ,
-/*
-  deleteSeance(id){
 
-  }
-*/
+  
+
 
   }
 };
