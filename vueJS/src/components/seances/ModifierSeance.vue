@@ -1,9 +1,8 @@
 <template>
-<!-- @addSeance="addSeance" -->
+
     <div>
         <cont-edit-modal :revele="revele"
          :toogleModale="toogleModale"
-         @add-seance="refresh"
         ></cont-edit-modal>
         <div>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

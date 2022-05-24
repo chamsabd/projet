@@ -27,7 +27,9 @@
             
           <td><liste-seances :to="{name:'ListeSeances' ,params:{id:this.$route.params.id} } "
                 
-           ></liste-seances></td>
+           ></liste-seances>
+           
+           </td>
              <td>
              <details-seance> </Details-Seance>
                 <b-button pill variant="outline-danger"

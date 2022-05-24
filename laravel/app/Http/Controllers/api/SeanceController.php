@@ -14,7 +14,7 @@ class SeanceController extends Controller
      */
     public function index()
     {
-      return Seance::with('formation')->get().'\n\t';
+      return Seance::with('formation')->get();
     }
 
     /**

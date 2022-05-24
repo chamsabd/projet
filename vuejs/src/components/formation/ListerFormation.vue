@@ -22,7 +22,7 @@
 
            :to="{name:'ContainerSeances' ,
                 params:{id:props.row.id , name:props.row.titre} }"
-                >Gérer Seances
+                >Consulter Seances
           </b-button>
         
         </td>
