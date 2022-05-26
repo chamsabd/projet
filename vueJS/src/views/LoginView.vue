@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit">
+    <div>
       <b-form-group
         id="input-group-1"
         label="Email address:"
@@ -26,9 +26,9 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" @click="onSubmit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
+    </div>
    
   </div>
 </template>
@@ -47,31 +47,31 @@ import axios from "axios";
       }
     },
     methods: {
-    async onSubmit() {
+    /*async onSubmit() {
       try {
-        const { data } = await axios.post("/api/login", this.form);
+        const { data } = await axios.post("http://127.0.0.1:8000/api/login", this.form);
         this.$store.dispatch("setUser", data);
         this.$router.push("/");
       } catch (error) {
         console.log(error);
       }
     },
-       
-    /* async onSubmit() {
+      */ 
+     async onSubmit() {
      
      //   alert(JSON.stringify(this.form))
         //console.log(this.form.email);
        // console.log(this.form.password);
         await axios.get('/sanctum/csrf-cookie')
         await axios({
-         url:"/login",
+         url:"http://127.0.0.1:8000/api/login",
          method:"post",
          data:this.form
        }).then (reponse=>{
         console.log(reponse);
       })
        }
-      */ 
+      
     }
     
     
