@@ -21,7 +21,16 @@
         <td>{{seance.id}}</td> 
         <td>{{seance.nom_seance}}</td>
         <td>
-
+        <!-- <details-seance> </Details-Seance>-->
+        <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button> &emsp;
+                <b-button pill variant="outline-danger"
+                @click="deleteSeance(seance.id)"
+                  ><i class="bi bi-trash3"></i>
+                </b-button> 
+              <modifier-seance
+              :to="{name:'ModifierSeance' ,params:{id:id_f} }"
+              ></modifier-seance>
+              
         </td>
         </tr>
    
@@ -30,26 +39,6 @@
 
 </tbody>
 </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-      
-    
     
    </div>
 </template>
@@ -62,12 +51,13 @@ import ModifierSeance from '@/components/seances/ModifierSeance'
 //import DataTable from "vue-materialize-datatable";
  //v-if="this.$route.params.id == seance.formation_id"
 export default {
+  components: { ModifierSeance },
   props:{
    id_f : Number},
      data() {
     return { 
      seances: {},
-      
+      ModifierSeance  // formation_id :this.props.row.id,
      //id_s:this.$route.params.id
     }
   }, 

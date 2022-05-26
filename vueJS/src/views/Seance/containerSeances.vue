@@ -9,8 +9,10 @@
       <h2>Seances de la formation : {{this.$route.params.name}}</h2>
     </div>
     <div > 
-    <cont-add-modal @cont-add-modal="contAddModal" 
-       :to="{name:'contAddModal' ,params:{id:this.$route.params.id}}"></cont-add-modal> </div>
+    
+    <cont-add-modal @cont-add-modal="contAddModal"  class="py-4"
+       :to="{name:'contAddModal' ,params:{id:this.$route.params.id}}"
+       ></cont-add-modal> </div>
     <center>
 <liste-seances :to="{name:'ListeSeances' ,params:{id:this.$route.params.id} } "
                 :id_f="id_f"
