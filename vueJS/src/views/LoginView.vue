@@ -32,7 +32,6 @@
    
   </div>
 </template>
-
 <script>
 import axios from "axios";
 
@@ -48,25 +47,34 @@ import axios from "axios";
       }
     },
     methods: {
-      onSubmit() {
+    async onSubmit() {
+      try {
+        const { data } = await axios.post("/api/login", this.form);
+        this.$store.dispatch("setUser", data);
+        this.$router.push("/");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+       
+    /* async onSubmit() {
      
      //   alert(JSON.stringify(this.form))
         //console.log(this.form.email);
        // console.log(this.form.password);
-       axios.get('/sanctum/csrf-cookie').then(response=>{
-         console.log(response);
-         axios({
-         url:"http://127.0.0.1:8000/api/login",
+        await axios.get('/sanctum/csrf-cookie')
+        await axios({
+         url:"/login",
          method:"post",
          data:this.form
        }).then (reponse=>{
         console.log(reponse);
       })
-       })
-  
-       
-     
+       }
+      */ 
     }
-    }
+    
+    
+    
   }
 </script>

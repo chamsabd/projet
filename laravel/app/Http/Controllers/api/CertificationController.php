@@ -27,5 +27,33 @@ class CertificationController extends Controller
     
         
     }
+  
+
+public function update(Request $request, $id)
+    {
+        $certif=Certification::FindOrFail($id);
+        $certif->nom=$request->nom;
+        $certif->score=$request->score;
+        echo "test". $certif->nom;
+        return response()->json('Certification modifie avec succes');  
+    }
 
 }
+  /*  public function store(Request $request)
+    {
+        $certif=new Certification();
+        $certif->user_id=$request->user_id;
+        $certif->formation_id=$request->formation_id;
+        $certif->save();
+        return response()->json('Certification ajoute avec succes');  
+    }
+    public function show($id)
+    {
+        $certif=Certification::FindOrFail($id);
+        return response()->json($certif);  
+    }
+*/
+
+
+
+
