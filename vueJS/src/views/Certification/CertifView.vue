@@ -2,10 +2,12 @@
 <certif-list :certifications="certifications"> </certif-list>
 </template>
 <script>
-import CertifList from '@/components/Certification/CertifList' 
+import CertifList from '@/components/Certification/CertifList'
 import axios from 'axios'
 export default {
-  components: { CertifList },
+  components:
+   { CertifList,
+    },
    data(){
        return{
          certifications:[],
@@ -23,6 +25,7 @@ export default {
         })
         .catch((error) => console.log(error.response));
     },
+
 
     }
         
