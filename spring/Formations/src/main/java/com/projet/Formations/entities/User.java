@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -30,12 +32,20 @@ public class User implements Serializable, UserDetails {
 	@Email
 	@Column(nullable=false,unique=true)
 	private String username;
+	@NotNull
 	@Column(nullable=false)
 	private String password;
+	@Column(nullable=false,unique=true)
+	@NotNull
 	private int nCin;
+	@NotNull
+	@NotBlank(message = "nom is required")
 	private String nom;
+	@NotNull
+	@NotBlank(message = "prenom is required")
 	private String prenom;
-
+	@NotNull
+	private String role;
 	@OneToMany(mappedBy = "responsable")
 	private List<Formation> formation;
 	public User() {
@@ -43,13 +53,30 @@ public class User implements Serializable, UserDetails {
 	
 	}
 	
-	public User(@Email String username, String password, int nCin, String nom, String prenom) {
+	public User(@Email String username, String password, int nCin, String nom, String prenom, String role) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.nCin = nCin;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.role = role;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public List<Formation> getFormation() {
+		return formation;
+	}
+
+	public void setFormation(List<Formation> formation) {
+		this.formation = formation;
 	}
 
 	public Long getIdUser() {

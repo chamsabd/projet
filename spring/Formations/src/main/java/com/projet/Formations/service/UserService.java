@@ -23,11 +23,26 @@ public class UserService implements  UserDetailsService{
 	public UserService(UserRepository userRepository) { 
 	 this.userRepository = userRepository; 
 	 } 
+	 static boolean isValid(String email) {
+		String regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+		return email.matches(regex);
+	 }
 	
-	public User saveUser(String username, String password, String confirmedPassword) { 
+	public User saveUser(String username,int nCin, String nom,String prenom, String password, String confirmedPassword) { 
 		 User appUser = new User(); 
+		
+		 if (Integer.toString(nCin).length()!=8) 
+		 throw new RuntimeException("n cin doit etre de length 8"); 
+		 if (!isValid(username)) 
+		 throw new RuntimeException("email not valid"); 
+		 if (nom.equals("")) 
+		 throw new RuntimeException("nom is required"); 
+		 if (prenom.equals("")) 
+		 throw new RuntimeException("prenom is required"); 
 		 if (userRepository.findUserWithName(username).isPresent() == true) 
 		 throw new RuntimeException("User already exists"); 
+		 if (password.equals("")) 
+		 throw new RuntimeException("Please add your password");
 		 if (!password.equals(confirmedPassword)) 
 		 throw new RuntimeException("Please confirm your password"); 
 		 appUser.setUsername(username); 
@@ -37,7 +52,10 @@ public class UserService implements  UserDetailsService{
 //		 roleRepository.save(r); 
 //		 roles.add(r); 
 //		 appUser.setRoles(roles); 
-		 appUser.setPassword(new BCryptPasswordEncoder().encode(password)); 
+		 appUser.setPassword(new BCryptPasswordEncoder().encode(password));
+		 appUser.setNom(nom); 
+		 appUser.setPrenom(prenom);
+		 appUser.setnCin(nCin);
 		 userRepository.save(appUser); 
 		 return appUser; 
 		 }
@@ -48,7 +66,6 @@ public class UserService implements  UserDetailsService{
 		 return user;
 	}
 	
-
 
 	public List<User> getAllResponsables() { 
 	 return userRepository.findAll(); 

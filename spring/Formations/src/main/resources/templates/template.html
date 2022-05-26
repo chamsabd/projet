@@ -30,24 +30,36 @@ src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
       
  <li class="nav-item dropdown">
  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-Formations
+responsable
  </a>
  <div class="dropdown-menu">
 <!-- sec:authorize="hasAnyRole('ADMIN')" -->
- <a   class="dropdown-item" th:href="@{showCreateFormation?(etat='create')}">Ajouter</a>
- <a class="dropdown-item" th:href="@{ListeFormations}">Lister</a>
+
+ <a class="dropdown-item" th:href="@{ListeFormations?(profile='responsable')}">Lister Formations</a>
  </div>
 </li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+ participant
+  </a>
+  <div class="dropdown-menu">
+ <!-- sec:authorize="hasAnyRole('ADMIN')" -->
+ 
+  <a class="dropdown-item" th:href="@{ListeFormations?(profile='participant')}">Lister Formations</a>
+  </div>
+ </li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+Formateur
+  </a>
+  <div class="dropdown-menu">
+ <!-- sec:authorize="hasAnyRole('ADMIN')" -->
+  <a   class="dropdown-item" th:href="@{showCreateFormation?(etat='create')}">Ajouter</a>
+  <a class="dropdown-item" th:href="@{ListeFormations?(profile='formateur')}">Lister Formation</a>
+  </div>
+ </li>
+  
 
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
       </ul>
 
        <ul class="navbar-nav ml-auto">
