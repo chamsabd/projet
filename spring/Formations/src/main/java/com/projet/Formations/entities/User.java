@@ -1,6 +1,5 @@
 package com.projet.Formations.entities;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,10 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -36,40 +32,25 @@ public class User implements Serializable, UserDetails {
 	@Email
 	@Column(nullable=false,unique=true)
 	private String username;
-	@NotNull
 	@Column(nullable=false)
 	private String password;
-	@Column(nullable=false,unique=true)
-	@NotNull
 	private int nCin;
-	@NotNull
-	@NotBlank(message = "nom is required")
 	private String nom;
-	@NotNull
-	@NotBlank(message = "prenom is required")
 	private String prenom;
-
-	@NotNull
-	private String role;
-	@NotNull
+	private String role ;
 	private String profile;
-
-	@ManyToMany
-	@JoinTable(name="Demande",
-	joinColumns=@JoinColumn(name="idUser"),
-	inverseJoinColumns =@JoinColumn(name="idFormation"))
-	Collection<Formation> formations;
 	@OneToMany(mappedBy = "responsable")
 	private List<Formation> formation;
+	@OneToMany(mappedBy = "formation")
+	private List<Demande> demandes;
+
 	public User() {
 		super();
 	
 	}
-	
-	public User(@Email String username, @NotNull String password, @NotNull int nCin,
-			@NotNull @NotBlank(message = "nom is required") String nom,
-			@NotNull @NotBlank(message = "prenom is required") String prenom, @NotNull String role,
-			@NotNull String profile) {
+
+	public User( @Email String username, String password, int nCin, String nom, String prenom, String role,
+			String profile) {
 		this.username = username;
 		this.password = password;
 		this.nCin = nCin;
@@ -77,24 +58,15 @@ public class User implements Serializable, UserDetails {
 		this.prenom = prenom;
 		this.role = role;
 		this.profile = profile;
+
 	}
 
-	public String getProfile() {
-		return profile;
+	public List<Formation> getFormation() {
+		return formation;
 	}
 
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
-
-	public User(@Email String username, String password, int nCin, String nom, String prenom, String role) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.nCin = nCin;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.role = role;
+	public void setFormation(List<Formation> formation) {
+		this.formation = formation;
 	}
 
 	public String getRole() {
@@ -105,12 +77,24 @@ public class User implements Serializable, UserDetails {
 		this.role = role;
 	}
 
-	public List<Formation> getFormation() {
-		return formation;
+	public String getProfile() {
+		return profile;
 	}
 
-	public void setFormation(List<Formation> formation) {
-		this.formation = formation;
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public List<Demande> getDemandes() {
+		return demandes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setDemandes(List<Demande> demandes) {
+		this.demandes = demandes;
 	}
 
 	public Long getIdUser() {
@@ -162,11 +146,8 @@ public class User implements Serializable, UserDetails {
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
-		
-		authorities.add(new SimpleGrantedAuthority(this.getRole())); 
-		 return authorities; 
+		// TODO Auto-generated method stub
+		return null;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

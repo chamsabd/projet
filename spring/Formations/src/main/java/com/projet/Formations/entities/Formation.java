@@ -68,10 +68,11 @@ public class Formation {
 	 @JoinColumn(name = "idFormateur")
 	  private User formateur;
 
-	 @ManyToMany(mappedBy = "formations")
-	 //Collection<Formation> formations;
-	 Collection<User> users;
-
+	
+	 @OneToMany(mappedBy = "formation")
+	 private List<Demande> demandes;
+	 
+	 
 
 
 	public Formation() {
