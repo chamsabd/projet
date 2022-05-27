@@ -27,6 +27,7 @@
         
         </td>
         <td>
+          
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
@@ -62,9 +63,6 @@ import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
-//import containerSeances from "@/views/Seance/containerSeances.vue";
-//import ListeSeances from '../seances/ListeSeances.vue';
-//import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
 
 
 import AddFormation from '../../components/formation/AddFormation.vue';
