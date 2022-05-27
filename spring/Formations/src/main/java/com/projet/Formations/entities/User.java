@@ -1,5 +1,4 @@
 package com.projet.Formations.entities;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
@@ -46,10 +48,17 @@ public class User implements Serializable, UserDetails {
 	@NotNull
 	@NotBlank(message = "prenom is required")
 	private String prenom;
+
 	@NotNull
 	private String role;
 	@NotNull
 	private String profile;
+
+	@ManyToMany
+	@JoinTable(name="Demande",
+	joinColumns=@JoinColumn(name="idUser"),
+	inverseJoinColumns =@JoinColumn(name="idFormation"))
+	Collection<Formation> formations;
 	@OneToMany(mappedBy = "responsable")
 	private List<Formation> formation;
 	public User() {
@@ -180,7 +189,5 @@ public class User implements Serializable, UserDetails {
 		return false;
 	}
 	
-	
-	
-	
+
 }
