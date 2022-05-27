@@ -17,18 +17,38 @@
          <tbody class="table-group-divider" v-for="seance in seances " :key="seance.id">
  
       
-       <tr class="containerSeances" v-if="id_f == seance.formation_id">
+       <tr class="containerSeances" v-if="id_f == seance.formation_id" >
         <td>{{seance.id}}</td> 
         <td>{{seance.nom_seance}}</td>
         <td>
-        <!-- <details-seance> </Details-Seance>-->
-        <b-button pill variant="outline-primary"><i class="bi bi-info-circle"></i></b-button> &emsp;
+ 
+        <b-button pill variant="outline-primary" @click="onRowClick(seance.name)">
+          <i class="bi bi-info-circle"></i>   
+       <b-modal  id="my-modal" size="lg"   centered ok-only>
+         <b-card   class="text-center">
+           <h2>Détails </h2>
+           <b-card-text> Nom de la séance : {{seance.nom_seance}}</b-card-text>
+           <b-card-text>Date de la séance: {{seance.date}} </b-card-text>
+           <b-card-text >Temps début: {{seance.temps_debut}} </b-card-text>
+           <b-card-text >Temps fin: {{seance.temps_fin}} </b-card-text>
+         </b-card>
+
+
+       </b-modal>
+          </b-button>
+      
+          &emsp;
+            
+                
+                
+                
                 <b-button pill variant="outline-danger"
                 @click="deleteSeance(seance.id)"
                   ><i class="bi bi-trash3"></i>
                 </b-button> 
-              <modifier-seance
-              :to="{name:'ModifierSeance' ,params:{id:id_f} }"
+            
+            <modifier-seance 
+              :id_s="seance.id"
               ></modifier-seance>
               
         </td>
@@ -42,18 +62,24 @@
     
    </div>
 </template>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@vue/composition-api@1.6.2"></script>
+
 <script>
 import axios from 'axios'
 import deleteSeance from "@/components/seances/deleteSeance";
 import detailsSeance from "@/components/seances/detailsSeance";
 import ModifierSeance from '@/components/seances/ModifierSeance'
-
+import DeleteSeance from './deleteSeance.vue';
+//import { ref} from '@vue/composition-api'
 //import DataTable from "vue-materialize-datatable";
  //v-if="this.$route.params.id == seance.formation_id"
 export default {
   components: { ModifierSeance },
   props:{
-   id_f : Number},
+ 
+    DeleteSeance ,
+    id_f : Number},
      data() {
     return { 
      seances: {},
@@ -64,8 +90,23 @@ export default {
   componenets: {
     deleteSeance,
     detailsSeance,
-    ModifierSeance 
+    ModifierSeance ,
+    
   },
+  methods:{
+       showModal(id) {
+      this.$bvModal.show(id);
+    }, hideModal(id) {
+      this.$bvModal.hide(id);
+    },
+    onRowClick(seance) {
+    // this.seance = seance
+    // console.log(this.seance);
+    // if (seance==seance.id){console.log(seance)}
+      this.showModal("my-modal");
+    },
+  }
+  ,
   
   
   

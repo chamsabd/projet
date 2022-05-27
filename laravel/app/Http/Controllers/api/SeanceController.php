@@ -63,7 +63,8 @@ class SeanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $seance=Seance::find($id);
+        return response()->json($seance);
     }
 
     /**
@@ -115,7 +116,7 @@ class SeanceController extends Controller
     {
         return [
             'formation_id' => ['required|exists:formations,id'] ,
-          //  'date'=>['required|date |after:now']    ,
+            'date'=>['required|date |after:now']    ,
           //  'nom_seance' => 'required'
           'nom_seance' => ['required']
 
