@@ -25,9 +25,10 @@
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
         <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter cours</b-button>
+        <b-button pill variant="outline-info" v-if="role=='formateur' || role=='participant' && props.row.etat == 0" @click="ListerCour(props.row)">lister cours</b-button>
+       
         </td>
         <td>  
-             
           <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
             <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
       </template>
@@ -163,7 +164,9 @@ export default {
 this.formation = row;
  this.showModal("ressource-modal");
     },
-
+ListerCour(row){
+this.$router.push({ path: `/ressource/${row.id}` });
+},
     deleteitm(id) {
       axios
         .delete("http://127.0.0.1:8000/api/formation/" + id)

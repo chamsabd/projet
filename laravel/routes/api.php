@@ -41,7 +41,7 @@ Route::get('/formateur/formations',[FormationController::class,'formateurindex']
 Route::prefix('/ressource')->group(function(){
     Route::post('/url',[RessourseController::class,'url']);
     Route::post('/store',[RessourseController::class,'store']);
-    Route::put('/{id}',[RessourseController::class,'update']);
+    Route::get('/down/{id}',[RessourseController::class,'upload']);
     Route::delete('/{id}',[RessourseController::class,'destroy']);
     Route::get('/{id}',[RessourseController::class,'show']);
   

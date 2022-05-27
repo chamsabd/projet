@@ -34,4 +34,8 @@ class Formation extends Model
     {
         return $this->belongsToMany(User::class, 'certifs');
     }
+    public function ressources()
+    {
+        return $this->hasMany(Resource::class);
+    } 
 }

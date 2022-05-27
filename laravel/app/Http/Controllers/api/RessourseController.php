@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Formation;
 use App\Models\Resource;
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class RessourseController extends Controller
@@ -57,9 +60,24 @@ class RessourseController extends Controller
      */
     public function show($id)
     {
-        //
+     $formation=Formation::find($id);
+    
+return $formation->ressources()->get();
+     
     }
+    public function upload($id)
+    {
+     $ressourse=Resource::find($id);
+     $extension = pathinfo(storage_path('public/'.$ressourse->url), PATHINFO_EXTENSION);
+   
+     $headers = array(
 
+        'Content-Type: application/'.$extension,
+      );
+    return Storage::download('public/'.$ressourse->url,$ressourse->titre,$headers);
+    // $ressourse=Storage::path($ressourse->path);
+    
+    }
     /**
      * Update the specified resource in storage.
      *
