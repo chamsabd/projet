@@ -1,5 +1,6 @@
 package com.projet.Formations.entities;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,7 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -32,11 +36,24 @@ public class User implements Serializable, UserDetails {
 	@Email
 	@Column(nullable=false,unique=true)
 	private String username;
+	@NotNull
 	@Column(nullable=false)
 	private String password;
+	@Column(nullable=false,unique=true)
+	@NotNull
 	private int nCin;
+	@NotNull
+	@NotBlank(message = "nom is required")
 	private String nom;
+	@NotNull
+	@NotBlank(message = "prenom is required")
 	private String prenom;
+
+	@NotNull
+	private String role;
+	@NotNull
+	private String profile;
+
 	@ManyToMany
 	@JoinTable(name="Demande",
 	joinColumns=@JoinColumn(name="idUser"),
@@ -49,13 +66,51 @@ public class User implements Serializable, UserDetails {
 	
 	}
 	
-	public User(@Email String username, String password, int nCin, String nom, String prenom) {
+	public User(@Email String username, @NotNull String password, @NotNull int nCin,
+			@NotNull @NotBlank(message = "nom is required") String nom,
+			@NotNull @NotBlank(message = "prenom is required") String prenom, @NotNull String role,
+			@NotNull String profile) {
+		this.username = username;
+		this.password = password;
+		this.nCin = nCin;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.role = role;
+		this.profile = profile;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public User(@Email String username, String password, int nCin, String nom, String prenom, String role) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.nCin = nCin;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.role = role;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public List<Formation> getFormation() {
+		return formation;
+	}
+
+	public void setFormation(List<Formation> formation) {
+		this.formation = formation;
 	}
 
 	public Long getIdUser() {
@@ -107,8 +162,11 @@ public class User implements Serializable, UserDetails {
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
+		
+		authorities.add(new SimpleGrantedAuthority(this.getRole())); 
+		 return authorities; 
 	}
 	@Override
 	public boolean isAccountNonExpired() {
