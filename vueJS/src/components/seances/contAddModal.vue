@@ -1,11 +1,7 @@
 <template>
 <!-- @addSeance="addSeance" -->
     <div>
-        <add-seance :revele="revele"
-         :toogleModale="toogleModale"
-         @add-seance="refresh"
-          :to="{name:'AddSeance' ,params:{id:this.$route.params.id}}"
-        ></add-seance>
+        
         <div>
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -20,7 +16,14 @@
       variant="outline-success"
       class=" float-end"
       ><i class="bi bi-plus-circle my-3"></i
-    ></b-button> </div>
+    >
+    <add-seance :revele="revele"
+         :toogleModale="toogleModale"
+         @add-seance="refresh"
+          :to="{name:'AddSeance' ,params:{id:this.$route.params.id}}"
+        ></add-seance>
+    
+    </b-button> </div>
     </div>
 </template>
 <script>
