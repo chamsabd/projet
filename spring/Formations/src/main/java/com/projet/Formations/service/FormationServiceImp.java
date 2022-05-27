@@ -2,8 +2,11 @@ package com.projet.Formations.service;
 
 
 
+
 import java.security.Principal;
+
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -83,8 +86,6 @@ private	 FormationRepository formationRepository;
 		// TODO Auto-generated method stub
 		return this.formationRepository.findByTitreFormationContains(nomFormation, pageable);
 	}
-
-
 
 
 
