@@ -1,6 +1,7 @@
 package com.projet.Formations.entities;
 
-import java.util.Calendar;
+//import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -8,24 +9,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.AssertTrue;
+//import javax.validation.constraints.AssertFalse;
+//import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
-import org.apache.jasper.tagplugins.jstl.core.When;
+//import org.apache.jasper.tagplugins.jstl.core.When;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.NonNull;
+//import org.springframework.lang.NonNull;
 
 @Entity
 public class Formation {
@@ -56,12 +58,13 @@ public class Formation {
 	private int nbrPlace;
 	@Min(0)
 	private float prix;
-	@OneToMany(mappedBy = "formation")
-	private List<Demande> demandes;
+
     @ManyToOne
 	@JoinColumn(name = "idResponsable")
 	 private User responsable;
-
+	 @ManyToMany(mappedBy = "formations")
+	 //Collection<Formation> formations;
+	 Collection<User> users;
 
 
 
@@ -69,7 +72,6 @@ public class Formation {
 		super();
 
 	}
-
 
 	public Formation(@NotNull @Size(min = 5, max = 30) String titreFormation,
 			@Null @Size(min = 15, max = 100) String description, @NotNull Date dateDebut, @NotNull Date dateFin,
@@ -156,12 +158,12 @@ public class Formation {
 		this.prix = prix;
 	}
 
-	public List<Demande> getDemandes() {
+/* 	public List<Demande> getDemandes() {
 		return demandes;
 	}
 
 	public void setDemandes(List<Demande> demandes) {
 		this.demandes = demandes;
-	}
+	} */
 
 }

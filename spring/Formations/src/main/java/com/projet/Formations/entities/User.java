@@ -1,5 +1,4 @@
 package com.projet.Formations.entities;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
@@ -35,7 +37,11 @@ public class User implements Serializable, UserDetails {
 	private int nCin;
 	private String nom;
 	private String prenom;
-
+	@ManyToMany
+	@JoinTable(name="Demande",
+	joinColumns=@JoinColumn(name="idUser"),
+	inverseJoinColumns =@JoinColumn(name="idFormation"))
+	Collection<Formation> formations;
 	@OneToMany(mappedBy = "responsable")
 	private List<Formation> formation;
 	public User() {
@@ -125,7 +131,5 @@ public class User implements Serializable, UserDetails {
 		return false;
 	}
 	
-	
-	
-	
+
 }
