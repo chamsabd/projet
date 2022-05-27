@@ -3,6 +3,8 @@ package com.projet.Formations.service;
 import java.util.List;
 import java.util.Objects;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,7 +30,7 @@ public class UserService implements  UserDetailsService{
 		return email.matches(regex);
 	 }
 	
-	public User saveUser(String username,int nCin, String nom,String prenom, String password, String confirmedPassword) { 
+	public User saveUser(String username,int nCin, String nom,String prenom, String password, String confirmedPassword,String profile) { 
 		 User appUser = new User(); 
 		
 		 if (Integer.toString(nCin).length()!=8) 
@@ -40,18 +42,20 @@ public class UserService implements  UserDetailsService{
 		 if (prenom.equals("")) 
 		 throw new RuntimeException("prenom is required"); 
 		 if (userRepository.findUserWithName(username).isPresent() == true) 
-		 throw new RuntimeException("User already exists"); 
+		 throw new RuntimeException("User already exists");
+		 if (userRepository.findUserWithNCin(nCin).isPresent() == true) 
+		 throw new RuntimeException("User already exists");  
 		 if (password.equals("")) 
 		 throw new RuntimeException("Please add your password");
 		 if (!password.equals(confirmedPassword)) 
 		 throw new RuntimeException("Please confirm your password"); 
 		 appUser.setUsername(username); 
-
-		//		 Set<Role> roles = new HashSet<Role>(); 
-//		 Role r = new Role("ROLE_USER"); 
-//		 roleRepository.save(r); 
-//		 roles.add(r); 
-//		 appUser.setRoles(roles); 
+		 if (userRepository.findByIdUser(1L).isPresent()==false) {
+			appUser.setRole("ADMIN");
+		 }
+		 else
+		appUser.setRole("USER");
+		appUser.setProfile(profile);
 		 appUser.setPassword(new BCryptPasswordEncoder().encode(password));
 		 appUser.setNom(nom); 
 		 appUser.setPrenom(prenom);

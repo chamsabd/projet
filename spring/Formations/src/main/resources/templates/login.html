@@ -56,6 +56,16 @@ src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 <label class="control-label" >confirmer Mot de passe :</label> 
 <input type="password" name="confirmedPassword" th:value="${user.confirmedPassword}"> 
 </div> 
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >vous ete?:</label> 
+    <select class="custom-select" name="profile" th:value="${user.profile}"
+    aria-label="Example select with button addon">
+    <option  value="proffeseur" label="proffeseur">
+    </option>
+     <option  value="etudiant" label="etudiant"></option>
+     <option  value="agent" label="agent"></option>
+</select>
+    </div> 
 <button th:text="${etat}"  class="btn btn-primary"></button>  <!-- etat=log in  --> 
 </form> 
 <a  th:href="@{login?(etat='sign up')}" th:if="${etat} == 'log in'"  class="btn btn-primary">Ajouter un Compte</a>

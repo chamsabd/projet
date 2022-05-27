@@ -53,8 +53,7 @@ responsable
 Formateur
   </a>
   <div class="dropdown-menu">
- <!-- sec:authorize="hasAnyRole('ADMIN')" -->
-  <a   class="dropdown-item" th:href="@{showCreateFormation?(etat='create')}">Ajouter</a>
+
   <a class="dropdown-item" th:href="@{ListeFormations?(profile='formateur')}">Lister Formation</a>
   </div>
  </li>

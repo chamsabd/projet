@@ -1,6 +1,7 @@
 package com.projet.Formations.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -46,6 +48,8 @@ public class User implements Serializable, UserDetails {
 	private String prenom;
 	@NotNull
 	private String role;
+	@NotNull
+	private String profile;
 	@OneToMany(mappedBy = "responsable")
 	private List<Formation> formation;
 	public User() {
@@ -53,6 +57,27 @@ public class User implements Serializable, UserDetails {
 	
 	}
 	
+	public User(@Email String username, @NotNull String password, @NotNull int nCin,
+			@NotNull @NotBlank(message = "nom is required") String nom,
+			@NotNull @NotBlank(message = "prenom is required") String prenom, @NotNull String role,
+			@NotNull String profile) {
+		this.username = username;
+		this.password = password;
+		this.nCin = nCin;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.role = role;
+		this.profile = profile;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	public User(@Email String username, String password, int nCin, String nom, String prenom, String role) {
 		super();
 		this.username = username;
@@ -128,8 +153,11 @@ public class User implements Serializable, UserDetails {
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
+		
+		authorities.add(new SimpleGrantedAuthority(this.getRole())); 
+		 return authorities; 
 	}
 	@Override
 	public boolean isAccountNonExpired() {

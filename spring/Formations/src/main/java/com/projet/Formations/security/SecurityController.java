@@ -28,12 +28,24 @@ class UserForm{
 	private String password;
 	
 	private int nCin;
-
+	private String role;
 	private String nom;
-	
+	private String profile;
 	private String prenom;
 	 private String confirmedPassword;
 	 
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public int getnCin() {
 		return nCin;
 	}
@@ -101,7 +113,7 @@ BindingResult bindingResult) throws RuntimeException
 	
 	
 	try {
-	userservice.saveUser(user.getUsername(),user.getnCin(),user.getNom(),user.getPrenom(), user.getPassword(), user.getConfirmedPassword());
+	userservice.saveUser(user.getUsername(),user.getnCin(),user.getNom(),user.getPrenom(), user.getPassword(), user.getConfirmedPassword(),user.getProfile());
 	}
 	catch(RuntimeException e) {
 		 modelMap.addAttribute("erreur",e.getMessage());
