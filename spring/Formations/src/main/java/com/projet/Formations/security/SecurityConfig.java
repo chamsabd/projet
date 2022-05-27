@@ -32,7 +32,7 @@ import com.projet.Formations.service.UserService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter { 
-public static final String AUTHORITIES_CLAIM_NAME = "roles"; 
+	public static final String AUTHORITIES_CLAIM_NAME = "roles";
 @Autowired
  UserService userDetailsService; 
 //@Autowired
@@ -66,13 +66,13 @@ http.csrf().disable()
 .antMatchers("/logout").permitAll() ;
 
  
-		//  http.authorizeRequests().antMatchers("/ListeFormations").permitAll(); 
-		//  //.hasAnyRole("ADMIN","USER"); 
-		//  http.authorizeRequests() 
-		//  .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 
-		//  .hasAnyRole("ADMIN")
-		// .anyRequest().authenticated(); 
-		//  http.exceptionHandling().accessDeniedPage("/accessDenied");
+		 http.authorizeRequests().antMatchers("/ListeFormations")
+		 .hasAnyAuthority("ADMIN","USER"); 
+		 http.authorizeRequests() 
+		 .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 
+		 .hasAnyAuthority("ADMIN")
+		.anyRequest().authenticated(); 
+		 http.exceptionHandling().accessDeniedPage("/accessDenied");
 	
 		 
 

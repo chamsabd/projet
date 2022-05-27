@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projet.Formations.entities.Formation;
+import com.projet.Formations.entities.User;
 import com.projet.Formations.service.FormationService;
 import com.projet.Formations.service.UserService;
 
@@ -29,22 +31,25 @@ public class FormationController {
 			ModelMap modelMap,
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "3") int size,
-			@RequestParam(name = "nom", defaultValue = "") String nom) {
-		if (nom == "") {
-			Page<Formation> prods = formationService.getAllFormationsparpage(page, size);
-			List<Formation> prod = formationService.getAllFormations();
+			@RequestParam(name = "nom", defaultValue = "") String nom,
+			@RequestParam(name = "profile", defaultValue = "participant") String profile,
+			@AuthenticationPrincipal User user) {
+		if (nom.equals("")) {	
+			Page<Formation> prods = formationService.getAllFormationsparpage(user,profile,page, size);
+			List<Formation> prod = formationService.getAllFormations(profile);
 			modelMap.addAttribute("scFormations", prod);
 			modelMap.addAttribute("Formations", prods);
-
+			
 			modelMap.addAttribute("pages", new int[prods.getTotalPages()]);
 			modelMap.addAttribute("currentPage", page);
 		} else {
 			Page<Formation> prods = formationService.findByTitreFormationContains(nom,
 					PageRequest.of(page, size).toOptional().get());
 
-			List<Formation> prod = formationService.getAllFormations();
+			List<Formation> prod = formationService.getAllFormations(profile);
 			modelMap.addAttribute("scFormations", prod);
 			modelMap.addAttribute("Formations", prods);
+			
 			modelMap.addAttribute("pages", new int[prods.getTotalPages()]);
 			modelMap.addAttribute("currentPage", page);
 			modelMap.addAttribute("nom", nom);
@@ -63,7 +68,7 @@ public class FormationController {
 	@RequestMapping("/saveFormation")
 	public String saveProduit(@Valid Formation formation,
 			BindingResult bindingResult,
-			ModelMap modelMap) {
+			ModelMap modelMap, RedirectAttributes redirAttrs) {
 		modelMap.addAttribute("etat", "create");
 		modelMap.addAttribute("responsables", userService.getAllResponsables());
 	
@@ -72,11 +77,10 @@ public class FormationController {
 			return "createFormation";
 		}
 		Formation saveFormation = formationService.saveFormation(formation);
-		String msg = "Formation enregistré avec Id " +
-				saveFormation.getIdFormation();
-				modelMap.addAttribute("formation", new Formation());
-		modelMap.addAttribute("msg", msg);
-		return "createFormation";
+		redirAttrs.addFlashAttribute("msg", "formation ajouter avec succes");
+			//	modelMap.addAttribute("formation", new Formation());
+
+		return "redirect:/ListeFormations";
 	}
 
 	@RequestMapping("/modifierFormation")
@@ -99,7 +103,9 @@ public class FormationController {
 	public String updateProduit(@Valid Formation formation,
 			BindingResult bindingResult,
 			ModelMap modelMap, @RequestParam(name = "page", defaultValue = "0") int page,
-			@RequestParam(name = "size", defaultValue = "3") int size, RedirectAttributes redirectAttributes) {
+			@RequestParam(name = "size", defaultValue = "3") int size, RedirectAttributes redirectAttributes,
+			@RequestParam(name = "profile", defaultValue = "participant") String profile,
+			@AuthenticationPrincipal User user, RedirectAttributes redirAttrs) {
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("etat", "update");
 			modelMap.addAttribute("responsables", userService.getAllResponsables());
@@ -107,14 +113,18 @@ public class FormationController {
 			return "createFormation";
 		}
 		formationService.updateFormation(formation);
-		Page<Formation> prods = formationService.getAllFormationsparpage(page, size);
-		modelMap.addAttribute("Formations", prods);
-		modelMap.addAttribute("pages", new int[prods.getTotalPages()]);
-		modelMap.addAttribute("currentPage", page);
-		modelMap.addAttribute("size", size);
-		//
+		Page<Formation> prods = formationService.getAllFormationsparpage(user,profile,page, size);
+		//redirAttrs.addFlashAttribute("Formations", prods);
+		//redirAttrs.addAttribute("pages", new int[prods.getTotalPages()]);
+		redirAttrs.addAttribute("page", page);
+		redirAttrs.addAttribute("nom","");
+		redirAttrs.addAttribute("profile", profile);
+		redirAttrs.addAttribute("size", size);
+		redirAttrs.addFlashAttribute("msg", "formation modiffier avec succes");
+	
+		
 		// redirectAttributes.addAttribute("currentPage",page);
 		// redirectAttributes.addAttribute("size", size);
-		return "listeFormations";
+		return "redirect:/ListeFormations";
 	}
 }
