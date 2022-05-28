@@ -61,13 +61,15 @@ class FormateurexController extends Controller
     public function update(Request $request, $id)
     {
         //
+       // $request->validate($this->validationRules());
         $existingformateurex=Formateurex::find($id);
         if($existingformateurex){
-        $existingformateurex->ncin=$request->formateurex["ncin"];
-        $existingformateurex->email=$request->formateurex["email"];
-        $existingformateurex->nom=$request->formateurex["nom"];
-        $existingformateurex->prenom=$request->formateurex["prenom"];
-        $existingformateurex->specialite=$request->formateurex["specialite"];
+        $request->validate($this->validationRules());
+        $existingformateurex->ncin=$request->ncin;
+        $existingformateurex->email=$request->email;
+        $existingformateurex->nom=$request->nom;
+        $existingformateurex->prenom=$request->prenom;
+        $existingformateurex->specialite=$request->specialite;
         $existingformateurex->save();
         return $existingformateurex;
 
@@ -90,10 +92,24 @@ class FormateurexController extends Controller
         if($existingformateurex){
             $existingformateurex->delete();
             return "Formateurex successfully deleted.";
+           // return $this->refresh() ;
         }
 
         return "Formateurex not found.";
 
     }
+
+    private function validationRules()
+    {    
+        return [
+            'ncin' => 'required|integer|between:0,10',
+           // 'email' => 'required|email',
+            'nom' => 'required|min:5|max:15',
+            'prenom' => 'required|min:5|max:15',
+            'specialite' => 'required|min:5|max:15',
+            
+        ];
+    }
+
 
 }
