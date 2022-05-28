@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Certification;
 use Illuminate\Database\Seeder;
-use App\Models\Client;
 
-class ClientSeeder extends Seeder
+class CertificationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,7 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        Client::factory()
-        ->count(3)    
-       ->create();
+        Certification::factory()->count(7)->create();
+ 
     }
 }

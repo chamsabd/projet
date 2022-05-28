@@ -1,8 +1,8 @@
 <template>
     
-  <div>
+ 
       <b-button pill variant="outline-warning" @click="senddemande()">send demande</b-button>
-  </div>
+ 
 </template>
 <script>
 import axios from "axios";
@@ -17,7 +17,7 @@ export default {
   },
   methods:{
     senddemande() {
-      console.log(this.f);
+     
       // var now=new Date();
       // var date=new Date(now.getFullYear(), now.getMonth(), now.getDate());
       //   //  var fd = new FormData()

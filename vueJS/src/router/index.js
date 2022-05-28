@@ -5,9 +5,10 @@ import Dashboard from '@/views/Dashboard'
 
 
 //import DemandesView from '@/views/demande/DemandesView'
-import afficherDemandes from '@/components/demande/afficherDemandes'
+import DemandesView from '@/views/demande/DemandesView'
 import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
+import ListerRessource from '@/views/ressource/ListerRessource'
 import CalenderView from '@/views/CalenderView'
 Vue.use(VueRouter)
 
@@ -32,16 +33,21 @@ const routes = [
           path: '/inscrits',
           name: 'InscritsView',
           component: InscritsView
-        }
-     
+        },
+         {
+          path: '/ressource/:id',
+          name: 'ListerRessource',
+          component: ListerRessource
+        },
+       {
+    path: '/demandes/:id',
+    name: 'DemandesView',
+    component: DemandesView
+  },
     ]
    
   },
-  {
-    path: '/demande',
-    name: 'afficherDemandes',
-    component: afficherDemandes
-  }
+
  
   // {
   //   path: '/demandes',
