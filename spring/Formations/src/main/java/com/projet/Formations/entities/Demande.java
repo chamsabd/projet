@@ -25,13 +25,13 @@ public class Demande {
 	private Formation formation;
 	private Date dateDemande;
 
-	/*public Demande( Date dateDemande,Formation formation,User user ) {
+	public Demande( Date dateDemande,Formation formation,User user ) {
 		super();
 		this.formation=formation;
 		this.user=user;
 		this.dateDemande = dateDemande;
 	}
-	*/
+	
 
 	public Demande() {
 		super();

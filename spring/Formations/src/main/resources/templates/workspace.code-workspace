@@ -1,11 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "..\\..\\..\\..\\.."
+			"path": "..\\..\\..\\..\\..\\..\\.."
 		},
 		{
-			"path": "..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\Desktop\\revision-safe (1)\\revision-safe"
+			"path": "..\\..\\..\\..\\.."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
 }

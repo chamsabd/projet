@@ -66,7 +66,7 @@ http.csrf().disable()
 .antMatchers("/logout").permitAll() ;
 
  
-		 http.authorizeRequests().antMatchers("/ListeFormations")
+		 http.authorizeRequests().antMatchers("/ListeFormations","/sendDemande")
 		 .hasAnyAuthority("ADMIN","USER"); 
 		 http.authorizeRequests() 
 		 .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 

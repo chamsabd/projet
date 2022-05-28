@@ -1,5 +1,6 @@
 package com.projet.Formations.entities;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -146,8 +148,10 @@ public class User implements Serializable, UserDetails {
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>(); 
+		
+		authorities.add(new SimpleGrantedAuthority(this.getRole())); 
+		 return authorities; 
 	}
 	@Override
 	public boolean isAccountNonExpired() {

@@ -15,4 +15,5 @@ public interface DemandeService {
 	Demande saveDemande(Demande d);
 	void deleteDemandeparid(Long id);
 	Page<Demande> getAllDemandesparpage(int page,int size);
+	void setFormationId(Long id);
 }
