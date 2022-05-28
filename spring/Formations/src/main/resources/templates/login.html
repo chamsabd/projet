@@ -27,10 +27,27 @@ src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 <div th:if="${erreur}" >
  <p th:text="${erreur}"></p>
 </div>
+<!-- <span th:errors=${user.nCin} class="text-danger"> </span>
+<span th:errors=${user.username} class="text-danger"> </span>
+<span th:errors=${user.nom} class="text-danger"> </span>
+<span th:errors=${user.prenom} class="text-danger"> </span> -->
+                    
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >ncin :</label> 
+    <input type="number" name="nCin" th:value="${user.nCin}"> 
+    </div> 
 <div class="form-group"> 
-<label class="control-label" >Utilisateur :</label> 
+<label class="control-label" >email :</label> 
 <input type="text" name="username"  th:value="${user.username}"/> 
 </div> 
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >nom :</label> 
+    <input type="text" name="nom" th:value="${user.nom}"> 
+    </div> 
+    <div th:if="${etat} == 'sign up'" class="form-group"> 
+        <label class="control-label" >prenom:</label> 
+        <input type="text" name="prenom" th:value="${user.prenom}"> 
+        </div> 
 <div class="form-group">  
 <label class="control-label" >Mot de passe :</label> 
 <input type="password" name="password" th:value="${user.password}">
@@ -39,6 +56,16 @@ src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 <label class="control-label" >confirmer Mot de passe :</label> 
 <input type="password" name="confirmedPassword" th:value="${user.confirmedPassword}"> 
 </div> 
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >vous ete?:</label> 
+    <select class="custom-select" name="profile" th:value="${user.profile}"
+    aria-label="Example select with button addon">
+    <option  value="proffeseur" label="proffeseur">
+    </option>
+     <option  value="etudiant" label="etudiant"></option>
+     <option  value="agent" label="agent"></option>
+</select>
+    </div> 
 <button th:text="${etat}"  class="btn btn-primary"></button>  <!-- etat=log in  --> 
 </form> 
 <a  th:href="@{login?(etat='sign up')}" th:if="${etat} == 'log in'"  class="btn btn-primary">Ajouter un Compte</a>

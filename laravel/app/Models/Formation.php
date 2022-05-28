@@ -32,7 +32,10 @@ class Formation extends Model
     }
     public function certifs()
     {
-        return $this->belongsToMany(User::class, 'certifs')->withTimestamps();//->withPivot('id',"score");
+
+        return $this->belongsToMany(User::class, 'certifications')->withTimestamps();//->withPivot('id',"score");
+
+
     }
     public function ressources()
     {

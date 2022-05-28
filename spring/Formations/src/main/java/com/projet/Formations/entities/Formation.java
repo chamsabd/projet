@@ -58,11 +58,14 @@ public class Formation {
 	private float prix;
 	@OneToMany(mappedBy = "formation")
 	private List<Demande> demandes;
+	@NotNull
     @ManyToOne
 	@JoinColumn(name = "idResponsable")
 	 private User responsable;
 
-
+	 @ManyToOne
+	 @JoinColumn(name = "idFormateur")
+	  private User formateur;
 
 
 	public Formation() {
@@ -74,7 +77,7 @@ public class Formation {
 	public Formation(@NotNull @Size(min = 5, max = 30) String titreFormation,
 			@Null @Size(min = 15, max = 100) String description, @NotNull Date dateDebut, @NotNull Date dateFin,
 			@NotNull boolean etat, @NotNull @Min(10) @Max(30) int nbrPlace, @Min(0) float prix,
-			@NotNull User responsable) {
+			@NotNull User responsable,@NotNull User formateur) {
 		this.titreFormation = titreFormation;
 		this.description = description;
 		this.dateDebut = dateDebut;
@@ -83,7 +86,18 @@ public class Formation {
 		this.nbrPlace = nbrPlace;
 		this.prix = prix;
 		this.responsable = responsable;
+		this.formateur = formateur;
 	}
+
+	public User getFormateur() {
+		return formateur;
+	}
+
+
+	public void setFormateur(User formateur) {
+		this.formateur = formateur;
+	}
+
 
 	public User getResponsable() {
 		return responsable;

@@ -19,6 +19,7 @@ class CreateInscritsTable extends Migration
            // $table->date('date_inscrit'); 
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+
             $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();

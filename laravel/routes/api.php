@@ -4,10 +4,15 @@ use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\InscritController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
+
 use App\Http\Controllers\api\RessourseController;
+
+use App\Http\Controllers\api\CertificationController;
+use App\Http\Controllers\CertificationController as ControllersCertificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +65,18 @@ Route::prefix('/inscrit')->group(function(){
 Route::get('/users',[UserController::class,'index']);
 
 Route::get('/user/demandes',[demandesController::class,'userdemandes']);
+
+Route::prefix('/certif')->group(function (){
+Route::get('/list',[CertificationController::class,'index']);
+Route::delete('/{id}',[CertificationController::class,'destroy']);
+Route::put('/{id}',[CertificationController::class,'update']);
+
+});
+
+
+
+
+
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
@@ -71,10 +88,13 @@ Route::get('/demandes/formation/{form_id}',[demandesController::class,'getDemand
 
 
 
+Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
+
 Route::get('/users',[UserController::class,'index']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+    
 });
 
 Route::post('/login', [AuthController::class,'login']);
