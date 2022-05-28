@@ -1,28 +1,15 @@
 <template>
   <div id="app">
-  
-    
- 
 
     
     <router-view/>
   </div>
-  
 </template>
 <script>
-import "@/store/index";
   export default {
-    name: 'App',
-
-  
-  computed:{
-    loggedIn() {
-      return this.$store.getters.loggedIn;
-    }
-  }
+    name: 'App'
   }
 </script>
-
 <style>
 
 #app {
