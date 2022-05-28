@@ -16,7 +16,6 @@ class CreateCertificationsTable extends Migration
         Schema::create('certifications', function (Blueprint $table) {
             $table->id();
             $table->float('score')->nullable(); 
-            $table->string('nom');
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
