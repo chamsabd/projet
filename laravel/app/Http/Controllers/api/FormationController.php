@@ -28,15 +28,14 @@ class FormationController extends Controller
     {
         $formations=Formation::with('responsable','formateur','formateurexterne')->get();
          $formations_dem=User::find(9)->demandes; //Auth::id()
-        
 foreach ($formations as $key => $formation) {
+    $formation->send=true;
     foreach ($formations_dem as $key => $formation_dem) {
       if ($formation->id==$formation_dem->id) {
         $formation->send=false;
         break;
       }
-      else
-      $formation->send=true;
+      
     }
    
 }
