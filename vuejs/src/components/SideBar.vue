@@ -13,20 +13,17 @@
      
     </b-form-select></div></b-row>
         </b-container> 
-
-        
-
         <div class="menu-items">
          
             <router-link to="/" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                   Acceuil
+                   home
                 </div>
             </router-link>
 
              <router-link  :to="{ name: 'FormationsView', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                   Formations
+                   formations
                 </div>
             </router-link>
 
@@ -37,13 +34,12 @@
             </router-link>
       <!-- <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
                  <div class="link-container">admin</div></router-link>
-
              <router-link :to="`/formations/${'admin'}`" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                   Formations
+                   formations
                 </div>
             </router-link>   <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
-                 <div class="link-container">Participant (e)</div></router-link>
+                 <div class="link-container">participant</div></router-link>
              <router-link :to="`/formations/${'participant'}`" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    formations
