@@ -42,7 +42,7 @@ Route::prefix('/formation')->group(function(){
 Route::prefix('/certif')->group(function (){
 Route::get('/list',[CertificationController::class,'index']);
 Route::delete('/{id}',[CertificationController::class,'destroy']);
-Route::put('update/{id}',[CertificationController::class,'update']);
+Route::put('/{id}',[CertificationController::class,'update']);
 
 });
 

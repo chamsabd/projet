@@ -14,7 +14,7 @@ class CertificationSeeder extends Seeder
      */
     public function run()
     {
-        Certification::factory()->count(5)->create();
+        Certification::factory()->count(7)->create();
  
     }
 }
