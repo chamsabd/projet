@@ -22,7 +22,7 @@
         <td>{{seance.nom_seance}}</td>
         <td>
  
-        <b-button pill variant="outline-primary" @click="onRowClick(seance.name)">
+        <b-button pill variant="outline-primary" @click="onRowClick(seance.id)">
           <i class="bi bi-info-circle"></i>   
        <b-modal  id="my-modal" size="lg"   centered ok-only>
          <b-card   class="text-center">
@@ -36,8 +36,12 @@
 
        </b-modal>
           </b-button>
-      
-       
+      &emsp;
+        <b-button pill variant="outline-danger"
+                @click="deleteSeance(seance.id)"
+                  ><i class="bi bi-trash3"></i>
+                </b-button> 
+
             
                 
                 
@@ -97,11 +101,17 @@ export default {
       this.$bvModal.hide(id);
     },
     onRowClick(seance) {
-    // this.seance = seance
-    // console.log(this.seance);
+     this.seances.id = seance
+     console.log(this.seances);
     // if (seance==seance.id){console.log(seance)}
       this.showModal("my-modal");
     },
+     deleteSeance(id){
+             axios.delete( 'http://127.0.0.1:8000/api/seance/'+id)
+             .then(response=>this.seances=response)
+             .catch(error=>console.log(error))
+        }
+        ,
   }
   ,
   

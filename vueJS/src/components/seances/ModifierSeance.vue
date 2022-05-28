@@ -19,11 +19,7 @@
                         @seance-updated="refresh"
                         
         ></cont-edit-modal>    &emsp;     
- <b-button pill variant="outline-danger"
-                @click="deleteSeance(seance.id)"
-                  ><i class="bi bi-trash3"></i>
-                </b-button> 
-
+ 
 
         </div>
     </div>
@@ -62,8 +58,8 @@ export default {
                         this.temps_debut=response.data.temps_debut,
                         this.temps_fin=response.data.temps_fin})
       .catch(error => console.log(error));
-        }
-        ,
+        },
+       
         refresh (seances){
           this.seances= seances.data
         }

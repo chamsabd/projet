@@ -86,7 +86,8 @@ class SeanceController extends Controller
         $existingSeance = Seance::findorfail($id);
         if ($existingSeance ) {
             $existingSeance->delete();
-            return "Seance supprimé" ;
+
+            return $this->refresh() ;
         }
         else{
             return "Seance non trouvé" ;
