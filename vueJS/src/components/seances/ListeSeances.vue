@@ -37,15 +37,12 @@
        </b-modal>
           </b-button>
       
-          &emsp;
+       
             
                 
                 
                 
-                <b-button pill variant="outline-danger"
-                @click="deleteSeance(seance.id)"
-                  ><i class="bi bi-trash3"></i>
-                </b-button> 
+               
             
             <modifier-seance 
               :id_s="seance.id"

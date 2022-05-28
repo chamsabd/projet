@@ -15,8 +15,17 @@
                         :date="date" 
                         :temps_fin="temps_fin"
                         :temps_debut="temps_debut"
+                        :id="id"
+                        @seance-updated="refresh"
                         
-        ></cont-edit-modal>  </div>
+        ></cont-edit-modal>    &emsp;     
+ <b-button pill variant="outline-danger"
+                @click="deleteSeance(seance.id)"
+                  ><i class="bi bi-trash3"></i>
+                </b-button> 
+
+
+        </div>
     </div>
 </template>
 <script>
@@ -29,7 +38,7 @@ export default {
     data(){
             return{
                 revele: false,
-                                   
+                        id:null ,         
                         nom_seance:"",
                         date :"" ,
                         temps_fin:"",
@@ -46,8 +55,9 @@ export default {
             this.revele= !this.revele
         } ,
         getSeance(id){
-       axios.get('http://127.0.0.1:8000/api/seance/'+id,)
-      .then(response =>{this.nom_seance=response.data.nom_seance,
+       axios.get('http://127.0.0.1:8000/api/seance/'+id)
+      .then(response =>{this.id=response.data.id,
+                        this.nom_seance=response.data.nom_seance,
                         this.date=response.data.date,
                         this.temps_debut=response.data.temps_debut,
                         this.temps_fin=response.data.temps_fin})

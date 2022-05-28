@@ -13,14 +13,14 @@
 
   <div class="mb-3">
     <label for="date" class="form-label">Date De Seance</label>
-    <input type="date" class="form-control" name="date" id="date" required 
+    <input type="date" class="form-control" name="date" id="date"
     :value="date" @input="$emit('update:value', $event.target.value)"
     >
   </div>
 
 <div class="mb-3">
     <label for="temps_debut" class="form-label">Temps De Début De La Seance</label>
-    <input type="time" class="form-control" name="temps_debut" id="temps_debut" required 
+    <input type="time" class="form-control" name="temps_debut" id="temps_debut" 
     :value="temps_debut" @input="$emit('update:value', $event.target.value)"
     >
   </div>
@@ -33,8 +33,10 @@
   <div class="mb-3">
     <input type="hidden"  name="formation_id" id="formation_id" >
   </div>
-
-  <button type="submit" class="btn btn-primary" >Modifier</button> &nbsp;
+   
+  <button type="submit" class="btn btn-primary" @click="update" 
+  data-dismiss="modal"
+  >Modifier</button> &nbsp;
   <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
  
@@ -51,7 +53,7 @@
 
 <script>
 
-//import axios from 'axios';
+import axios from 'axios';
 
 
 export default {
@@ -67,14 +69,25 @@ export default {
       } },
     nom_seance:String,
     date:String  ,
-    
     temps_debut:String,
     temps_fin:String,
+    id:Number
  },
  data(){
    return {
     nom:this.nom_seance
  }},
+ methods:{
+   update(){
+     axios.put('http://127.0.0.1:8000/api/seance/'+this.id,{
+       nom_seance:this.nom,
+       date:this.date,
+       temps_debut:this.temps_debut,
+       temps_fin:this.temps_fin
+     }).then(response=>this.$emit('seance-updated',response))
+     .catch(error=>console.log(error)) ;
+   }
+ }
  } 
 
 </script>
