@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Client;
 use App\Models\Formation;
 use App\Models\Inscrit;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InscritFactory extends Factory
@@ -19,9 +20,10 @@ class InscritFactory extends Factory
       
         return [
           
-           //'client_id' =>Client::get('id')->unique()->random(),
+           'user_id' =>User::get('id')->unique()->random(),
+
             'formation_id' =>Formation::get('id')->unique()->random(),
-           'date_inscrit' =>$this->faker->unique()->date($format = 'Y-m-d', $max = 'now'),
+          // 'date_inscrit' =>now(),
            'created_at'=>now()  
         ];
     }

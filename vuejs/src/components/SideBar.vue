@@ -1,23 +1,43 @@
 <template>
     <div class="sidebar">
         <div class="title">
-          Bienvenue !
-        </div>
+           welcomme
+        </div> 
+        <b-container>
+        <b-row>
+        <div class="col-xs-2">  <b-form-select v-model="role" size="sm" >
+      
+      <b-form-select-option value="responsable">responsable</b-form-select-option>
+      <b-form-select-option value="admin" >admin</b-form-select-option>
+      <b-form-select-option value="participant" >participant</b-form-select-option>
+     
+    </b-form-select></div></b-row>
+        </b-container> 
+
+        
+
         <div class="menu-items">
+         
             <router-link to="/" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    Acceuil
                 </div>
             </router-link>
-             <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
-                 <div class="link-container">responsable</div></router-link>
-             <router-link :to="`/formations/${'responsable'}`" active-class="active" tag="button" exact class="side-btn">
+
+             <router-link  :to="{ name: 'FormationsView', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    Formations
                 </div>
             </router-link>
-      <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
-                 <div class="link-container">Admin</div></router-link>
+
+            <router-link v-if="role=='responsable'" :to="{ name: 'InscritsView'}" active-class="active" tag="button" exact class="side-btn">
+                <div class="link-container">
+                   les participants
+                </div>
+            </router-link>
+      <!-- <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
+                 <div class="link-container">admin</div></router-link>
+
              <router-link :to="`/formations/${'admin'}`" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    Formations
@@ -28,7 +48,7 @@
                 <div class="link-container">
                    formations
                 </div>
-            </router-link>
+            </router-link> -->
   
         </div>
     </div>
@@ -37,6 +57,33 @@
 <script>
 export default {
      name: "SideBar",
+      data: function () {
+    return {
+        role:this.$route.params.role?this.$route.params.role:'participant',
+    }},
+     computed: {
+        
+     }
+     ,watch: {
+ role:function () {
+     var r=this.$route.path;
+     console.log(r);
+      console.log(this.$route.params.role);
+      if (this.$route.params.role!=undefined) {
+           r= r.replace(this.$route.params.role, this.role);
+     console.log(r);
+ this.$router.push(r);
+      }
+      else {
+         if (this.$route.path != '/') {
+    this.$router.push("/");
+}
+           
+      }
+   
+ 
+ }},
+
 }
 </script>
 

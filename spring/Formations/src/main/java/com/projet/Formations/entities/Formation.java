@@ -1,48 +1,111 @@
 package com.projet.Formations.entities;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
+
+import org.apache.jasper.tagplugins.jstl.core.When;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	private Long idFormation;
-	private String nomFormation;
+	
+@NotNull @Size(min = 5, max = 30)
+	private String titreFormation;
+	
+	@Size(max = 100)
 	private String description;
+	
+@NotNull @Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@FutureOrPresent
 	private Date dateDebut;
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Future
 	private Date dateFin;
-	private Date dateCertif;
+	@NotNull
 	private boolean etat;
+	@NotNull
+	@Min(10)
+	@Max(30)
 	private int nbrPlace;
-
+	@Min(0)
+	private float prix;
 	@OneToMany(mappedBy = "formation")
 	private List<Demande> demandes;
+	@NotNull
+    @ManyToOne
+	@JoinColumn(name = "idResponsable")
+	 private User responsable;
+
+	 @ManyToOne
+	 @JoinColumn(name = "idFormateur")
+	  private User formateur;
+
 
 	public Formation() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public Formation(String nomFormation, String description, Date dateDebut, Date dateFin, Date dateCertif,
-			boolean etat, int nbrPlace) {
-		super();
 
-		this.nomFormation = nomFormation;
+	public Formation(@NotNull @Size(min = 5, max = 30) String titreFormation,
+			@Null @Size(min = 15, max = 100) String description, @NotNull Date dateDebut, @NotNull Date dateFin,
+			@NotNull boolean etat, @NotNull @Min(10) @Max(30) int nbrPlace, @Min(0) float prix,
+			@NotNull User responsable,@NotNull User formateur) {
+		this.titreFormation = titreFormation;
 		this.description = description;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.dateCertif = dateCertif;
 		this.etat = etat;
 		this.nbrPlace = nbrPlace;
+		this.prix = prix;
+		this.responsable = responsable;
+		this.formateur = formateur;
 	}
 
+	public User getFormateur() {
+		return formateur;
+	}
+
+
+	public void setFormateur(User formateur) {
+		this.formateur = formateur;
+	}
+
+
+	public User getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(User responsable) {
+		this.responsable = responsable;
+	}
 	public Long getIdFormation() {
 		return idFormation;
 	}
@@ -51,12 +114,12 @@ public class Formation {
 		this.idFormation = idFormation;
 	}
 
-	public String getNomFormation() {
-		return nomFormation;
+	public String getTitreFormation() {
+		return titreFormation;
 	}
 
-	public void setNomFormation(String nomFormation) {
-		this.nomFormation = nomFormation;
+	public void setTitreFormation(String titreFormation) {
+		this.titreFormation = titreFormation;
 	}
 
 	public String getDescription() {
@@ -83,14 +146,6 @@ public class Formation {
 		this.dateFin = dateFin;
 	}
 
-	public Date getDateCertif() {
-		return dateCertif;
-	}
-
-	public void setDateCertif(Date dateCertif) {
-		this.dateCertif = dateCertif;
-	}
-
 	public boolean isEtat() {
 		return etat;
 	}
@@ -107,11 +162,20 @@ public class Formation {
 		this.nbrPlace = nbrPlace;
 	}
 
-	@Override
-	public String toString() {
-		return "Formation [idFormation=" + idFormation + ", nomFormation=" + nomFormation + ", description="
-				+ description + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", dateCertif=" + dateCertif
-				+ ", etat=" + etat + ", nbrPlace=" + nbrPlace + "]";
+	public float getPrix() {
+		return prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+	public List<Demande> getDemandes() {
+		return demandes;
+	}
+
+	public void setDemandes(List<Demande> demandes) {
+		this.demandes = demandes;
 	}
 
 }

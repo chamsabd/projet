@@ -1,22 +1,28 @@
 package com.projet.Formations.service;
 
-//import java.util.Date;
+
+
+
+import java.util.List;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 
 import com.projet.Formations.entities.Formation;
+import com.projet.Formations.entities.User;
 
 public interface FormationService {
+	List<Formation> getAllFormations(String etat);
 	Formation saveFormation(Formation f);
 	Formation updateFormation(Formation f);
-	void deleteFormationparif(Long id);
+	void deleteFormationparid(Long id);
 	Formation getFormation(Long id);
-	Page<Formation> getAllFormationparpage(int page,int size);
-	 Page<Formation> findByNomFormationContains(String nom,Pageable pageable);
 
-//	 Page<Formation> findByDateDebutFormationContains(Date datedebut,Pageable pageable);
-//	 Page<Formation> findByDateCertifFormationContains(Date datecertif,Pageable pageable);
+	Page<Formation> getAllFormationsparpage(User user,String profile,int page,int size);
+
+	 Page<Formation> findByTitreFormationContains(String titreFormation,Pageable pageable);
+
 
 }

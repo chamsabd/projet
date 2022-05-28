@@ -14,7 +14,6 @@ class CreateFormationsTable extends Migration
     public function up()
     {
         Schema::create('formations', function (Blueprint $table) {
-            
             $table->id();
             $table->string('titre');
             $table->date('date_debut');
@@ -23,7 +22,7 @@ class CreateFormationsTable extends Migration
             $table->foreignId('responsable_id')->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('formateur_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('formateurexterne_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');//change to formatuer externe
-
+            $table->decimal("prix");
             $table->boolean('etat');
             $table->integer('nbr_place');
             $table->timestamps();

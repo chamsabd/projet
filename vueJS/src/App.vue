@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
 
@@ -7,7 +8,11 @@
 </template>
 <script>
   export default {
-    name: 'App'
+    name: 'App',
+      data: function () {
+    return {
+      
+    }},
   }
 </script>
 <style>
@@ -25,3 +30,4 @@ body {
   box-sizing: border-box;
 }
 </style>
+

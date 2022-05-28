@@ -66,11 +66,7 @@ public class Demande {
 		this.dateDemande = dateDemande;
 	}
 
-	@Override
-	public String toString() {
-		return "Demande [idDemande=" + idDemande + ", idUtilisateur=" + idUtilisateur + ", formation=" + formation
-				+ ", dateDemande=" + dateDemande + ", toString()=" + super.toString() + "]";
-	}
+
 
 }
 
