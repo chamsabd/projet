@@ -1,5 +1,6 @@
 
 import Vue from 'vue'
+import './plugins/axios'
 import App from './App.vue'
 //import router from "../../trash/router";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
