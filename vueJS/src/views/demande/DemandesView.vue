@@ -1,37 +1,83 @@
 <template>
+<div>
+  <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="info"
+      @dismissed="dismissCountDown=0"
 
-    <afficherdemandes :demande="demande" />
+      @dismiss-count-down="countDownChanged"
+    >
+    <h6 aria-describedby="help-block">  {{alert}}  </h6>
 
+      <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
+      <b-progress
+        variant="info"
+        :max="dismissSecs"
+        :value="dismissCountDown"
+        height="4px"
+      ></b-progress>
+    </b-alert>
+    <AfficherDemande :d="demandes" @respon="respon"/>
+</div>
 </template>
 
 <script>
 //import axios from "axios";
-import AfficherDemandes from "@components/demande/afficherDemandes.vue";
 
+import axios from "axios";
 //import DataTable from "vue-materialize-datatable";
 //import ArchiverItem from "@/components/ArchiverItem";
-
+import AfficherDemande from '../../components/demande/afficherDemandes.vue';
 export default {
   name: "DemandesView",
   components: {
- AfficherDemandes,
+ AfficherDemande,
   },
   data: function () {
-    return {
-      tableColumns1: [
-     
-        {
-          label: "date demande",
-          field: "date_demande",
-          numeric: true,
-          html: false,
-        },
-      ],
+    return {     
+      demandes:[],
+       dismissSecs: 10,
+        dismissCountDown: 0,
+        alert:"",
 
-      demandes: [],
-      demande:{},
     };
+  }, 
+   computed:{
+form_id(){
+  return this.$route.params.id;
+},
   },
+  
+  mounted() {
+   this.getdemandes();
+  },
+watch: {
+ form_id:function () {
+  this.getdemandes();
+ }
+},
+    methods: {
+       countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      },
+       respon(alert){
+        if(alert!='none'){
+    this.alert=alert;
+this.showAlert();}
+    this.getdemandes();
+  },
+    async getdemandes() {
+ await  axios
+        .get("http://127.0.0.1:8000/api/demandes/formation/"+this.form_id)
+        .then((response) => {
+          this.demandes = response.data;
+        })
+        .catch((error) => console.log(error.response));
+    },}
 };
 </script>
 

@@ -10,8 +10,8 @@ class Resource extends Model
     use HasFactory;
   
     
-    public function seance()
+    public function formation()
     {
-        return $this->belongsTo(Seance::class,'id_seance','id_seance');
+        return $this->belongsTo(Formation::class);
     }
 }
