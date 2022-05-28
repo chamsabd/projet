@@ -10,7 +10,7 @@
     
         <b-form-input
           id="input-1"
-          v-model="form.email"
+          v-model="user.email"
           type="email"
           placeholder="Enter email"
           required
@@ -20,7 +20,7 @@
       <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
         <b-form-input
           type="password"
-          v-model="form.password"
+          v-model="user.password"
           placeholder="Enter password"
           required
         ></b-form-input>
@@ -33,13 +33,13 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-
+//import axios from "axios";
+import "@/store/index";
   export default {
     
     data() {
       return {
-        form: {
+        user: {
           email: '',
           password: '',
         },
@@ -62,19 +62,23 @@ import axios from "axios";
      //   alert(JSON.stringify(this.form))
         //console.log(this.form.email);
        // console.log(this.form.password);
-        await axios.get('/sanctum/csrf-cookie')
-        await axios({
-         url:"http://127.0.0.1:8000/api/login",
-         method:"post",
-         data:this.form
-       }).then (reponse=>{
-        console.log(reponse);
-      })
+       console.log(this.user.email);
+      console.log(this.user.password);
+     /* axios.post('http://localhost:8000/api/login',this.user 
+       ).then(response=>{
+         console.log(response.data);
+       }) 
+       */
+    this.$store.dispatch("login", this.user).then(() => {
+      this.$router.push("/");
        }
+      );
       
+           
+     
+    
+    
     }
-    
-    
-    
+  }
   }
 </script>

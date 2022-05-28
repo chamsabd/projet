@@ -6,10 +6,19 @@
   </div>
 </template>
 <script>
+import "@/store/index";
   export default {
-    name: 'App'
+    name: 'App',
+
+  
+  computed:{
+    loggedIn() {
+      return this.$store.getters.loggedIn;
+    }
+  }
   }
 </script>
+
 <style>
 
 #app {
