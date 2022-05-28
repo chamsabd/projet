@@ -10,21 +10,18 @@
     :value="nom_seance" @input="$emit('update:value', $event.target.value)"  
     >
   </div>
-
   <div class="mb-3">
     <label for="date" class="form-label">Date De Seance</label>
     <input type="date" class="form-control" name="date" id="date"
     :value="date" @input="$emit('update:value', $event.target.value)"
     >
   </div>
-
 <div class="mb-3">
     <label for="temps_debut" class="form-label">Temps De Début De La Seance</label>
     <input type="time" class="form-control" name="temps_debut" id="temps_debut" 
     :value="temps_debut" @input="$emit('update:value', $event.target.value)"
     >
   </div>
-
   <div class="mb-3">
     <label for="temps_fin" class="form-label">Temps De Fin De La Seance</label>
     <input type="time" class="form-control" name="temps_fin" id="temps_fin" required
@@ -33,29 +30,16 @@
   <div class="mb-3">
     <input type="hidden"  name="formation_id" id="formation_id" >
   </div>
-   
-  <button type="submit" class="btn btn-primary" @click="update" 
-  data-dismiss="modal"
-  >Modifier</button> &nbsp;
+  <button type="submit" class="btn btn-primary" 
+  @click="update"
+  data-dismiss="modal">Modifier</button> &nbsp;
   <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
- 
     </div>
-
-
-
-
-
-    
        </div>
-
 </template>
-
 <script>
-
 import axios from 'axios';
-
-
 export default {
  name: 'cont-edit-modal',
  //props:["SeanceToEdit","revele","toggleModale"],
@@ -85,17 +69,16 @@ export default {
        temps_debut:this.temps_debut,
        temps_fin:this.temps_fin,
        //id_foramtion:78
-     }).then(response=>console.log(response))
-       /* console.log(this.nom_seance),
+     }).then(response=>console.log(response),
+        console.log(this.nom_seance),
         console.log(this.date),
         console.log(this.temps_debut),
-        console.log(this.temps_fin)
-     )*/
+        console.log(this.temps_fin))
      .catch(error=>console.log(error)) ;
    }
  }
  } 
-
+//this.$emit('seance-updated',response)
 </script>
 <style  scoped>
 .bloc-modale {

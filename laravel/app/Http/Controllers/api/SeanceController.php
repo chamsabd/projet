@@ -34,7 +34,7 @@ class SeanceController extends Controller
    $newSeance->date = $request->seance["date"];
    $newSeance->temps_fin = $request->seance["temps_fin"];
    $newSeance->temps_debut = $request->seance["temps_debut"];
-   $newSeance->temps_debut = $request->seance["formation_id"];  
+   $newSeance->formation_id = $request->seance["formation_id"];  
    $newSeance->save() ;
    if($newSeance){
     return $this->refresh();
@@ -65,10 +65,10 @@ class SeanceController extends Controller
     public function update(Request $request, $id)
     {
           $seance=Seance::find($id);
-          $seance->nom_seance =$request->seance["nom_seance"];
-          $seance->date =$request->seance["date"];
-          $seance->temps_debut =$request->seance["temps_debut"];
-          $seance->temps_fin =$request->seance["temps_fin"];
+          $seance->nom_seance =$request->nom_seance;
+          $seance->date =$request->date;
+          $seance->temps_debut =$request->temps_debut;
+          $seance->temps_fin =$request->temps_fin;
           $seance->save();
           if($seance){
                return $this->refresh();
@@ -107,8 +107,7 @@ class SeanceController extends Controller
     }
 
 private function refresh(){
-    $seance = Seance::orderBy('created_at','DESC');
-    return response()->json($seance);
+    return response()->json(Seance::orderBy('created_at','DESC'));
 }
 
 }

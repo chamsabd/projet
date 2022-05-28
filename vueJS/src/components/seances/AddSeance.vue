@@ -26,7 +26,7 @@
   <div class="mb-3">
     <input type="hidden"  name="formation_id" id="formation_id" v-model="seance.formation_id">
   </div>
-
+{{this.$route.params.id}}
   <button type="submit" class="btn btn-primary" @click="addSeance">Valider</button> &nbsp;
   <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
