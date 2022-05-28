@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="template">
+ 
+<link rel="stylesheet" type="text/css"
+href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des Demandes</title>
+</head>
+  <body>
+    <div layout:fragment="Mycontent">
+    <div class="container">
+    <div class="card">
+     <div class="card-header">
+     Liste des demandes
+     </div>
+     <div class="card-body"> 
+     <form th:action="@{listeDemandes(page=${currentPage},size=${size}}" method="get">
+    
+    
+     </form>
+     <table class="table table-striped">
+     <tr>
+     <th>ID</th><th>id Demande</th>Formation<th> </th><th>Nom de l'utlisateur </th> <th>date Demande</th>
+     </tr> 
+     <tr th:each="p:${Demandes.content}">
+     <td th:text="${p.idDemande}"></td>
+     <td th:text="${p.idFormation}"></td>
+     <td th:text="${p.idUser}"></td>
+     <td th:text="${p.dateDemande}"></td> 
+     
+     
+     </tr>
+      
+    </table>
+    <!-- Modal -->
+    
+    
+     <ul class="nav nav-pills">
+     <li th:each="page,status:${pages}">
+     <a th:class="${status.index==currentPage?'btn btn-primary':'btn' 
+    }" 
+     th:href="@{ListeFormations(page=${status.index}, size=${size},nom=${nom} ) }"
+     th:text="${status.index }"></a>
+     </li>
+     </ul>
+     
+     </div>
+    </div>
+    </div>
+    </div>
+    </body>
+
+
+</html>

@@ -50,6 +50,12 @@ href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
  <td th:text="${p.titreFormation}"></td>
  <td th:text="${p.dateDebut}"></td> 
  <td>
+  <a class="btn btn-outline-warning"  th:href="@{SendDemande?(profile=${profile},id=${p.idFormation})}"
+    > 
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+    <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+  </svg> Envoyer Demande
+</a>
 <a  class="btn btn-outline-warning" sec:authorize="hasAnyAuthority('ADMIN')"
  th:href="@{modifierFormation?(id=${p.idFormation}, etat='update',
 page=${currentPage},size=${size})}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -90,7 +96,6 @@ data-toggle="modal" th:data-target="'#exampleModal'+${p.idFormation}"><svg xmlns
     </div>
   </div>
 </div>
-
 </td> 
  
  </tr>
@@ -109,6 +114,8 @@ data-toggle="modal" th:data-target="'#exampleModal'+${p.idFormation}"><svg xmlns
  </ul>
  
  </div>
+<a th:href="@{listeDemandes(page=${currentPage},size=${size})}"  sec:authorize="hasAnyAuthority('ADMIN')"> Listes ds Demandes</a>
+
 </div>
 </div>
 </div>

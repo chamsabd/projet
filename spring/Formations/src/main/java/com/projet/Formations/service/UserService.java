@@ -69,7 +69,9 @@ public class UserService implements  UserDetailsService{
 		 User user = userRepository.findUserWithName(username).orElseThrow(() -> new UsernameNotFoundException("User not found")); 
 		 return user;
 	}
-	
+	public User UserSave(User user) {
+		return userRepository.save(user);
+	}
 
 	public List<User> getAllResponsables() { 
 	 return userRepository.findAll(); 
