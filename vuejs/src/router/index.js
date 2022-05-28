@@ -34,13 +34,6 @@ const routes = [
           name: 'InscritsView',
           component: InscritsView
         },
-     
-    
-   
-  
-  
-        
-
          {
           path: '/ressource/:id',
           name: 'ListerRessource',
@@ -51,19 +44,9 @@ const routes = [
     name: 'DemandesView',
     component: DemandesView
   },
-   {
-          path:'/listesCertifs',
-          name:'listeCertif',
-          component:CertifView,
-
-        }
-       
     ]
    
   },
-
-
-
 
  
   // {
