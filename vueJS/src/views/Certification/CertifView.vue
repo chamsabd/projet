@@ -1,5 +1,24 @@
 <template>
-<certif-list :certifications="certifications"> </certif-list>
+<div>
+   <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="info"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+    >
+    <h6 aria-describedby="help-block">  {{alert}}</h6>
+      <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
+      <b-progress
+        variant="info"
+        :max="dismissSecs"
+        :value="dismissCountDown"
+        height="4px"
+      ></b-progress>
+    </b-alert>
+    <certif-list @updatecertif="updatecertif" :certifications="certifications"> </certif-list>
+
+    </div>
 </template>
 <script>
 import CertifList from '@/components/Certification/CertifList'
@@ -11,6 +30,9 @@ export default {
    data(){
        return{
          certifications:[],
+         dismissSecs: 10,
+        dismissCountDown: 0,
+        alert:'',
        }
    },
     mounted() {
@@ -26,8 +48,21 @@ export default {
         .catch((error) => console.log(error.response));
     },
 
-
+    updatecertif(alert){
+      this.getCertifications();
+      this.showAlert();
+  this.alert=alert;
+    },countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+         showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      },
     }
+     
+
+
+    
         
    
 }
