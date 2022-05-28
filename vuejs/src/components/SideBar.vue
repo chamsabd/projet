@@ -10,7 +10,7 @@
       <b-form-select-option value="responsable">responsable</b-form-select-option>
       <b-form-select-option value="admin" >admin</b-form-select-option>
       <b-form-select-option value="participant" >participant</b-form-select-option>
-     
+      <b-form-select-option value="formateur" >formateur</b-form-select-option>
     </b-form-select></div></b-row>
         </b-container> 
 

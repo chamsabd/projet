@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Formation;
 use App\Models\Seance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,10 +16,10 @@ class ResourceFactory extends Factory
     public function definition()
     {
         return [
-            'url'=>$this->faker->file($sourceDir = 'public', $targetDir = 'storage\img'),
-           'type'=>$this->faker->fileExtension(),
+            'url'=>$this->faker->file($sourceDir = 'public', $targetDir = 'storage\app\files'),
+          'titre'=>$this->faker->word,
           // 'id_seance'=>$this->faker->numberBetween(10, 500),
-           'seance_id'=>Seance::get('id')->random(),
+           'formation_id'=>Formation::get('id')->random(),
            'created_at'=>now()
         ];
     }

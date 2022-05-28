@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\mail as MailMail;
 use App\Models\Formation;
 use App\Models\User;
+use App\Mail\mail as testMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Mail\Mailable;
+
 class FormationController extends Controller
 {
 
@@ -30,13 +36,17 @@ class FormationController extends Controller
          $formations_dem=User::find(9)->demandes; //Auth::id()
         
 foreach ($formations as $key => $formation) {
+   
     foreach ($formations_dem as $key => $formation_dem) {
-      if ($formation->id==$formation_dem->id) {
+      if ($formation->id!=$formation_dem->id) {
+        $formation->send=true;
+              }
+      else{
         $formation->send=false;
         break;
       }
-      else
-      $formation->send=true;
+     
+     
     }
    
 }
@@ -51,7 +61,7 @@ foreach ($formations as $key => $formation) {
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
 
-       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
+       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',9)->get();
 
     }
   
@@ -63,7 +73,7 @@ foreach ($formations as $key => $formation) {
     public function formateurindex()
     {
 
-        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',1)->get();
+        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',9)->get();
     }
     /**
      * Store a newly created resource in storage.
@@ -151,6 +161,17 @@ foreach ($formations as $key => $formation) {
         }
         
     }
+    public function test()
+    {
+       $details=[
+           'title'=>'mail from iset',
+           'body' =>'test est'
+       ];
+       Mail::to("isetbizerteformation@gmail.com")->send(new testMail($details));
+   
+        }
+        
+    
     private function validationRules()
     {    
         return [

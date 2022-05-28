@@ -23,8 +23,10 @@ href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
   </button>
 </div>
  <div class="card-body"> 
+
  <form th:action="@{ ListeFormations(profile=${profile},page=${currentPage}, size=${size},nom=${nom} ) }" method="get">
   <div class="row row-cols-2">
+
  <div class="input-group mb-3 col-md-6">
  <input class="form-control" list="datalistOptions" id="exampleDataList" th:value="${nom}" name="nom" placeholder="Type to search...">
 <datalist id="datalistOptions" >
