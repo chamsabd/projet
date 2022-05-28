@@ -33,19 +33,13 @@ const routes = [
           path: '/inscrits',
           name: 'InscritsView',
           component: InscritsView
-<<<<<<< HEAD
-        }
-     
-    ]
-   
-  },
-  {
-    path: '/demande',
-    name: 'afficherDemandes',
-    component: afficherDemandes
-  }
-=======
         },
+     
+    
+   
+  
+  
+        
 
          {
           path: '/ressource/:id',
@@ -56,7 +50,8 @@ const routes = [
     path: '/demandes/:id',
     name: 'DemandesView',
     component: DemandesView
-  }, {
+  },
+   {
           path:'/listesCertifs',
           name:'listeCertif',
           component:CertifView,
@@ -69,7 +64,7 @@ const routes = [
 
 
 
->>>>>>> c8f4f595abc708ccd762b14e7acf04bbfd85de59
+
  
   // {
   //   path: '/demandes',
