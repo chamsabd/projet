@@ -24,35 +24,23 @@ class SeanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-           'formation_id' => 'exists:formations,id',
-          // 'nom_seance' => 'required ',
-          // 'date'=>'after:tomorrow'
-        ]);
-       $newSeance = new Seance() ;
- //Seance::create($request->all());
-      /* $newSeance = Seance::create([
-             'nom_seance' => $request->nom_seance,
-             'date' => $request->date,
-             'temps_fin' => $request->temps_fin,
-             'temps_debut' => $request->temps_debut ,
-             'formation_id' => $request->formation_id 
-       ]);*/
-
-      $newSeance->nom_seance = $request->seance["nom_seance"];
-      $newSeance->date = $request->seance["date"];
-      $newSeance->temps_fin = $request->seance["temps_fin"];
-      $newSeance->temps_debut = $request->seance["temps_debut"];
-      $newSeance->temps_debut = $request->seance["formation_id"];
-     // $newSeance->temps_debut = $request->seance["temps_debut"];
-     // $newSeance->nom_seance = $request->nom_seance;
-     // $newSeance->date = $request->date;
-     // $newSeance->temps_fin = $request->temps_fin;
-     // $newSeance->temps_debut = $request->temps_debut;
-     // $newSeance->temps_debut = $request->formation_id;  
-       $newSeance->save() ;
-       return $newSeance ; 
+    { $request->validate([
+        'formation_id' => 'exists:formations.id',
+       // 'nom_seance' => 'required ',
+       // 'date'=>'after:tomorrow'
+     ]);
+    $newSeance = new Seance() ;
+   $newSeance->nom_seance = $request->seance["nom_seance"];
+   $newSeance->date = $request->seance["date"];
+   $newSeance->temps_fin = $request->seance["temps_fin"];
+   $newSeance->temps_debut = $request->seance["temps_debut"];
+   $newSeance->temps_debut = $request->seance["formation_id"];  
+   $newSeance->save() ;
+   if($newSeance){
+    return $this->refresh();
+}
+  // return $newSeance ; 
+ 
     }
 
     /**
@@ -76,21 +64,15 @@ class SeanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $existingSeance = Seance::findorfail($id);
-        if ($existingSeance ) {
-        $existingSeance->nom_seance=$request->seance["nom_seance"];
-        $existingSeance->date=$request->seance["date"];
-        $existingSeance->nom_seance=$request->seance["temps_fin"];
-        $existingSeance->nom_seance=$request->seance["temps_debut"];
-       // $existingSeance->formation_id=$request->seance["formation_id"];
-       // $existingSeance->nom_seance=$request->nom_seance;
-       // $existingSeance->date=$request->date;
-       // $existingSeance->nom_seance=$request->temps_fin;
-       // $existingSeance->nom_seance=$request->temps_debut;
-       // $existingSeance->save();
-        return $existingSeance ;
-        }
-       else{ return "Seance non trouvé";}
+          $seance=Seance::find($id);
+          $seance->nom_seance =$request->seance["nom_seance"];
+          $seance->date =$request->seance["date"];;
+          $seance->temps_debut =$request->seance["temps_debut"];
+          $seance->temps_fin =$request->seance["temps_fin"];
+          $seance->save();
+          if($seance){
+               return $this->refresh();
+          }
     }
 
     /**
@@ -122,6 +104,11 @@ class SeanceController extends Controller
 
             ];
     }
+
+private function refresh(){
+    $seance = Seance::orderBy('created_at','DESC');
+    return response()->json($seance);
+}
 
 }
 
