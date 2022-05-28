@@ -66,7 +66,7 @@ class SeanceController extends Controller
     {
           $seance=Seance::find($id);
           $seance->nom_seance =$request->seance["nom_seance"];
-          $seance->date =$request->seance["date"];;
+          $seance->date =$request->seance["date"];
           $seance->temps_debut =$request->seance["temps_debut"];
           $seance->temps_fin =$request->seance["temps_fin"];
           $seance->save();

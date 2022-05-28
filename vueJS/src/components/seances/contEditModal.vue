@@ -80,11 +80,17 @@ export default {
  methods:{
    update(){
      axios.put('http://127.0.0.1:8000/api/seance/'+this.id,{
-       nom_seance:this.nom,
+       nom_seance:this.nom_seance,
        date:this.date,
        temps_debut:this.temps_debut,
-       temps_fin:this.temps_fin
-     }).then(response=>this.$emit('seance-updated',response))
+       temps_fin:this.temps_fin,
+       //id_foramtion:78
+     }).then(response=>console.log(response))
+       /* console.log(this.nom_seance),
+        console.log(this.date),
+        console.log(this.temps_debut),
+        console.log(this.temps_fin)
+     )*/
      .catch(error=>console.log(error)) ;
    }
  }

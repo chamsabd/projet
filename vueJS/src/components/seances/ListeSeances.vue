@@ -101,8 +101,10 @@ export default {
       this.$bvModal.hide(id);
     },
     onRowClick(seance) {
-     this.seances.id = seance
-     console.log(this.seances);
+      this.seances.id= seance.id
+    // console.log(this.seances.id);
+    // this.seance = seance
+    // console.log(this.seance);
     // if (seance==seance.id){console.log(seance)}
       this.showModal("my-modal");
     },
