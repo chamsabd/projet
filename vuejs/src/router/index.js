@@ -5,7 +5,7 @@ import Dashboard from '@/views/Dashboard'
 
 
 //import DemandesView from '@/views/demande/DemandesView'
-import afficherDemandes from '@/components/demande/afficherDemandes'
+import DemandesView from '@/views/demande/DemandesView'
 import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
 import ListerRessource from '@/views/ressource/ListerRessource'
@@ -39,15 +39,15 @@ const routes = [
           name: 'ListerRessource',
           component: ListerRessource
         },
-     
+       {
+    path: '/demandes/:id',
+    name: 'DemandesView',
+    component: DemandesView
+  },
     ]
    
   },
-  {
-    path: '/demande',
-    name: 'afficherDemandes',
-    component: afficherDemandes
-  }
+
  
   // {
   //   path: '/demandes',

@@ -52,8 +52,6 @@ import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
-
-
 import AddFormation from '../../components/formation/AddFormation.vue';
 import AddRessource from '../ressource/AddRessource.vue';
 
@@ -177,26 +175,7 @@ this.$router.push({ path: `/ressource/${row.id}` });
     },
 
     getDemandeByFormation(id) {
-      console.log(id);
-    // var demande={};
-    //     demande.formation_id=this.d.row.id;
-        
-    //   axios(
-    //   {   url: 'http://127.0.0.1:8000/api/demandes/'+id,
-    //         method: 'get',
-    //         data: demande,
-    //       })
-    //   .then((response) => {
-    //     console.log(response);
-          
-    //     })
-     axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
-    .then((response) => {
-      this.d = response.data;
-      console.log(this.d);
-      window.location.href = '/demande';
-    })
-    .catch((error) => console.log(error.response));
+this.$router.push({ path: `/demandes/${id}` });
     },
   },
 };

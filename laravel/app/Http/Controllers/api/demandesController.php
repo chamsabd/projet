@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\demandeResource;
 use App\Models\Demande;
+use App\Models\Formation;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -36,12 +37,9 @@ class demandesController extends Controller
     {
         // $Demande = Demande::FindOrFail($id);
         // return new demandeResource($Demande);
-        $data = DB::table("formations")
-            ->join("demandes", "formations.id", "demandes.formation_id")
-            ->where("formations.id", "=", $form_id)
-            ->select("formations.titre", "demandes.*")
-            ->get();
-        return $data;
+        $formation=Formation::find($form_id);
+    
+        return $formation->demandes()->get();
     }
     /**
      * Store a newly created resource in storage.

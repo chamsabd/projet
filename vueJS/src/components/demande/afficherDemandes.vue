@@ -12,7 +12,6 @@
     />
       <th slot="thead-tr">Actions</th> -->
 
-      
     </datatable>
   </div>
 </template>
@@ -29,31 +28,26 @@ export default {
 
   },
   props: {
-    d:Object
+    d:Array
   },
  data: function () {
     return {
         
      formation_id: " ",
       tableColumns1: [
-        {
-          label: "nom formation",
-          field: "titre",
+       {
+          label: "email utilisateur",
+          field: "email",
           numeric: false,
           html: false,
         },
         {
           label: "date demande",
-          field: "date_demande",
+          field: "pivot.created_at",
           numeric: true,
           html: false,
         },
-        {
-          label: "nom utilisateur",
-          field: "nom",
-          numeric: false,
-          html: false,
-        },
+       
       ],
 
     

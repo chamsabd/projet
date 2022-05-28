@@ -38,6 +38,7 @@ Route::get('/formateur/formations',[FormationController::class,'formateurindex']
     Route::get('/{id}',[FormationController::class,'show']);
   
 });
+Route::get('/mail',[FormationController::class,'test']);
 Route::prefix('/ressource')->group(function(){
     Route::post('/url',[RessourseController::class,'url']);
     Route::post('/store',[RessourseController::class,'store']);

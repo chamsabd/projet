@@ -24,7 +24,7 @@ class Formation extends Model
     } 
     public function demandes()
     {
-        return $this->belongsToMany(User::class, 'demandes');
+        return $this->belongsToMany(User::class, 'demandes')->withTimestamps()->withPivot('id');
     }
     public function inscrits()
     {
@@ -32,7 +32,7 @@ class Formation extends Model
     }
     public function certifs()
     {
-        return $this->belongsToMany(User::class, 'certifs');
+        return $this->belongsToMany(User::class, 'certifs')->withTimestamps();//->withPivot('id',"score");
     }
     public function ressources()
     {

@@ -68,7 +68,6 @@ watch: {
   this.getformations();
  }
 },
- 
   mounted() {
     this.getformations();
   },
@@ -78,7 +77,7 @@ watch: {
         .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
         .then((response) => {
           this.formations = response.data;
-      
+   
         })
         .catch((error) => console.log(error.response));
     },
@@ -89,12 +88,13 @@ watch: {
         this.dismissCountDown = this.dismissSecs
       },
   Add(alert){
+   
     if(alert!='none'){
     this.alert=alert;
 this.showAlert();
 }
 
-this.getformations();
+ this.getformations();
 
   },
     onAddClick() {
