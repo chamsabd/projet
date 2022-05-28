@@ -1,29 +1,29 @@
 <template>
     <div class="sidebar">
         <div class="title">
-           welcomme
+          Bienvenue !
         </div>
         <div class="menu-items">
             <router-link to="/" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                   home
+                   Acceuil
                 </div>
             </router-link>
              <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
                  <div class="link-container">responsable</div></router-link>
              <router-link :to="`/formations/${'responsable'}`" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                   formations
+                   Formations
                 </div>
             </router-link>
       <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
-                 <div class="link-container">admin</div></router-link>
+                 <div class="link-container">Admin</div></router-link>
              <router-link :to="`/formations/${'admin'}`" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                   formations
+                   Formations
                 </div>
             </router-link>   <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
-                 <div class="link-container">participant</div></router-link>
+                 <div class="link-container">Participant (e)</div></router-link>
              <router-link :to="`/formations/${'participant'}`" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    formations
