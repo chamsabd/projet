@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Dashboard from '@/views/Dashboard'
@@ -10,11 +9,16 @@ import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
 import ListerRessource from '@/views/ressource/ListerRessource'
 import CalenderView from '@/views/CalenderView'
-Vue.use(VueRouter)
 
+import LoginView from '@/views/LoginView'
+import registerView from '@/views/registerView'
+//import CertifList from '@/components/Certification/CertifList'
+import CertifView from '@/views/Certification/CertifView'
+import Vue from 'vue'
+
+Vue.use(VueRouter)
 const routes = [
   {
-
     path: '/',
 
     component: Dashboard,
@@ -30,10 +34,12 @@ const routes = [
           component: FormationsView
         },
         {
+
           path: '/inscrits',
           name: 'InscritsView',
           component: InscritsView
         },
+
          {
           path: '/ressource/:id',
           name: 'ListerRessource',
@@ -43,10 +49,18 @@ const routes = [
     path: '/demandes/:id',
     name: 'DemandesView',
     component: DemandesView
-  },
+  }, {
+          path:'/listesCertifs',
+          name:'listeCertif',
+          component:CertifView,
+
+        }
+       
     ]
    
   },
+
+
 
  
   // {
@@ -54,6 +68,17 @@ const routes = [
   //   name: 'DemandesView',
   //   component: DemandesView
   // },
+  {
+    path: '/login',
+    name: 'LoginView',
+    component: LoginView
+  },
+
+  {
+    path: '/register',
+    name: 'registerView',
+    component: registerView
+  }
 
 ]
 
