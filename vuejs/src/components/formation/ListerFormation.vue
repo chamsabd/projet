@@ -19,16 +19,6 @@
           
          
         </td>
-           
-  <td><!--@click="consulterSeances(props.row)"-->
-          <b-button pill variant="outline-info" 
-          
-           :to="{name:'ContainerSeances' ,
-                params:{id:props.row.id , name:props.row.titre} }"
-                >Gérer Seances
-          </b-button>
-        </td>
-      
         <td>
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
@@ -40,14 +30,7 @@
         <td>  
              
           <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
-            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button>
-
-             <b-button v-if="role.participant" pill variant="outline-warning">send demande</b-button>
-          <add-demande :f="props" />
-          </td>
-        
-      
-
+            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -55,13 +38,7 @@
        </b-modal>
 
 
-
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
-
-      <!-- <liste-seances />-->
-      
-       
-
   </div>
          
 
@@ -69,20 +46,15 @@
 
 <script>
 import axios from "axios";
+
 import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
-
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 
 
 import AddFormation from '../../components/formation/AddFormation.vue';
-
-//import containerSeances from "@/views/Seance/containerSeances.vue";
-//import ListeSeances from '../seances/ListeSeances.vue';
-//import AfficherDetailsSeance from '../seances/AfficherDetailsSeance.vue';
-
 
 export default {
   name: "ListerFormations",
@@ -93,20 +65,14 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
-
     // AfficherDemandes,
-
-  //  ListeSeances,
-  //  containerSeances
-   // AddSeance
-
   },
   props: {
   formations:Array,
   role:String,
   //  d:Object,
   },
-  data () {
+  data: function () {
     return {
      d:{},
       //demandes:[],
@@ -201,14 +167,8 @@ export default {
         .catch((error) => console.log(error.response));
     },
 
-
     getDemandeByFormation(id) {
       console.log(id);
-
-  
-
-    // getDemande(id){
-
     // var demande={};
     //     demande.formation_id=this.d.row.id;
         
