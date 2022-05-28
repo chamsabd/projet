@@ -63,6 +63,8 @@ Route::get('/user/demandes',[demandesController::class,'userdemandes']);
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
+Route::get('/demandes/refuse/{id}',[demandesController::class,'refuse']);
+Route::get('/demandes/accepte/{id}',[demandesController::class,'accepte']);
 Route::delete('/demandes/{id}',[demandesController::class,'destroy']);
 //Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
 Route::get('/demandes/formation/{form_id}',[demandesController::class,'getDemandeByFormation']);

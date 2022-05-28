@@ -33,15 +33,14 @@ class FormationController extends Controller
    public function participantindex()
     {
         $formations=Formation::with('responsable','formateur','formateurexterne')->get();
-         $formations_dem=User::find(4)->demandes; //Auth::id()
+         $formations_dem=User::find(9)->demandes; //Auth::id()
         
 foreach ($formations as $key => $formation) {
    
     foreach ($formations_dem as $key => $formation_dem) {
       if ($formation->id!=$formation_dem->id) {
         $formation->send=true;
-        
-      }
+              }
       else{
         $formation->send=false;
         break;
@@ -62,7 +61,7 @@ foreach ($formations as $key => $formation) {
     {
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
 
-       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',1)->get();
+       return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id',9)->get();
 
     }
   
@@ -74,7 +73,7 @@ foreach ($formations as $key => $formation) {
     public function formateurindex()
     {
 
-        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',15)->get();
+        return Formation::with('responsable','formateur','formateurexterne')->where('formateur_id',9)->get();
     }
     /**
      * Store a newly created resource in storage.

@@ -40,8 +40,6 @@
 <add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
   </div>
-         
-
 </template>
 
 <script>
