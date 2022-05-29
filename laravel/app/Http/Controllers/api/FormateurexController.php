@@ -102,8 +102,9 @@ class FormateurexController extends Controller
     private function validationRules()
     {    
         return [
-            'ncin' => 'required|integer|between:0,10',
-           // 'email' => 'required|email',
+            //'ncin' => 'required|integer|size:8',
+            //'ncin' => 'required|integer||min:8|max:8',
+            'email' => 'required|email',
             'nom' => 'required|min:5|max:15',
             'prenom' => 'required|min:5|max:15',
             'specialite' => 'required|min:5|max:15',
