@@ -105,7 +105,7 @@ return "redirect:/ListeFormations";
 public String accepterDemande( @RequestParam(name = "id") Long id,RedirectAttributes redirectAttrs){
 Demande d=demRep.findByIdDemande(id);
 d.setAccepted(true);
-Inscrit i=new Inscrit(d.getUser(),d.getFormation(),new Date());
+
 try {
 	System.out.println(d.getUser().getUsername());
 	sendEmail(d.getUser().getUsername(),"velisitation votre demande au formation "+d.getFormation().getTitreFormation()+" a ete accepter aujourd'hui vous etes un participant","demande accepter");
@@ -113,13 +113,18 @@ try {
 	return "Error in sending email: " + ex; //msg
 }
 if (d.getFormation().getNbrPlace()>0) {
-	
-//Formation f=d.getFormation();
+	//d.setFormation(d.getFormation())
+	Inscrit i=new Inscrit(d.getUser(),d.getFormation(),new Date());
+	inscritService.saveInscrit(i);
+d.getFormation().setNbrPlace(d.getFormation().getNbrPlace()-1);
+//int x=(int) f.getNbrPlace()-1;
+//f.setNbrPlace(x);
+//formationService.updateFormation(f);
 //f.setNbrPlace(d.getFormation().getNbrPlace()-1);
 //d.setFormation(f);
 //f.setNbrPlace(f.getNbrPlace()-1);
 //formationService.updateFormation(f);
-inscritService.saveInscrit(i);
+
 //demService.deleteDemandeparid(id);	
 }
 
