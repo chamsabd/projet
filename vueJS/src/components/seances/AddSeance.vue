@@ -1,19 +1,41 @@
+<!---->
 <template>
   <div class="bloc-modale"  v-if="revele">
    <div class="overlay" v-on:click="toggleModale()">
      <div class="modale card">
        <div class="btn-modale btn btn-danger" v-on:click="toggleModale()">x</div>
-<form>
+<form @submit.stop.prevent="addSeance"  >
   <div class="mb-3">
-    <label for="texte" class="form-label">Nom De Seance a Ajouter</label>
-    <input type="text" class="form-control" name="texte" id="texte"  required v-model="seance.nom_seance" >
+    <label for="texte" class="form-label"  :state="advalid_nom">Nom De Seance a Ajouter</label>
+    <b-form-input type="text" 
+    class="form-control" name="texte" id="texte" trim
+    :state="advalid_nom"
+    v-model="seance.nom_seance"   ></b-form-input>
+    <b-form-invalid-feedback :state="advalid_nom">titre doit etre 5-15 caractere </b-form-invalid-feedback>
+    <b-form-valid-feedback :state="advalid_nom"> Looks Good</b-form-valid-feedback>
+    
   </div>
 
   <div class="mb-3">
-    <label for="date" class="form-label">Date De Seance</label>
-    <input type="date" class="form-control" name="date" id="date" required v-model="seance.date">
-  </div>
+    <label :state="advalid_dated" for="date" class="form-label mb-2 mr-sm-2 mb-sm-0">Date De Seance</label>
+    <b-form-datepicker type="date" class="form-control"
+     name="date" id="date"
+     
+      :min="mind"
+      :max="maxd"
+      reset-button
+      v-model="seance.date"
+      state="advalid_dated"
+      require
+      trim
 
+      ></b-form-datepicker>
+      <b-form-invalid-feedback :state="advalid_dated">please enter a date</b-form-invalid-feedback>
+      <b-form-valid-feedback :state="advalid_dated">Looks Good.</b-form-valid-feedback>
+  
+  
+  </div>
+    
 <div class="mb-3">
     <label for="temps_debut" class="form-label">Temps De Début De La Seance</label>
     <input type="time" class="form-control" name="temps_debut" id="temps_debut" required v-model="seance.temps_debut">
@@ -26,8 +48,8 @@
   <div class="mb-3">
     <input type="hidden"  name="formation_id" id="formation_id" v-model="seance.formation_id">
   </div>
-{{this.$route.params.id}}
-  <button type="submit" class="btn btn-primary" @click="addSeance">Valider</button> &nbsp;
+<!-- @click="addSeance" -->
+  <button type="submit" class="btn btn-primary">Valider</button> &nbsp;
   <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
  
@@ -53,6 +75,7 @@ export default {
 
  },
  data(){
+    const now = new Date();
    return {
    seance : {
        nom_seance:'',
@@ -61,12 +84,14 @@ export default {
        temps_debut:"",
        formation_id:this.$route.params.id
        },
-      
-     
+     nom_seance_error:"" ,
+     dat_error:"",
+     today: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
    }
  } ,
  methods:{
-addSeance(){ 
+addSeance(){
+    if(!this.advalid_titre ||!this.advalid_dated ) {
   axios.post('http://127.0.0.1:8000/api/seance/store',{
   seance : this.seance ,
   
@@ -78,9 +103,60 @@ addSeance(){
   })
   .catch(error =>{console.log(error) }) ;
   
-} ,
+} },/*
+submitHandler(){
+  //valisation nom seance
+  this.nom_seance_error=this.seance.nom_seance.length>5 ?'': 'le nom de la seance doit avoir au minimum 6 caractéres'
+  this.dat_error=this.seance.date>this.today?'': 'choisissez une date a partir de demain'
+ if ((!this.nom_seance_error) ){this.addSeance()}
+
+},*/
 
  }
+,
+
+computed: {
+
+advalid_nom() {
+
+      if (this.seance.nom_seance != undefined  && this.seance.nom_seance != "")
+
+        return (
+
+          this.seance.nom_seance.length >= 5 && this.seance.nom_seance.length <= 15
+
+        );
+
+      return false;
+
+    },
+     minf() {
+      const min = new Date(this.seance.date);
+      if (this.seance.date) min.setDate(min.getDate());
+      return this.seance.date ? min : undefined;
+    },
+    mind() {
+      const min = new Date(this.today);
+      min.setMonth(min.getMonth() + 1);
+      return min;
+    },
+      maxd() {
+      const max = new Date(this.seance.date);
+      if (this.seance.date) max.setDate(max.getDate() );
+      return this.seance.date ? max : undefined;
+    },
+  advalid_dated() {
+      if (this.seance.date != undefined && this.seance.date != "")
+        return true;
+      return false;
+    },
+
+},
+
+
+
+
+
 };
 </script>
 <style  scoped>
@@ -117,5 +193,11 @@ top:20%;
   position: absolute;
   top:10px;
   right: 10px;
+}
+.error{
+  color:red;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 </style>
