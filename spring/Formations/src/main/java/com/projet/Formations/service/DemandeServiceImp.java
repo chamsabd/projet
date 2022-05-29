@@ -1,5 +1,6 @@
 package com.projet.Formations.service;
 
+import java.text.Format;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 
 import com.projet.Formations.dao.DemandeRepository;
 import com.projet.Formations.entities.Demande;
+import com.projet.Formations.entities.Formation;
 
 @Service
 public class DemandeServiceImp implements DemandeService{
@@ -35,9 +37,10 @@ public class DemandeServiceImp implements DemandeService{
 	}
 
 	@Override
-	public Page<Demande> getAllDemandesparpage(int page, int size) {
+	public Page<Demande> getAllDemandesparpage(Formation f,int page, int size) {
 		// TODO Auto-generated method stub
-		return this.demandeRepository.findAll(PageRequest.of(page, size));
+		
+		return this.demandeRepository.findByFormation(f, PageRequest.of(page, size));
 	}
 
 	@Override

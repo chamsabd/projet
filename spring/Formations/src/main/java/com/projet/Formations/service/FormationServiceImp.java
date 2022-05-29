@@ -45,7 +45,7 @@ private	 FormationRepository formationRepository;
 
 	@Override
 	public Formation updateFormation(Formation f) {
-		// TODO Auto-generated method stub
+
 		return this.formationRepository.save(f);
 	}
 

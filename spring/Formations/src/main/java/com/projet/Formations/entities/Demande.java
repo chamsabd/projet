@@ -24,20 +24,29 @@ public class Demande {
 	@Autowired
 	private Formation formation;
 	private Date dateDemande;
-
+	private Boolean accepted;
 	public Demande( Date dateDemande,Formation formation,User user ) {
 		super();
 		this.formation=formation;
 		this.user=user;
 		this.dateDemande = dateDemande;
+		this.accepted=false;
 	}
 	
 
+	public Boolean getAccepted() {
+		return accepted;
+	}
+
+
+	public void setAccepted(Boolean accepted) {
+		this.accepted = accepted;
+	}
+
+
 	public Demande() {
 		super();
-		this.dateDemande = new Date();
-		this.setFormation(formation);
-		this.setUser(user);
+	
 		
 	}
 	public Long getFormationId() {
@@ -56,13 +65,7 @@ public class Demande {
 		this.idDemande = idDemande;
 	}
 
-	public User getIdUtilisateur() {
-		return user;
-	}
 
-	public void setIdUtilisateur(User idUtilisateur) {
-		this.user = idUtilisateur;
-	}
 
 	public Formation getFormation() {
 		return formation;

@@ -4,6 +4,8 @@ package com.projet.Formations.entities;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,24 +39,23 @@ public class Formation {
 	
 @NotNull @Size(min = 5, max = 30)
 	private String titreFormation;
-	
 	@Size(max = 100)
 	private String description;
 	
-@NotNull @Temporal(TemporalType.DATE)
+ @Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@FutureOrPresent
 	private Date dateDebut;
-	@NotNull
+
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Future
 	private Date dateFin;
-	@NotNull
+	
 	private boolean etat;
-	@NotNull
-	@Min(10)
-	@Max(30)
+	
+	
+@Min(0)	@Max(30)
 	private int nbrPlace;
 	@Min(0)
 	private float prix;
@@ -69,7 +70,7 @@ public class Formation {
 	  private User formateur;
 
 	
-	 @OneToMany(mappedBy = "formation")
+	 @OneToMany(cascade = CascadeType.ALL,mappedBy = "formation")
 	 private List<Demande> demandes;
 	 
 	 
