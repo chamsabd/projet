@@ -21,7 +21,7 @@ src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 <header>
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-   <a class="navbar-brand" href="#">Gestion de produits</a>
+   <a class="navbar-brand" href="#">Gestion des Formations</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,6 +38,18 @@ responsable
  <a class="dropdown-item" th:href="@{ListeFormations?(profile='responsable')}">Lister Formations</a>
  </div>
 </li>
+
+<li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN')" >
+  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+ gestion formateur
+  </a>
+  <div class="dropdown-menu">
+
+ 
+  <a class="dropdown-item" th:href="@{ListeFormateurex}">Lister Formateur</a>
+  <a class="dropdown-item" th:href="@{showCreate}">Ajouter Formateur</a>
+  </div>
+ </li>
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
  participant
@@ -53,7 +65,6 @@ responsable
 Formateur
   </a>
   <div class="dropdown-menu">
-
   <a class="dropdown-item" th:href="@{ListeFormations?(profile='formateur')}">Lister Formation</a>
   </div>
  </li>

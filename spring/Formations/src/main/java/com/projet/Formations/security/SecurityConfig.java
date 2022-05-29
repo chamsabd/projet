@@ -66,10 +66,10 @@ http.csrf().disable()
 .antMatchers("/logout").permitAll() ;
 
  
-		 http.authorizeRequests().antMatchers("/ListeFormations","/sendDemande")
+		 http.authorizeRequests().antMatchers("/ListeFormations","/sendDemande","/listeDemandes","/accepterDemande","/refuserDemande")
 		 .hasAnyAuthority("ADMIN","USER"); 
 		 http.authorizeRequests() 
-		 .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation") 
+		 .antMatchers("/showCreateFormation","/saveFormation","/modifierFormation","/updateFormation","/ListeFormateurex","/showCreate","/saveFormateurex","/supprimerFormateurex","/modifierFormateurex","/updateFormateurex") 
 		 .hasAnyAuthority("ADMIN")
 		.anyRequest().authenticated(); 
 		 http.exceptionHandling().accessDeniedPage("/accessDenied");
