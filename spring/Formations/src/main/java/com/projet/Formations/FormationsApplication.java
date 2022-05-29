@@ -13,8 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class FormationsApplication implements CommandLineRunner{
-	@Autowired
-	private DemandeService service; 
+
 	
 	@Autowired
 	public static void main(String[] args) {
@@ -24,8 +23,5 @@ public class FormationsApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception { 
 	
 		
-		
-Demande demad1 = new Demande(); 
-service.saveDemande(demad1);
 	}
 }

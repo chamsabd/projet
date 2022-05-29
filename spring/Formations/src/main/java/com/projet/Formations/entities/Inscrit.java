@@ -27,6 +27,12 @@ public class Inscrit {
 	@Autowired
 	private Formation formation;
 	private Date dateInscrit;
+
+	
+	public Inscrit() {
+		super();
+	}
+
 	public Inscrit(User user, Formation formation, Date dateInscrit) {
 		this.user = user;
 		this.formation = formation;

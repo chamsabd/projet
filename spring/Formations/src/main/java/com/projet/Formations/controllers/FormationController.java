@@ -118,7 +118,7 @@ public class FormationController {
 			return "createFormation";
 		}
 		formationService.updateFormation(formation);
-		Page<Formation> prods = formationService.getAllFormationsparpage(user,profile,page, size);
+	//	Page<Formation> prods = formationService.getAllFormationsparpage(user,profile,page, size);
 		//redirAttrs.addFlashAttribute("Formations", prods);
 		//redirAttrs.addAttribute("pages", new int[prods.getTotalPages()]);
 		redirAttrs.addAttribute("page", page);

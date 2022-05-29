@@ -53,7 +53,7 @@ public class Formation {
 	@NotNull
 	private boolean etat;
 	@NotNull
-	@Min(10)
+	@Min(0)
 	@Max(30)
 	private int nbrPlace;
 	@Min(0)
