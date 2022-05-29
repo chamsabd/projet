@@ -17,21 +17,19 @@ href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
      Liste des demandes
      </div>
      <div class="card-body"> 
-     <form th:action="@{listeDemandes(page=${currentPage},size=${size}}" method="get">
-    
-    
-     </form>
+
      <table class="table table-striped">
      <tr>
-     <th>ID</th><th>id Demande</th>Formation<th> </th><th>Nom de l'utlisateur </th> <th>date Demande</th>
+     <th>ID</th>
+     <th>titre Formation</th>
+       <th>email de l'utlisateur </th>
+        <th>date Demande</th>
      </tr> 
-     <tr th:each="p:${Demandes.content}">
+     <tr th:each="p:${demandes.content}">
      <td th:text="${p.idDemande}"></td>
-     <td th:text="${p.idFormation}"></td>
-     <td th:text="${p.idUser}"></td>
+     <td th:text="${p.formation.titreFormation}"></td>
+     <td th:text="${p.user.username}"></td>
      <td th:text="${p.dateDemande}"></td> 
-     
-     
      </tr>
       
     </table>

@@ -14,7 +14,7 @@
         <div class="container">
             <div class="card-body">
 
-                <form th:action="${etat} =='update'?@{updateFormation?(page=${page},size=${size})}:@{saveFormation}"
+                <form th:action="${etat} =='update'?@{updateFormation?(page=${page},size=${size},profile=${profile})}:@{saveFormation?(profile=${profile})}"
                     method="post">
                     <!-- save Formation ou update -->
                     <div class="form-group">

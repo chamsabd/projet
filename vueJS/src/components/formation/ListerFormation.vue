@@ -37,6 +37,7 @@
           <formation-details :formation="formation"/>
        </b-modal>
 
+
 <add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
   </div>
@@ -51,6 +52,7 @@ import FormationDetails from './FormationDetails.vue';
 import AddDemande from "@/components/demande/addDemande.vue";
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 import AddFormation from '../../components/formation/AddFormation.vue';
+
 import AddRessource from '../ressource/AddRessource.vue';
 
 export default {
@@ -62,6 +64,7 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+
     AddRessource,
 
     // AfficherDemandes,
@@ -173,6 +176,7 @@ this.$router.push({ path: `/ressource/${row.id}` });
     },
 
     getDemandeByFormation(id) {
+
 this.$router.push({ path: `/demandes/${id}` });
     },
   },

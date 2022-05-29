@@ -44,18 +44,21 @@ public class DemandeController {
 	//@GetMapping(value="/listeDemandes")
 	public String listeDemandes(
 			ModelMap modelMap,
+			@RequestParam(name = "id") Long id_form,
+
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "3") int size
 			) {
-		
-			Page<Demande> prods = demService.getAllDemandesparpage(page, size);
-				modelMap.addAttribute("Demandes", prods);
+				Formation f= formationRepository.findByIdFormation(id_form);
+
+			Page<Demande> prods = demService.getAllDemandesparpage(f,page, size);
+				modelMap.addAttribute("demandes", prods);
 
 			modelMap.addAttribute("pages", new int[prods.getTotalPages()]);
 			modelMap.addAttribute("currentPage", page);
 		
 
-		return "redirect:/listeDemandes"; 
+		return "listeDemandes"; 
 }
 @RequestMapping("/SendDemande")
 public String sendDemande(@RequestParam(name = "profile", defaultValue = "participant") String profile, @RequestParam(name = "id") Long idFormation,@AuthenticationPrincipal User user,RedirectAttributes redirectAttrs){

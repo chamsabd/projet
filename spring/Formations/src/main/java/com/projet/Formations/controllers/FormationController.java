@@ -34,6 +34,7 @@ public class FormationController {
 			@RequestParam(name = "nom", defaultValue = "") String nom,
 			@RequestParam(name = "profile", defaultValue = "participant") String profile,
 			@AuthenticationPrincipal User user) {
+				modelMap.addAttribute("profile", profile);
 		if (nom.equals("")) {	
 			Page<Formation> prods = formationService.getAllFormationsparpage(user,profile,page, size);
 			List<Formation> prod = formationService.getAllFormations(profile);
@@ -58,28 +59,30 @@ public class FormationController {
 	}
 
 	@RequestMapping("/showCreateFormation")
-	public String showCreate(ModelMap modelMap, @RequestParam(name = "etat") String etat) {
+	public String showCreate(ModelMap modelMap, @RequestParam(name = "etat") String etat,
+		@RequestParam(name = "profile", defaultValue = "participant") String profile) {
 		modelMap.addAttribute("responsables", userService.getAllResponsables());
 		modelMap.addAttribute("formation", new Formation());
 		modelMap.addAttribute("etat", etat);
+		modelMap.addAttribute("profile", profile);
 		return "createFormation";
 	}
 
 	@RequestMapping("/saveFormation")
 	public String saveProduit(@Valid Formation formation,
 			BindingResult bindingResult,
-			ModelMap modelMap, RedirectAttributes redirAttrs) {
+			ModelMap modelMap, RedirectAttributes redirAttrs,	@RequestParam(name = "profile", defaultValue = "participant") String profile) {
 		modelMap.addAttribute("etat", "create");
 		modelMap.addAttribute("responsables", userService.getAllResponsables());
-	
+		modelMap.addAttribute("profile", profile);
 		if (bindingResult.hasErrors()) {
 
 			return "createFormation";
 		}
-		Formation saveFormation = formationService.saveFormation(formation);
+		 formationService.saveFormation(formation);
+		redirAttrs.addAttribute("profile", profile);
 		redirAttrs.addFlashAttribute("msg", "formation ajouter avec succes");
 			//	modelMap.addAttribute("formation", new Formation());
-
 		return "redirect:/ListeFormations";
 	}
 
@@ -87,12 +90,13 @@ public class FormationController {
 	public String editerProduit(@RequestParam(name = "id") Long id,
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "3") int size, ModelMap modelMap,
-			@RequestParam(name = "etat") String etat) {
+			@RequestParam(name = "etat") String etat,@RequestParam(name = "profile", defaultValue = "participant") String profile
+			) {
 		Formation f = formationService.getFormation(id);
 
 		modelMap.addAttribute("etat", etat);
 		modelMap.addAttribute("responsables", userService.getAllResponsables());
-		
+		modelMap.addAttribute("profile", profile);
 		modelMap.addAttribute("formation", f);
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("size", size);
@@ -106,6 +110,7 @@ public class FormationController {
 			@RequestParam(name = "size", defaultValue = "3") int size, RedirectAttributes redirectAttributes,
 			@RequestParam(name = "profile", defaultValue = "participant") String profile,
 			@AuthenticationPrincipal User user, RedirectAttributes redirAttrs) {
+				modelMap.addAttribute("profile", profile);
 		if (bindingResult.hasErrors()) {
 			modelMap.addAttribute("etat", "update");
 			modelMap.addAttribute("responsables", userService.getAllResponsables());

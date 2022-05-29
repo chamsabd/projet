@@ -33,7 +33,6 @@ const routes = [
           path: '/inscrits',
           name: 'InscritsView',
           component: InscritsView
-
         },
          {
           path: '/ressource/:id',
