@@ -24,11 +24,14 @@ class SeanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { $request->validate([
-        'formation_id' => 'exists:formations.id',
-       // 'nom_seance' => 'required ',
-       // 'date'=>'after:tomorrow'
-     ]);
+    {
+
+        $request->validate([
+         //'formation_id' => 'exists:formations.id',
+         //'nom_seance' => 'required|min:5|max:15',
+           // 'date'=>'after:tomorrow'
+         ]);
+    //$request->validate($this->validationRules());
     $newSeance = new Seance() ;
    $newSeance->nom_seance = $request->seance["nom_seance"];
    $newSeance->date = $request->seance["date"];
@@ -98,10 +101,10 @@ class SeanceController extends Controller
     private function validationRules()
     {
         return [
-            'formation_id' => ['required|exists:formations,id'] ,
+          /*  'formation_id' => ['required|exists:formations,id'] ,
             'date'=>['required|date |after:now']    ,
-          //  'nom_seance' => 'required'
-          'nom_seance' => ['required']
+          //  'nom_seance' => 'required'*/
+          'nom_seance' => 'required|min:5|max:15',
 
             ];
     }
