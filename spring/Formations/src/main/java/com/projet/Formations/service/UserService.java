@@ -80,5 +80,8 @@ public class UserService implements  UserDetailsService{
 	 public User getresponsable(Long id) {
 		 return this.userRepository.getById(id);
 	 }
+    public User findByIdUser(Long long1) {
+        return null;
+    }
  
 }

@@ -67,7 +67,6 @@ public class FormationController {
 		modelMap.addAttribute("profile", profile);
 		return "createFormation";
 	}
-
 	@RequestMapping("/saveFormation")
 	public String saveProduit(@Valid Formation formation,
 			BindingResult bindingResult,
@@ -76,7 +75,6 @@ public class FormationController {
 		modelMap.addAttribute("responsables", userService.getAllResponsables());
 		modelMap.addAttribute("profile", profile);
 		if (bindingResult.hasErrors()) {
-
 			return "createFormation";
 		}
 		 formationService.saveFormation(formation);
@@ -93,7 +91,8 @@ public class FormationController {
 			@RequestParam(name = "etat") String etat,@RequestParam(name = "profile", defaultValue = "participant") String profile
 			) {
 		Formation f = formationService.getFormation(id);
-
+ if(f==null)
+ return "redirect:/accessDenied";
 		modelMap.addAttribute("etat", etat);
 		modelMap.addAttribute("responsables", userService.getAllResponsables());
 		modelMap.addAttribute("profile", profile);
@@ -101,6 +100,8 @@ public class FormationController {
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("size", size);
 		return "createFormation";
+		
+		
 	}
 
 	@RequestMapping("/updateFormation")
@@ -125,7 +126,7 @@ public class FormationController {
 		redirAttrs.addAttribute("nom","");
 		redirAttrs.addAttribute("profile", profile);
 		redirAttrs.addAttribute("size", size);
-		redirAttrs.addFlashAttribute("msg", "formation modiffier avec succes");
+		redirAttrs.addFlashAttribute("msg", "formation modifier avec succes");
 	
 		
 		// redirectAttributes.addAttribute("currentPage",page);

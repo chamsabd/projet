@@ -17,7 +17,12 @@ href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
      Liste des demandes
      </div>
      <div class="card-body"> 
-
+      <div class="alert alert-success alert-dismissible fade show" role="alert"  th:if="${msg}">
+        <strong th:text="${msg}"></strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
      <table class="table table-striped">
      <tr>
      <th>ID</th>
@@ -27,16 +32,16 @@ href="/webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
         <th>accepter </th>
         <th>refuser </th>
      </tr> 
-     <tr th:each="p:${demandes.content}" th:if="${p.accepted}==false">
+     <tr th:each="p:${demandes.content}" >
      <td th:text="${p.idDemande}"></td>
      <td th:text="${p.formation.titreFormation}"></td>
      <td th:text="${p.user.username}"></td>
      <td th:text="${p.dateDemande}"></td> 
-     <td><a   class="btn btn-outline-success" onclick="return confirm('etes vous sure d accepter cette demande?')" th:href="@{accepterDemande(id=${p.idDemande})}" >
+     <td th:if="${p.accepted}==false"><a   class="btn btn-outline-success" onclick="return confirm('etes vous sure d accepter cette demande?')" th:href="@{accepterDemande(id=${p.idDemande})}" >
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
         <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
       </svg> accepter</a></td>
-      <td><a   class="btn btn-outline-danger" onclick="return confirm('etes vous sure de refuser cette demande?')" th:href="@{refuserDemande(id=${p.idDemande})}">
+      <td th:if="${p.accepted}==false"><a   class="btn btn-outline-danger" onclick="return confirm('etes vous sure de refuser cette demande?')" th:href="@{refuserDemande(id=${p.idDemande})}">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
         </svg> refuser</a></td>

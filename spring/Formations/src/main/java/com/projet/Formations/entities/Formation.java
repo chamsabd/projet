@@ -27,11 +27,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
 //import org.apache.jasper.tagplugins.jstl.core.When;
 import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.lang.NonNull;
 
 @Entity
+@DynamicUpdate
 public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment

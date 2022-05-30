@@ -62,10 +62,27 @@ public class DemandeController {
 			@RequestParam(name = "id") Long id_form,
 
 			@RequestParam(name = "page", defaultValue = "0") int page,
-			@RequestParam(name = "size", defaultValue = "3") int size
+			@RequestParam(name = "size", defaultValue = "3") int size,
+			@AuthenticationPrincipal User user
 			) {
+			
 				Formation f= formationRepository.findByIdFormation(id_form);
+				if((f == null) ){
 
+					
+				//	System.out.println(f.getResponsable().getIdUser()!=user.getIdUser())	;	
+						//System.out.println(f.getResponsable());
+							return "redirect:/accessDenied";
+						}
+						if( f.getResponsable().getIdUser()-user.getIdUser()!=0L){
+
+							//System.out.println(f.getResponsable().getIdUser()-user.getIdUser()==0L)	;
+
+							return "redirect:/accessDenied";
+						}
+						 
+				
+			
 			Page<Demande> prods = demService.getAllDemandesparpage(f,page, size);
 				modelMap.addAttribute("demandes", prods);
 				modelMap.addAttribute("id",id_form);
@@ -78,6 +95,9 @@ public class DemandeController {
 @RequestMapping("/SendDemande")
 public String sendDemande(@RequestParam(name = "profile", defaultValue = "participant") String profile, @RequestParam(name = "id") Long idFormation,@AuthenticationPrincipal User user,RedirectAttributes redirectAttrs){
 		Formation f= formationRepository.findByIdFormation(idFormation);
+		if(f==null)
+		return "redirect:/accessDenied";
+
 		Demande d=new Demande (new Date(),f,user);
 
 	Optional<Demande> d1=demRep.findDemande(user,f);
@@ -102,31 +122,41 @@ return "redirect:/ListeFormations";
 
 }
 @RequestMapping("/accepterDemande")
-public String accepterDemande( @RequestParam(name = "id") Long id,RedirectAttributes redirectAttrs){
+public String accepterDemande( @RequestParam(name = "id") Long id,RedirectAttributes redirectAttrs,@AuthenticationPrincipal User user){
 Demande d=demRep.findByIdDemande(id);
-d.setAccepted(true);
+Formation f= d.getFormation();
+		
+			
+							if( f.getResponsable().getIdUser()-user.getIdUser()!=0L){
+	
+								//System.out.println(f.getResponsable().getIdUser()-user.getIdUser()==0L)	;
+	
+								return "redirect:/accessDenied";
+							}
 
 try {
-	System.out.println(d.getUser().getUsername());
-	sendEmail(d.getUser().getUsername(),"velisitation votre demande au formation "+d.getFormation().getTitreFormation()+" a ete accepter aujourd'hui vous etes un participant","demande accepter");
+
+	sendEmail(d.getUser().getUsername(),"félicitation votre demande au formation "+d.getFormation().getTitreFormation()+" a ete accepter aujourd'hui vous etes un participant","demande accepter");
 } catch (Exception ex) {
-	return "Error in sending email: " + ex; //msg
+	redirectAttrs.addFlashAttribute("msg", "l'email n'est pas envoyer car il n'existe pas");
+	return "redirect:/listeDemandes";
+
 }
 if (d.getFormation().getNbrPlace()>0) {
 	//d.setFormation(d.getFormation())
+	d.setAccepted(true);
 	Inscrit i=new Inscrit(d.getUser(),d.getFormation(),new Date());
 	inscritService.saveInscrit(i);
-d.getFormation().setNbrPlace(d.getFormation().getNbrPlace()-1);
-//int x=(int) f.getNbrPlace()-1;
-//f.setNbrPlace(x);
-//formationService.updateFormation(f);
-//f.setNbrPlace(d.getFormation().getNbrPlace()-1);
-//d.setFormation(f);
-//f.setNbrPlace(f.getNbrPlace()-1);
-//formationService.updateFormation(f);
 
-//demService.deleteDemandeparid(id);	
+
+System.out.println(f.getNbrPlace());
+formationRepository.setNbrPlaceById(f.getNbrPlace()-1,f.getIdFormation());
+	
+redirectAttrs.addFlashAttribute("msg", "l'email envoyer");
+
 }
+else
+redirectAttrs.addFlashAttribute("msg", "il n'y a pa plus de place dans la formation");
 
 redirectAttrs.addAttribute("id", d.getFormation().getIdFormation());
 
@@ -137,16 +167,26 @@ redirectAttrs.addAttribute("id", d.getFormation().getIdFormation());
 
 
 @RequestMapping("/refuserDemande")
-public String refuserDemande( @RequestParam(name = "id") Long id,RedirectAttributes redirectAttrs){
+public String refuserDemande( @RequestParam(name = "id") Long id,RedirectAttributes redirectAttrs,@AuthenticationPrincipal User user){
 	Demande d=demRep.findByIdDemande(id);
-demService.deleteDemandeparid(id);
+	Formation f= d.getFormation();
+	if( f.getResponsable().getIdUser()-user.getIdUser()!=0L){
+	
+		//System.out.println(f.getResponsable().getIdUser()-user.getIdUser()==0L)	;
+
+		return "redirect:/accessDenied";
+	}
+
 
 try {
 	sendEmail(d.getUser().getUsername(),"desoler votre demande au formation "+d.getFormation().getTitreFormation()+"est refuser","demande refuser");
 } catch (Exception ex) {
-	return "Error in sending email: " + ex;
+	redirectAttrs.addFlashAttribute("msg", "l'email n'est pas envoyer car il n'existe pas");
+	return "redirect:/listeDemandes";
 }
+demService.deleteDemandeparid(id);
 	redirectAttrs.addAttribute("id", d.getFormation().getIdFormation());
+	redirectAttrs.addFlashAttribute("msg", "l'email envoyer");
 	return "redirect:/listeDemandes";
 }
 @RequestMapping("/simpleemail3")
