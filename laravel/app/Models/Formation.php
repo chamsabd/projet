@@ -24,7 +24,7 @@ class Formation extends Model
     } 
     public function demandes()
     {
-        return $this->belongsToMany(User::class, 'demandes')->withTimestamps()->withPivot('id');
+        return $this->belongsToMany(User::class, 'demandes')->withTimestamps()->withPivot('id',"accepted");
     }
     public function inscrits()
     {
