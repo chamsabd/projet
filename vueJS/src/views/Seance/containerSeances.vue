@@ -6,8 +6,9 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css"
       />
-      <h2>Seances de la formation : {{this.$route.params.name}}</h2>
-    </div>
+      <h2>Seances de la formation : {{this.$route.params.name}}</h2> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+     <!-- <b-button pill variant="outline-secondary" :to="{name:'../ListerFormation' }"><i class="bi bi-house"></i></b-button>
+ -->   </div>
     <div > 
     
     <cont-add-modal @cont-add-modal="contAddModal"  class="py-4"

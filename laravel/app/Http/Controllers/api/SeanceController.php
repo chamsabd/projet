@@ -65,18 +65,19 @@ class SeanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
-    {
+    {     
           $seance=Seance::find($id);
-          $seance->nom_seance =$request->nom_seance;
-          $seance->date =$request->date;
-          $seance->temps_debut =$request->temps_debut;
-          $seance->temps_fin =$request->temps_fin;
-          $seance->save();
           if($seance){
-               return $this->refresh();
-          }
-    }
+          $seance->nom_seance =$request->seance["nom_seance"];
+          $seance->date =$request->seance["date"];
+          $seance->temps_debut =$request->seance["temps_debut"];
+          $seance->temps_fin =$request->seance["temps_fin"];
+          $seance->save();
+          
+    } }
 
     /**
      * Remove the specified resource from storage.

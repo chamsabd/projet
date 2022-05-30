@@ -12,7 +12,7 @@
     class="form-control" name="texte" id="texte" trim
     :state="advalid_nom"
     v-model="seance.nom_seance"   ></b-form-input>
-    <b-form-invalid-feedback :state="advalid_nom">titre doit etre 5-15 caractere </b-form-invalid-feedback>
+    <b-form-invalid-feedback :state="advalid_nom">Nom de la seance doit etre 5-15 caractere </b-form-invalid-feedback>
     <b-form-valid-feedback :state="advalid_nom"> Looks Good</b-form-valid-feedback>
     
   </div>
