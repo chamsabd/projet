@@ -45,8 +45,12 @@ export default {
   }, 
    computed:{
 form_id(){
-  return this.$route.params.id;
+  console.log(this.$route.query);
+  return this.$route.query.id;
 },
+role(){
+  return this.$route.query.role;
+}
   },
   
   mounted() {
@@ -71,13 +75,21 @@ this.showAlert();}
     this.getdemandes();
   },
     async getdemandes() {
+      if(this.role!="responsable"){
+        this.$router.push("/");
+      }
+      else{
  await  axios
         .get("http://127.0.0.1:8000/api/demandes/formation/"+this.form_id)
         .then((response) => {
+          if (typeof(response.data)=="string") {
+             this.$router.push("/");
+          }
+          else
           this.demandes = response.data;
         })
         .catch((error) => console.log(error.response));
-    },}
+    }}}
 };
 </script>
 

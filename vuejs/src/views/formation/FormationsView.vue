@@ -76,7 +76,14 @@ watch: {
  await  axios
         .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
         .then((response) => {
+          console.log(response.data.length);
+           if (response.data.length==0) {
+            this.alert="il n'y a pas de formations";
+this.showAlert();
+          }
+          else
           this.formations = response.data;
+          console.log(response.data);
    
         })
         .catch((error) => console.log(error.response));

@@ -30,19 +30,20 @@ const routes = [
           component: FormationsView
         },
         {
-          path: '/inscrits',
+          path: '/inscrits/:role',
           name: 'InscritsView',
           component: InscritsView
         },
          {
-          path: '/ressource/:id',
+          path: '/ressource',
           name: 'ListerRessource',
           component: ListerRessource
         },
        {
-    path: '/demandes/:id',
+    path: '/demandes',
     name: 'DemandesView',
-    component: DemandesView
+    component: DemandesView,
+   
   },
     ]
    
@@ -56,6 +57,7 @@ const routes = [
   // },
 
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

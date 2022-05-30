@@ -24,13 +24,16 @@
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
-        <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter cours</b-button>
-        <b-button pill variant="outline-info" v-if="role=='formateur' || role=='participant' && props.row.etat == 0" @click="ListerCour(props.row)">lister cours</b-button>
+        <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter support</b-button>
+        <b-button pill variant="outline-info" v-if="role=='formateur' || role=='participant' && props.row.etat == 0 && props.row.accepted==true" @click="ListerCour(props.row)">lister support cours</b-button>
        
         </td>
         <td>  
-          <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
-            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
+          <add-demande v-if="role=='participant' && props.row.send==true && props.row.nbr_place>0 && props.row.etat == 0" @add="Add" :f="props" />
+            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==false && props.row.send==false">demande sended </b-button>
+      <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==true">demande accepter </b-button>
+      </td>
+      
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -40,6 +43,8 @@
 
 <add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
+
+       
   </div>
 </template>
 
@@ -129,6 +134,7 @@ export default {
       
    this.$emit('add',alert);
   },
+  
     modifFormation(row){
      this.modformation=row; 
      console.log(this.formation);
@@ -164,7 +170,11 @@ this.formation = row;
  this.showModal("ressource-modal");
     },
 ListerCour(row){
-this.$router.push({ path: `/ressource/${row.id}` });
+
+this.$router.push({ path: `/ressource`,query: { 
+            id:row.id,
+            role: this.role
+        }  });
 },
     deleteitm(id) {
       axios
@@ -176,8 +186,11 @@ this.$router.push({ path: `/ressource/${row.id}` });
     },
 
     getDemandeByFormation(id) {
-
-this.$router.push({ path: `/demandes/${id}` });
+   
+this.$router.push({ path: `/demandes`,query: { 
+            id: id,
+            role: this.role
+        } });
     },
   },
 };

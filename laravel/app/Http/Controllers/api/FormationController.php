@@ -36,15 +36,15 @@ class FormationController extends Controller
          $formations_dem=User::find(9)->demandes; //Auth::id()
         
 foreach ($formations as $key => $formation) {
-   
+    $formation->send=true;
+    $formation->accepted=false;
     foreach ($formations_dem as $key => $formation_dem) {
-      if ($formation->id!=$formation_dem->id) {
-        $formation->send=true;
-              }
-      else{
+      if ($formation->id==$formation_dem->id) {
         $formation->send=false;
+        $formation->accepted=$formation_dem->pivot->accepted;
         break;
-      }
+              }
+     
      
      
     }

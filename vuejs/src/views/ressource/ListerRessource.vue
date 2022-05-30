@@ -38,7 +38,11 @@ export default {
   },
     computed:{
 id_formation(){
-  return this.$route.params.id;
+
+  return this.$route.query.id;
+},
+role(){
+  return this.$route.query.role;
 },
   },
 watch: {
