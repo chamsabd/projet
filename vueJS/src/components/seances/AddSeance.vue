@@ -4,7 +4,8 @@
    <div class="overlay" v-on:click="toggleModale()">
      <div class="modale card">
        <div class="btn-modale btn btn-danger" v-on:click="toggleModale()">x</div>
-<form @submit.stop.prevent="addSeance"  >
+       <!--@submit.stop.prevent="addSeance"-->
+<form   >
   <div class="mb-3">
     <label for="texte" class="form-label"  :state="advalid_nom">Nom De Seance a Ajouter</label>
     <b-form-input type="text" 
@@ -47,8 +48,8 @@
   <div class="mb-3">
     <input type="hidden"  name="formation_id" id="formation_id" v-model="seance.formation_id">
   </div>
-<!-- @click="addSeance" -->
-  <button type="submit" class="btn btn-primary">Valider</button> &nbsp;
+<!--  -->
+  <button type="submit" @click="addSeance" class="btn btn-primary">Valider</button> &nbsp;
   <button type="reset" class="btn btn-warning"> Annuler</button>
 </form>     </div>
  
