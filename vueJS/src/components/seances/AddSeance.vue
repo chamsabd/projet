@@ -20,12 +20,11 @@
     <label :state="advalid_dated" for="date" class="form-label mb-2 mr-sm-2 mb-sm-0">Date De Seance</label>
     <b-form-datepicker type="date" class="form-control"
      name="date" id="date"
-     
       :min="mind"
       :max="maxd"
       reset-button
       v-model="seance.date"
-      state="advalid_dated"
+      :state="advalid_dated"
       require
       trim
 
