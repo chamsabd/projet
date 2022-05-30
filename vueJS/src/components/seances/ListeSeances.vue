@@ -37,7 +37,10 @@
        </b-modal>
           </b-button>
       &emsp;
-        <b-button pill variant="outline-danger"
+        <b-button
+        href="javascript:;"
+         
+         pill variant="outline-danger"
                 @click="deleteSeance(seance.id)"
                   ><i class="bi bi-trash3"></i>
                 </b-button>  
@@ -69,6 +72,7 @@ import DeleteSeance from './deleteSeance.vue';
 //import { ref} from '@vue/composition-api'
 //import DataTable from "vue-materialize-datatable";
  //v-if="this.$route.params.id == seance.formation_id"
+
 export default {
   components: { ModifierSeance },
   props:{
@@ -103,9 +107,10 @@ export default {
       this.showModal("my-modal");
     },
      deleteSeance(id){
+       if(confirm("Voulez vous supprimer cette séance?")){
              axios.delete( 'http://127.0.0.1:8000/api/seance/'+id)
              .then(response=>this.seances=response)
-             .catch(error=>console.log(error))
+             .catch(error=>console.log(error))}
         }
         ,
   }
