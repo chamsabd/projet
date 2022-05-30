@@ -24,12 +24,12 @@
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
-        <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter cours</b-button>
-        <b-button pill variant="outline-info" v-if="role=='formateur' || role=='participant' && props.row.etat == 0 && props.row.accepted==true" @click="ListerCour(props.row)">lister cours</b-button>
+        <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter support</b-button>
+        <b-button pill variant="outline-info" v-if="role=='formateur' || role=='participant' && props.row.etat == 0 && props.row.accepted==true" @click="ListerCour(props.row)">lister support cours</b-button>
        
         </td>
         <td>  
-          <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
+          <add-demande v-if="role=='participant' && props.row.send==true && props.row.nbr_place>0 && props.row.etat == 0" @add="Add" :f="props" />
             <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==false && props.row.send==false">demande sended </b-button>
       <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==true">demande accepter </b-button>
       </td>
