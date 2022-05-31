@@ -1,7 +1,25 @@
 <template>
     <div id="app"  class="container ">
      <h1 class="text-center">formateur ex</h1>
-    <ListerFormateurex :formateurexes="formateurexes" />
+     <b-alert
+      :show="dismissCountDown"
+      dismissible
+      variant="info"
+      @dismissed="dismissCountDown=0"
+
+      @dismiss-count-down="countDownChanged"
+    >
+    <h6 aria-describedby="help-block">  {{alert}}  </h6>
+
+      <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
+      <b-progress
+        variant="info"
+        :max="dismissSecs"
+        :value="dismissCountDown"
+        height="4px"
+      ></b-progress>
+    </b-alert>
+    <ListerFormateurex :formateurexes="formateurexes" @add="Add" />
     </div>
 </template>
 <script>
@@ -17,6 +35,11 @@ export default {
          data: function () {
     return {
       formateurexes: [],
+       dismissSecs: 10,
+        dismissCountDown: 0,
+
+    
+      alert:'',
    
     };
   },
@@ -34,6 +57,20 @@ watch: {
     this.getformateurex();
   },
    methods: {
+      countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+      showAlert() {
+        this.dismissCountDown = this.dismissSecs
+      },
+      Add(alert){
+   console.log(alert);
+    if(alert!='none'){
+    this.alert=alert;
+this.showAlert();
+}
+this.getformateurex();
+},
     async getformateurex() {
   
  await  axios
