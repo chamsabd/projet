@@ -31,6 +31,14 @@
         <td>
           
           <b-button pill variant="outline-info" @click="onRowClick(props.row)">details</b-button>
+
+        </td>
+        
+        <td>
+          
+         <b-button pill variant="outline-secondary" @click="AffecterFor(props.row)">Affecter Formateur</b-button>
+        </td>
+
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
@@ -45,19 +53,22 @@
       <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==true">demande accepter </b-button>
       </td>
       
-
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
-       </b-modal>
+
+
+         
+   
+       </b-modal> 
+       <AffecterFormateur :formation="formation"/>
+
 
 
 
 <add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
-
-       
 
   </div>
 </template>
@@ -69,6 +80,9 @@ import DataTable from "vue-materialize-datatable";
 import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
+
+import AffecterFormateur from "@/components/formation/AffecterFormateur";
+
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
 import AddFormation from '../../components/formation/AddFormation.vue';
 
@@ -76,12 +90,16 @@ import AddFormation from '../../components/formation/AddFormation.vue';
 import AddRessource from '../ressource/AddRessource.vue';
 
 
+
 export default {
   name: "ListerFormations",
   components: {
     //  ArchiverItem,
 
+    AffecterFormateur,
+
  AddFormation,
+
     datatable: DataTable,
     FormationDetails,
     AddDemande,
@@ -203,6 +221,14 @@ this.$router.push({ path: `/ressource`,query: {
         .catch((error) => console.log(error.response));
     },
 
+
+    AffecterFor(formation){
+      this.formation=formation;
+      this.showModal("my-modaldelete");
+      
+    }
+
+   
     getDemandeByFormation(id) {
 
    
@@ -212,6 +238,7 @@ this.$router.push({ path: `/demandes`,query: {
         } });
 
     },
+
   },
 };
 </script>

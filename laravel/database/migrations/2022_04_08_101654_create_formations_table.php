@@ -19,10 +19,12 @@ class CreateFormationsTable extends Migration
             $table->date('date_debut');
             $table->string('description')->nullable();
             $table->date('date_fin');
+
             $table->foreignId('responsable_id')->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('formateur_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('formateur_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade')->default(null);
             $table->foreignId('formateurexterne_id')->nullable()->constrained()->on('Users')->onDelete('cascade')->onUpdate('cascade');//change to formatuer externe
-            $table->decimal("prix");
+    $table->decimal("prix");
+
             $table->boolean('etat');
             $table->integer('nbr_place');
             $table->timestamps();

@@ -20,7 +20,6 @@ import FormationDetails from "@/components/formation/FormationDetails";
 export default {
   name: 'ModalComp',
   components: {
-    //  ArchiverItem,
     AddFormation,
     FormationDetails,
   },

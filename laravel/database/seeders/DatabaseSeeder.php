@@ -21,12 +21,16 @@ class DatabaseSeeder extends Seeder
        // $this->call(ProfesseurSeeder::class);
       //  $this->call(ResponsableSeeder::class);
         $this->call(FormationSeeder::class);
-      //  $this->call(SeanceSeeder::class);
-      //  $this->call(ResourceSeeder::class);
-      //  $this->call(DemandeSeeder::class);
-      //  $this->call(EtudiantSeeder::class);  
-      //  $this->call(InscritSeeder::class);
-      //  $this->call(CertificationSeeder::class);
+
+        $this->call(SeanceSeeder::class);
+        $this->call(ResourceSeeder::class);
+        $this->call(DemandeSeeder::class);
+        $this->call(EtudiantSeeder::class);  
+        $this->call(InscritSeeder::class);
+        $this->call(FormateurexSeeder::class);
+
+       $this->call(CertificationSeeder::class);
+
 
 
 

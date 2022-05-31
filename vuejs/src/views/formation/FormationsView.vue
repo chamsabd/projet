@@ -9,6 +9,7 @@
 
       @dismiss-count-down="countDownChanged"
     >
+
     <h6 aria-describedby="help-block">  {{alert}}  </h6>
 
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
@@ -19,8 +20,11 @@
         height="4px"
       ></b-progress>
     </b-alert>
+
    <lister-formation :formations="formations" @add="Add" :role="role"/>
+
   </div>
+
 </template>
 
 <script>
@@ -30,10 +34,6 @@ import ListerFormation from '../../components/formation/ListerFormation.vue';
 
 //import ArchiverItem from "@/components/ArchiverItem";
 //import afficherDemandes from "@/components/demande/afficherDemandes.vue";
-
-
-
-
 
 
 export default {
@@ -127,6 +127,7 @@ this.showAlert();
         .catch((error) => console.log(error.response));
     },
   },
+  
 };
 </script>
 

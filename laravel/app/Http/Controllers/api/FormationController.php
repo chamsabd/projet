@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Mail\mail as MailMail;
 use App\Models\Formation;
 use App\Models\User;
-use App\Mail\mail as testMail;
+
+use App\Models\Formateurex;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Stmt\TryCatch;
@@ -142,6 +145,33 @@ foreach ($formations as $key => $formation) {
         $formation->update();
         return $formation;}
         return 'data not found';
+
+    }
+    public function updateFormateur(Request $request, $id )
+    {
+       // $User=User::where('id','=',$id)->first();
+       // $Formateurex=Formateurex::where('nom','=',$nom)->first();
+       // dd($utilisateur->id);
+
+        $formation=Formation::find($id);
+        if($formation){
+        $formation->formateur_id=$request->id;
+       // $formation->formateurexterne_id=$Formateurex->id;
+        $formation->save();
+        return response()->json([
+            'message' => 'Update Success',
+            'id' => $formation->id,
+            'attributes' => $formation
+        ], 201);
+    } else {
+        return response()->json([
+            "formateur non trouvée"
+        ], 404);
+    }
+        /*Formation::where('id', $id)->update({
+            'formateur' => $request->formateur,
+        })*/
+
 
     }
 

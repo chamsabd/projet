@@ -2,6 +2,9 @@
 use App\Http\Controllers\api\SeanceController;
 use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
+
+use App\Http\Controllers\api\FormateurexController;
+
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\InscritController;
 
@@ -41,7 +44,9 @@ Route::get('/formateur/formations',[FormationController::class,'formateurindex']
     Route::put('/{id}',[FormationController::class,'update']);
     Route::delete('/{id}',[FormationController::class,'destroy']);
     Route::get('/{id}',[FormationController::class,'show']);
-  
+
+    Route::put('update/{id}',[FormationController::class,'updateFormateur']);
+
 });
 Route::get('/mail',[FormationController::class,'test']);
 Route::prefix('/ressource')->group(function(){
@@ -74,7 +79,14 @@ Route::put('/{id}',[CertificationController::class,'update']);
 });
 
 
-
+//Route::apiResource('/formateurexes',FormateurexController::class);
+Route::get('/formateurexes',[FormateurexController::class,'index']);
+Route::prefix('/formateurex')->group(function(){
+    Route::post('/store',[FormateurexController::class,'store']);
+    Route::put('/{id}',[FormateurexController::class,'update']);
+    Route::delete('/{id}',[FormateurexController::class,'destroy']);
+    Route::get('/{id}',[FormateurexController::class,'show']);
+});
 
 
 Route::get('/demandes',[demandesController::class,'index']);

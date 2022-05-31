@@ -7,9 +7,15 @@ import Dashboard from '@/views/Dashboard'
 //import DemandesView from '@/views/demande/DemandesView'
 import DemandesView from '@/views/demande/DemandesView'
 import FormationsView from '@/views/formation/FormationsView'
+
+//import AddFormateurex from '@/components/formateurex/AddFormateurex'
+//import ListerFormateurex from '@/components/formateurex/ListerFormateurex'
+import FormateurexView from '@/views/formateurex/FormateurexView'
+
 import InscritsView from '@/views/inscrit/InscritsView'
 import ListerRessource from '@/views/ressource/ListerRessource'
 import CalenderView from '@/views/CalenderView'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,16 +53,25 @@ const routes = [
 
    
   },
-    ]
-   
-  },
+ 
+
+//   {
+//     path: '/demande',
+//     name: 'afficherDemandes',
+//     component: afficherDemandes
+//   },
+  {
+    path: '/formateurex',
+    name: 'FormateurexView',
+    component: FormateurexView
+  }
 
  
-  // {
-  //   path: '/demandes',
-  //   name: 'DemandesView',
-  //   component: DemandesView
-  // },
+  {
+    path: '/demandes',
+    name: 'DemandesView',
+    component: DemandesView
+  },}
 
 ]
 

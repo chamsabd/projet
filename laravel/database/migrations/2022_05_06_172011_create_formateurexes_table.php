@@ -15,7 +15,12 @@ class CreateFormateurexesTable extends Migration
     {
         Schema::create('formateurexes', function (Blueprint $table) {
             $table->id();
+            $table->integer('ncin')->unique();
+            $table->string('email')->unique();
+            $table->string('nom');
+            $table->string('prenom');
             $table->string('specialite');
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }
