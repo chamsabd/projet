@@ -68,7 +68,6 @@ watch: {
   this.getformations();
  }
 },
- 
   mounted() {
     this.getformations();
   },
@@ -77,8 +76,15 @@ watch: {
  await  axios
         .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
         .then((response) => {
+          console.log(response.data.length);
+           if (response.data.length==0) {
+            this.alert="il n'y a pas de formations";
+this.showAlert();
+          }
+          else
           this.formations = response.data;
-          console.log(this.formations);
+          console.log(response.data);
+   
         })
         .catch((error) => console.log(error.response));
     },
@@ -89,12 +95,13 @@ watch: {
         this.dismissCountDown = this.dismissSecs
       },
   Add(alert){
+   
     if(alert!='none'){
     this.alert=alert;
 this.showAlert();
 }
 
-this.getformations();
+ this.getformations();
 
   },
     onAddClick() {

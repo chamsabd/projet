@@ -24,13 +24,16 @@
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
-        
-
+        <b-button pill variant="outline-info" v-if="role=='formateur' && props.row.etat == 0" @click="AjoutCour(props.row)">ajouter support</b-button>
+        <b-button pill variant="outline-info" v-if="role=='formateur' || role=='participant' && props.row.etat == 0 && props.row.accepted==true" @click="ListerCour(props.row)">lister support cours</b-button>
+       
         </td>
         <td>  
-             
-          <add-demande v-if="role=='participant' && props.row.send==true && props.row.etat == 0" @add="Add" :f="props" />
-            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.send==false">demande sended </b-button></td>
+          <add-demande v-if="role=='participant' && props.row.send==true && props.row.nbr_place>0 && props.row.etat == 0" @add="Add" :f="props" />
+            <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==false && props.row.send==false">demande sended </b-button>
+      <b-button pill variant="outline-success" v-if="role=='participant' && props.row.accepted==true">demande accepter </b-button>
+      </td>
+      
       </template>
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
@@ -38,10 +41,11 @@
        </b-modal>
 
 
+<add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
-  </div>
-         
 
+       
+  </div>
 </template>
 
 <script>
@@ -52,9 +56,9 @@ import FormationDetails from './FormationDetails.vue';
 //import ArchiverItem from "@/components/ArchiverItem";
 import AddDemande from "@/components/demande/addDemande.vue";
 // import AfficherDemandes from "@/components/demande/afficherDemandes.vue";
-
-
 import AddFormation from '../../components/formation/AddFormation.vue';
+
+import AddRessource from '../ressource/AddRessource.vue';
 
 export default {
   name: "ListerFormations",
@@ -65,6 +69,9 @@ export default {
     datatable: DataTable,
     FormationDetails,
     AddDemande,
+
+    AddRessource,
+
     // AfficherDemandes,
   },
   props: {
@@ -104,7 +111,7 @@ export default {
         },
       ],
 
-    
+   
       formation: {},
       modformation:{}
     };
@@ -127,6 +134,7 @@ export default {
       
    this.$emit('add',alert);
   },
+  
     modifFormation(row){
      this.modformation=row; 
      console.log(this.formation);
@@ -157,7 +165,17 @@ export default {
       console.log(this.formation);
       this.showModal("my-modal");
     },
+    AjoutCour(row){
+this.formation = row;
+ this.showModal("ressource-modal");
+    },
+ListerCour(row){
 
+this.$router.push({ path: `/ressource`,query: { 
+            id:row.id,
+            role: this.role
+        }  });
+},
     deleteitm(id) {
       axios
         .delete("http://127.0.0.1:8000/api/formation/" + id)
@@ -168,26 +186,11 @@ export default {
     },
 
     getDemandeByFormation(id) {
-      console.log(id);
-    // var demande={};
-    //     demande.formation_id=this.d.row.id;
-        
-    //   axios(
-    //   {   url: 'http://127.0.0.1:8000/api/demandes/'+id,
-    //         method: 'get',
-    //         data: demande,
-    //       })
-    //   .then((response) => {
-    //     console.log(response);
-          
-    //     })
-     axios.get("http://127.0.0.1:8000/api/demandes/formation/" +id)
-    .then((response) => {
-      this.d = response.data;
-      console.log(this.d);
-      window.location.href = '/demande';
-    })
-    .catch((error) => console.log(error.response));
+   
+this.$router.push({ path: `/demandes`,query: { 
+            id: id,
+            role: this.role
+        } });
     },
   },
 };

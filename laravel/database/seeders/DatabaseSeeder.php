@@ -16,17 +16,18 @@ class DatabaseSeeder extends Seeder
 
        
         $this->call(UserSeeder::class);
-        $this->call(AdminSeeder::class);
-        $this->call(DepartementSeeder::class);
-        $this->call(ClientSeeder::class);
-        $this->call(ProfesseurSeeder::class);
-        $this->call(ResponsableSeeder::class);
+       // $this->call(AdminSeeder::class);
+       // $this->call(DepartementSeeder::class);
+       // $this->call(ProfesseurSeeder::class);
+      //  $this->call(ResponsableSeeder::class);
         $this->call(FormationSeeder::class);
-        $this->call(SeanceSeeder::class);
-        $this->call(ResourceSeeder::class);
-        $this->call(DemandeSeeder::class);
-        $this->call(EtudiantSeeder::class);  
-        $this->call(InscritSeeder::class);
+      //  $this->call(SeanceSeeder::class);
+      //  $this->call(ResourceSeeder::class);
+      //  $this->call(DemandeSeeder::class);
+      //  $this->call(EtudiantSeeder::class);  
+      //  $this->call(InscritSeeder::class);
+      //  $this->call(CertificationSeeder::class);
+
 
 
     }

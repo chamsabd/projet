@@ -5,10 +5,14 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\demandeResource;
 use App\Models\Demande;
+use App\Models\Formation;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\mail as IsetMail;
+use App\Models\Inscrit;
+use Illuminate\Support\Facades\Mail;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -36,12 +40,12 @@ class demandesController extends Controller
     {
         // $Demande = Demande::FindOrFail($id);
         // return new demandeResource($Demande);
-        $data = DB::table("formations")
-            ->join("demandes", "formations.id", "demandes.formation_id")
-            ->where("formations.id", "=", $form_id)
-            ->select("formations.titre", "demandes.*")
-            ->get();
-        return $data;
+
+        $formation=Formation::find($form_id);
+       if($formation->responsable_id==9)
+        return $formation->demandes()->get();
+    else
+    return response()->json("vous n'ete pas le responsable de cette formation");  
     }
     /**
      * Store a newly created resource in storage.
@@ -69,6 +73,7 @@ class demandesController extends Controller
                 $Demande->date_demande=$request ->date_demande;
                 $Demande->formation_id=$request->formation_id;
                 $Demande->user_id=9;
+                $Demande->accepted=false;
                 $Demande->save();
             // if($Demande->save()){
             //     return response()->json($Demande, 200);
@@ -100,22 +105,59 @@ class demandesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
+    public function accepte( $id)
+    {
+        //ajouter inscrit
+        //nplace-1
+
+        $Demande = Demande::FindOrFail($id);
+        if ($Demande) {
+        $formation=Formation::FindOrFail($Demande->formation_id);
+        if ( $formation->nbr_place>0) {
+             $formation->nbr_place=$formation->nbr_place-1;
+             $formation->update();
+             $inscrit=new Inscrit();
+          
+              $inscrit->formation_id= $Demande->formation_id;
+             $inscrit->user_id= $Demande->user_id;
+             $Demande->accepted=true;
+             $inscrit->save();
+             $Demande->update();
+              //  $Demande->delete();
+                $details=[
+                    'title'=>'demande accepter',
+                    'body' =>"felicitation votre demmande au formation ".$formation->titre." a ete accepter aujourd'hui vous ete un participant "
+                ];
+                Mail::to("chamsabdelwahed42@gmail.com")->send(new IsetMail($details));//Auth::user()->email
+           return response()->json('demande accepter'); 
+        }
+                 return response()->json("il n'ya plus de place ");
+        }
+        return response()->json("demande n'existe pas  ");
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function refuse($id)
     {
     $Demande = Demande::FindOrFail($id);
-            $Demande->delete();
-            return response()->json('demande deleted succefuly');  
+  
+    if ($Demande) {  
+        $formation=Formation::FindOrFail($Demande->formation_id);
+        $Demande->delete();
+            $details=[
+                'title'=>'demande refuser',
+                'body' =>'desoler votre demmande au formation '.$formation->titre.' a ete refusser '
+            ];
+            Mail::to("chamsabdelwahed42@gmail.com")->send(new IsetMail($details));//Auth::user()->email
+     return response()->json('demande refuser');  
+    }
+    return response()->json("demande n'existe pas");    
+          
     }
      private function validationRules()
     {

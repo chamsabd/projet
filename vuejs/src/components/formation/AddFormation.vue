@@ -4,7 +4,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-lg-9">
       <div class="card">
-        <div class="card-header"><strong>add</strong> Formation</div>
+        <div class="card-header"><strong>Formation</strong></div>
         <form ref="my-modal1form" @submit.stop.prevent="AddFormation">
            <b-form-input class="d-none"
                 v-model="formation.id"
@@ -213,7 +213,7 @@ errors:[],
         'responsable_id':null,
         'date_fin':null,
       };
-      this.$emit('add-formation',"none");
+      this.$emit('add',"none");
       },
       handleOk(bvModalEvent) {
         // Prevent modal from closing

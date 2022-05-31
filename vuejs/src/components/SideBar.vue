@@ -10,7 +10,7 @@
       <b-form-select-option value="responsable">responsable</b-form-select-option>
       <b-form-select-option value="admin" >admin</b-form-select-option>
       <b-form-select-option value="participant" >participant</b-form-select-option>
-     
+      <b-form-select-option value="formateur" >formateur</b-form-select-option>
     </b-form-select></div></b-row>
         </b-container> 
         <div class="menu-items">
@@ -27,7 +27,7 @@
                 </div>
             </router-link>
 
-            <router-link v-if="role=='responsable'" :to="{ name: 'InscritsView'}" active-class="active" tag="button" exact class="side-btn">
+            <router-link v-if="role=='responsable'" :to="{ name: 'InscritsView', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    les participants
                 </div>
@@ -55,7 +55,7 @@ export default {
      name: "SideBar",
       data: function () {
     return {
-        role:this.$route.params.role?this.$route.params.role:'participant',
+        role:this.$route.params.role?this.$route.params.role:this.$route.query.role?this.$route.query.role:"participant",
     }},
      computed: {
         
@@ -63,8 +63,8 @@ export default {
      ,watch: {
  role:function () {
      var r=this.$route.path;
-     console.log(r);
-      console.log(this.$route.params.role);
+  
+    
       if (this.$route.params.role!=undefined) {
            r= r.replace(this.$route.params.role, this.role);
      console.log(r);

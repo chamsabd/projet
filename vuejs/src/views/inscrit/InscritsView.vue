@@ -72,8 +72,11 @@ export default {
    
     };
   },
-  computed:{
+   computed:{
 
+role(){
+  return this.$route.params.role;
+}
   },
 watch: {
  

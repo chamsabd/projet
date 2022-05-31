@@ -4,9 +4,16 @@ use App\Http\Controllers\api\FormationController;
 use App\Http\Controllers\api\demandesController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\InscritController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
+
+use App\Http\Controllers\api\RessourseController;
+
+use App\Http\Controllers\api\CertificationController;
+use App\Http\Controllers\CertificationController as ControllersCertificationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +43,17 @@ Route::get('/formateur/formations',[FormationController::class,'formateurindex']
     Route::get('/{id}',[FormationController::class,'show']);
   
 });
+Route::get('/mail',[FormationController::class,'test']);
+Route::prefix('/ressource')->group(function(){
+    Route::post('/url',[RessourseController::class,'url']);
+    Route::post('/store',[RessourseController::class,'store']);
+    Route::get('/down/{id}',[RessourseController::class,'upload']);
+    Route::delete('/{id}',[RessourseController::class,'destroy']);
+    Route::get('/{id}',[RessourseController::class,'show']);
+  
+});
+
+
 Route::get('/inscrits/formations',[InscritController::class,'formationsindex']);
 Route::get('/inscrits',[InscritController::class,'index']);
 Route::prefix('/inscrit')->group(function(){
@@ -47,19 +65,36 @@ Route::prefix('/inscrit')->group(function(){
 Route::get('/users',[UserController::class,'index']);
 
 Route::get('/user/demandes',[demandesController::class,'userdemandes']);
+
+Route::prefix('/certif')->group(function (){
+Route::get('/list',[CertificationController::class,'index']);
+Route::delete('/{id}',[CertificationController::class,'destroy']);
+Route::put('/{id}',[CertificationController::class,'update']);
+
+});
+
+
+
+
+
 Route::get('/demandes',[demandesController::class,'index']);
 Route::post('/demandes/store',[demandesController::class,'store']);
 Route::put('/demandes/{id}',[demandesController::class,'update']);
+Route::get('/demandes/refuse/{id}',[demandesController::class,'refuse']);
+Route::get('/demandes/accepte/{id}',[demandesController::class,'accepte']);
 Route::delete('/demandes/{id}',[demandesController::class,'destroy']);
 //Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
 Route::get('/demandes/formation/{form_id}',[demandesController::class,'getDemandeByFormation']);
 
 
 
+Route::get('/demandes/{id}',[demandesController::class,'getDemande']);
+
 Route::get('/users',[UserController::class,'index']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+    
 });
 
 Route::post('/login', [AuthController::class,'login']);
