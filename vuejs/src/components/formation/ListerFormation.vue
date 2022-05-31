@@ -38,7 +38,7 @@
           
          <b-button pill variant="outline-secondary" @click="AffecterFor(props.row)">Affecter Formateur</b-button>
         </td>
-
+<td>
          <b-button pill variant="outline-warning" v-if="role=='responsable'" :d="d" @click="getDemandeByFormation(props.row.id)">afficher demandes</b-button>
 
            <b-button v-if="role=='admin' " pill variant="outline-info" @click="modifFormation(props.row)">modif</b-button>
@@ -226,7 +226,7 @@ this.$router.push({ path: `/ressource`,query: {
       this.formation=formation;
       this.showModal("my-modaldelete");
       
-    }
+    },
 
    
     getDemandeByFormation(id) {

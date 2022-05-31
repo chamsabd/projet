@@ -64,16 +64,17 @@ const routes = [
     path: '/formateurex',
     name: 'FormateurexView',
     component: FormateurexView
-  }
+  },
 
  
   {
     path: '/demandes',
     name: 'DemandesView',
     component: DemandesView
-  },}
+  },
 
-]
+  
+]}]
 
 
 const router = new VueRouter({
