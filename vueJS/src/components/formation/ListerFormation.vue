@@ -224,7 +224,7 @@ this.$router.push({ path: `/ressource`,query: {
 
     AffecterFor(formation){
       this.formation=formation;
-      this.showModal("my-modaldelete");
+      this.showModal("my-modal2");
       
     },
 

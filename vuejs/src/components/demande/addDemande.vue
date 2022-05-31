@@ -11,7 +11,17 @@ export default {
     return{
  
     }
+  },  
+  computed:{
+role(){
+  return this.$route.params.role;
+},
   },
+watch: {
+ role:function () {
+  this.getformations();
+ }
+},
   props:{
     f:Object,
   },
@@ -19,7 +29,7 @@ export default {
     senddemande() {
        if(this.role!="participant"){
         this.alert="vous n'etes pas participant";
-this.showAlert();
+  this.$emit('add',alert);
       }
    else{
         var demande={};
