@@ -33,6 +33,7 @@ const routes = [
           path: '/inscrits/:role',
           name: 'InscritsView',
           component: InscritsView
+
         },
          {
           path: '/ressource',
@@ -43,6 +44,7 @@ const routes = [
     path: '/demandes',
     name: 'DemandesView',
     component: DemandesView,
+
    
   },
     ]
