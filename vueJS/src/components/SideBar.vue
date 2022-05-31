@@ -32,6 +32,11 @@
                    les participants
                 </div>
             </router-link>
+             <router-link v-if="role=='responsable'" :to="{ name: 'Certifview', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
+                <div class="link-container">
+                   les certifications
+                </div>
+            </router-link>
       <!-- <router-link disabled to="#" class=" side-btn-haschildren" tag="button" exact >
                  <div class="link-container">admin</div></router-link>
              <router-link :to="`/formations/${'admin'}`" active-class="active" tag="button" exact class="side-btn">
