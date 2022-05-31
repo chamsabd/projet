@@ -10,6 +10,7 @@ import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
 import ListerRessource from '@/views/ressource/ListerRessource'
 import CalenderView from '@/views/CalenderView'
+import containerSeances from '@/views/Seance/containerSeances'
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,7 +47,28 @@ const routes = [
     component: DemandesView,
 
    
+  },{
+    path: '/containerSeances',
+    name: 'containerSeances',
+    component: containerSeances,
+
+   
   },
+  {
+    path: '/contAddModal',
+    name: 'contAddModal',
+    component: containerSeances,
+
+   
+  },
+  {
+    path: '/ListeSeances',
+    name: 'ListeSeances',
+    component: containerSeances,
+
+   
+  },
+
     ]
    
   },

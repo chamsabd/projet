@@ -21,7 +21,7 @@
            <td><!--@click="consulterSeances(props.row)"-->
           <b-button pill variant="outline-info" 
 
-           :to="{name:'ContainerSeances' ,
+           :to="{name:'containerSeances' ,
                 params:{id:props.row.id , name:props.row.titre} }"
                 >Consulter Seances
           </b-button>
