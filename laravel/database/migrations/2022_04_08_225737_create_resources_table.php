@@ -16,9 +16,10 @@ class CreateResourcesTable extends Migration
         Schema::create('resources', function (Blueprint $table) {
 
             $table->id();
+            $table->string('titre');
             $table->string('url');
-            $table->string('type');
-            $table->foreignId('seance_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+           
+            $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
           //  $table->foreign('id_seance')->references('id_seance')->on('seances')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();

@@ -16,6 +16,7 @@ class CreateDemandesTable extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->date('date_demande');
+            $table->boolean('accepted');
             $table->foreignId('formation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
            $table->timestamps();

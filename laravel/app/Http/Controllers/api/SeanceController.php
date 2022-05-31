@@ -14,7 +14,7 @@ class SeanceController extends Controller
      */
     public function index()
     {
-      return Seance::with('formation')->get().'\n\t';
+      return Seance::with('formation')->get();
     }
 
     /**
@@ -25,7 +25,25 @@ class SeanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+         //'formation_id' => 'exists:formations.id',
+         //'nom_seance' => 'required|min:5|max:15',
+           // 'date'=>'after:tomorrow'
+         ]);
+    //$request->validate($this->validationRules());
+    $newSeance = new Seance() ;
+   $newSeance->nom_seance = $request->seance["nom_seance"];
+   $newSeance->date = $request->seance["date"];
+   $newSeance->temps_fin = $request->seance["temps_fin"];
+   $newSeance->temps_debut = $request->seance["temps_debut"];
+   $newSeance->formation_id = $request->seance["formation_id"];  
+   $newSeance->save() ;
+   if($newSeance){
+    return $this->refresh();
+}
+  // return $newSeance ; 
+ 
     }
 
     /**
@@ -36,7 +54,8 @@ class SeanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $seance=Seance::find($id);
+        return response()->json($seance);
     }
 
     /**
@@ -46,10 +65,19 @@ class SeanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
-    {
-        //
-    }
+    {     
+          $seance=Seance::find($id);
+          if($seance){
+          $seance->nom_seance =$request->seance["nom_seance"];
+          $seance->date =$request->seance["date"];
+          $seance->temps_debut =$request->seance["temps_debut"];
+          $seance->temps_fin =$request->seance["temps_fin"];
+          $seance->save();
+          
+    } }
 
     /**
      * Remove the specified resource from storage.
@@ -59,6 +87,33 @@ class SeanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $existingSeance = Seance::findorfail($id);
+        if ($existingSeance ) {
+            $existingSeance->delete();
+
+            return $this->refresh() ;
+        }
+        else{
+            return "Seance non trouvé" ;
+        }
+
     }
+
+    private function validationRules()
+    {
+        return [
+          /*  'formation_id' => ['required|exists:formations,id'] ,
+            'date'=>['required|date |after:now']    ,
+          //  'nom_seance' => 'required'*/
+          'nom_seance' => 'required|min:5|max:15',
+
+            ];
+    }
+
+private function refresh(){
+    return response()->json(Seance::orderBy('created_at','DESC'));
 }
+
+}
+
+

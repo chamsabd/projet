@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="template">
+
+<link rel="stylesheet" type="text/css"
+href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Modifier Formateur externe</title>
+</head>
+<body>
+<div class="container" layout:fragment="Mycontent">
+<div class="card-body">
+<form action="updateFormateurex" method="post">
+<div class="form-group">
+<input type="text" name="idFormateurex" th:value="${formateurex.idFormateurex}" class="form-control d-none"/>
+<input type="number" name="size" th:value="${size}" class="form-control d-none"/>
+<input type="number" name="page" th:value="${page}" class="form-control d-none"/>
+</div>
+<div class="form-group">
+<label class="control-label">Ncin :</label>
+<input type="text" name="ncin" th:value="${formateurex.ncin}" class="form-control"/>
+</div>
+<div class="form-group">
+<label class="control-label">Email :</label>
+<input type="text" name="email" th:value="${formateurex.email}" class="form-control"/>
+</div>
+<div class="form-group">
+<label class="control-label">Nom :</label>
+<input type="text" name="nom" th:value="${formateurex.nom}" class="form-control"/>
+</div>
+<div class="form-group">
+<label class="control-label">Prenom :</label>
+<input type="text" name="prenom" th:value="${formateurex.prenom}" class="form-control"/>
+</div>
+<div class="form-group">
+<label class="control-label">Specialite :</label>
+<input type="text" name="specialite" th:value="${formateurex.specialite}" class="form-control"/>
+</div>
+<div>
+<button type="submit" class="btn btn-warning">Modifier</button>
+</div>
+</form>
+</div>
+<br/>
+<br/>
+<a href="ListeFormateurex">Liste Produits</a>
+</div>
+</body>
+</html>

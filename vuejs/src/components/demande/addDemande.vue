@@ -1,8 +1,8 @@
 <template>
     
-  <div>
+ 
       <b-button pill variant="outline-warning" @click="senddemande()">send demande</b-button>
-  </div>
+ 
 </template>
 <script>
 import axios from "axios";
@@ -17,25 +17,28 @@ export default {
   },
   methods:{
     senddemande() {
-      console.log(this.f);
-      // var now=new Date();
-      // var date=new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      //   //  var fd = new FormData()
-        //   fd.append('formation_id',this.f.id);
-        //  fd.append('date_demande', date);
+       if(this.role!="participant"){
+        this.alert="vous n'etes pas participant";
+this.showAlert();
+      }
+   else{
         var demande={};
         demande.formation_id=this.f.row.id;
-        demande.date_formation=new Date();
+        demande.date_demande=(new Date()).toISOString().split('T')[0];
+        
       axios(
       {   url: 'http://127.0.0.1:8000/api/demandes/store',
             method: 'post',
             data: demande,
           })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
+         var alert="la demande est envoyer avec success"
+  this.$emit('add',alert);
           
         })
-        .catch((error) => console.log(error.response));
+        .catch((error) => {
+          console.log(error.response.data.message)
+          });}
     },
     // deleteitm(id) {
     //   axios

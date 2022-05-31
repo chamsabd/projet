@@ -6,10 +6,12 @@
       dismissible
       variant="info"
       @dismissed="dismissCountDown=0"
+
       @dismiss-count-down="countDownChanged"
     >
 
-    <h6 aria-describedby="help-block"> le formation {{titreform}} est ajouter avec success a la fin de table</h6>
+    <h6 aria-describedby="help-block">  {{alert}}  </h6>
+
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
         variant="info"
@@ -18,8 +20,9 @@
         height="4px"
       ></b-progress>
     </b-alert>
-   <lister-formation :formations="formations" :role="role"/>
-   <add-formation @add-formation="Addformation" />
+
+   <lister-formation :formations="formations" @add="Add" :role="role"/>
+
   </div>
 
 </template>
@@ -28,10 +31,9 @@
 import axios from "axios";
 
 import ListerFormation from '../../components/formation/ListerFormation.vue';
-import AddFormation from '../../components/formation/AddFormation.vue';
+
 //import ArchiverItem from "@/components/ArchiverItem";
-
-
+//import afficherDemandes from "@/components/demande/afficherDemandes.vue";
 
 
 export default {
@@ -43,8 +45,6 @@ export default {
    
  
     ListerFormation,
-   AddFormation,
-     
 
   },
   data: function () {
@@ -54,7 +54,7 @@ export default {
         dismissCountDown: 0,
 
       formations: [],
-      titreform:'',
+      alert:'',
    
     };
   },
@@ -68,17 +68,23 @@ watch: {
   this.getformations();
  }
 },
- 
   mounted() {
     this.getformations();
   },
   methods: {
     async getformations() {
-  
  await  axios
         .get("http://127.0.0.1:8000/api/"+this.role+"/formations")
         .then((response) => {
+          console.log(response.data.length);
+           if (response.data.length==0) {
+            this.alert="il n'y a pas de formations";
+this.showAlert();
+          }
+          else
           this.formations = response.data;
+          console.log(response.data);
+   
         })
         .catch((error) => console.log(error.response));
     },
@@ -88,11 +94,15 @@ watch: {
       showAlert() {
         this.dismissCountDown = this.dismissSecs
       },
-  Addformation(formation){
-    this.titreform=formation.titre;
-console.log(formation);
-this.getformations();
+  Add(alert){
+   
+    if(alert!='none'){
+    this.alert=alert;
 this.showAlert();
+}
+
+ this.getformations();
+
   },
     onAddClick() {
       this.formation = {};

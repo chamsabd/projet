@@ -59,5 +59,17 @@ class User extends Authenticatable
     public function etudiant(){
         return $this->hasOne(Etudiant::class);
     }
-  
-}
+    public function inscrits(){
+        return $this->belongsToMany(Formation::class,"inscrits")
+        ->withTimestamps()->withPivot('id');
+    }
+    public function demandes(){
+        return $this->belongsToMany(Formation::class,"demandes")
+        ->withTimestamps()->withPivot('id',"accepted");
+    }
+
+    public function certif(){
+        return $this->belongsToMany(Formation::class,"Certifications")
+        ->withTimestamps()->withPivot('id');
+    }
+ }

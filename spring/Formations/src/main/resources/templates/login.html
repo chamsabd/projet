@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec=https://www.thymeleaf.org/thymeleaf-extras-springsecurity5
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css"
+href="webjars/bootstrap/4.6.1/css/bootstrap.min.css" />
+ <script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+ <script type="text/javascript"
+src="webjars/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+
+<head> 
+<meta charset="utf-8"> 
+<title>Connexion</title> 
+</head> 
+<body> 
+<div layout:fragment="Mycontent"> 
+<div class="container mt-5"> 
+<div class="col-md-6 offset-md-3"> 
+<div class="card"> 
+<div class="card-header">Connexion</div>
+
+<div class="card-body"> 
+<form  th:action="${etat} =='log in'?'login':'register'"  method="POST"> 
+<div th:if="${param.error}" >
+ <p th:text="'invalid username or password'"></p>
+</div>
+<div th:if="${erreur}" >
+ <p th:text="${erreur}"></p>
+</div>
+<!-- <span th:errors=${user.nCin} class="text-danger"> </span>
+<span th:errors=${user.username} class="text-danger"> </span>
+<span th:errors=${user.nom} class="text-danger"> </span>
+<span th:errors=${user.prenom} class="text-danger"> </span> -->
+                    
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >ncin :</label> 
+    <input type="number" name="nCin" th:value="${user.nCin}"> 
+    </div> 
+<div class="form-group"> 
+<label class="control-label" >email :</label> 
+<input type="text" name="username"  th:value="${user.username}"/> 
+</div> 
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >nom :</label> 
+    <input type="text" name="nom" th:value="${user.nom}"> 
+    </div> 
+    <div th:if="${etat} == 'sign up'" class="form-group"> 
+        <label class="control-label" >prenom:</label> 
+        <input type="text" name="prenom" th:value="${user.prenom}"> 
+        </div> 
+<div class="form-group">  
+<label class="control-label" >Mot de passe :</label> 
+<input type="password" name="password" th:value="${user.password}">
+</div>
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+<label class="control-label" >confirmer Mot de passe :</label> 
+<input type="password" name="confirmedPassword" th:value="${user.confirmedPassword}"> 
+</div> 
+<div th:if="${etat} == 'sign up'" class="form-group"> 
+    <label class="control-label" >vous ete?:</label> 
+    <select class="custom-select" name="profile" th:value="${user.profile}"
+    aria-label="Example select with button addon">
+    <option  value="proffeseur" label="proffeseur">
+    </option>
+     <option  value="etudiant" label="etudiant"></option>
+     <option  value="agent" label="agent"></option>
+</select>
+    </div> 
+<button th:text="${etat}"  class="btn btn-primary"></button>  <!-- etat=log in  --> 
+</form> 
+<a  th:href="@{login?(etat='sign up')}" th:if="${etat} == 'log in'"  class="btn btn-primary">Ajouter un Compte</a>
+<a  th:href="@{login?(etat='log in')}" th:if="${etat} == 'sign up'"  class="btn btn-primary">log in</a>
+</div> 
+</div> 
+</div> 
+</div> 
+</div> 
+</body> 
+</html>
