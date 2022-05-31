@@ -57,6 +57,11 @@ watch: {
       else{
 		await axios.get("http://127.0.0.1:8000/api/certif/list")
             .then((response) => {
+               if (response.data.length==0) {
+            this.alert="il n'y a pas de certifications";
+this.showAlert();
+          }
+          else
           this.certifications = response.data;
           ///console.log (this.certifications);
         })

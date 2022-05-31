@@ -20,6 +20,16 @@ export default {
    
     };
   },
+     computed:{
+role(){
+  return this.$route.params.role;
+},
+  },
+watch: {
+ role:function () {
+  this.getformations();
+ }
+},
   mounted() {
     this.getformateurex();
   },

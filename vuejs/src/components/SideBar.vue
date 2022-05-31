@@ -26,7 +26,11 @@
                    formations
                 </div>
             </router-link>
-
+  <router-link v-if="role=='admin'" :to="{ name: 'FormateurexView', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
+                <div class="link-container">
+                   les formateur externe
+                </div>
+            </router-link>
             <router-link v-if="role=='responsable'" :to="{ name: 'InscritsView', params: { role: role }}" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    les participants

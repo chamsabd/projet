@@ -68,7 +68,7 @@ const routes = [
 //     component: afficherDemandes
 //   },
   {
-    path: '/formateurex',
+    path: '/formateurex/:role',
     name: 'FormateurexView',
     component: FormateurexView
   },
