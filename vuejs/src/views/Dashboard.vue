@@ -4,17 +4,38 @@
         <div class="content">
             <router-view :key="$route.path"/>
         </div>
+
+        <b-button v-if="loggedIn" text key="Logout" @click="logout" class="btn btn-info btn-lg">
+          Logout
+        </b-button>
+       
+
     </div>
     
 </template>
 
 <script>
 import SideBar from '../components/SideBar'
+import "@/store/index";
 export default {
     name: 'HomeView',
     components: {
         SideBar
-    }
+    },
+
+    computed:{
+       
+loggedIn() {
+            return this.$store.getters.loggedIn;
+                }
+    },
+        methods: {
+        logout() {
+            this.$store.dispatch("logout").then(() => {
+                this.$router.push("/login");
+            });
+        }
+}
 }
 </script>
 

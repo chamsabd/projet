@@ -1,5 +1,9 @@
 <template>
+
     <div>
+       <b-alert v-if="alert" show dismissible>
+    {{alert}} 
+  </b-alert>
       <b-form-group
         id="input-group-1"
         label="Email address:"
@@ -10,6 +14,7 @@
           id="input-1"
           v-model="user.email"
           type="email"
+          for="email" 
           placeholder="Enter email"
           required
         ></b-form-input>
@@ -38,8 +43,9 @@ import "@/store/index";
         user: {
           email: '',
           password: '',
+          
         },
-       
+       alert:'',
       }
     },
     methods: {
@@ -67,6 +73,10 @@ import "@/store/index";
        */
     this.$store.dispatch("login", this.user).then(() => {
       this.$router.push("/");
+       })
+       .catch(error => {
+         console.log(error);
+         this.alert=error;
        }
       );
       

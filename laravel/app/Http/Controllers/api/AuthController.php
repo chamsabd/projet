@@ -54,9 +54,8 @@ class AuthController extends Controller
     
             // Check password
             if(!$user || !Hash::check($fields['password'], $user->password)) {
-                return response([
-                    'message' => 'somthing is wrong'
-                ], 401);
+              
+                return response()->json(['error' => 'Email ou mot de passe non valide'], 401);
             }
     
             $token = $user->createToken('myapptoken')->plainTextToken;
