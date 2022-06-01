@@ -1,4 +1,3 @@
-
 <template>
   <div id="app">
 
@@ -30,4 +29,3 @@ body {
   box-sizing: border-box;
 }
 </style>
-

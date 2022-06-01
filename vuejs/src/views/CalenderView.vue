@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import '@fortawesome/fontawesome-free/css/all.css'; // needs additional webpack config!
-import axios from 'axios'
+import  axios from "axios";
 //import $ from 'jquery'
 export default {
   components: {

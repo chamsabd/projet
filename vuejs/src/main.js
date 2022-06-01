@@ -1,14 +1,16 @@
 
 import Vue from 'vue'
-import './plugins/axios'
+//import './plugins/axios'
 import App from './App.vue'
 //import router from "../../trash/router";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import store from "./store";
+import axios from "axios";
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import axios from 'axios'
+//import  axios from "@/plugins/axios"
 import VueAxios from 'vue-axios'
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -26,6 +28,6 @@ Vue.config.productionTip = false
 
 new Vue({
  router,
-
+ store,
  render: h => h(App)
 }).$mount('#app')

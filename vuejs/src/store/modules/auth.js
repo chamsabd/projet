@@ -1,9 +1,12 @@
-import "@/plugins/axios";
+import axios from"axios"
 export default {
     state: {
-        user: null,
-        token: null,
-        loggedIn: false,
+        user: localStorage.getItem("user") ?? null,
+        token: localStorage.getItem("token") ?? null,
+        loggedIn:
+            localStorage.getItem("user") !== null &&
+            localStorage.getItem("token") !== null,
+            //errors:'',
     },
     mutations: {
         SET_USER(state, user) {
@@ -34,19 +37,25 @@ export default {
                     .then((response) => {
                         const { user, token } = response.data;
                         commit("LOGIN", { user, token });
+                        localStorage.setItem("user", JSON.stringify(user));
+                        localStorage.setItem("token", token);
                         resolve(response);
                     })
                     .catch((error) => {
                         reject(error);
+                        //this.errors=error.response.data.error;
+                        //console.log(this.errors);
                     });
             });
         },
         logout({ commit }) {
             return new Promise((resolve, reject) => {
                 axios
-                    .post("logout")
+                    .post("http://localhost:8000/api/logout")
                     .then((response) => {
                         commit("LOGOUT");
+                        localStorage.removeItem("user");
+                        localStorage.removeItem("token");
                         resolve(response);
                     })
                     .catch((error) => {
@@ -65,5 +74,9 @@ export default {
         loggedIn(state) {
             return state.loggedIn;
         },
+      /*  isAdmin(state) {
+            return state.user?.is_admin == 1;
+        },
+        */
     },
 };

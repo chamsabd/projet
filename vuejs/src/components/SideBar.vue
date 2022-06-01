@@ -1,16 +1,16 @@
 <template>
     <div class="sidebar">
         <div class="title">
-           welcomme
+           Bienvenue sur le site de gestion des Formations
         </div> 
         <b-container>
         <b-row>
         <div class="col-xs-2">  <b-form-select v-model="role" size="sm" >
       
-      <b-form-select-option value="responsable">responsable</b-form-select-option>
-      <b-form-select-option value="admin" >admin</b-form-select-option>
-      <b-form-select-option value="participant" >participant</b-form-select-option>
-      <b-form-select-option value="formateur" >formateur</b-form-select-option>
+      <b-form-select-option value="responsable">Responsable</b-form-select-option>
+      <b-form-select-option value="admin" >Admin</b-form-select-option>
+      <b-form-select-option value="participant" >Participant</b-form-select-option>
+      <b-form-select-option value="formateur" >Formateur</b-form-select-option>
     </b-form-select></div></b-row>
         </b-container> 
         <div class="menu-items">
@@ -47,6 +47,10 @@
             </router-link> -->
   
         </div>
+    
+
+
+
     </div>
 </template>
 
@@ -79,6 +83,9 @@ export default {
    
  
  }},
+    methods: {
+      
+    }
 
 }
 </script>
@@ -166,4 +173,5 @@ export default {
     border-radius: 50%;
     background-color: teal;
 }
+
 </style>

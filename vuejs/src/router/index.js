@@ -10,6 +10,7 @@ import FormationsView from '@/views/formation/FormationsView'
 import InscritsView from '@/views/inscrit/InscritsView'
 import ListerRessource from '@/views/ressource/ListerRessource'
 import CalenderView from '@/views/CalenderView'
+import ViewLogin from '@/views/ViewLogin'
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,6 +25,12 @@ const routes = [
      
         component: CalenderView
       },
+      {
+
+        path: "/login",
+        name: "login",
+        component: ViewLogin
+            },
       {
           path: '/formations/:role',
           name: 'FormationsView',
@@ -44,6 +51,7 @@ const routes = [
     name: 'DemandesView',
     component: DemandesView
   },
+ 
     ]
    
   },

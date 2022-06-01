@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
         public function register(Request $request) {
@@ -67,6 +68,18 @@ class AuthController extends Controller
     
             return response($response, 201);
         }
+    
+        
+            // Revoke the token that was used to authenticate the current request...
+            public function logout(Request $request){
+                Auth::user()->tokens->each(function($token, $key) {
+                    $token->delete();
+                });
+                return response(['message'=> 'good'], 200);
+               
+            } 
+           
+        
     
     
     }
