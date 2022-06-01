@@ -54,6 +54,9 @@ watch: {
  }
 },
   mounted() {
+      if(this.role!="admin"){
+        this.$router.push("/");
+      }
     this.getformateurex();
   },
    methods: {

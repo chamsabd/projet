@@ -23,7 +23,7 @@
 
            :to="{name:'ContainerSeances' ,
                 params:{id:props.row.id , name:props.row.titre} }"
-                >Consulter Seances
+                >Seances
           </b-button>
         
 
@@ -52,16 +52,8 @@
     </datatable>
       <b-modal  id="my-modal" size="lg" title="add formation"  centered ok-only>
           <formation-details :formation="formation"/>
-
-
-         
-   
        </b-modal> 
        <AffecterFormateur :formation="formation"/>
-
-
-
-
 <add-ressource :formation="formation"  @add="Add"/>
         <add-formation v-if="role=='admin'" @add="Add" :modformation="modformation" />
 

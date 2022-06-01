@@ -37,6 +37,9 @@ export default {
        }
    },
     mounted() {
+        if(this.role!="responsable"){
+        this.$router.push("/");
+      }
     this.getCertifications();
   },
     computed:{

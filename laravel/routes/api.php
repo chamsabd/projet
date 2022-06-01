@@ -48,7 +48,7 @@ Route::get('/formateur/formations',[FormationController::class,'formateurindex']
     Route::put('update/{id}',[FormationController::class,'updateFormateur']);
 
 });
-Route::get('/mail',[FormationController::class,'test']);
+//Route::get('/mail',[FormationController::class,'test']);
 Route::prefix('/ressource')->group(function(){
     Route::post('/url',[RessourseController::class,'url']);
     Route::post('/store',[RessourseController::class,'store']);
@@ -75,10 +75,8 @@ Route::prefix('/certif')->group(function (){
 Route::get('/list',[CertificationController::class,'index']);
 Route::delete('/{id}',[CertificationController::class,'destroy']);
 Route::put('/{id}',[CertificationController::class,'update']);
-
+Route::post('/store',[CertificationController::class,'store']);
 });
-
-
 //Route::apiResource('/formateurexes',FormateurexController::class);
 Route::get('/formateurexes',[FormateurexController::class,'index']);
 Route::prefix('/formateurex')->group(function(){

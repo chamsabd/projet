@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certification;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CertificationController extends Controller
@@ -64,20 +65,26 @@ public function update(Request $request, $id)
       
     } */
 
-  /*  public function store(Request $request)
+    public function store(Request $request)
     {
+        $user=User::find($request->user_id);
+       if($user->inscrits()) {
+      //  $user=User::find($request->user_id);
+      //  $user->certif()->sync($request->formation_id);
         $certif=new Certification();
         $certif->user_id=$request->user_id;
-        $certif->formation_id=$request->formation_id;
+        $certif->formation_id=$request->formation_id; 
         $certif->save();
-        return response()->json('Certification ajoute avec succes');  
+        return response()->json("participant ajouter au certif avec succes");
     }
-    public function show($id)
+        return response()->json("ce n'est pas un participant");  
+    }
+   /* public function show($id)
     {
         $certif=Certification::FindOrFail($id);
         return response()->json($certif);  
-    }
-*/
+    }*/
+
 private function validationRules()
 {    
     return [

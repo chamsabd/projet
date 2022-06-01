@@ -7,7 +7,7 @@
       variant="info"
       @dismissed="dismissCountDown=0"
       @dismiss-count-down="countDownChanged">
-    <h6 aria-describedby="help-block"> le formation  est ajouter avec success a la fin de table</h6>
+    <h6 aria-describedby="help-block"> {{alert}} </h6>
       <b-form-text id="help-block">This alert will dismiss after {{ dismissCountDown }} seconds...</b-form-text>
       <b-progress
         variant="info"
@@ -31,7 +31,7 @@
       </b-card-header>
       <b-collapse :id="'id'+formation.id" v-if="formation.inscrits"  accordion="my-accordion" role="tabpanel">
         <b-card-body>
-          <lister-inscrit :inscrits="formation.inscrits" />
+          <lister-inscrit :inscrits="formation.inscrits" @add="Add" />
         </b-card-body>
       </b-collapse>
     </b-card>
@@ -64,10 +64,9 @@ export default {
   },
   data: function () {
     return {
-   
  dismissSecs: 10,
         dismissCountDown: 0,
-
+alert:"",
      formations:[],
    
     };
@@ -83,6 +82,9 @@ watch: {
 },
  
   mounted() {
+      if(this.role!="responsable"){
+        this.$router.push("/");
+      }
     this.getformations();
   },
   methods: {
@@ -102,7 +104,13 @@ watch: {
         this.dismissCountDown = this.dismissSecs
       },
   
-  
+  Add(alert){
+    if(alert!='none'){
+    this.alert=alert;
+this.showAlert();
+}
+this.getformations();
+},
    
     deleteitm(id) {
       axios
