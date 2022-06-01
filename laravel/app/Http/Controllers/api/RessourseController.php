@@ -61,9 +61,9 @@ class RessourseController extends Controller
     public function show($id)
     {
      $formation=Formation::find($id);
-    
-return $formation->ressources()->get();
-     
+     if($formation->formateur_id==9)
+     if($formation->ressources())
+      return $formation->ressources()->get();
     }
     public function upload($id)
     {
@@ -98,8 +98,11 @@ return $formation->ressources()->get();
      */
     public function destroy($id)
     {
-        //
-    }
+        $ressource=Resource::find($id);
+        if ($ressource){
+    $ressource->destroy($id);
+}    
+}
     private function validationrules()
     {    
         return [

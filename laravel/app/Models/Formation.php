@@ -19,8 +19,7 @@ class Formation extends Model
     }  
     public function formateurexterne()
     {
-        return $this->belongsTo(User::class, 'formateurexterne_id');
-
+ return $this->belongsTo(User::class, 'formateurexterne_id');
     } 
     public function demandes()
     {
@@ -32,8 +31,7 @@ class Formation extends Model
     }
     public function certifs()
     {
-
-        return $this->belongsToMany(User::class, 'certifications')->withTimestamps();//->withPivot('id',"score");
+        return $this->belongsToMany(User::class, 'Certifications')->withTimestamps()->withPivot('id',"score");
 
 
     }

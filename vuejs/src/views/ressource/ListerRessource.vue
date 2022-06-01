@@ -6,15 +6,16 @@
       <th scope="col">#</th>
       <th scope="col">titre</th>
       <th scope="col">download</th>
-     
+     <th scope="col" v-if="role=='formateur'">supprimer</th>
     </tr>
   </thead>
   <tbody>
     <tr v-for="ressource in ressources" :key="ressource.id">
       <th scope="row">{{ressource.id}}</th>
       <td scope="col">{{ressource.titre}}</td>
-    
-      <td scope="col"><b-icon icon="download" @click="down(ressource)"></b-icon></td>
+      <td scope="col">
+        <b-icon icon="download" @click="down(ressource)"></b-icon></td>
+<td scope="col" v-if="role=='formateur'"><b-icon icon="x" @click="delet(ressource.id)"></b-icon></td>
     </tr>
  
   </tbody>
@@ -58,9 +59,25 @@ watch: {
   },
 
    mounted() {
+       if(this.role!="formateur" && this.role!="participant"){
+        this.$router.push("/");
+      }
     this.getressources();
   },
   methods: {
+    delet(id){
+
+      axios
+        .delete("http://127.0.0.1:8000/api/ressource/"+id)
+        .then((response) => {
+            if (response.data.length==0) {
+  this.$router.push("/");
+            }
+           this.getressources();
+        })
+        .catch((error) => console.log(error.response));
+  
+    },
     down(ressource){
        axios({
     url:"http://127.0.0.1:8000/api/ressource/down/"+ressource.id,
@@ -83,16 +100,12 @@ watch: {
     async getressources() {
  await  axios
         .get("http://127.0.0.1:8000/api/ressource/"+this.id_formation)
-        .then((response) => {
-          this.ressources = response.data;
+        .then((response) => { 
+          console.log(response); 
+          this.ressources=response.data;
         })
         .catch((error) => console.log(error.response));
     },
-
-
-
-
-  
   },
 };
 </script>

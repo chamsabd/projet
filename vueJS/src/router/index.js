@@ -11,7 +11,7 @@ import FormationsView from '@/views/formation/FormationsView'
 //import AddFormateurex from '@/components/formateurex/AddFormateurex'
 //import ListerFormateurex from '@/components/formateurex/ListerFormateurex'
 import FormateurexView from '@/views/formateurex/FormateurexView'
-
+import CertifView from '@/views/Certification/CertifView'
 import InscritsView from '@/views/inscrit/InscritsView'
 import ListerRessource from '@/views/ressource/ListerRessource'
 import CalenderView from '@/views/CalenderView'
@@ -53,6 +53,13 @@ const routes = [
 
    
   },
+  {
+    path: '/certifications/:role',
+    name: 'Certifview',
+    component: CertifView,
+
+   
+  },
  
 
 //   {
@@ -61,7 +68,7 @@ const routes = [
 //     component: afficherDemandes
 //   },
   {
-    path: '/formateurex',
+    path: '/formateurex/:role',
     name: 'FormateurexView',
     component: FormateurexView
   },

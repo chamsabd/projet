@@ -43,7 +43,10 @@ class demandesController extends Controller
 
         $formation=Formation::find($form_id);
        if($formation->responsable_id==9)
+       if($formation->demandes())
         return $formation->demandes()->get();
+        else
+        response()->json("pas de demandes");  
     else
     return response()->json("vous n'ete pas le responsable de cette formation");  
     }

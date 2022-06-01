@@ -191,15 +191,7 @@ foreach ($formations as $key => $formation) {
         }
         
     }
-    public function test()
-    {
-       $details=[
-           'title'=>'mail from iset',
-           'body' =>'test est'
-       ];
-       Mail::to("isetbizerteformation@gmail.com")->send(new testMail($details));
-   
-        }
+ 
         
     
     private function validationRules()

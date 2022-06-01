@@ -22,9 +22,23 @@ class InscritController extends Controller
     }
     public function formationsindex()
     {
+        $inscrit=Formation::with('inscrits','certifs')->where('formations.responsable_id',9)->get();
        // return Formation::with('responsable','formateur','formateurexterne')->where('responsable_id', Auth::id())->get();
-       return Formation::with('inscrits')->where('formations.responsable_id',9)->get();
+//$certif=Formation::with('certifs')->where('formations.responsable_id',9)->get();
+//return $certif;
+foreach ($inscrit as $key => $f) {
+   foreach ($f->inscrits as $key => $i) {
+  $i->in=false;
+  foreach ($f->certifs as $key => $c) {
+      if($c->pivot->formation_id==$i->pivot->formation_id){
+        $i->in=true;
+      }
+      # code...
+  }
+}
 
+}
+return $inscrit;
     }
 
     /**

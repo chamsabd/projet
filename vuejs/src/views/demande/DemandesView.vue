@@ -82,8 +82,9 @@ this.showAlert();}
  await  axios
         .get("http://127.0.0.1:8000/api/demandes/formation/"+this.form_id)
         .then((response) => {
-          if (typeof(response.data)=="string") {
-             this.$router.push("/");
+        if (response.data.length==0) {
+            this.alert="il n'y a pas de demandes";
+this.showAlert();
           }
           else
           this.demandes = response.data;

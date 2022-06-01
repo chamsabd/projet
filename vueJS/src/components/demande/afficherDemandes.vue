@@ -21,9 +21,11 @@
   <b-button variant="success"  @click="showMsgBoxTwo(props.row.pivot.id,'accept')">accept <b-iconstack >
       <b-icon stacked icon="square"></b-icon>
       <b-icon stacked icon="check"></b-icon>
-    </b-iconstack></b-button>
-       
-        
+    </b-iconstack></b-button>     
+         </td>
+         <td></td>
+         <td v-if="props.row.pivot.accepted==true">
+       accepter        
          </td>
           </template>
 

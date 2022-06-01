@@ -24,6 +24,7 @@
 import CertifList from '@/components/Certification/CertifList'
 import axios from 'axios'
 export default {
+  name:"CertifView",
   components:
    { CertifList,
     },
@@ -36,16 +37,38 @@ export default {
        }
    },
     mounted() {
+        if(this.role!="responsable"){
+        this.$router.push("/");
+      }
     this.getCertifications();
   },
+    computed:{
+role(){
+  return this.$route.params.role;
+},
+  },
+watch: {
+ role:function () {
+  this.getformations();
+ }
+},
    methods:{
      async getCertifications(){
+ if(this.role!="responsable"){
+        this.$router.push("/");
+      }
+      else{
 		await axios.get("http://127.0.0.1:8000/api/certif/list")
             .then((response) => {
+               if (response.data.length==0) {
+            this.alert="il n'y a pas de certifications";
+this.showAlert();
+          }
+          else
           this.certifications = response.data;
           ///console.log (this.certifications);
         })
-        .catch((error) => console.log(error.response));
+        .catch((error) => console.log(error.response));}
     },
 
     updatecertif(alert){

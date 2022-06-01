@@ -18,7 +18,10 @@
       <td scope="col">{{inscrit.ncin}}</td>
       <td scope="col">{{inscrit.role}}</td>
       <td scope="col">{{inscrit.pivot.created_at}}</td>
-      <td scope="col">action</td>
+     
+      <td scope="col"><b-button v-if="inscrit.in==false" pill variant="outline-warning" @click="ajoutcertif(inscrit.id,inscrit.pivot.formation_id)">ajouter au certif</b-button>
+      <p v-else>condidat</p>
+ </td>
     </tr>
  
   </tbody>
@@ -45,9 +48,17 @@ export default {
   
     };
   },
-  computed: {
- 
+
+    computed:{
+role(){
+  return this.$route.params.role;
+},
   },
+watch: {
+ role:function () {
+  this.getformations();
+ }
+},
 //    mounted() {
 //     this.getinscrits();
 //   },
@@ -61,7 +72,30 @@ export default {
 //         .catch((error) => console.log(error.response));
 //     },
 
- 
+  ajoutcertif(user,formation) {
+       if(this.role!="responsable"){
+        this.alert="vous n'etes pas responsable";
+  this.$emit('add',alert);
+      }
+   else{
+       
+       var send={};
+       send.formation_id=formation;
+       send.user_id=user;
+      axios(
+      {   url: 'http://127.0.0.1:8000/api/certif/store',
+            method: 'post',
+            data: send,
+          })
+      .then(() => {
+         var alert="le participant ajouter au certif avec succese"
+  this.$emit('add',alert);
+          
+        })
+        .catch((error) => {
+          console.log(error.response.data.message)
+          });}
+    },
 
     deleteitm(id) {
       axios

@@ -89,7 +89,11 @@ export default {
 if(!window.confirm('Supprimer ce formateur')) return;
       axios.delete( 'http://127.0.0.1:8000/api/formateurex/'+id)
 
-             .then(response=>this.formateurex=response)
+             .then( ()=>{
+               var alert="le formateur supprimer avec succes"
+               console.log("deleted");
+  this.$emit('add',alert);
+  })
 
              .catch(error=>console.log(error))
       
